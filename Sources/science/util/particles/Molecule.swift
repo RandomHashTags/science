@@ -9,7 +9,7 @@ import Foundation
 struct Molecule {
     var atoms:[Atom]
     
-    var molecular_formula : String {
+    lazy var molecular_formula : String = {
         var elements:[ChemicalElement:Int] = [:]
         for atom in atoms {
             let element:ChemicalElement = atom.chemical_element
@@ -20,9 +20,9 @@ struct Molecule {
             }
         }
         return elements.map({ get_molecular_formula($0.key, amount: $0.value) }).joined()
-    }
+    }()
     private func get_molecular_formula(_ chemical_element: ChemicalElement, amount: Int) -> String {
-        let amount_string:String = amount > 1 ? amount.subscript : ""
+        let amount_string:String = amount > 1 ? amount.as_subscript : ""
         return chemical_element.symbol + amount_string
     }
 }

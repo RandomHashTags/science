@@ -8,7 +8,7 @@ import Foundation
 
 extension BinaryInteger {
     
-    var `subscript` : String {
+    var as_subscript : String {
         let values:[Character] = String(describing: self).map({ Self.get_subscript($0) })
         return String(values)
     }
@@ -28,7 +28,7 @@ extension BinaryInteger {
         }
     }
     
-    var superscript : String {
+    var as_superscript : String {
         let values:[Character] = String(describing: self).map({ Self.get_superscript($0) })
         return String(values)
     }
