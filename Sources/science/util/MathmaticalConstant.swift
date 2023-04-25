@@ -21,4 +21,7 @@ enum MathmaticalConstant {
     static var standard_temperature:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat("273.15"))
     /// Exactly 100 kiloPascals, as defined at https://en.wikipedia.org/wiki/Standard_temperature_and_pressure .
     static var standard_pressure:PressureUnit = PressureUnit(prefix: UnitPrefix.kilo, type: PressureUnitType.pascal, value: HugeFloat("100"))
+    
+    /// Exactly 9.80665 meters per second squared, as defined at https://en.wikipedia.org/wiki/Gravity_of_Earth .
+    static var gravity_standard:AccelerationUnit = AccelerationUnit(type: AccelerationUnitType.metres_per_second_per_second, value: HugeFloat("9.80665"))
 }
