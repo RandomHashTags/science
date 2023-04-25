@@ -23,7 +23,15 @@ let package = Package(
             name: "science",
             dependencies: [
                 .product(name: "huge-numbers", package: "swift_huge-numbers")
-            ]),
+            ],
+            exclude: ["renderer"]
+        ),
+        .target(
+            name: "RendererMetal",
+            dependencies: ["RendererMetalSharedTypes"],
+            path: "./Sources/science/renderer/metal"
+        ),
+        .target(name: "RendererMetalSharedTypes", path: "./Sources/science/renderer/metal_shared_types"),
         .testTarget(
             name: "scienceTests",
             dependencies: [
