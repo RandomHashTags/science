@@ -7,384 +7,157 @@
 import Foundation
 import huge_numbers
 
-enum ChemicalElement : Int {
-    case undiscovered = 0
-    case hydrogen = 1
-    case helium
-    case lithium
-    case beryllium
-    case boron
-    case carbon
-    case nitrogen
-    case oxygen
-    case fluorine
-    case neon
-    case sodium
-    case magnesium
-    case aluminium
-    case silicon
-    case phosphorus
-    case sulfur
-    case chlorine
-    case argon
-    case potassium
-    case calcium
-    case scandium
-    case titanium
-    case vanadium
-    case chromium
-    case manganese
-    case iron
-    case cobalt
-    case nickel
-    case copper
-    case zinc
-    case gallium
-    case germanium
-    case arsenic
-    case selenium
-    case bromine
-    case krypton
-    case rubidium
-    case strontium
-    case yttrium
-    case zirconium
-    case niobium
-    case molybdenum
-    case technetium
-    case ruthenium
-    case rhodium
-    case palladium
-    case silver
-    case cadmium
-    case indium
-    case tin
-    case antimony
-    case tellurium
-    case iodine
-    case xenon
-    case caesium
-    case barium
-    case lanthanum
-    case cerium
-    case praseodymium
-    case neodymium
-    case promethium
-    case samarium
-    case europium
-    case gadolinium
-    case terbium
-    case dysprosium
-    case holmium
-    case erbium
-    case thulium
-    case ytterbium
-    case lutetium
-    case hafnium
-    case tantalum
-    case tungsten
-    case rhenium
-    case osmium
-    case iridium
-    case platinum
-    case gold
-    case mercury
-    case thallium
-    case lead
-    case bismuth
-    case polonium
-    case astatine
-    case radon
-    case francium
-    case radium
-    case actinium
-    case thorium
-    case protactinium
-    case uranium
-    case neptunium
-    case plutonium
-    case americium
-    case curium
-    case berkelium
-    case californium
-    case einsteinium
-    case fermium
-    case mendelevium
-    case nobelium
-    case lawrencium
-    case rutherfordium
-    case dubnium
-    case seaborgium
-    case bohrium
-    case hassium
-    case meitnerium
-    case darmstadtium
-    case roentgenium
-    case copernicium
-    case nihonium
-    case flerovium
-    case moscovium
-    case livermorium
-    case tennessine
-    case oganesson
+// TODO: support uncertainty
+struct ChemicalElement : Hashable {
+    static var elements : [Int:ChemicalElement] = [:]
     
-    var atom : Atom {
-        return get_isotope(atomic_weight: standard_atomic_weight)
+    let atomic_number:Int
+    let symbol:String
+    /// Masured in Dalton
+    let standard_atomic_weight:Float
+    //let freezing_point:TemperatureUnit
+    /// if known, melting point of this chemical element, measured in degrees Kelvin
+    let melting_point:TemperatureUnit?
+    
+    init(atomic_number: Int, symbol: String, standard_atomic_weight: Float, melting_point: String?) {
+        self.atomic_number = atomic_number
+        self.symbol = symbol
+        self.standard_atomic_weight = standard_atomic_weight
+        //self.freezing_point = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(freezing_point))
+        self.melting_point = melting_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(melting_point!)) : nil
+        ChemicalElement.elements[atomic_number] = self
     }
+    
+    lazy var atom : Atom = {
+        return get_isotope(atomic_weight: standard_atomic_weight)
+    }()
     
     func get_isotope(atomic_weight: Float) -> Atom {
-        let protons:[Proton] = [Proton].init(repeating: Proton(), count: rawValue)
-        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: Int(atomic_weight) - rawValue)
-        let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: rawValue)
+        let protons:[Proton] = [Proton].init(repeating: Proton(), count: atomic_number)
+        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: Int(atomic_weight) - atomic_number)
+        let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
         return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, velocity: SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero))
     }
-    
-    /// Measured in Dalton.
-    var standard_atomic_weight : Float {
-        switch self {
-        case .undiscovered: return 0
-        case .hydrogen: return 1.0080
-        case .helium: return 4.0026
-        case .lithium: return 6.94
-        case .beryllium: return 9.0122
-        case .boron: return 10.81
-        case .carbon: return 12.011
-        case .nitrogen: return 14.007
-        case .oxygen: return 15.999
-        case .fluorine: return 18.998
-        case .neon: return 20.180
-        case .sodium: return 22.990
-        case .magnesium: return 24.305
-        case .aluminium: return 26.982
-        case .silicon: return 28.085
-        case .phosphorus: return 30.974
-        case .sulfur: return 32.06
-        case .chlorine: return 35.45
-        case .argon: return 39.95
-        case .potassium: return 39.098
-        case .calcium: return 40.078
-        case .scandium: return 44.956
-        case .titanium: return 47.867
-        case .vanadium: return 50.942
-        case .chromium: return 51.996
-        case .manganese: return 54.938
-        case .iron: return 55.845
-        case .cobalt: return 58.933
-        case .nickel: return 58.693
-        case .copper: return 63.546
-        case .zinc: return 65.38
-        case .gallium: return 69.723
-        case .germanium: return 72.630
-        case .arsenic: return 74.922
-        case .selenium: return 78.971
-        case .bromine: return 79.904
-        case .krypton: return 83.798
-        case .rubidium: return 85.468
-        case .strontium: return 87.62
-        case .yttrium: return 88.906
-        case .zirconium: return 91.224
-        case .niobium: return 92.906
-        case .molybdenum: return 95.95
-        case .technetium: return 97
-        case .ruthenium: return 101.07
-        case .rhodium: return 102.91
-        case .palladium: return 106.42
-        case .silver: return 107.87
-        case .cadmium: return 112.41
-        case .indium: return 114.82
-        case .tin: return 118.71
-        case .antimony: return 121.76
-        case .tellurium: return 127.60
-        case .iodine: return 126.90
-        case .xenon: return 131.29
-        case .caesium: return 132.91
-        case .barium: return 137.33
-        case .lanthanum: return 138.91
-        case .cerium: return 140.12
-        case .praseodymium: return 140.91
-        case .neodymium: return 144.24
-        case .promethium: return 145
-        case .samarium: return 150.36
-        case .europium: return 151.96
-        case .gadolinium: return 157.25
-        case .terbium: return 158.93
-        case .dysprosium: return 162.50
-        case .holmium: return 164.93
-        case .erbium: return 167.26
-        case .thulium: return 168.93
-        case .ytterbium: return 173.05
-        case .lutetium: return 174.97
-        case .hafnium: return 178.49
-        case .tantalum: return 180.95
-        case .tungsten: return 183.84
-        case .rhenium: return 186.21
-        case .osmium: return 190.23
-        case .iridium: return 192.22
-        case .platinum: return 195.08
-        case .gold: return 196.97
-        case .mercury: return 200.59
-        case .thallium: return 204.38
-        case .lead: return 207.2
-        case .bismuth: return 208.98
-        case .polonium: return 209
-        case .astatine: return 210
-        case .radon: return 222
-        case .francium: return 223
-        case .radium: return 226
-        case .actinium: return 227
-        case .thorium: return 232.04
-        case .protactinium: return 231.04
-        case .uranium: return 238.03
-        case .neptunium: return 237
-        case .plutonium: return 244
-        case .americium: return 243
-        case .curium: return 247
-        case .berkelium: return 247
-        case .californium: return 251
-        case .einsteinium: return 252
-        case .fermium: return 257
-        case .mendelevium: return 258
-        case .nobelium: return 259
-        case .lawrencium: return 266
-        case .rutherfordium: return 267
-        case .dubnium: return 268
-        case .seaborgium: return 269
-        case .bohrium: return 270
-        case .hassium: return 269
-        case .meitnerium: return 278
-        case .darmstadtium: return 281
-        case .roentgenium: return 282
-        case .copernicium: return 285
-        case .nihonium: return 286
-        case .flerovium: return 289
-        case .moscovium: return 290
-        case .livermorium: return 293
-        case .tennessine: return 294
-        case .oganesson: return 294
-        }
-    }
-    
-    var symbol : String {
-        switch self {
-        case .undiscovered: return "?"
-        case .hydrogen:   return "H"
-        case .helium:     return "He"
-        case .lithium:    return "Li"
-        case .beryllium:  return "Be"
-        case .boron:      return "B"
-        case .carbon:     return "C"
-        case .nitrogen:   return "N"
-        case .oxygen:     return "O"
-        case .fluorine:   return "F"
-        case .neon:       return "Ne"
-        case .sodium:     return "Na"
-        case .magnesium:  return "Mg"
-        case .aluminium:  return "Al"
-        case .silicon:    return "Si"
-        case .phosphorus: return "P"
-        case .sulfur:     return "S"
-        case .chlorine:   return "Cl"
-        case .argon:      return "Ar"
-        case .potassium:  return "K"
-        case .calcium:    return "Ca"
-        case .scandium:   return "Sc"
-        case .titanium:   return "Ti"
-        case .vanadium:   return "V"
-        case .chromium:   return "Cr"
-        case .manganese:  return "Mn"
-        case .iron:       return "Fe"
-        case .cobalt:     return "Co"
-        case .nickel:     return "Ni"
-        case .copper:     return "Cu"
-        case .zinc:       return "Zn"
-        case .gallium:    return "Ga"
-        case .germanium:  return "Ge"
-        case .arsenic:    return "As"
-        case .selenium:   return "Se"
-        case .bromine:    return "Br"
-        case .krypton:    return "Kr"
-        case .rubidium:   return "Rb"
-        case .strontium:  return "Sr"
-        case .yttrium:    return "Y"
-        case .zirconium:  return "Zr"
-        case .niobium:    return "Nb"
-        case .molybdenum: return "Mo"
-        case .technetium: return "Tc"
-        case .ruthenium:  return "Ru"
-        case .rhodium:    return "Rh"
-        case .palladium:  return "Pd"
-        case .silver:     return "Ag"
-        case .cadmium:    return "Cd"
-        case .indium:     return "In"
-        case .tin:        return "Sn"
-        case .antimony:   return "Sb"
-        case .tellurium:  return "Te"
-        case .iodine:     return "I"
-        case .xenon:      return "Xe"
-        case .caesium:    return "Cs"
-        case .barium:     return "Ba"
-        case .lanthanum:  return "La"
-        case .cerium:     return "Ce"
-        case .praseodymium: return "Pr"
-        case .neodymium:    return "Nd"
-        case .promethium:   return "Pm"
-        case .samarium:     return "Sm"
-        case .europium:     return "Eu"
-        case .gadolinium:   return "Gd"
-        case .terbium:      return "Tb"
-        case .dysprosium:   return "Dy"
-        case .holmium:      return "Ho"
-        case .erbium:       return "Er"
-        case .thulium:      return "Tm"
-        case .ytterbium:    return "Yb"
-        case .lutetium:     return "Lu"
-        case .hafnium:      return "Hf"
-        case .tantalum:     return "Ta"
-        case .tungsten:     return "W"
-        case .rhenium:      return "Re"
-        case .osmium:       return "Os"
-        case .iridium:      return "Ir"
-        case .platinum:     return "Pt"
-        case .gold:         return "Au"
-        case .mercury:      return "Hg"
-        case .thallium:     return "Tl"
-        case .lead:         return "Pb"
-        case .bismuth:      return "Bi"
-        case .polonium:     return "Po"
-        case .astatine:     return "At"
-        case .radon:        return "Rn"
-        case .francium:     return "Fr"
-        case .radium:       return "Ra"
-        case .actinium:     return "Ac"
-        case .thorium:      return "Th"
-        case .protactinium: return "Pa"
-        case .uranium:      return "U"
-        case .neptunium:    return "Np"
-        case .plutonium:    return "Pu"
-        case .americium:    return "Am"
-        case .curium:       return "Cm"
-        case .berkelium:    return "Bk"
-        case .californium:  return "Cf"
-        case .einsteinium:  return "Es"
-        case .fermium:      return "Fm"
-        case .mendelevium:  return "Md"
-        case .nobelium:     return "No"
-        case .lawrencium:   return "Lr"
-        case .rutherfordium: return "Rf"
-        case .dubnium:       return "Db"
-        case .seaborgium:    return "Sg"
-        case .bohrium:       return "Bh"
-        case .hassium:       return "Hs"
-        case .meitnerium:    return "Mt"
-        case .darmstadtium:  return "Ds"
-        case .roentgenium:   return "Rg"
-        case .copernicium:   return "Cn"
-        case .nihonium:      return "Nh"
-        case .flerovium:     return "Fl"
-        case .moscovium:     return "Mc"
-        case .livermorium:   return "Lv"
-        case .tennessine:    return "Ts"
-        case .oganesson:     return "Og"
-        }
-    }
+}
+// https://www.rsc.org/periodic-table
+// https://en.wikipedia.org/wiki/List_of_chemical_elements
+extension ChemicalElement {
+    static var hydrogen:ChemicalElement =      ChemicalElement(atomic_number: 1, symbol: "H", standard_atomic_weight: 1.0080, melting_point: "13.99")
+    static var helium:ChemicalElement =        ChemicalElement(atomic_number: 2, symbol: "He", standard_atomic_weight: 4.0026, melting_point: nil)
+    static var lithium:ChemicalElement =       ChemicalElement(atomic_number: 3, symbol: "Li", standard_atomic_weight: 6.94, melting_point: "453.65")
+    static var beryllium:ChemicalElement =     ChemicalElement(atomic_number: 4, symbol: "Be", standard_atomic_weight: 9.0122, melting_point: "1560")
+    static var boron:ChemicalElement =         ChemicalElement(atomic_number: 5, symbol: "B", standard_atomic_weight: 10.81, melting_point: "2350")
+    static var carbon:ChemicalElement =        ChemicalElement(atomic_number: 6, symbol: "C", standard_atomic_weight: 12.011, melting_point: "4098")
+    static var nitrogen:ChemicalElement =      ChemicalElement(atomic_number: 7, symbol: "N", standard_atomic_weight: 14.007, melting_point: "63.2")
+    static var oxygen:ChemicalElement =        ChemicalElement(atomic_number: 8, symbol: "O", standard_atomic_weight: 15.999, melting_point: "54.36")
+    static var fluorine:ChemicalElement =      ChemicalElement(atomic_number: 9, symbol: "F", standard_atomic_weight: 18.998, melting_point: "53.48")
+    static var neon:ChemicalElement =          ChemicalElement(atomic_number: 10, symbol: "Ne", standard_atomic_weight: 20.180, melting_point: "24.56")
+    static var sodium:ChemicalElement =        ChemicalElement(atomic_number: 11, symbol: "Na", standard_atomic_weight: 22.990, melting_point: "370.944")
+    static var magnesium:ChemicalElement =     ChemicalElement(atomic_number: 12, symbol: "Mg", standard_atomic_weight: 24.305, melting_point: "923")
+    static var aluminium:ChemicalElement =     ChemicalElement(atomic_number: 13, symbol: "Al", standard_atomic_weight: 26.982, melting_point: "933.473")
+    static var silicon:ChemicalElement =       ChemicalElement(atomic_number: 14, symbol: "Si", standard_atomic_weight: 28.085, melting_point: "1687")
+    static var phosphorus:ChemicalElement =    ChemicalElement(atomic_number: 15, symbol: "P", standard_atomic_weight: 30.974, melting_point: "317.3")
+    static var sulfur:ChemicalElement =        ChemicalElement(atomic_number: 16, symbol: "S", standard_atomic_weight: 32.06, melting_point: "388.36")
+    static var chlorine:ChemicalElement =      ChemicalElement(atomic_number: 17, symbol: "Cl", standard_atomic_weight: 35.45, melting_point: "171.1")
+    static var argon:ChemicalElement =         ChemicalElement(atomic_number: 18, symbol: "Ar", standard_atomic_weight: 39.95, melting_point: "83.81")
+    static var potassium:ChemicalElement =     ChemicalElement(atomic_number: 19, symbol: "K", standard_atomic_weight: 39.098, melting_point: "336.7")
+    static var calcium:ChemicalElement =       ChemicalElement(atomic_number: 20, symbol: "Ca", standard_atomic_weight: 40.078, melting_point: "1115")
+    static var scandium:ChemicalElement =      ChemicalElement(atomic_number: 21, symbol: "Sc", standard_atomic_weight: 44.956, melting_point: "1814")
+    static var titanium:ChemicalElement =      ChemicalElement(atomic_number: 22, symbol: "Ti", standard_atomic_weight: 47.867, melting_point: "1943")
+    static var vanadium:ChemicalElement =      ChemicalElement(atomic_number: 23, symbol: "V", standard_atomic_weight: 50.942, melting_point: "2183")
+    static var chromium:ChemicalElement =      ChemicalElement(atomic_number: 24, symbol: "Cr", standard_atomic_weight: 51.996, melting_point: "2180")
+    static var manganese:ChemicalElement =     ChemicalElement(atomic_number: 25, symbol: "Mn", standard_atomic_weight: 54.938, melting_point: "1519")
+    static var iron:ChemicalElement =          ChemicalElement(atomic_number: 26, symbol: "Fe", standard_atomic_weight: 55.845, melting_point: "1811")
+    static var cobalt:ChemicalElement =        ChemicalElement(atomic_number: 27, symbol: "Co", standard_atomic_weight: 58.933, melting_point: "1768")
+    static var nickel:ChemicalElement =        ChemicalElement(atomic_number: 28, symbol: "Ni", standard_atomic_weight: 58.693, melting_point: "1728")
+    static var copper:ChemicalElement =        ChemicalElement(atomic_number: 29, symbol: "Cu", standard_atomic_weight: 63.546, melting_point: "1357.77")
+    static var zinc:ChemicalElement =          ChemicalElement(atomic_number: 30, symbol: "Zn", standard_atomic_weight: 65.38, melting_point: "692.677")
+    static var gallium:ChemicalElement =       ChemicalElement(atomic_number: 31, symbol: "Ga", standard_atomic_weight: 69.723, melting_point: "302.9146")
+    static var germanium:ChemicalElement =     ChemicalElement(atomic_number: 32, symbol: "Ge", standard_atomic_weight: 72.630, melting_point: "1211.4")
+    static var arsenic:ChemicalElement =       ChemicalElement(atomic_number: 33, symbol: "As", standard_atomic_weight: 74.922, melting_point: "889")
+    static var selenium:ChemicalElement =      ChemicalElement(atomic_number: 34, symbol: "Se", standard_atomic_weight: 78.971, melting_point: "494")
+    static var bromine:ChemicalElement =       ChemicalElement(atomic_number: 35, symbol: "Br", standard_atomic_weight: 79.904, melting_point: "266")
+    static var krypton:ChemicalElement =       ChemicalElement(atomic_number: 36, symbol: "Kr", standard_atomic_weight: 83.798, melting_point: "115.78")
+    static var rubidium:ChemicalElement =      ChemicalElement(atomic_number: 37, symbol: "Rb", standard_atomic_weight: 85.468, melting_point: "312.45")
+    static var strontium:ChemicalElement =     ChemicalElement(atomic_number: 38, symbol: "Sr", standard_atomic_weight: 87.62, melting_point: "1050")
+    static var yttrium:ChemicalElement =       ChemicalElement(atomic_number: 39, symbol: "Y", standard_atomic_weight: 88.906, melting_point: "1795")
+    static var zirconium:ChemicalElement =     ChemicalElement(atomic_number: 40, symbol: "Zr", standard_atomic_weight: 91.224, melting_point: "2127")
+    static var niobium:ChemicalElement =       ChemicalElement(atomic_number: 41, symbol: "Nb", standard_atomic_weight: 92.906, melting_point: "2750")
+    static var molybdenum:ChemicalElement =    ChemicalElement(atomic_number: 42, symbol: "Mo", standard_atomic_weight: 95.95, melting_point: "2895")
+    static var technetium:ChemicalElement =    ChemicalElement(atomic_number: 43, symbol: "Tc", standard_atomic_weight: 98, melting_point: "2430")
+    static var ruthenium:ChemicalElement =     ChemicalElement(atomic_number: 44, symbol: "Ru", standard_atomic_weight: 101.07, melting_point: "2606")
+    static var rhodium:ChemicalElement =       ChemicalElement(atomic_number: 45, symbol: "Rh", standard_atomic_weight: 102.91, melting_point: "2236")
+    static var palladium:ChemicalElement =     ChemicalElement(atomic_number: 46, symbol: "Pd", standard_atomic_weight: 106.42, melting_point: "1828")
+    static var silver:ChemicalElement =        ChemicalElement(atomic_number: 47, symbol: "Ag", standard_atomic_weight: 107.87, melting_point: "1234.93")
+    static var cadmium:ChemicalElement =       ChemicalElement(atomic_number: 48, symbol: "Cd", standard_atomic_weight: 112.41, melting_point: "594.219")
+    static var indium:ChemicalElement =        ChemicalElement(atomic_number: 49, symbol: "In", standard_atomic_weight: 114.82, melting_point: "429.75")
+    static var tin:ChemicalElement =           ChemicalElement(atomic_number: 50, symbol: "Sn", standard_atomic_weight: 118.71, melting_point: "505.078")
+    static var antimony:ChemicalElement =      ChemicalElement(atomic_number: 51, symbol: "Sb", standard_atomic_weight: 121.76, melting_point: "903.778")
+    static var tellurium:ChemicalElement =     ChemicalElement(atomic_number: 52, symbol: "Te", standard_atomic_weight: 127.60, melting_point: "722.66")
+    static var iodine:ChemicalElement =        ChemicalElement(atomic_number: 53, symbol: "I", standard_atomic_weight: 126.90, melting_point: "386.9")
+    static var xenon:ChemicalElement =         ChemicalElement(atomic_number: 54, symbol: "Xe", standard_atomic_weight: 131.29, melting_point: "161.4")
+    static var caesium:ChemicalElement =       ChemicalElement(atomic_number: 55, symbol: "Cs", standard_atomic_weight: 132.91, melting_point: "301.7")
+    static var barium:ChemicalElement =        ChemicalElement(atomic_number: 56, symbol: "Ba", standard_atomic_weight: 137.327, melting_point: "1000")
+    static var lanthanum:ChemicalElement =     ChemicalElement(atomic_number: 57, symbol: "La", standard_atomic_weight: 138.905, melting_point: "1193")
+    static var cerium:ChemicalElement =        ChemicalElement(atomic_number: 58, symbol: "Ce", standard_atomic_weight: 140.12, melting_point: "1072")
+    static var praseodymium:ChemicalElement =  ChemicalElement(atomic_number: 59, symbol: "Pr", standard_atomic_weight: 140.91, melting_point: "1204")
+    static var neodymium:ChemicalElement =     ChemicalElement(atomic_number: 60, symbol: "Nd", standard_atomic_weight: 144.24, melting_point: "1289")
+    static var promethium:ChemicalElement =    ChemicalElement(atomic_number: 61, symbol: "Pm", standard_atomic_weight: 145, melting_point: "1315")
+    static var samarium:ChemicalElement =      ChemicalElement(atomic_number: 62, symbol: "Sm", standard_atomic_weight: 150.36, melting_point: "1345")
+    static var europium:ChemicalElement =      ChemicalElement(atomic_number: 63, symbol: "Eu", standard_atomic_weight: 151.96, melting_point: "1095")
+    static var gadolinium:ChemicalElement =    ChemicalElement(atomic_number: 64, symbol: "Gd", standard_atomic_weight: 157.25, melting_point: "1586")
+    static var terbium:ChemicalElement =       ChemicalElement(atomic_number: 65, symbol: "Tb", standard_atomic_weight: 158.93, melting_point: "1632")
+    static var dysprosium:ChemicalElement =    ChemicalElement(atomic_number: 66, symbol: "Dy", standard_atomic_weight: 162.50, melting_point: "1685")
+    static var holmium:ChemicalElement =       ChemicalElement(atomic_number: 67, symbol: "Ho", standard_atomic_weight: 164.93, melting_point: "1745")
+    static var erbium:ChemicalElement =        ChemicalElement(atomic_number: 68, symbol: "Er", standard_atomic_weight: 167.26, melting_point: "1802")
+    static var thulium:ChemicalElement =       ChemicalElement(atomic_number: 69, symbol: "Tm", standard_atomic_weight: 168.93, melting_point: "1818")
+    static var ytterbium:ChemicalElement =     ChemicalElement(atomic_number: 70, symbol: "Yb", standard_atomic_weight: 173.05, melting_point: "1097")
+    static var lutetium:ChemicalElement =      ChemicalElement(atomic_number: 71, symbol: "Lu", standard_atomic_weight: 174.97, melting_point: "1936")
+    static var hafnium:ChemicalElement =       ChemicalElement(atomic_number: 72, symbol: "Hf", standard_atomic_weight: 178.49, melting_point: "2506")
+    static var tantalum:ChemicalElement =      ChemicalElement(atomic_number: 73, symbol: "Ta", standard_atomic_weight: 180.95, melting_point: "3290")
+    static var tungsten:ChemicalElement =      ChemicalElement(atomic_number: 74, symbol: "W", standard_atomic_weight: 183.84, melting_point: "3687")
+    static var rhenium:ChemicalElement =       ChemicalElement(atomic_number: 75, symbol: "Re", standard_atomic_weight: 186.21, melting_point: "3458")
+    static var osmium:ChemicalElement =        ChemicalElement(atomic_number: 76, symbol: "Os", standard_atomic_weight: 190.23, melting_point: "3306")
+    static var iridium:ChemicalElement =       ChemicalElement(atomic_number: 77, symbol: "Ir", standard_atomic_weight: 192.22, melting_point: "2719")
+    static var platinum:ChemicalElement =      ChemicalElement(atomic_number: 78, symbol: "Pt", standard_atomic_weight: 195.08, melting_point: "2041.4")
+    static var gold:ChemicalElement =          ChemicalElement(atomic_number: 79, symbol: "Au", standard_atomic_weight: 196.97, melting_point: "1337.33")
+    static var mercury:ChemicalElement =       ChemicalElement(atomic_number: 80, symbol: "Hg", standard_atomic_weight: 200.59, melting_point: "234.321")
+    static var thallium:ChemicalElement =      ChemicalElement(atomic_number: 81, symbol: "Tl", standard_atomic_weight: 204.38, melting_point: "577")
+    static var lead:ChemicalElement =          ChemicalElement(atomic_number: 82, symbol: "Pb", standard_atomic_weight: 207.2, melting_point: "600.612")
+    static var bismuth:ChemicalElement =       ChemicalElement(atomic_number: 83, symbol: "Bi", standard_atomic_weight: 208.98, melting_point: "544.556")
+    static var polonium:ChemicalElement =      ChemicalElement(atomic_number: 84, symbol: "Po", standard_atomic_weight: 209, melting_point: "527")
+    static var astatine:ChemicalElement =      ChemicalElement(atomic_number: 85, symbol: "At", standard_atomic_weight: 210, melting_point: "573")
+    static var radon:ChemicalElement =         ChemicalElement(atomic_number: 86, symbol: "Rn", standard_atomic_weight: 222, melting_point: "202")
+    static var francium:ChemicalElement =      ChemicalElement(atomic_number: 87, symbol: "Fr", standard_atomic_weight: 223, melting_point: "294")
+    static var radium:ChemicalElement =        ChemicalElement(atomic_number: 88, symbol: "Ra", standard_atomic_weight: 226, melting_point: "969")
+    static var actinium:ChemicalElement =      ChemicalElement(atomic_number: 89, symbol: "Ac", standard_atomic_weight: 227, melting_point: "1323")
+    static var thorium:ChemicalElement =       ChemicalElement(atomic_number: 90, symbol: "Th", standard_atomic_weight: 232.04, melting_point: "2023")
+    static var protactinium:ChemicalElement =  ChemicalElement(atomic_number: 91, symbol: "Pa", standard_atomic_weight: 231.04, melting_point: "1845")
+    static var uranium:ChemicalElement =       ChemicalElement(atomic_number: 92, symbol: "U", standard_atomic_weight: 238.03, melting_point: "1408")
+    static var neptunium:ChemicalElement =     ChemicalElement(atomic_number: 93, symbol: "Np", standard_atomic_weight: 237, melting_point: "917")
+    static var plutonium:ChemicalElement =     ChemicalElement(atomic_number: 94, symbol: "Pu", standard_atomic_weight: 244, melting_point: "913")
+    static var americium:ChemicalElement =     ChemicalElement(atomic_number: 95, symbol: "Am", standard_atomic_weight: 243, melting_point: "1449")
+    static var curium:ChemicalElement =        ChemicalElement(atomic_number: 96, symbol: "Cm", standard_atomic_weight: 247, melting_point: "1618")
+    static var berkelium:ChemicalElement =     ChemicalElement(atomic_number: 97, symbol: "Bk", standard_atomic_weight: 247, melting_point: "1259")
+    static var californium:ChemicalElement =   ChemicalElement(atomic_number: 98, symbol: "Cf", standard_atomic_weight: 251, melting_point: "1173")
+    static var einsteinium:ChemicalElement =   ChemicalElement(atomic_number: 99, symbol: "Es", standard_atomic_weight: 252, melting_point: "1133")
+    static var fermium:ChemicalElement =       ChemicalElement(atomic_number: 100, symbol: "Fm", standard_atomic_weight: 257, melting_point: "1800")
+    static var mendelevium:ChemicalElement =   ChemicalElement(atomic_number: 101, symbol: "Md", standard_atomic_weight: 258, melting_point: "1100")
+    static var nobelium:ChemicalElement =      ChemicalElement(atomic_number: 102, symbol: "No", standard_atomic_weight: 259, melting_point: "1100")
+    static var lawrencium:ChemicalElement =    ChemicalElement(atomic_number: 103, symbol: "Lr", standard_atomic_weight: 266, melting_point: "1900")
+    static var rutherfordium:ChemicalElement = ChemicalElement(atomic_number: 104, symbol: "Rf", standard_atomic_weight: 267, melting_point: nil)
+    static var dubnium:ChemicalElement =       ChemicalElement(atomic_number: 105, symbol: "Db", standard_atomic_weight: 268, melting_point: nil)
+    static var seaborgium:ChemicalElement =    ChemicalElement(atomic_number: 106, symbol: "Sg", standard_atomic_weight: 269, melting_point: nil)
+    static var bohrium:ChemicalElement =       ChemicalElement(atomic_number: 107, symbol: "Bh", standard_atomic_weight: 270, melting_point: nil)
+    static var hassium:ChemicalElement =       ChemicalElement(atomic_number: 108, symbol: "Hs", standard_atomic_weight: 269, melting_point: nil)
+    static var meitnerium:ChemicalElement =    ChemicalElement(atomic_number: 109, symbol: "Mt", standard_atomic_weight: 278, melting_point: nil)
+    static var darmstadtium:ChemicalElement =  ChemicalElement(atomic_number: 110, symbol: "Ds", standard_atomic_weight: 281, melting_point: nil)
+    static var roentgenium:ChemicalElement =   ChemicalElement(atomic_number: 111, symbol: "Rg", standard_atomic_weight: 282, melting_point: nil)
+    static var copernicium:ChemicalElement =   ChemicalElement(atomic_number: 112, symbol: "Cn", standard_atomic_weight: 285, melting_point: nil)
+    static var nihonium:ChemicalElement =      ChemicalElement(atomic_number: 113, symbol: "Nh", standard_atomic_weight: 286, melting_point: nil)
+    static var flerovium:ChemicalElement =     ChemicalElement(atomic_number: 114, symbol: "Fl", standard_atomic_weight: 289, melting_point: nil)
+    static var moscovium:ChemicalElement =     ChemicalElement(atomic_number: 115, symbol: "Mc", standard_atomic_weight: 290, melting_point: nil)
+    static var livermorium:ChemicalElement =   ChemicalElement(atomic_number: 116, symbol: "Lv", standard_atomic_weight: 293, melting_point: nil)
+    static var tennessine:ChemicalElement =    ChemicalElement(atomic_number: 117, symbol: "Ts", standard_atomic_weight: 294, melting_point: nil)
+    static var oganesson:ChemicalElement =     ChemicalElement(atomic_number: 118, symbol: "Og", standard_atomic_weight: 294, melting_point: nil)
 }

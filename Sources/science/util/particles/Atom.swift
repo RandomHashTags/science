@@ -7,7 +7,7 @@
 import Foundation
 import MetalKit
 
-struct Atom {
+struct Atom : Hashable {
     var nucleus:AtomicNucleus
     var electron_shells:[ElectronShell]
     var velocity:SpeedUnit
@@ -31,8 +31,8 @@ struct Atom {
         return proton_count == electron_count ? .stable : proton_count > electron_count ? .anion : .cation
     }
     
-    var chemical_element : ChemicalElement {
-        return ChemicalElement(rawValue: nucleus.proton_count) ?? ChemicalElement.undiscovered
+    var chemical_element : ChemicalElement? {
+        return ChemicalElement.elements[nucleus.proton_count]
     }
     
     var elementary_charge : Double {

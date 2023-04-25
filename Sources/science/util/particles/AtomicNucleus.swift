@@ -6,7 +6,7 @@
 
 import Foundation
 
-struct AtomicNucleus {
+struct AtomicNucleus : Hashable {
     var protons:[Proton]
     var neutrons:[Neutron]
     
@@ -17,7 +17,7 @@ struct AtomicNucleus {
         return neutrons.count
     }
     
-    var element : ChemicalElement {
-        return ChemicalElement(rawValue: proton_count) ?? ChemicalElement.undiscovered
+    var element : ChemicalElement? {
+        return ChemicalElement.elements[proton_count]
     }
 }
