@@ -3,6 +3,7 @@
 Just an open-source scientific simulator. Created for educational and scientific purposes.
 
 ## Future development
+- cross-platform: macOS, linux, windows | ARM, x86, RISC
 - modern and friendly UI
 - SIMD where applicable
 - gpu support/acceleration
