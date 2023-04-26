@@ -9,6 +9,8 @@ import Foundation
 import huge_numbers
 
 struct AccelerationUnit : Unit {
+    static var zero:AccelerationUnit = AccelerationUnit(type: AccelerationUnitType.metres_per_second_per_second, value: HugeFloat.zero)
+    
     typealias TargetUnitType = AccelerationUnitType
     
     var prefix:UnitPrefix
