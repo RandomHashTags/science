@@ -15,8 +15,8 @@ struct ChemicalElement : Hashable {
     let symbol:String
     /// Masured in Dalton
     let standard_atomic_weight:Float
+    /// predicted/known density of this chemical element, measured in grams per cubic centimetre
     let density:DensityUnit
-    //let freezing_point:TemperatureUnit
     /// if known, melting point of this chemical element, measured in degrees Kelvin
     let melting_point:TemperatureUnit?
     /// if known, boiling point of this chemical element, measured in degrees Kelvin
@@ -26,7 +26,7 @@ struct ChemicalElement : Hashable {
         self.atomic_number = atomic_number
         self.symbol = symbol
         self.standard_atomic_weight = standard_atomic_weight
-        self.density = DensityUnit(type: DensityUnitType.kilogram_per_cubic_metre, value: HugeFloat(density))
+        self.density = DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat(density))
         //self.freezing_point = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(freezing_point))
         self.melting_point = melting_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(melting_point!)) : nil
         self.boiling_point = boiling_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(boiling_point!)) : nil

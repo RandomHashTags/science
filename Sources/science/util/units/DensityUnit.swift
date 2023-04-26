@@ -21,6 +21,13 @@ struct DensityUnit : Unit {
         case .kilogram_per_cubic_metre:
             switch unit {
             case .kilogram_per_cubic_metre: return value
+            case .gram_per_cubic_centimetre: return value * HugeFloat("0.001")
+            }
+            
+        case .gram_per_cubic_centimetre:
+            switch unit {
+            case .kilogram_per_cubic_metre: return value * HugeFloat("1000")
+            case .gram_per_cubic_centimetre: return value
             }
             
         }
