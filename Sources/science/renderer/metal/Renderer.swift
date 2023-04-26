@@ -21,7 +21,7 @@ enum RendererError: Error {
     case badVertexDescriptor
 }
 
-class Renderer: NSObject, MTKViewDelegate {
+public class Renderer: NSObject, MTKViewDelegate {
     
     public let device: MTLDevice
     let commandQueue: MTLCommandQueue
@@ -44,7 +44,7 @@ class Renderer: NSObject, MTKViewDelegate {
     
     var mesh: MTKMesh
     
-    init?(metalKitView: MTKView) {
+    public init?(metalKitView: MTKView) {
         self.device = metalKitView.device!
         guard let queue = self.device.makeCommandQueue() else { return nil }
         self.commandQueue = queue
@@ -211,7 +211,7 @@ class Renderer: NSObject, MTKViewDelegate {
         rotation += 0.01
     }
     
-    func draw(in view: MTKView) {
+    public func draw(in view: MTKView) {
         /// Per frame updates hare
         
         _ = inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
@@ -284,7 +284,7 @@ class Renderer: NSObject, MTKViewDelegate {
         }
     }
     
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+    public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         /// Respond to drawable size or orientation changes here
         
         let aspect = Float(size.width) / Float(size.height)

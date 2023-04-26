@@ -7,6 +7,10 @@
 import XCTest
 @testable import science
 import huge_numbers
+import Metal
+import MetalKit
+import RendererMetal
+import AppKit
 
 final class scienceTests: XCTestCase {
     func testExample() throws {
@@ -19,6 +23,7 @@ final class scienceTests: XCTestCase {
         test_electrons()
         test_mathmatical_constants()
         test_unit_conversions()
+        test_renderer()
     }
 }
 extension scienceTests {
@@ -58,5 +63,19 @@ extension scienceTests {
         var result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.fahrenheit, value: HugeFloat(string: "-40")).to_unit(unit: TemperatureUnitType.celsius)
         var expected_result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.celsius, value: HugeFloat("-40"))
         XCTAssert(result == expected_result, "test_unit_conversion_temperature;result=\(result);expected_result=\(expected_result)")
+    }
+}
+
+
+extension scienceTests {
+    private func test_renderer() {
+        test_renderer_metal()
+    }
+    private func test_renderer_metal() {
+        return; // TODO: fix
+        let app:NSApplication = NSApplication.shared
+        let delegate:MetalRendererDelegate = MetalRendererDelegate()
+        app.delegate = delegate
+        app.run()
     }
 }

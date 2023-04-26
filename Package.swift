@@ -36,6 +36,7 @@ let package = Package(
             name: "scienceTests",
             dependencies: [
                 "science",
+                "RendererMetal",
                 .product(name: "huge-numbers", package: "swift_huge-numbers")
             ]),
     ]

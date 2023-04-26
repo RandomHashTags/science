@@ -11,7 +11,7 @@ import huge_numbers
 struct ChemicalElement : Hashable {
     static var elements : [Int:ChemicalElement] = [:]
     
-    let atomic_number:Int
+    let atomic_number:Int, proton_count:Int? = nil, neutron_count:Int? = nil
     let symbol:String
     /// Masured in Dalton
     let standard_atomic_weight:Float
@@ -38,8 +38,8 @@ struct ChemicalElement : Hashable {
     }()
     
     func get_isotope(atomic_weight: Float) -> Atom {
-        let protons:[Proton] = [Proton].init(repeating: Proton(), count: atomic_number)
-        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: Int(atomic_weight) - atomic_number)
+        let protons:[Proton] = [Proton].init(repeating: Proton(), count: proton_count ?? atomic_number)
+        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: neutron_count ?? Int(atomic_weight) - atomic_number)
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
         return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, velocity: SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero))
     }
