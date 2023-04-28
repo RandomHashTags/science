@@ -7,7 +7,7 @@
 import Foundation
 import huge_numbers
 
-protocol Unit : Hashable {
+public protocol Unit : Hashable {
     associatedtype TargetUnitType : UnitType
     
     var prefix:UnitPrefix { get set }
@@ -23,7 +23,7 @@ protocol Unit : Hashable {
     func to_unit(unit: TargetUnitType) -> Self
     func to_unit(prefix: UnitPrefix, unit: TargetUnitType) -> Self
 }
-extension Unit {
+public extension Unit {
     init(type: TargetUnitType, value: HugeFloat) {
         self.init(prefix: UnitPrefix.normal, type: type, value: value)
     }
@@ -51,19 +51,19 @@ extension Unit {
         return Self.init(prefix: prefix, type: unit, value: value)
     }
 }
-extension Unit {
+public extension Unit {
     static prefix func - (item: Self) -> Self {
         return Self(type: item.type, value: -item.value)
     }
 }
-extension Unit {
+public extension Unit {
     static func * (left: Self, right: Self) -> Self {
         let left_type:TargetUnitType = left.type
         let right_updated:Self = right.to_unit(prefix: left.prefix, unit: left_type)
         return Self(type: left_type, value: left.value * right_updated.value)
     }
 }
-extension Unit {
+public extension Unit {
     static func * (left: Self, right: HugeFloat) -> Self {
         var copy:Self = left
         copy.value *= right

@@ -6,10 +6,10 @@
 
 import Foundation
 
-enum ActionUnitType : UnitType {
+public enum ActionUnitType : UnitType {
     case joule_second
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .joule_second: return "J*s"
         }

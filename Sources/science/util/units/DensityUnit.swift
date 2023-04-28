@@ -8,14 +8,20 @@
 import Foundation
 import huge_numbers
 
-struct DensityUnit : Unit {
-    typealias TargetUnitType = DensityUnitType
+public struct DensityUnit : Unit {
+    public typealias TargetUnitType = DensityUnitType
     
-    var prefix:UnitPrefix
-    var type:DensityUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: DensityUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: DensityUnitType) -> HugeFloat {
         switch type {
             
         case .kilogram_per_cubic_metre:

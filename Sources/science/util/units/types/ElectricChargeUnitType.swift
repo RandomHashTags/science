@@ -6,10 +6,10 @@
 
 import Foundation
 
-enum ElectricChargeUnitType : UnitType {
+public enum ElectricChargeUnitType : UnitType {
     case coulomb
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .coulomb: return "C"
         }

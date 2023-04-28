@@ -8,16 +8,22 @@
 import Foundation
 import huge_numbers
 
-struct AccelerationUnit : Unit {
-    static var zero:AccelerationUnit = AccelerationUnit(type: AccelerationUnitType.metres_per_second_per_second, value: HugeFloat.zero)
+public struct AccelerationUnit : Unit {
+    public static var zero:AccelerationUnit = AccelerationUnit(type: AccelerationUnitType.metres_per_second_per_second, value: HugeFloat.zero)
     
-    typealias TargetUnitType = AccelerationUnitType
+    public typealias TargetUnitType = AccelerationUnitType
     
-    var prefix:UnitPrefix
-    var type:AccelerationUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: AccelerationUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: AccelerationUnitType) -> HugeFloat {
         switch type {
             
         case .metres_per_second_per_second:

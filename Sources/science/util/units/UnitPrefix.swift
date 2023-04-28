@@ -7,7 +7,7 @@
 import Foundation
 import huge_numbers
 
-enum UnitPrefix : Int {
+public enum UnitPrefix : Int {
     // rawValue == base ten multiplier (10^x)
     case quecto = -30
     case ronto = -27
@@ -33,7 +33,7 @@ enum UnitPrefix : Int {
     case ronna = 27
     case quetta = 30
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .quecto: return "q"
         case .ronto: return "r"
@@ -61,7 +61,7 @@ enum UnitPrefix : Int {
         }
     }
     
-    func convert_to(_ prefix: UnitPrefix, value: HugeFloat) -> HugeFloat {
+    public func convert_to(_ prefix: UnitPrefix, value: HugeFloat) -> HugeFloat {
         return value * pow(10, Float80(rawValue - prefix.rawValue))
     }
 }

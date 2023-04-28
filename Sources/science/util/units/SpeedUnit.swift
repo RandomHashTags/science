@@ -7,14 +7,20 @@
 import Foundation
 import huge_numbers
 
-struct SpeedUnit : Unit {
-    typealias TargetUnitType = SpeedUnitType
+public struct SpeedUnit : Unit {
+    public typealias TargetUnitType = SpeedUnitType
     
-    var prefix:UnitPrefix
-    var type:SpeedUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: SpeedUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: SpeedUnitType) -> HugeFloat {
         switch type {
             
         case .metre_per_second:

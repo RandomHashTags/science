@@ -8,14 +8,20 @@
 import Foundation
 import huge_numbers
 
-struct TemperatureUnit : Unit {
-    typealias TargetUnitType = TemperatureUnitType
+public struct TemperatureUnit : Unit {
+    public typealias TargetUnitType = TemperatureUnitType
     
-    var prefix:UnitPrefix
-    var type:TemperatureUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: TemperatureUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: TemperatureUnitType) -> HugeFloat {
         switch type {
             
         case .celsius:

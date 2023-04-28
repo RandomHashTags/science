@@ -7,14 +7,20 @@
 import Foundation
 import huge_numbers
 
-struct FrequencyUnit : Unit {
-    typealias TargetUnitType = FrequencyUnitType
+public struct FrequencyUnit : Unit {
+    public typealias TargetUnitType = FrequencyUnitType
     
-    var prefix:UnitPrefix
-    var type:FrequencyUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: FrequencyUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: FrequencyUnitType) -> HugeFloat {
         switch type {
             
         case .wavelength_in_metres:

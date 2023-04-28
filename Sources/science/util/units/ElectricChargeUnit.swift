@@ -7,14 +7,20 @@
 import Foundation
 import huge_numbers
 
-struct ElectricChargeUnit : Unit {
-    typealias TargetUnitType = ElectricChargeUnitType
+public struct ElectricChargeUnit : Unit {
+    public typealias TargetUnitType = ElectricChargeUnitType
     
-    var prefix:UnitPrefix
-    var type:ElectricChargeUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: ElectricChargeUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: ElectricChargeUnitType) -> HugeFloat {
         switch type {
             
         case .coulomb:

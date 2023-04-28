@@ -7,14 +7,20 @@
 import Foundation
 import huge_numbers
 
-struct EnergyUnit : Unit {
-    typealias TargetUnitType = EnergyUnitType
+public struct EnergyUnit : Unit {
+    public typealias TargetUnitType = EnergyUnitType
     
-    var prefix:UnitPrefix
-    var type:EnergyUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: EnergyUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: EnergyUnitType) -> HugeFloat {
         switch type {
             
         case .joule:
@@ -31,7 +37,7 @@ struct EnergyUnit : Unit {
         }
     }
     
-    func to_kilograms() -> MassUnit {
+    public func to_kilograms() -> MassUnit {
         let joule_value:HugeFloat = convert_value_to_unit(EnergyUnitType.joule)
         let kilograms_value:HugeFloat = joule_value / MathmaticalConstant.speed_of_light_in_a_vacuum_squared.value
         return MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: kilograms_value)

@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum PressureUnitType : UnitType {
+public enum PressureUnitType : UnitType {
     case pascal
     case pound_per_square_inch
     case standard_atmosphere
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .pascal: return "Pa"
         case .pound_per_square_inch: return "psi"

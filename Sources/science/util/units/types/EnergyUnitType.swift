@@ -6,11 +6,11 @@
 
 import Foundation
 
-enum EnergyUnitType : UnitType {
+public enum EnergyUnitType : UnitType {
     case joule
     case electronvolt
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .joule: return "J"
         case .electronvolt: return "eV"

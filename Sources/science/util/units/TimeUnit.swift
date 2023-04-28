@@ -8,14 +8,20 @@
 import Foundation
 import huge_numbers
 
-struct TimeUnit : Unit {
-    typealias TargetUnitType = TimeUnitType
+public struct TimeUnit : Unit {
+    public typealias TargetUnitType = TimeUnitType
     
-    var prefix:UnitPrefix
-    var type:TimeUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: TimeUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: TimeUnitType) -> HugeFloat {
         switch type {
             
         case .second:

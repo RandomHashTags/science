@@ -7,14 +7,20 @@
 import Foundation
 import huge_numbers
 
-struct MassUnit : Unit {
-    typealias TargetUnitType = MassUnitType
+public struct MassUnit : Unit {
+    public typealias TargetUnitType = MassUnitType
     
-    var prefix:UnitPrefix
-    var type:MassUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: MassUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: MassUnitType) -> HugeFloat {
         switch type {
             
         case .gram:

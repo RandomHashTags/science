@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TimeUnitType : UnitType {
+public enum TimeUnitType : UnitType {
     case second
     case minute
     case hour
@@ -22,7 +22,7 @@ enum TimeUnitType : UnitType {
     case century
     case millennium
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .second: return "s"
         case .minute: return "min"

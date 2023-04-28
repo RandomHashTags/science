@@ -6,12 +6,12 @@
 
 import Foundation
 
-enum FrequencyUnitType : UnitType {
+public enum FrequencyUnitType : UnitType {
     case wavelength_in_metres
     
     case hertz
         
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .wavelength_in_metres: return "m"
             

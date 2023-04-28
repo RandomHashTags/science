@@ -7,14 +7,20 @@
 import Foundation
 import huge_numbers
 
-struct ActionUnit : Unit {
-    typealias TargetUnitType = ActionUnitType
+public struct ActionUnit : Unit {
+    public typealias TargetUnitType = ActionUnitType
     
-    var prefix:UnitPrefix
-    var type:ActionUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: ActionUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: ActionUnitType) -> HugeFloat {
         switch type {
             
         case .joule_second:

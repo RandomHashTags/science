@@ -6,14 +6,14 @@
 
 import Foundation
 
-enum SpeedUnitType : UnitType {
+public enum SpeedUnitType : UnitType {
     case metre_per_second
     case kilometre_per_hour
     case mile_per_hour
     case knot
     case foot_per_second
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .metre_per_second: return "m/s"
         case .kilometre_per_hour: return "km/h"

@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum ForceUnitType : UnitType {
+public enum ForceUnitType : UnitType {
     case newton
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .newton: return "N"
         }

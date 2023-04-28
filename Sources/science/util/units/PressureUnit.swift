@@ -8,14 +8,20 @@
 import Foundation
 import huge_numbers
 
-struct PressureUnit : Unit {
-    typealias TargetUnitType = PressureUnitType
+public struct PressureUnit : Unit {
+    public typealias TargetUnitType = PressureUnitType
     
-    var prefix:UnitPrefix
-    var type:PressureUnitType
-    var value:HugeFloat
+    public var prefix:UnitPrefix
+    public var type:TargetUnitType
+    public var value:HugeFloat
     
-    func convert_value_to_unit(_ unit: PressureUnitType) -> HugeFloat {
+    public init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat) {
+        self.prefix = prefix
+        self.type = type
+        self.value = value
+    }
+    
+    public func convert_value_to_unit(_ unit: PressureUnitType) -> HugeFloat {
         switch type {
             
         case .pascal:

@@ -7,13 +7,13 @@
 import Foundation
 import huge_numbers
 
-enum TemperatureUnitType : UnitType {
+public enum TemperatureUnitType : UnitType {
     case kelvin
     case celsius
     case fahrenheit
     case rankine
     
-    var symbol : String {
+    public var symbol : String {
         switch self {
         case .kelvin: return "K"
         case .celsius: return "C"
@@ -22,7 +22,7 @@ enum TemperatureUnitType : UnitType {
         }
     }
     
-    var absolute_zero : HugeFloat {
+    public var absolute_zero : HugeFloat {
         switch self {
         case .kelvin: return HugeFloat.zero
         case .celsius: return HugeFloat("-273.15")

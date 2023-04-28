@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct EnvironmentTimeline : Hashable {
-    var starting_point:TimeUnit
-    var speed:TimeUnit
-    var end_after:TimeUnit
+public struct EnvironmentTimeline : Hashable {
+    public var starting_point:TimeUnit
+    public var speed:TimeUnit
+    public var end_after:TimeUnit
 }
