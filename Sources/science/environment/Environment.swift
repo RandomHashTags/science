@@ -44,7 +44,6 @@ public struct Environment : Hashable {
         )
         
         gravity_per_frame = gravity.value / fps_float
-        print("Environment;gravity_value=\(gravity.value);gravity_per_frame=\(gravity_per_frame)")
         timeline_nanoseconds = 1_000_000_000 / fps_integer
         is_paused = true
         individual_atoms = []

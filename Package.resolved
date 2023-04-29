@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RandomHashTags/swift_huge-numbers",
       "state" : {
-        "revision" : "63adbd6367ec5682bab32d22b45b55d566342b56",
-        "version" : "1.0.4"
+        "revision" : "3f7c96d6900f8ea3cdd31e3473156ddadd9b1efe",
+        "version" : "1.0.6"
       }
     }
   ],
