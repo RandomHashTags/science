@@ -17,7 +17,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.2")
+        .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.4")
     ],
     targets: [
         .target(

@@ -6,7 +6,7 @@
 
 import Foundation
 
-enum ParticleType {
+public enum ParticleType {
     case composite
     case elementary
 }

@@ -6,9 +6,9 @@
 
 import Foundation
 
-protocol ElementaryParticle : SubatomicParticle {
+public protocol ElementaryParticle : SubatomicParticle {
 }
-extension ElementaryParticle {
+public extension ElementaryParticle {
     var particle_type : ParticleType {
         return ParticleType.elementary
     }

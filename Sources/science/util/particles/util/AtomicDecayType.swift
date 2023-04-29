@@ -6,7 +6,7 @@
 
 import Foundation
 
-enum AtomicDecayType {
+public enum AtomicDecayType {
     case alpha
     case beta_minus
     case beta_plus

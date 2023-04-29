@@ -8,21 +8,21 @@ import Foundation
 import huge_numbers
 
 // TODO: support uncertainty
-struct ChemicalElement : Hashable {
+public struct ChemicalElement : Hashable {
     static var elements : [Int:ChemicalElement] = [:]
     
-    let atomic_number:Int, proton_count:Int? = nil, neutron_count:Int? = nil
-    let symbol:String
+    public let atomic_number:Int, proton_count:Int? = nil, neutron_count:Int? = nil
+    public let symbol:String
     /// Masured in Dalton
-    let standard_atomic_weight:Float
+    public let standard_atomic_weight:Float
     /// predicted/known density of this chemical element, measured in grams per cubic centimetre
-    let density:DensityUnit
+    public let density:DensityUnit
     /// if known, melting point of this chemical element, measured in degrees Kelvin
-    let melting_point:TemperatureUnit?
+    public let melting_point:TemperatureUnit?
     /// if known, boiling point of this chemical element, measured in degrees Kelvin
-    let boiling_point:TemperatureUnit?
+    public let boiling_point:TemperatureUnit?
     
-    init(atomic_number: Int, symbol: String, standard_atomic_weight: Float, density: String, melting_point: String?, boiling_point: String? = nil) {
+    public init(atomic_number: Int, symbol: String, standard_atomic_weight: Float, density: String, melting_point: String?, boiling_point: String? = nil) {
         self.atomic_number = atomic_number
         self.symbol = symbol
         self.standard_atomic_weight = standard_atomic_weight
@@ -33,20 +33,23 @@ struct ChemicalElement : Hashable {
         ChemicalElement.elements[atomic_number] = self
     }
     
-    lazy var atom : Atom = {
+    public lazy var atom : Atom = {
         return get_isotope(atomic_weight: standard_atomic_weight)
     }()
     
-    func get_isotope(atomic_weight: Float) -> Atom {
+    public func get_isotope(atomic_weight: Float) -> Atom {
         let protons:[Proton] = [Proton].init(repeating: Proton(), count: proton_count ?? atomic_number)
         let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: neutron_count ?? Int(atomic_weight) - atomic_number)
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
-        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, velocity: SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero))
+        let location:Location = Location(x: HugeFloat.zero, y: HugeFloat.zero, z: HugeFloat.zero)
+        let speed:SpeedUnit = SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero)
+        let velocity:Velocity = Velocity(x: speed, y: speed, z: speed)
+        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, location: location, velocity: velocity)
     }
 }
 // https://www.rsc.org/periodic-table
 // https://en.wikipedia.org/wiki/List_of_chemical_elements
-extension ChemicalElement {
+public extension ChemicalElement {
     // H2O melting point = 273.15 K (13.99+27.18=41.17)
     // H2SO4 melting point = 283.26 K (13.99+388.36+(27.18*2)=511.07)
     

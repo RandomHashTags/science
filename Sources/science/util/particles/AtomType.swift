@@ -6,7 +6,7 @@
 
 import Foundation
 
-enum AtomType {
+public enum AtomType {
     case stable
     case cation
     case anion
