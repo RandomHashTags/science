@@ -25,7 +25,7 @@ public struct ChemicalElement : Hashable {
     public let half_life:TimeUnit?
     // TODO: support radioactive decay
     
-    public init(atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
+    public init(atomic_number: Int, assign: Bool = true, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
         self.atomic_number = atomic_number
         self.neutron_count = neutron_count
         self.symbol = symbol
@@ -35,10 +35,12 @@ public struct ChemicalElement : Hashable {
         self.melting_point = melting_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(melting_point!)) : nil
         self.boiling_point = boiling_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(boiling_point!)) : nil
         self.half_life = half_life
-        ChemicalElement.elements[atomic_number] = self
+        if assign {
+            ChemicalElement.elements[atomic_number] = self
+        }
     }
     public init(_ element: ChemicalElement, neutron_count: Int, standard_atomic_weight: Float, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
-        self.init(atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, half_life: half_life)
+        self.init(atomic_number: element.atomic_number, assign: false, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, half_life: half_life)
     }
     
     public lazy var atom : Atom = {
