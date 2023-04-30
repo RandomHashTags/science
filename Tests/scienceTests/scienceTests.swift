@@ -18,7 +18,7 @@ final class scienceTests: XCTestCase {
         test_molecules()
         
         let photon:Photon = Photon(frequency: FrequencyUnit(type: .hertz, value: huge_float_one)), photon_energy:EnergyUnit = photon.energy
-        print("scienceTests;photo energy at " + photon.frequency.value.description + " " + photon.frequency.type.symbol + "=" + String(describing: photon_energy))
+        //print("scienceTests;photo energy at " + photon.frequency.value.description + " " + photon.frequency.type.symbol + "=" + String(describing: photon_energy))
         
         test_electrons()
         test_mathmatical_constants()

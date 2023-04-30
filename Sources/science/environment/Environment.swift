@@ -19,7 +19,11 @@ public struct Environment : Hashable {
     
     public var ambient_temperature:TemperatureUnit
     public var ambient_pressure:PressureUnit
-    public var gravity:AccelerationUnit
+    public var gravity:AccelerationUnit {
+        didSet {
+            gravity_per_frame = gravity.value / fps.to_float
+        }
+    }
     
     public var timeline:EnvironmentTimeline
     
@@ -62,16 +66,17 @@ public struct Environment : Hashable {
     public mutating func simulate() async {
         while !is_paused {
             print("Environment;simulate")
-            apply_physics()
+            tick()
             try? await Task.sleep(nanoseconds: timeline_nanoseconds)
         }
     }
     
-    public func save() {
+    private mutating func tick() {
+        apply_physics()
     }
     
     
-    public mutating func apply_physics() {
+    private mutating func apply_physics() {
         for index in individual_atoms.indices {
             let before:HugeFloat = individual_atoms[index].location.y
             individual_atoms[index].location.y -= gravity_per_frame
@@ -79,6 +84,6 @@ public struct Environment : Hashable {
         }
     }
     // TODO: support time skipping/jumping/browsing/indexing
-    public mutating func apply_physics(multiplier: HugeFloat) {
+    private mutating func apply_physics(multiplier: HugeFloat) {
     }
 }

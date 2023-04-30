@@ -45,20 +45,4 @@ public struct Atom : Hashable {
         velocity = -atom2_velocity
         atom.velocity = -atom1_velocity
     }
-    
-    public func decay(_ type: AtomicDecayType) -> ChemicalReaction {
-        switch type {
-        case .alpha:
-            let protons:[Proton] = nucleus.protons
-            let neutrons:[Neutron] = nucleus.neutrons
-            return ChemicalReaction(destroyed_protons: [protons[0], protons[1]], destroyed_neutrons: [neutrons[0], neutrons[1]])
-        case .beta_minus:
-            let electron:Electron = Electron()
-            return ChemicalReaction(created_protons: [Proton()], destroyed_neutrons: [nucleus.neutrons.first!], created_electrons: [electron], created_antielectrons: [AntiParticle(electron)])
-        case .beta_plus:
-            return ChemicalReaction(destroyed_protons: [nucleus.protons.first!], created_neutrons: [Neutron()], created_antielectrons: [AntiParticle(Electron())])
-        case .gamma:
-            return ChemicalReaction()
-        }
-    }
 }

@@ -11,34 +11,42 @@ import huge_numbers
 public struct ChemicalElement : Hashable {
     static var elements : [Int:ChemicalElement] = [:]
     
-    public let atomic_number:Int, proton_count:Int? = nil, neutron_count:Int? = nil
+    public let atomic_number:Int, neutron_count:Int?
     public let symbol:String
     /// Masured in Dalton
     public let standard_atomic_weight:Float
-    /// predicted/known density of this chemical element, measured in grams per cubic centimetre
-    public let density:DensityUnit
+    /// if known, predicted/known density of this chemical element, measured in grams per cubic centimetre
+    public let density:DensityUnit?
     /// if known, melting point of this chemical element, measured in degrees Kelvin
     public let melting_point:TemperatureUnit?
     /// if known, boiling point of this chemical element, measured in degrees Kelvin
     public let boiling_point:TemperatureUnit?
     
-    public init(atomic_number: Int, symbol: String, standard_atomic_weight: Float, density: String, melting_point: String?, boiling_point: String? = nil) {
+    public let half_life:TimeUnit?
+    // TODO: support radioactive decay
+    
+    public init(atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
         self.atomic_number = atomic_number
+        self.neutron_count = neutron_count
         self.symbol = symbol
         self.standard_atomic_weight = standard_atomic_weight
-        self.density = DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat(density))
+        self.density = density != nil ? DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat(density!)) : nil
         //self.freezing_point = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(freezing_point))
         self.melting_point = melting_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(melting_point!)) : nil
         self.boiling_point = boiling_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(boiling_point!)) : nil
+        self.half_life = half_life
         ChemicalElement.elements[atomic_number] = self
+    }
+    public init(_ element: ChemicalElement, neutron_count: Int, standard_atomic_weight: Float, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
+        self.init(atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, half_life: half_life)
     }
     
     public lazy var atom : Atom = {
         return get_isotope(atomic_weight: standard_atomic_weight)
     }()
     
-    public func get_isotope(atomic_weight: Float) -> Atom {
-        let protons:[Proton] = [Proton].init(repeating: Proton(), count: proton_count ?? atomic_number)
+    private func get_isotope(atomic_weight: Float) -> Atom {
+        let protons:[Proton] = [Proton].init(repeating: Proton(), count: atomic_number)
         let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: neutron_count ?? Int(atomic_weight) - atomic_number)
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
         let location:Location = Location(x: HugeFloat.zero, y: HugeFloat.zero, z: HugeFloat.zero)
