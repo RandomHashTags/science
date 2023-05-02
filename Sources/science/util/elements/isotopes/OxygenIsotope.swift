@@ -8,6 +8,7 @@
 import Foundation
 import huge_numbers
 
+// https://en.wikipedia.org/wiki/Isotopes_of_oxygen
 public enum OxygenIsotope {
     public static var oxygen_11:ChemicalElement = ChemicalElement(ChemicalElement.oxygen, neutron_count: 3, standard_atomic_weight: 11.051_25, half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: HugeFloat("198")))
     public static var oxygen_12:ChemicalElement = ChemicalElement(ChemicalElement.oxygen, neutron_count: 4, standard_atomic_weight: 12.034_368, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("8.9")))

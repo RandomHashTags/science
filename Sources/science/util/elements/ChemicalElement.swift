@@ -22,8 +22,8 @@ public struct ChemicalElement : Hashable {
     /// if known, boiling point of this chemical element, measured in degrees Kelvin
     public let boiling_point:TemperatureUnit?
     
-    public let half_life:TimeUnit?
     // TODO: support radioactive decay
+    public let half_life:TimeUnit?
     
     public init(atomic_number: Int, assign: Bool = true, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
         self.atomic_number = atomic_number
