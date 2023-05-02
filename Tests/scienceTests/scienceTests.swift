@@ -23,6 +23,7 @@ final class scienceTests: XCTestCase {
         test_electrons()
         test_mathmatical_constants()
         test_unit_conversions()
+        test_environment()
         test_renderer()
     }
 }
@@ -63,6 +64,16 @@ extension scienceTests {
         var result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.fahrenheit, value: HugeFloat(string: "-40")).to_unit(unit: TemperatureUnitType.celsius)
         var expected_result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.celsius, value: HugeFloat("-40"))
         XCTAssert(result == expected_result, "test_unit_conversion_temperature;result=\(result);expected_result=\(expected_result)")
+    }
+}
+
+extension scienceTests {
+    private func test_environment() {
+        var elapsed_time:ElapsedTime = ElapsedTime()
+        elapsed_time.add(TimeUnit(type: TimeUnitType.second, value: HugeFloat("25")))
+        elapsed_time.add(TimeUnit(prefix: UnitPrefix.kilo, type: TimeUnitType.second, value: HugeFloat("1")))
+        elapsed_time.add(TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("5")))
+        print("test_environment;elapsed_time=" + elapsed_time.description)
     }
 }
 

@@ -44,18 +44,14 @@ public struct ChemicalElement : Hashable {
     }
     
     public lazy var atom : Atom = {
-        return get_isotope(atomic_weight: standard_atomic_weight)
-    }()
-    
-    private func get_isotope(atomic_weight: Float) -> Atom {
         let protons:[Proton] = [Proton].init(repeating: Proton(), count: atomic_number)
-        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: neutron_count ?? Int(atomic_weight) - atomic_number)
+        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: neutron_count ?? Int(standard_atomic_weight) - atomic_number)
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
         let location:Location = Location(x: HugeFloat.zero, y: HugeFloat.zero, z: HugeFloat.zero)
         let speed:SpeedUnit = SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero)
         let velocity:Velocity = Velocity(x: speed, y: speed, z: speed)
-        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, location: location, velocity: velocity)
-    }
+        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, half_life: half_life, location: location, velocity: velocity)
+    }()
 }
 // https://www.rsc.org/periodic-table
 // https://en.wikipedia.org/wiki/List_of_chemical_elements
