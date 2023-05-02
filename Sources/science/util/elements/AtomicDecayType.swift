@@ -7,6 +7,12 @@
 import Foundation
 
 public enum AtomicDecayType {
+    case electron_capture
+    case proton_emission
+    case proton_emission_2
+    case neutron_emission
+    case neutron_emission_2
+    
     case alpha
     case beta_minus
     case beta_minus_neutron_emission

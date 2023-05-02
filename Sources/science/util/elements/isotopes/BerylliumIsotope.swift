@@ -8,6 +8,7 @@
 import Foundation
 import huge_numbers
 
+// https://en.wikipedia.org/wiki/Isotopes_of_beryllium
 public enum BerylliumIsotope {
     public static var beryllium_5:ChemicalElement =  ChemicalElement(ChemicalElement.beryllium, neutron_count: 1, standard_atomic_weight: 5.039_87, half_life: nil) // TODO: fix
     public static var beryllium_6:ChemicalElement =  ChemicalElement(ChemicalElement.beryllium, neutron_count: 2, standard_atomic_weight: 6.019_726, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("5.0")))
