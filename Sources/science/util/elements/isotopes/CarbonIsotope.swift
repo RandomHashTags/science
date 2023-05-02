@@ -10,8 +10,8 @@ import huge_numbers
 
 // https://en.wikipedia.org/wiki/Isotopes_of_carbon
 public enum CarbonIsotope {
-    public static var carbon_8:ChemicalElement = ChemicalElement(ChemicalElement.carbon, neutron_count: 2, standard_atomic_weight: 8.036_643, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("3.5")))
-    public static var carbon_9:ChemicalElement = ChemicalElement(ChemicalElement.carbon, neutron_count: 3, standard_atomic_weight: 9.031_0372, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("126.5")))
+    public static var carbon_8:ChemicalElement =  ChemicalElement(ChemicalElement.carbon, neutron_count: 2, standard_atomic_weight: 8.036_643, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("3.5")))
+    public static var carbon_9:ChemicalElement =  ChemicalElement(ChemicalElement.carbon, neutron_count: 3, standard_atomic_weight: 9.031_0372, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("126.5")))
     public static var carbon_10:ChemicalElement = ChemicalElement(ChemicalElement.carbon, neutron_count: 4, standard_atomic_weight: 10.016_853_22, half_life: TimeUnit(type: TimeUnitType.second, value: HugeFloat("19.3011")))
     public static var carbon_11:ChemicalElement = ChemicalElement(ChemicalElement.carbon, neutron_count: 5, standard_atomic_weight: 11.011_432_60, half_life: TimeUnit(type: TimeUnitType.minute, value: HugeFloat("20.3402")))
     public static var carbon_12:ChemicalElement = ChemicalElement(ChemicalElement.carbon, neutron_count: 6, standard_atomic_weight: 12)
