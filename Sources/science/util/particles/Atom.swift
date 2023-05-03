@@ -11,6 +11,7 @@ public struct Atom : Hashable {
     public var nucleus:AtomicNucleus
     public var electron_shells:[ElectronShell]
     public let half_life:TimeUnit?
+    public var lifetime:ElapsedTime = ElapsedTime()
     public var location:Location
     public var velocity:Velocity
     
@@ -24,13 +25,13 @@ public struct Atom : Hashable {
     public var valence_electrons : [Electron]? {
         return valence_shell?.electrons
     }
-    public var is_stable : Bool {
+    public var is_electrically_stable : Bool {
         return valence_electrons?.count ?? 0 == 8
     }
     
     public var type : AtomType {
         let proton_count:Int = nucleus.proton_count, electron_count:Int = electron_count
-        return proton_count == electron_count ? .stable : proton_count > electron_count ? .anion : .cation
+        return proton_count == electron_count ? .stable : electron_count > proton_count ? .anion : .cation
     }
     
     public var chemical_element : ChemicalElement? {
@@ -50,14 +51,11 @@ public struct Atom : Hashable {
     public var is_unstable : Bool {
         return half_life != nil
     }
-    public func try_decaying() -> ChemicalReaction? {
-        guard is_unstable else { return nil }
-        return decay()
+    public mutating func decay() -> ChemicalReaction {
+        lifetime = ElapsedTime()
+        return decay(AtomicDecayType.gamma)
     }
-    private func decay() -> ChemicalReaction? {
-        return nil
-    }
-    private func decay(_ type: AtomicDecayType) -> ChemicalReaction {
+    private mutating func decay(_ type: AtomicDecayType) -> ChemicalReaction {
         let protons:[Proton] = nucleus.protons, neutrons:[Neutron] = nucleus.neutrons
         switch type {
         case .alpha:

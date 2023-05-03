@@ -17,7 +17,7 @@ final class scienceTests: XCTestCase {
         let huge_float_one:HugeFloat = HugeFloat.one
         test_molecules()
         
-        let photon:Photon = Photon(frequency: FrequencyUnit(type: .hertz, value: huge_float_one)), photon_energy:EnergyUnit = photon.energy
+        let photon:Photon = Photon(frequency: FrequencyUnit(type: .hertz, value: huge_float_one)), photon_energy:EnergyUnit = photon.to_energy()
         //print("scienceTests;photo energy at " + photon.frequency.value.description + " " + photon.frequency.type.symbol + "=" + String(describing: photon_energy))
         
         test_electrons()
@@ -92,24 +92,29 @@ extension scienceTests {
     }
     
     private func test_unit_conversion_mass_to_energy() {
-        let kilogram_to_joules:EnergyUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.one).to_joule()
+        let kilogram_to_joules:EnergyUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.one).to_energy()
         XCTAssert(kilogram_to_joules == EnergyUnit(type: EnergyUnitType.joule, value: HugeFloat("89875517873681764")))
         let kilogram_to_energy:EnergyUnit = kilogram_to_joules.to_unit(unit: EnergyUnitType.electronvolt)
         XCTAssert(kilogram_to_energy == EnergyUnit(type: EnergyUnitType.electronvolt, value: HugeFloat("560958884538931987162813850074640384")))
-        let joule_to_mass:MassUnit = kilogram_to_energy.to_kilograms()
+        let joule_to_mass:MassUnit = kilogram_to_energy.to_mass()
         //XCTAssert(joule_to_mass == MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat("1")), "test_unit_conversion_mass_to_energy;\(joule_to_mass)")
     }
 }
 
 extension scienceTests {
     private func test_environment() {
+        test_environment_elapsed_time()
+    }
+    private func test_environment_elapsed_time() {
         var elapsed_time:ElapsedTime = ElapsedTime()
-        elapsed_time.add(TimeUnit(type: TimeUnitType.second, value: HugeFloat("25")))
-        elapsed_time.add(TimeUnit(prefix: UnitPrefix.kilo, type: TimeUnitType.second, value: HugeFloat("1")))
-        elapsed_time.add(TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("5")))
-        elapsed_time.add(TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("2")))
-        elapsed_time.add(TimeUnit(prefix: UnitPrefix.mega, type: TimeUnitType.second, value: HugeFloat("8")))
-        print("scienceTests;test_environment;elapsed_time=" + elapsed_time.description)
+        elapsed_time += TimeUnit(type: TimeUnitType.second, value: HugeFloat("25"))
+        elapsed_time += TimeUnit(prefix: UnitPrefix.kilo, type: TimeUnitType.second, value: HugeFloat("1"))
+        elapsed_time += TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("5"))
+        elapsed_time += TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("2"))
+        elapsed_time += TimeUnit(prefix: UnitPrefix.giga, type: TimeUnitType.second, value: HugeFloat("8"))
+        print("scienceTests;test_environment_elapsed_time;elapsed_time=" + elapsed_time.description)
+        
+        XCTAssert(ElapsedTime([.second:[.normal:HugeFloat.one]]) == TimeUnit(type: TimeUnitType.second, value: HugeFloat.one))
     }
 }
 

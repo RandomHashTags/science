@@ -6,6 +6,7 @@
 
 import Foundation
 
+// https://en.wikipedia.org/wiki/Particle_radiation
 public enum AtomicDecayType {
     case electron_capture
     case proton_emission

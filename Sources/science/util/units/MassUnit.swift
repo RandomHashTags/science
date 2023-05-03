@@ -57,9 +57,11 @@ public struct MassUnit : Unit {
         }
     }
     
-    public func to_joule() -> EnergyUnit {
+    /// Converts this ``MassUnit`` to a ``EnergyUnit``. Default is the joule.
+    public func to_energy(unit_prefix: UnitPrefix = UnitPrefix.normal, unit_type: EnergyUnitType = EnergyUnitType.joule) -> EnergyUnit {
         let kilogram_value:HugeFloat = convert_value_to_unit(prefix: UnitPrefix.kilo, MassUnitType.gram)
         let joules_value:HugeFloat = kilogram_value * MathmaticalConstant.speed_of_light_in_a_vacuum_squared.value
-        return EnergyUnit(type: EnergyUnitType.joule, value: joules_value)
+        let joules:EnergyUnit = EnergyUnit(type: EnergyUnitType.joule, value: joules_value)
+        return joules.to_unit(prefix: unit_prefix, unit: unit_type)
     }
 }

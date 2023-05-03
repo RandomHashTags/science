@@ -7,14 +7,15 @@
 import Foundation
 import huge_numbers
 
-struct Photon : ElementaryParticle {
-    let elementary_charge:Double = 0
+public struct Photon : ElementaryParticle {
+    public let elementary_charge:Double = 0
     
-    var frequency:FrequencyUnit
-    var mass:MassUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.zero)
+    public var frequency:FrequencyUnit
+    public var mass:MassUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.zero)
     
-    var energy : EnergyUnit {
+    public func to_energy(unit_prefix: UnitPrefix = UnitPrefix.normal, unit_type: EnergyUnitType = EnergyUnitType.joule) -> EnergyUnit {
         let action:ActionUnit = MathmaticalConstant.planck_constant * frequency.convert_value_to_unit(FrequencyUnitType.hertz)
-        return EnergyUnit(type: EnergyUnitType.joule, value: action.value)
+        let joules:EnergyUnit = EnergyUnit(type: EnergyUnitType.joule, value: action.value)
+        return joules.to_unit(prefix: unit_prefix, unit: unit_type)
     }
 }

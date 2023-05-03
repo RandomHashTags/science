@@ -16,7 +16,7 @@ public struct ElapsedTime : Hashable {
     }
     
     public var description : String {        
-        let target_types:[TimeUnitType] = [TimeUnitType.year, TimeUnitType.week, TimeUnitType.day, TimeUnitType.hour, TimeUnitType.minute, TimeUnitType.second]
+        let target_types:[TimeUnitType] = [TimeUnitType.decade, TimeUnitType.year, TimeUnitType.week, TimeUnitType.day, TimeUnitType.hour, TimeUnitType.minute, TimeUnitType.second]
         var time_values:[TimeUnitType:HugeFloat] = [:]
         for type in target_types {
             if let type_values:[UnitPrefix:HugeFloat] = values[type] {
@@ -34,8 +34,9 @@ public struct ElapsedTime : Hashable {
         var days:HugeFloat = time_values[.day] ?? HugeFloat.zero
         var weeks:HugeFloat = time_values[.week] ?? HugeFloat.zero
         var years:HugeFloat = time_values[.year] ?? HugeFloat.zero
+        var decades:HugeFloat = time_values[.decade] ?? HugeFloat.zero
                 
-        let sixty:HugeFloat = HugeFloat("60"), twenty_four:HugeFloat = HugeFloat("24"), seven:HugeFloat = HugeFloat("7"), three_sixty_five:HugeFloat = HugeFloat("365.25")
+        let sixty:HugeFloat = HugeFloat("60"), twenty_four:HugeFloat = HugeFloat("24"), seven:HugeFloat = HugeFloat("7"), three_sixty_five:HugeFloat = HugeFloat("365.25"), ten:HugeFloat = HugeFloat("10")
         if seconds >= sixty {
             let amount:HugeFloat = (seconds / sixty).integer.to_float
             seconds -= amount * sixty
@@ -56,6 +57,11 @@ public struct ElapsedTime : Hashable {
             days -= amount * three_sixty_five
             years += amount
         }
+        if years >= ten {
+            let amount:HugeFloat = (years / ten).integer.to_float
+            years -= amount * ten
+            decades += amount
+        }
         if days >= seven {
             let amount:HugeFloat = (days / seven).integer.to_float
             days -= amount * seven
@@ -63,8 +69,12 @@ public struct ElapsedTime : Hashable {
         }
         
         var string:String = "", needs_comma:Bool = false
+        if !decades.integer.is_zero {
+            string.append(decades.description + "decades")
+            needs_comma = true
+        }
         if !years.integer.is_zero {
-            string.append(years.description + "yr")
+            string.append((needs_comma ? ", " : "") + years.description + "yr")
             needs_comma = true
         }
         if !weeks.integer.is_zero {
@@ -89,16 +99,44 @@ public struct ElapsedTime : Hashable {
         return string
     }
     
-    public mutating func add(_ unit: TimeUnit) {
-        let unit_type:TimeUnitType = unit.type
-        if values[unit_type] == nil {
-            values[unit_type] = [:]
+    public func to_unit(unit_prefix: UnitPrefix = UnitPrefix.normal, unit_type: TimeUnitType) -> TimeUnit {
+        let target_types:[TimeUnitType] = [TimeUnitType.year, TimeUnitType.week, TimeUnitType.day, TimeUnitType.hour, TimeUnitType.minute, TimeUnitType.second]
+        var unit:TimeUnit = TimeUnit(type: unit_type, value: HugeFloat.zero)
+        for type in target_types {
+            if let type_values:[UnitPrefix:HugeFloat] = values[type] {
+                for (target_unit_prefix, value) in type_values {
+                    unit += TimeUnit(prefix: target_unit_prefix, type: type, value: value).to_unit(prefix: unit_prefix, unit: unit_type)
+                }
+            }
+        }
+        return unit
+    }
+}
+public extension ElapsedTime {
+    static func >= (left: ElapsedTime, right: TimeUnit) -> Bool {
+        return left.to_unit(unit_prefix: right.prefix, unit_type: right.type) >= right
+    }
+}
+public extension ElapsedTime {
+    static func == (left: ElapsedTime, right: TimeUnit) -> Bool {
+        return left.to_unit(unit_prefix: right.prefix, unit_type: right.type) == right
+    }
+}
+
+/*
+ Addition
+ */
+public extension ElapsedTime {
+    static func += (left: inout ElapsedTime, right: TimeUnit) {
+        let unit_type:TimeUnitType = right.type
+        if left.values[unit_type] == nil {
+            left.values[unit_type] = [:]
         }
         
-        let unit_prefix:UnitPrefix = unit.prefix
-        if values[unit_type]![unit_prefix] == nil {
-            values[unit_type]![unit_prefix] = HugeFloat.zero
+        let unit_prefix:UnitPrefix = right.prefix
+        if left.values[unit_type]![unit_prefix] == nil {
+            left.values[unit_type]![unit_prefix] = HugeFloat.zero
         }
-        values[unit_type]![unit_prefix]! += unit.value
+        left.values[unit_type]![unit_prefix]! += right.value
     }
 }

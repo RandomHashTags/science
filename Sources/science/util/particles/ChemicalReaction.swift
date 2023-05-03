@@ -21,4 +21,9 @@ public struct ChemicalReaction { // TODO: fix terminology
     public var destroyed_electrons:[Electron]?
     public var created_antielectrons:[AntiParticle]?
     public var destroyed_antielectrons:[AntiParticle]?
+    
+    public var emitted_photons:[Photon]?
+    public var emitted_protons:[Proton]?
+    public var emitted_neutrons:[Neutron]?
+    public var absorbed_electrons:[Int:Electron]? // TODO: fix
 }

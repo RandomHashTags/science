@@ -82,12 +82,26 @@ public extension Unit {
     }
 }
 /*
+ Addition
+ */
+public extension Unit {
+    static func + (left: Self, right: Self) -> Self {
+        let left_type:TargetUnitType = left.type, left_prefix:UnitPrefix = left.prefix
+        let right_updated:Self = right.to_unit(prefix: left_prefix, unit: left_type)
+        return Self(type: left_type, value: left.value + right_updated.value)
+    }
+    
+    static func += (left: inout Self, right: Self) {
+        left = left + right
+    }
+}
+/*
  Multiplication
  */
 public extension Unit {
     static func * (left: Self, right: Self) -> Self {
-        let left_type:TargetUnitType = left.type
-        let right_updated:Self = right.to_unit(prefix: left.prefix, unit: left_type)
+        let left_type:TargetUnitType = left.type, left_prefix:UnitPrefix = left.prefix
+        let right_updated:Self = right.to_unit(prefix: left_prefix, unit: left_type)
         return Self(type: left_type, value: left.value * right_updated.value)
     }
 }

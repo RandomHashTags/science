@@ -35,6 +35,7 @@ public struct Environment : Hashable {
     public var is_paused:Bool
     
     public var individual_atoms:[Atom]
+    public var half_life_atoms:[Atom]
     
     public init(_ settings: EnvironmentSettings) {
         let fps:HugeInt = settings.fps, fps_float:HugeFloat = fps.to_float, fps_integer:UInt64 = fps.to_int()!
@@ -56,6 +57,7 @@ public struct Environment : Hashable {
         
         is_paused = true
         individual_atoms = []
+        half_life_atoms = []
     }
     
     public mutating func pause() {
@@ -81,11 +83,35 @@ public struct Environment : Hashable {
     }
     
     private mutating func update_time() {
-        elapsed_time.add(elapsed_time_per_frame)
+        elapsed_time += elapsed_time_per_frame
+        for index in individual_atoms.indices {
+            individual_atoms[index].lifetime += elapsed_time_per_frame
+        }
+        for index in half_life_atoms.indices {
+            half_life_atoms[index].lifetime += elapsed_time_per_frame
+        }
+        
+        let previous_count:Int = individual_atoms.count
+        for index in half_life_atoms.indices {
+            let half_life:TimeUnit = half_life_atoms[index].half_life!
+            if half_life_atoms[index].lifetime >= half_life {
+                let reaction:ChemicalReaction = half_life_atoms[index].decay()
+                if !half_life_atoms[index].is_unstable {
+                    individual_atoms.append(half_life_atoms[index])
+                }
+            }
+        }
+        if previous_count != individual_atoms.count {
+            half_life_atoms.removeAll(where: { !$0.is_unstable })
+        }
     }
     private mutating func apply_physics() {
         for index in individual_atoms.indices {
             individual_atoms[index].location.y -= gravity_per_frame
+            
+        }
+        for index in half_life_atoms.indices {
+            half_life_atoms[index].location.y -= gravity_per_frame
         }
     }
     // TODO: support time skipping/jumping/browsing/indexing
