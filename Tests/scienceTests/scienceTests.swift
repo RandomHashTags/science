@@ -51,19 +51,53 @@ extension scienceTests {
 }
 extension scienceTests {
     private func test_unit_conversions() {
-        test_unit_conversion_mass_to_energy()
+        test_unit_conversion_density()
+        test_unit_conversion_frequency()
+        test_unit_conversion_mass()
         test_unit_conversion_temperature()
+        
+        test_unit_conversion_mass_to_energy()
     }
-    private func test_unit_conversion_mass_to_energy() {
-        let kilogram_to_energy:EnergyUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.one).to_joule().to_unit(unit: EnergyUnitType.electronvolt)
-        XCTAssert(kilogram_to_energy == EnergyUnit(type: EnergyUnitType.electronvolt, value: HugeFloat("560958884538931987162813850074640384")))
-        let joule_to_mass:MassUnit = kilogram_to_energy.to_kilograms()
-        //XCTAssert(joule_to_mass == MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat("1")), "test_unit_conversion_mass_to_energy;\(joule_to_mass)")
+    private func test_unit_conversion_density() {
+        var result:DensityUnit = DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat.one).to_unit(unit: DensityUnitType.kilogram_per_cubic_metre)
+        var expected_result:DensityUnit = DensityUnit(type: DensityUnitType.kilogram_per_cubic_metre, value: HugeFloat("1000"))
+        XCTAssert(result == expected_result, "test_unit_conversion_density;result=\(result);expected_result=\(expected_result)")
+        
+        result = expected_result.to_unit(unit: DensityUnitType.gram_per_cubic_centimetre)
+        expected_result = DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat.one)
+        XCTAssert(result == expected_result, "test_unit_conversion_density;result=\(result);expected_result=\(expected_result)")
+    }
+    private func test_unit_conversion_frequency() {
+        var result:FrequencyUnit = FrequencyUnit(type: FrequencyUnitType.hertz, value: HugeFloat.one).to_unit(unit: FrequencyUnitType.wavelength_in_metres)
+        var expected_result:FrequencyUnit = FrequencyUnit(type: FrequencyUnitType.wavelength_in_metres, value: HugeFloat("299792458"))
+        XCTAssert(result == expected_result, "test_unit_conversion_frequency;result=\(result);expected_result=\(expected_result)")
+        
+        result = expected_result.to_unit(unit: FrequencyUnitType.hertz)
+        expected_result = FrequencyUnit(type: FrequencyUnitType.hertz, value: HugeFloat.one)
+        XCTAssert(result == expected_result, "test_unit_conversion_frequency;result=\(result);expected_result=\(expected_result)")
+    }
+    private func test_unit_conversion_mass() {
+        var result:MassUnit = MassUnit(type: MassUnitType.gram, value: HugeFloat("1000000")).to_unit(unit: MassUnitType.tonne)
+        var expected_result:MassUnit = MassUnit(type: MassUnitType.tonne, value: HugeFloat.one)
+        XCTAssert(result == expected_result, "test_unit_conversion_mass;result=\(result);expected_result=\(expected_result)")
+        
+        result = expected_result.to_unit(unit: MassUnitType.gram)
+        expected_result = MassUnit(type: MassUnitType.gram, value: HugeFloat("1000000"))
+        XCTAssert(result == expected_result, "test_unit_conversion_mass;result=\(result);expected_result=\(expected_result)")
     }
     private func test_unit_conversion_temperature() {
         var result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.fahrenheit, value: HugeFloat(string: "-40")).to_unit(unit: TemperatureUnitType.celsius)
         var expected_result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.celsius, value: HugeFloat("-40"))
         XCTAssert(result == expected_result, "test_unit_conversion_temperature;result=\(result);expected_result=\(expected_result)")
+    }
+    
+    private func test_unit_conversion_mass_to_energy() {
+        let kilogram_to_joules:EnergyUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.one).to_joule()
+        XCTAssert(kilogram_to_joules == EnergyUnit(type: EnergyUnitType.joule, value: HugeFloat("89875517873681764")))
+        let kilogram_to_energy:EnergyUnit = kilogram_to_joules.to_unit(unit: EnergyUnitType.electronvolt)
+        XCTAssert(kilogram_to_energy == EnergyUnit(type: EnergyUnitType.electronvolt, value: HugeFloat("560958884538931987162813850074640384")))
+        let joule_to_mass:MassUnit = kilogram_to_energy.to_kilograms()
+        //XCTAssert(joule_to_mass == MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat("1")), "test_unit_conversion_mass_to_energy;\(joule_to_mass)")
     }
 }
 
@@ -73,7 +107,9 @@ extension scienceTests {
         elapsed_time.add(TimeUnit(type: TimeUnitType.second, value: HugeFloat("25")))
         elapsed_time.add(TimeUnit(prefix: UnitPrefix.kilo, type: TimeUnitType.second, value: HugeFloat("1")))
         elapsed_time.add(TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("5")))
-        print("test_environment;elapsed_time=" + elapsed_time.description)
+        elapsed_time.add(TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("2")))
+        elapsed_time.add(TimeUnit(prefix: UnitPrefix.mega, type: TimeUnitType.second, value: HugeFloat("8")))
+        print("scienceTests;test_environment;elapsed_time=" + elapsed_time.description)
     }
 }
 

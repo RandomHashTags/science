@@ -26,12 +26,12 @@ public struct FrequencyUnit : Unit {
         case .wavelength_in_metres:
             switch unit {
             case .wavelength_in_metres: return value
-            case .hertz: return value / 299_792_458
+            case .hertz: return value / HugeFloat("299792458")
             }
             
         case .hertz:
             switch unit {
-            case .wavelength_in_metres: return 299_792_458_000_000 / value
+            case .wavelength_in_metres: return value * HugeFloat("299792458")
             case .hertz: return value
             }
             

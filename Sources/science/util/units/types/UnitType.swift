@@ -6,6 +6,6 @@
 
 import Foundation
 
-public protocol UnitType : CaseIterable {
+public protocol UnitType : CaseIterable, Equatable {
     var symbol : String { get }
 }

@@ -62,6 +62,10 @@ public enum UnitPrefix : Int {
     }
     
     public func convert_to(_ prefix: UnitPrefix, value: HugeFloat) -> HugeFloat {
-        return value * pow(10, Float80(rawValue - prefix.rawValue))
+        if self == prefix {
+            return value
+        } else {
+            return value.multiply_decimal_by_ten(rawValue - prefix.rawValue)
+        }
     }
 }

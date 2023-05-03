@@ -8,7 +8,7 @@
 import Foundation
 import huge_numbers
 
-public struct ElapsedTime {
+public struct ElapsedTime : Hashable {
     private var values:[TimeUnitType:[UnitPrefix:HugeFloat]]
     
     public init(_ values: [TimeUnitType:[UnitPrefix:HugeFloat]] = [:]) {
@@ -16,7 +16,7 @@ public struct ElapsedTime {
     }
     
     public var description : String {        
-        let target_types:[TimeUnitType] = [TimeUnitType.day, TimeUnitType.hour, TimeUnitType.minute, TimeUnitType.second]
+        let target_types:[TimeUnitType] = [TimeUnitType.year, TimeUnitType.week, TimeUnitType.day, TimeUnitType.hour, TimeUnitType.minute, TimeUnitType.second]
         var time_values:[TimeUnitType:HugeFloat] = [:]
         for type in target_types {
             if let type_values:[UnitPrefix:HugeFloat] = values[type] {
@@ -32,8 +32,10 @@ public struct ElapsedTime {
         var minutes:HugeFloat = time_values[.minute] ?? HugeFloat.zero
         var hours:HugeFloat = time_values[.hour] ?? HugeFloat.zero
         var days:HugeFloat = time_values[.day] ?? HugeFloat.zero
+        var weeks:HugeFloat = time_values[.week] ?? HugeFloat.zero
+        var years:HugeFloat = time_values[.year] ?? HugeFloat.zero
                 
-        let sixty:HugeFloat = HugeFloat("60"), twenty_four:HugeFloat = HugeFloat("24")
+        let sixty:HugeFloat = HugeFloat("60"), twenty_four:HugeFloat = HugeFloat("24"), seven:HugeFloat = HugeFloat("7"), three_sixty_five:HugeFloat = HugeFloat("365.25")
         if seconds >= sixty {
             let amount:HugeFloat = (seconds / sixty).integer.to_float
             seconds -= amount * sixty
@@ -45,14 +47,32 @@ public struct ElapsedTime {
             hours += amount
         }
         if hours >= twenty_four {
-            let amount:HugeFloat = (minutes / sixty).integer.to_float
+            let amount:HugeFloat = (hours / twenty_four).integer.to_float
             hours -= amount * twenty_four
             days += amount
         }
+        if days >= three_sixty_five {
+            let amount:HugeFloat = (days / three_sixty_five).integer.to_float
+            days -= amount * three_sixty_five
+            years += amount
+        }
+        if days >= seven {
+            let amount:HugeFloat = (days / seven).integer.to_float
+            days -= amount * seven
+            weeks += amount
+        }
         
         var string:String = "", needs_comma:Bool = false
+        if !years.integer.is_zero {
+            string.append(years.description + "yr")
+            needs_comma = true
+        }
+        if !weeks.integer.is_zero {
+            string.append((needs_comma ? ", " : "") + weeks.description + "weeks")
+            needs_comma = true
+        }
         if !days.integer.is_zero {
-            string.append(days.description + "d")
+            string.append((needs_comma ? ", " : "") + days.description + "d")
             needs_comma = true
         }
         if !hours.integer.is_zero {

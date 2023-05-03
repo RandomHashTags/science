@@ -7,7 +7,7 @@
 import Foundation
 import huge_numbers
 
-public protocol Unit : Hashable {
+public protocol Unit : Hashable, Comparable {
     associatedtype TargetUnitType : UnitType
     
     var prefix:UnitPrefix { get set }
@@ -51,11 +51,39 @@ public extension Unit {
         return Self.init(prefix: prefix, type: unit, value: value)
     }
 }
+
+
+/*
+ Comparable
+ */
+public extension Unit {
+    static func < (left: Self, right: Self) -> Bool {
+        let left_prefix:UnitPrefix = left.prefix, right_prefix:UnitPrefix = right.prefix
+        guard left_prefix == right_prefix else {
+            return left_prefix.rawValue < right_prefix.rawValue
+        }
+        let left_type:TargetUnitType = left.type, right_type:TargetUnitType = right.type
+        guard left_type == right_type else {
+            return left.value < right.convert_value_to_unit(left_type)
+        }
+        return left.value < right.value
+    }
+    
+    static func == (left: Self, right: Self) -> Bool {
+        return left.prefix == right.prefix && left.type == right.type && left.value == right.value
+    }
+}
+/*
+ prefixes / postfixes
+ */
 public extension Unit {
     static prefix func - (item: Self) -> Self {
         return Self(type: item.type, value: -item.value)
     }
 }
+/*
+ Multiplication
+ */
 public extension Unit {
     static func * (left: Self, right: Self) -> Self {
         let left_type:TargetUnitType = left.type

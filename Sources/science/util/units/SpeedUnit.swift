@@ -26,45 +26,45 @@ public struct SpeedUnit : Unit {
         case .metre_per_second:
             switch unit {
             case .metre_per_second: return value
-            case .kilometre_per_hour: return value * 3.6
-            case .mile_per_hour: return value * 2.236936
-            case .knot: return value * 1.943844
-            case .foot_per_second: return value * 3.280840
+            case .kilometre_per_hour: return value * HugeFloat("3.6")
+            case .mile_per_hour: return value * HugeFloat("2.236936")
+            case .knot: return value * HugeFloat("1.943844")
+            case .foot_per_second: return value * HugeFloat("3.280840")
             }
             
         case .kilometre_per_hour:
             switch unit {
-            case .metre_per_second: return value * 0.277778
+            case .metre_per_second: return value * HugeFloat("0.277778")
             case .kilometre_per_hour: return value
-            case .mile_per_hour: return value * 0.621371
-            case .knot: return value * 0.539957
-            case .foot_per_second: return value * 0.911344
+            case .mile_per_hour: return value * HugeFloat("0.621371")
+            case .knot: return value * HugeFloat("0.539957")
+            case .foot_per_second: return value * HugeFloat("0.911344")
             }
             
         case .mile_per_hour:
             switch unit {
-            case .metre_per_second: return value * 0.44704
-            case .kilometre_per_hour: return value * 1.609344
+            case .metre_per_second: return value * HugeFloat("0.44704")
+            case .kilometre_per_hour: return value * HugeFloat("1.609344")
             case .mile_per_hour: return value
-            case .knot: return value * 0.868976
-            case .foot_per_second: return value * 1.466667
+            case .knot: return value * HugeFloat("0.868976")
+            case .foot_per_second: return value * HugeFloat("1.466667")
             }
             
         case .knot:
             switch unit {
-            case .metre_per_second: return value * 0.514444
-            case .kilometre_per_hour: return value * 1.852
-            case .mile_per_hour: return value * 1.150779
+            case .metre_per_second: return value * HugeFloat("0.514444")
+            case .kilometre_per_hour: return value * HugeFloat("1.852")
+            case .mile_per_hour: return value * HugeFloat("1.150779")
             case .knot: return value
-            case .foot_per_second: return value * 1.68810
+            case .foot_per_second: return value * HugeFloat("1.68810")
             }
             
         case .foot_per_second:
             switch unit {
-            case .metre_per_second: return value * 0.3048
-            case .kilometre_per_hour: return value * 1.09728
-            case .mile_per_hour: return value * 0.681818
-            case .knot: return value * 0.592484
+            case .metre_per_second: return value * HugeFloat("0.3048")
+            case .kilometre_per_hour: return value * HugeFloat("1.09728")
+            case .mile_per_hour: return value * HugeFloat("0.681818")
+            case .knot: return value * HugeFloat("0.592484")
             case .foot_per_second: return value
             }
         }
