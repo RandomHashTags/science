@@ -61,22 +61,6 @@ public struct ScientificEnvironment : Hashable {
         half_life_atoms = []
     }
     
-    public mutating func set_unit<T: UnitType>(_ type: T, value: HugeFloat) {
-        switch type {
-        case is TemperatureUnitType.Type:
-            ambient_temperature.value = value
-            break
-        case is PressureUnitType.Type:
-            ambient_temperature.value = value
-            break
-        case is AccelerationUnitType.Type:
-            gravity.value = value
-            break
-        default:
-            break
-        }
-    }
-    
     public mutating func pause() {
         guard !is_paused else { return }
         is_paused = true

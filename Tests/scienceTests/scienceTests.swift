@@ -129,9 +129,5 @@ extension scienceTests {
     }
     private func test_renderer_metal() {
         return; // TODO: fix
-        let app:NSApplication = NSApplication.shared
-        let delegate:MetalRendererDelegate = MetalRendererDelegate()
-        app.delegate = delegate
-        app.run()
     }
 }

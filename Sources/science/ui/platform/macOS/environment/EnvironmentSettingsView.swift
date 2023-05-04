@@ -66,6 +66,9 @@ struct EnvironmentSettingsView : View {
         } set_value_type: { id in
             environment.ambient_pressure.type = PressureUnitType(rawValue: id)!
         }
+        
+        //let pointer:UnsafeMutablePointer<AccelerationUnit> = UnsafeMutablePointer<AccelerationUnit>(&environment.gravity)
+        //get_unit_view(title: "Gravity", unit: pointer, types: AccelerationUnitType.allCases)
     }
     
     private func get_unit_view<T: UnitType>(title: String, types: [T], get_value: @escaping () -> String, set_value: @escaping (String) -> Void, get_value_type: @escaping () -> String, set_value_type: @escaping (String) -> Void) -> some View {
@@ -113,6 +116,43 @@ struct EnvironmentSettingsView : View {
                 }
             } label: {
                 Text(unit.pointee.type.id)
+            }
+            Spacer()
+        }
+    }
+    
+    private func get_unit_view<T: science.Unit>(title: String, editing_unit: @escaping ((inout T) -> Void) -> Void, types: [T.TargetUnitType]) -> some View {
+        HStack {
+            Spacer()
+            Text(title)
+            Spacer()
+            TextField(title, text: Binding<String>.init(get: {
+                var string:String = ""
+                editing_unit { brother in
+                    string = brother.value.description
+                }
+                return string
+            }, set: { value in
+                let corrected_value:String = value.filter({ $0.isNumber || $0 == "." || $0 == "-" })
+                editing_unit { brother in
+                    brother.value = HugeFloat(corrected_value)
+                }
+            }))
+            Menu {
+                ForEach(types) { type in
+                    let id:String = type.id
+                    Button(id) {
+                        editing_unit { brother in
+                            brother.type = T.TargetUnitType.init(rawValue: id)!
+                        }
+                    }
+                }
+            } label: {
+                var type:String = ""
+                let _:Void = editing_unit { brother in
+                    type = brother.type.id
+                }
+                Text(type)
             }
             Spacer()
         }
