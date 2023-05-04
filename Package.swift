@@ -14,7 +14,8 @@ let package = Package(
         .library(
             name: "science",
             targets: ["science"]
-        )
+        ),
+        .library(name: "UserInterfaceMacOS", targets: ["UserInterfaceMacOS"])
     ],
     dependencies: [
         .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.10")
