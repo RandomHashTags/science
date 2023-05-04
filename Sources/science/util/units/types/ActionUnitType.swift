@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum ActionUnitType : UnitType {
+public enum ActionUnitType : String, UnitType {
     case joule_second
     
     public var symbol : String {

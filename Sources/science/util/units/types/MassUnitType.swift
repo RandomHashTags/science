@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum MassUnitType : UnitType {
+public enum MassUnitType : String, UnitType {
     case gram
     case ounce
     case pound

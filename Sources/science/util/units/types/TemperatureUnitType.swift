@@ -7,7 +7,7 @@
 import Foundation
 import huge_numbers
 
-public enum TemperatureUnitType : UnitType {
+public enum TemperatureUnitType : String, UnitType {
     case kelvin
     case celsius
     case fahrenheit

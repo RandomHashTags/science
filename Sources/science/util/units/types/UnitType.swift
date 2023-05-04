@@ -6,6 +6,11 @@
 
 import Foundation
 
-public protocol UnitType : CaseIterable, Equatable {
+public protocol UnitType : Identifiable, CaseIterable, Equatable, RawRepresentable where RawValue == String, ID == String {
     var symbol : String { get }
+}
+public extension UnitType {
+    var id : String {
+        return rawValue
+    }
 }

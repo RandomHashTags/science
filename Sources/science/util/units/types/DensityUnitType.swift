@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum DensityUnitType : UnitType {
+public enum DensityUnitType : String, UnitType {
     case kilogram_per_cubic_metre
     case gram_per_cubic_centimetre
     

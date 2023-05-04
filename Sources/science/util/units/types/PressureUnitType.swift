@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PressureUnitType : UnitType {
+public enum PressureUnitType : String, UnitType {
     case pascal
     case pound_per_square_inch
     case standard_atmosphere

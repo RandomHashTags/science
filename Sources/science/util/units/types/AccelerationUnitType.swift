@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AccelerationUnitType : UnitType {
+public enum AccelerationUnitType : String, UnitType {
     case metres_per_second_per_second
     
     public var symbol : String {

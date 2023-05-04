@@ -1,5 +1,5 @@
 //
-//  Environment.swift
+//  ScientificEnvironment.swift
 //  
 //
 //  Created by Evan Anderson on 4/21/23.
@@ -8,7 +8,8 @@
 import Foundation
 import huge_numbers
 
-public struct Environment : Hashable {
+// TODO: add a tick handler and tick listeners for dynamic editing
+public struct ScientificEnvironment : Hashable {
     public var fps:HugeInt {
         didSet {
             let fps_integer:UInt64 = fps.to_int()!
@@ -78,6 +79,7 @@ public struct Environment : Hashable {
     }
     
     private mutating func tick() {
+        print("ScientificEnvironment;tick")
         apply_physics()
         update_time()
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ForceUnitType : UnitType {
+public enum ForceUnitType : String, UnitType {
     case newton
     
     public var symbol : String {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TimeUnitType : UnitType {
+public enum TimeUnitType : String, UnitType {
     case second
     case minute
     case hour

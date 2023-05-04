@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum FrequencyUnitType : UnitType {
+public enum FrequencyUnitType : String, UnitType {
     case wavelength_in_metres
     
     case hertz

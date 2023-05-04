@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum SpeedUnitType : UnitType {
+public enum SpeedUnitType : String, UnitType {
     case metre_per_second
     case kilometre_per_hour
     case mile_per_hour

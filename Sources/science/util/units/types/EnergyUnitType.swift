@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum EnergyUnitType : UnitType {
+public enum EnergyUnitType : String, UnitType {
     case joule
     case electronvolt
     

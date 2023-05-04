@@ -89,6 +89,10 @@ extension scienceTests {
         var result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.fahrenheit, value: HugeFloat(string: "-40")).to_unit(unit: TemperatureUnitType.celsius)
         var expected_result:TemperatureUnit = TemperatureUnit(type: TemperatureUnitType.celsius, value: HugeFloat("-40"))
         XCTAssert(result == expected_result, "test_unit_conversion_temperature;result=\(result);expected_result=\(expected_result)")
+        
+        result = TemperatureUnit(type: TemperatureUnitType.fahrenheit, value: HugeFloat("32")).to_unit(unit: TemperatureUnitType.celsius)
+        expected_result = TemperatureUnit(type: TemperatureUnitType.celsius, value: HugeFloat.zero)
+        XCTAssert(result == expected_result, "test_unit_conversion_temperature;result=\(result);expected_result=\(expected_result)")
     }
     
     private func test_unit_conversion_mass_to_energy() {

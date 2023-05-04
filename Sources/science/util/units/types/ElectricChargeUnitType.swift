@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum ElectricChargeUnitType : UnitType {
+public enum ElectricChargeUnitType : String, UnitType {
     case coulomb
     
     public var symbol : String {
