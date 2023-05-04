@@ -31,7 +31,7 @@ public struct EnergyUnit : Unit {
             
         case .electronvolt:
             switch unit {
-            case .joule: return value * HugeFloat("0.0000000000000000001602176634")
+            case .joule: return value / HugeFloat("6241509343260179456")
             case .electronvolt: return value
             }
         }

@@ -94,10 +94,10 @@ extension scienceTests {
     private func test_unit_conversion_mass_to_energy() {
         let kilogram_to_joules:EnergyUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.one).to_energy()
         XCTAssert(kilogram_to_joules == EnergyUnit(type: EnergyUnitType.joule, value: HugeFloat("89875517873681764")))
-        let kilogram_to_energy:EnergyUnit = kilogram_to_joules.to_unit(unit: EnergyUnitType.electronvolt)
-        XCTAssert(kilogram_to_energy == EnergyUnit(type: EnergyUnitType.electronvolt, value: HugeFloat("560958884538931987162813850074640384")))
-        let joule_to_mass:MassUnit = kilogram_to_energy.to_mass()
-        //XCTAssert(joule_to_mass == MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat("1")), "test_unit_conversion_mass_to_energy;\(joule_to_mass)")
+        let kilogram_to_electronvolt:EnergyUnit = kilogram_to_joules.to_unit(unit: EnergyUnitType.electronvolt)
+        XCTAssert(kilogram_to_electronvolt == EnergyUnit(type: EnergyUnitType.electronvolt, value: HugeFloat("560958884538931987162813850074640384")))
+        let electronvolt_to_mass:MassUnit = kilogram_to_electronvolt.to_mass()
+        XCTAssert(electronvolt_to_mass == MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat("1")), "test_unit_conversion_mass_to_energy;joule_to_mass=\(electronvolt_to_mass.description)")
     }
 }
 
