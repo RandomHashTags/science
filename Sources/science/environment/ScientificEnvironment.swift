@@ -8,7 +8,7 @@
 import Foundation
 import huge_numbers
 
-// TODO: add a tick handler and tick listeners for dynamic editing
+// TODO: add a tick handler and tick listeners for dynamic manipulation
 public struct ScientificEnvironment : Hashable {
     public var fps:HugeInt {
         didSet {
@@ -35,10 +35,10 @@ public struct ScientificEnvironment : Hashable {
     
     public var is_paused:Bool
     
-    public var individual_atoms:[Atom]
-    public var half_life_atoms:[Atom]
+    private var individual_atoms:[Atom]
+    private var half_life_atoms:[Atom]
     
-    public init(_ settings: EnvironmentSettings) {
+    public init(_ settings: ScientificEnvironmentSettings) {
         let fps:HugeInt = settings.fps, fps_float:HugeFloat = fps.to_float, fps_integer:UInt64 = fps.to_int()!
         self.fps = fps
         ambient_temperature = settings.ambient_temperature
@@ -59,6 +59,22 @@ public struct ScientificEnvironment : Hashable {
         is_paused = true
         individual_atoms = []
         half_life_atoms = []
+    }
+    
+    public mutating func set_unit<T: UnitType>(_ type: T, value: HugeFloat) {
+        switch type {
+        case is TemperatureUnitType.Type:
+            ambient_temperature.value = value
+            break
+        case is PressureUnitType.Type:
+            ambient_temperature.value = value
+            break
+        case is AccelerationUnitType.Type:
+            gravity.value = value
+            break
+        default:
+            break
+        }
     }
     
     public mutating func pause() {

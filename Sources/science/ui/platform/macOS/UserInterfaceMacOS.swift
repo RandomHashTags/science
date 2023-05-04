@@ -32,7 +32,7 @@ private class UserInterfaceMacOSAppDelegate : NSObject, NSApplicationDelegate {
         app_menu.submenu = NSMenu()
         app_menu.submenu?.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         
-        let title:String = "Science, made by Evan Anderson"
+        let title:String = "The all-in-one scientific simulator, made by Evan Anderson"
         let main_menu:NSMenu = NSMenu(title: title)
         main_menu.addItem(app_menu)
         NSApplication.shared.mainMenu = main_menu

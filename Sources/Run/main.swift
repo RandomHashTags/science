@@ -12,7 +12,7 @@ print("main;test1")
 
 /*Task {
     var environment:Environment = Environment(
-        EnvironmentSettings(
+        ScientificEnvironmentSettings(
             fps: HugeInt("2"),
             ambient_temperature: MathmaticalConstant.standard_temperature,
             ambient_pressure: MathmaticalConstant.standard_pressure,

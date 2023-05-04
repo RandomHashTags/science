@@ -1,5 +1,5 @@
 //
-//  EnvironmentSettings.swift
+//  ScientificEnvironmentSettings.swift
 //  
 //
 //  Created by Evan Anderson on 4/26/23.
@@ -8,7 +8,7 @@
 import Foundation
 import huge_numbers
 
-public struct EnvironmentSettings : Hashable {
+public struct ScientificEnvironmentSettings : Hashable {
     public var fps:HugeInt
     public var ambient_temperature:TemperatureUnit
     public var ambient_pressure:PressureUnit
