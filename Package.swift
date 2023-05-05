@@ -14,8 +14,7 @@ let package = Package(
         .library(
             name: "science",
             targets: ["science"]
-        ),
-        .library(name: "UserInterfaceMacOS", targets: ["UserInterfaceMacOS"])
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.10")
@@ -28,29 +27,36 @@ let package = Package(
             ],
             exclude: ["renderer", "ui"]
         ),
+        .executableTarget(
+            name: "Run",
+            dependencies: ["science"]
+        ),
         
         .target(
             name: "RendererMetal",
             dependencies: ["RendererMetalSharedTypes"],
             path: "./Sources/science/renderer/metal"
         ),
-        .target(name: "RendererMetalSharedTypes", path: "./Sources/science/renderer/metal_shared_types"),
+        .target(
+            name: "RendererMetalSharedTypes",
+            path: "./Sources/science/renderer/metal_shared_types"
+        ),
         
         .target(
-            name: "UserInterfaceMacOS",
+            name: "MacOSUserInterface",
             dependencies: ["science"],
-            path: "./Sources/science/ui/platform/macOS"
+            path: "./Sources/science/ui/platform/macOS/views"
+        ),
+        .executableTarget(
+            name: "UserInterfaceMacOS",
+            dependencies: ["MacOSUserInterface"],
+            path: "./Sources/science/ui/platform/macOS/run"
         ),
         
-        .executableTarget(
-            name: "Run",
-            dependencies: ["science", "UserInterfaceMacOS"]
-        ),
         .testTarget(
             name: "scienceTests",
             dependencies: [
                 "science",
-                "RendererMetal",
                 .product(name: "huge-numbers", package: "swift_huge-numbers")
             ]
         ),

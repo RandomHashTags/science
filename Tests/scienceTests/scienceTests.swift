@@ -9,7 +9,6 @@ import XCTest
 import huge_numbers
 import Metal
 import MetalKit
-import RendererMetal
 import AppKit
 
 final class scienceTests: XCTestCase {
@@ -24,7 +23,6 @@ final class scienceTests: XCTestCase {
         test_mathmatical_constants()
         test_unit_conversions()
         test_environment()
-        test_renderer()
     }
 }
 extension scienceTests {
@@ -119,15 +117,5 @@ extension scienceTests {
         print("scienceTests;test_environment_elapsed_time;elapsed_time=" + elapsed_time.description)
         
         XCTAssert(ElapsedTime([.second:[.normal:HugeFloat.one]]) == TimeUnit(type: TimeUnitType.second, value: HugeFloat.one))
-    }
-}
-
-
-extension scienceTests {
-    private func test_renderer() {
-        test_renderer_metal()
-    }
-    private func test_renderer_metal() {
-        return; // TODO: fix
     }
 }
