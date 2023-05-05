@@ -28,6 +28,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
             timeline_nanoseconds = 1_000_000_000 / fps_integer
         }
     }
+    public var fps_counter:EnvironmentFPSCounter = EnvironmentFPSCounter()
     
     public var ambient_temperature:TemperatureUnit
     public var ambient_pressure:PressureUnit
@@ -46,9 +47,10 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     
     public var is_simulating:Bool = false
     private var simulation_task:Task<Void, Never>?
+    private var fps_counter_task:Task<Void, Never>?
     
-    private var individual_atoms:[Atom]
-    private var half_life_atoms:[Atom]
+    public private(set) var individual_atoms:[Atom]
+    public private(set) var half_life_atoms:[Atom]
     
     public init(_ settings: ScientificEnvironmentSettings) {
         uuid = settings.uuid ?? UUID()
@@ -77,6 +79,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         guard is_simulating else { return }
         is_simulating = false
         simulation_task!.cancel()
+        fps_counter_task!.cancel()
     }
     public func resume() {
         guard !is_simulating else { return }
@@ -84,6 +87,18 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         simulation_task = Task {
             await simulate()
         }
+        fps_counter_task = Task {
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                await reset_fps_counter()
+                fps_counter.last_count = fps_counter.new_count
+                fps_counter.new_count = 0
+            }
+        }
+    }
+    @MainActor
+    private func reset_fps_counter() {
+        fps_counter.objectWillChange.send()
     }
     
     public func simulate() async {
@@ -94,9 +109,9 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     }
     
     private func tick() {
-        print("ScientificEnvironment;tick")
         apply_physics()
         update_time()
+        fps_counter.new_count += 1
     }
     
     private func update_time() {
