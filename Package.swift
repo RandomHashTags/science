@@ -29,7 +29,7 @@ let package = Package(
         ),
         .executableTarget(
             name: "Run",
-            dependencies: ["science"]
+            dependencies: ["science", .target(name: "MacOSUserInterface", condition: .when(platforms: [.macOS]))]
         ),
         
         .target(
@@ -45,12 +45,12 @@ let package = Package(
         .target(
             name: "MacOSUserInterface",
             dependencies: ["science"],
-            path: "./Sources/science/ui/platform/macOS/views"
+            path: "./Sources/ui/macOS/views"
         ),
         .executableTarget(
             name: "UserInterfaceMacOS",
             dependencies: ["MacOSUserInterface"],
-            path: "./Sources/science/ui/platform/macOS/run"
+            path: "./Sources/ui/macOS/run"
         ),
         
         .testTarget(

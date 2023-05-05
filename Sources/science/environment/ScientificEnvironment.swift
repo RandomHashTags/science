@@ -9,7 +9,18 @@ import Foundation
 import huge_numbers
 
 // TODO: add a tick handler and tick listeners for dynamic manipulation
-public struct ScientificEnvironment : Hashable {
+public final class ScientificEnvironment : Hashable, ObservableObject {
+    
+    public static func == (lhs: ScientificEnvironment, rhs: ScientificEnvironment) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+    
+    private let uuid:UUID
+    
     public var fps:HugeInt {
         didSet {
             let fps_integer:UInt64 = fps.to_int()!
@@ -33,12 +44,14 @@ public struct ScientificEnvironment : Hashable {
     private var timeline_nanoseconds:UInt64
     private var elapsed_time_per_frame:TimeUnit
     
-    public var is_paused:Bool
+    public var is_simulating:Bool = false
+    private var simulation_task:Task<Void, Never>?
     
     private var individual_atoms:[Atom]
     private var half_life_atoms:[Atom]
     
     public init(_ settings: ScientificEnvironmentSettings) {
+        uuid = settings.uuid ?? UUID()
         let fps:HugeInt = settings.fps, fps_float:HugeFloat = fps.to_float, fps_integer:UInt64 = fps.to_int()!
         self.fps = fps
         ambient_temperature = settings.ambient_temperature
@@ -56,35 +69,37 @@ public struct ScientificEnvironment : Hashable {
         timeline_nanoseconds = 1_000_000_000 / fps_integer
         elapsed_time_per_frame = TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("1000") / fps_float)
         
-        is_paused = true
         individual_atoms = []
         half_life_atoms = []
     }
     
-    public mutating func pause() {
-        guard !is_paused else { return }
-        is_paused = true
+    public func stop_simulating() {
+        guard is_simulating else { return }
+        is_simulating = false
+        simulation_task!.cancel()
     }
-    public mutating func resume() async {
-        guard is_paused else { return }
-        is_paused = false
-        await simulate()
+    public func resume() {
+        guard !is_simulating else { return }
+        is_simulating = true
+        simulation_task = Task {
+            await simulate()
+        }
     }
     
-    public mutating func simulate() async {
-        while !is_paused {
+    public func simulate() async {
+        while !Task.isCancelled {
             tick()
             try? await Task.sleep(nanoseconds: timeline_nanoseconds)
         }
     }
     
-    private mutating func tick() {
+    private func tick() {
         print("ScientificEnvironment;tick")
         apply_physics()
         update_time()
     }
     
-    private mutating func update_time() {
+    private func update_time() {
         elapsed_time += elapsed_time_per_frame
         for index in individual_atoms.indices {
             individual_atoms[index].lifetime += elapsed_time_per_frame
@@ -107,7 +122,7 @@ public struct ScientificEnvironment : Hashable {
             half_life_atoms.removeAll(where: { !$0.is_unstable })
         }
     }
-    private mutating func apply_physics() {
+    private func apply_physics() {
         for index in individual_atoms.indices {
             individual_atoms[index].location.y -= gravity_per_frame
             
@@ -117,6 +132,6 @@ public struct ScientificEnvironment : Hashable {
         }
     }
     // TODO: support time skipping/jumping/browsing/indexing
-    private mutating func apply_physics(multiplier: HugeFloat) {
+    private func apply_physics(multiplier: HugeFloat) {
     }
 }
