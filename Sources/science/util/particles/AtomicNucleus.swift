@@ -19,6 +19,6 @@ public struct AtomicNucleus : Hashable {
     }
     
     public var element : ChemicalElement? {
-        return ChemicalElement.elements[proton_count]
+        return ChemicalElement.value_of(proton_count: proton_count, neutron_count: neutron_count)
     }
 }

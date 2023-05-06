@@ -20,7 +20,7 @@ struct EnvironmentView : View {
         } content: {
             let max_width:CGFloat = 1000
             VStack {
-                EnvironmentStatsView(fps_counter: environment.fps_counter)
+                EnvironmentStatsView(environment: environment, fps_counter: environment.fps_counter)
                 Spacer()
                 EnvironmentRenderer()
                 Spacer()
@@ -34,6 +34,7 @@ struct EnvironmentView : View {
 
 struct EnvironmentStatsView : View {
     
+    var environment:ScientificEnvironment
     @ObservedObject var fps_counter:EnvironmentFPSCounter
     
     var body: some View {
@@ -41,8 +42,10 @@ struct EnvironmentStatsView : View {
             Spacer()
             Text("FPS: \(fps_counter.last_count)")
             Spacer()
-            //Text("Individual Atoms: \(environment.individual_atoms.count)")
-            //Spacer()
+            Text("Individual Atoms: \(environment.individual_atoms.count)")
+            Spacer()
+            Text("Simulation Elapsed Time: " + environment.simulation_elapsed_time.description)
+            Spacer()
         }.cornerRadius(50).background(Color.gray)
     }
 }

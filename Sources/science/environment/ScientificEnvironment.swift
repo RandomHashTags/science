@@ -39,7 +39,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     }
     
     public var timeline:EnvironmentTimeline
-    public var elapsed_time:ElapsedTime
+    public var simulation_elapsed_time:ElapsedTime
     
     private var gravity_per_frame:HugeFloat
     private var timeline_nanoseconds:UInt64
@@ -65,14 +65,14 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
             speed: settings.time_speed,
             end_after: TimeUnit(type: TimeUnitType.minute, value: HugeFloat("5"))
         )
-        elapsed_time = ElapsedTime()
+        simulation_elapsed_time = ElapsedTime()
         
         gravity_per_frame = gravity.value / fps_float
         timeline_nanoseconds = 1_000_000_000 / fps_integer
         elapsed_time_per_frame = TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("1000") / fps_float)
         
         individual_atoms = []
-        half_life_atoms = []
+        half_life_atoms = [OxygenIsotope.oxygen_26.atom]
     }
     
     public func stop_simulating() {
@@ -115,7 +115,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     }
     
     private func update_time() {
-        elapsed_time += elapsed_time_per_frame
+        simulation_elapsed_time += elapsed_time_per_frame
         for index in individual_atoms.indices {
             individual_atoms[index].lifetime += elapsed_time_per_frame
         }

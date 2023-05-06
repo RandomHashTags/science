@@ -10,4 +10,6 @@ import MacOSUserInterface
 
 #if canImport(MacOSUserInterface)
 ScienceApplication.run()
+#else
+print("the GUI is only available on MacOS platforms right now")
 #endif
