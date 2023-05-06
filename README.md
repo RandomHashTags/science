@@ -13,5 +13,10 @@ Just an open-source scientific simulator. Created for educational and scientific
 
 ## Contributing
 Adding/improving functionality is always welcome, just make a PR. 
+
+## Funding
+Support the development of this project by sponsoring the developers.
+- [RandomHashTags](https://github.com/sponsors/RandomHashTags)
+
 ## License
 Apache License 2.0
