@@ -25,7 +25,7 @@ let package = Package(
             dependencies: [
                 .product(name: "huge-numbers", package: "swift_huge-numbers")
             ],
-            exclude: ["renderer", "ui"]
+            exclude: ["renderer"]
         ),
         .executableTarget(
             name: "Run",
