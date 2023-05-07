@@ -399,7 +399,8 @@ public enum ChemicalElement : String, CaseIterable {
             return NitrogenIsotope.self
         case .oxygen:
             return OxygenIsotope.self
-        // case .fluorine:
+        case .fluorine:
+            return FluorineIsotope.self
         // case .neon:
         // case .sodium:
         // case .magnesium:
