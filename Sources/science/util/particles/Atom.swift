@@ -51,20 +51,23 @@ public struct Atom : Hashable {
     public var is_unstable : Bool {
         return half_life != nil
     }
-    public mutating func decay() -> ChemicalReaction {
-        print("Atom;decay;decay_type=\(decay_mode);half_life=\(half_life?.description);lifetime=\(lifetime.description)")
-        guard let decay_type:AtomicDecayType = decay_mode, let half_life:TimeUnit = half_life else { return ChemicalReaction() }
-        lifetime -= half_life
-        
-        let reaction:ChemicalReaction = decay(decay_type)
-        let chemical_element:ChemicalElement = chemical_element!
-        let element_identifier:String = chemical_element.rawValue
-        let target_number:Int = nucleus.proton_count + nucleus.neutron_count
-        let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
-        decay_mode = new_element.decay_mode
-        self.half_life = new_element.half_life
-        print("Atom;decay;remaining_lifetime=\(lifetime.description);new_decay_mode=\(decay_mode);new_half_life=\(half_life)")
-        return reaction
+    public mutating func decay() -> [ChemicalReaction] {
+        var reactions:[ChemicalReaction] = []
+        while let decay_mode:AtomicDecayType = decay_mode, let half_life:TimeUnit = half_life, lifetime >= half_life {
+            lifetime -= half_life
+            
+            let reaction:ChemicalReaction = decay(decay_mode)
+            let chemical_element:ChemicalElement = chemical_element!
+            let element_identifier:String = chemical_element.rawValue
+            let target_number:Int = nucleus.proton_count + nucleus.neutron_count
+            let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
+            self.decay_mode = new_element.decay_mode
+            self.half_life = new_element.half_life
+            
+            reactions.append(reaction)
+        }
+        print("Atom;decay;finally decayed into " + chemical_element!.rawValue + ";new_decay_mode=\(decay_mode);new_half_life=\(half_life?.description)")
+        return reactions
     }
     private mutating func decay(_ type: AtomicDecayType) -> ChemicalReaction {
         let protons:[Proton] = nucleus.protons, neutrons:[Neutron] = nucleus.neutrons

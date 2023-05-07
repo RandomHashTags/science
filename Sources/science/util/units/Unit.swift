@@ -32,6 +32,10 @@ public extension Unit {
         return prefix.symbol + type.symbol
     }
     
+    var is_zero : Bool {
+        return value.is_zero
+    }
+    
     var description : String {
         return value.description + " " + symbol
     }
@@ -48,7 +52,7 @@ public extension Unit {
     }
     func to_unit(prefix: UnitPrefix, unit: TargetUnitType) -> Self {
         let value:HugeFloat = convert_value_to_unit(prefix: prefix, unit)
-        return Self.init(prefix: prefix, type: unit, value: value)
+        return Self(prefix: prefix, type: unit, value: value)
     }
 }
 

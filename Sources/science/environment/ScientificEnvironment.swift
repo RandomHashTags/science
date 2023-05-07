@@ -125,9 +125,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         
         let previous_count:Int = individual_atoms.count
         for index in half_life_atoms.indices {
-            while let half_life:TimeUnit = half_life_atoms[index].half_life, half_life_atoms[index].lifetime >= half_life {
-                let reaction:ChemicalReaction = half_life_atoms[index].decay()
-            }
+            let reactions:[ChemicalReaction] = half_life_atoms[index].decay()
             if !half_life_atoms[index].is_unstable {
                 individual_atoms.append(half_life_atoms[index])
             }

@@ -140,6 +140,9 @@ public enum ChemicalElement : String, CaseIterable {
         return ChemicalElementDetails(identifier: rawValue, atomic_number: atomic_number, symbol: symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point)
     }
     
+    public var get_details : ChemicalElementDetails {
+        return ChemicalElementDetails.value_of(identifier: rawValue)!
+    }
     public var details : ChemicalElementDetails {
         switch self {
         case .hydrogen:

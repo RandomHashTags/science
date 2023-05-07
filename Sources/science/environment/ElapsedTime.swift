@@ -15,17 +15,10 @@ public struct ElapsedTime : Hashable {
         self.values = values
     }
     public init(_ value: TimeUnit) {
-        let target_types:[TimeUnitType] = [TimeUnitType.decade, TimeUnitType.year, TimeUnitType.week, TimeUnitType.day, TimeUnitType.hour, TimeUnitType.minute, TimeUnitType.second]
-        var all_values:[TimeUnitType:[UnitPrefix:HugeFloat]] = [:]
-        for type in target_types {
-            if let type_values:[UnitPrefix:HugeFloat] = all_values[type] {
-                all_values[type] = [:]
-                for (unit_prefix, value) in type_values {
-                    all_values[type]![unit_prefix] = value
-                }
-            }
-        }
-        values = all_values
+        values = [:]
+        let value_type:TimeUnitType = value.type
+        values[value_type] = [:]
+        values[value_type]![value.prefix] = value.value
     }
     
     public var description : String {        
@@ -122,10 +115,12 @@ public struct ElapsedTime : Hashable {
                 }
             }
         }
+        print("ElapsedTime;to_unit;unit_prefix=\(unit_prefix);unit_type=\(unit_type);unit=" + unit.description)
         return unit
     }
     
-    public mutating func simplify() {
+    public mutating func simplify() { // TODO: fix
+        let previous_description:String = description
         var seconds:HugeFloat = normalize(unit_type: TimeUnitType.second)
         var minutes:HugeFloat = normalize(unit_type: TimeUnitType.minute)
         var hours:HugeFloat = normalize(unit_type: TimeUnitType.hour)
@@ -174,6 +169,8 @@ public struct ElapsedTime : Hashable {
         set_value(type: TimeUnitType.week, value: weeks)
         set_value(type: TimeUnitType.year, value: years)
         set_value(type: TimeUnitType.decade, value: decades)
+        
+        print("ElapsedTime;simplify;previous_description=" + previous_description + ";description=" + description)
     }
     
     private mutating func set_value(_ unit_prefix: UnitPrefix = UnitPrefix.normal, type: TimeUnitType, value: HugeFloat) {
@@ -193,9 +190,28 @@ public struct ElapsedTime : Hashable {
         return normal_value
     }
 }
+/*
+ Comparable
+ */
 public extension ElapsedTime {
     static func >= (left: ElapsedTime, right: TimeUnit) -> Bool {
-        return left.to_unit(unit_prefix: right.prefix, unit_type: right.type) >= right
+        let right_type:TimeUnitType = right.type, right_prefix:UnitPrefix = right.prefix
+        print("ElapsedTime;>=;left=" + left.description + ";right=" + right.description)
+        let greater_elements:[Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element] = left.values.filter({ $0.key.is_greater_than_or_equal_to(right_type) })
+        if greater_elements.count == 1 {
+            let greater_element:Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element = greater_elements[0]
+            if let _:UnitPrefix = greater_element.value.keys.first(where: { $0.rawValue >= right_prefix.rawValue }) {
+                print("ElapsedTime;>=;returned true due to left prefix being bigger then right_prefix")
+                return true
+            } else {
+                let left_to_unit:TimeUnit = left.to_unit(unit_prefix: right_prefix, unit_type: right_type)
+                let value:Bool = left_to_unit >= right
+                print("ElapsedTime;>=;test1;left_to_unit=" + left_to_unit.description + ";returned " + value.description)
+                return value
+            }
+        }
+        print("ElapsedTime;>=;returned true due to left being bigger via time unit")
+        return true
     }
 }
 public extension ElapsedTime {
@@ -228,7 +244,6 @@ public extension ElapsedTime {
     static func - (left: ElapsedTime, right: TimeUnit) -> ElapsedTime {
         var time:TimeUnit = left.to_unit(unit_prefix: right.prefix, unit_type: right.type)
         time -= right
-        print("ElapsedTime;-;time=" + time.description)
         return ElapsedTime(time)
     }
     static func -= (left: inout ElapsedTime, right: TimeUnit) {

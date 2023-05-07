@@ -27,7 +27,7 @@ final class scienceTests: XCTestCase {
 }
 extension scienceTests {
     private func test_molecules() {
-        let atom:Atom = ChemicalElement.silicon.atom
+        let atom:Atom = ChemicalElement.silicon.get_details.atom
         let molecule:Molecule = Molecule(atoms: [atom, atom, atom, atom, atom])
         XCTAssert(molecule.molecular_formula.elementsEqual("Si" + 5.as_subscript))
     }
@@ -37,10 +37,10 @@ extension scienceTests {
         test_electron_shell()
     }
     private func test_electron_shell() {
-        XCTAssert(ChemicalElement.hydrogen.atom.electron_shells.count == 1)
-        XCTAssert(ChemicalElement.helium.atom.electron_shells.count == 1)
-        XCTAssert(ChemicalElement.lithium.atom.electron_shells.count == 2)
-        XCTAssert(ChemicalElement.sodium.atom.electron_shells.count == 3)
+        XCTAssert(ChemicalElement.hydrogen.get_details.atom.electron_shells.count == 1)
+        XCTAssert(ChemicalElement.helium.get_details.atom.electron_shells.count == 1)
+        XCTAssert(ChemicalElement.lithium.get_details.atom.electron_shells.count == 2)
+        XCTAssert(ChemicalElement.sodium.get_details.atom.electron_shells.count == 3)
     }
 }
 extension scienceTests {

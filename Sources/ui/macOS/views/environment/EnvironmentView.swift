@@ -42,6 +42,8 @@ struct EnvironmentStatsView : View {
             Spacer()
             Text("FPS: \(fps_counter.last_count)")
             Spacer()
+            Text("Half-life Atoms: \(environment.half_life_atoms.count)")
+            Spacer()
             Text("Individual Atoms: \(environment.individual_atoms.count)")
             Spacer()
             Text("Simulation Elapsed Time: " + environment.simulation_elapsed_time.description)

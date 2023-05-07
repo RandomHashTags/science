@@ -7,8 +7,8 @@
 import Foundation
 
 public enum EnergyUnitType : String, UnitType {
-    case joule
     case electronvolt
+    case joule
     
     public var symbol : String {
         switch self {

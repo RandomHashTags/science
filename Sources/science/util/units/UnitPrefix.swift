@@ -7,6 +7,7 @@
 import Foundation
 import huge_numbers
 
+// https://en.wikipedia.org/wiki/Metric_prefix
 public enum UnitPrefix : Int {
     // rawValue == base ten multiplier (10^x)
     case quecto = -30

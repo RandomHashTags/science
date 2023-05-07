@@ -8,9 +8,9 @@ import Foundation
 import huge_numbers
 
 public enum TemperatureUnitType : String, UnitType {
-    case kelvin
-    case celsius
     case fahrenheit
+    case celsius
+    case kelvin
     case rankine
     
     public var symbol : String {
