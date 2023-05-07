@@ -8,6 +8,6 @@ import Foundation
 
 extension Array {
     func get(_ index: Int) -> Element? {
-        return index < count ? self[index] : nil
+        return index < count && index >= 0 ? self[index] : nil
     }
 }

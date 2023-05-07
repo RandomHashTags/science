@@ -35,7 +35,7 @@ public struct Atom : Hashable {
     }
     
     public var chemical_element : ChemicalElement? {
-        return ChemicalElement.value_of(proton_count: nucleus.proton_count, neutron_count: nucleus.neutron_count)
+        return nucleus.element
     }
     
     public var elementary_charge : Double {
@@ -57,9 +57,12 @@ public struct Atom : Hashable {
         lifetime -= half_life
         
         let reaction:ChemicalReaction = decay(decay_type)
-        let chemical_element:ChemicalElement? = chemical_element
-        decay_mode = chemical_element?.decay_mode
-        self.half_life = chemical_element?.half_life
+        let chemical_element:ChemicalElement = chemical_element!
+        let element_identifier:String = chemical_element.rawValue
+        let target_number:Int = nucleus.proton_count + nucleus.neutron_count
+        let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
+        decay_mode = new_element.decay_mode
+        self.half_life = new_element.half_life
         print("Atom;decay;remaining_lifetime=\(lifetime.description);new_decay_mode=\(decay_mode);new_half_life=\(half_life)")
         return reaction
     }
@@ -70,36 +73,49 @@ public struct Atom : Hashable {
             nucleus.protons.removeFirst(2)
             nucleus.neutrons.removeFirst(2)
             return ChemicalReaction(destroyed_protons: [protons[0], protons[1]], destroyed_neutrons: [neutrons[0], neutrons[1]])
+            
         case .beta_minus:
             let created_proton:Proton = Proton()
             let destroyed_neutron:Neutron = neutrons[0]
             let created_electron:Electron = Electron()
             nucleus.protons.append(created_proton)
             nucleus.neutrons.removeFirst()
-            // TODO: gain electron
+            // TODO: emit electron/positron and electron antineutrino
             return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)])
+        case .beta_minus_neutron_emission:
+            let created_proton:Proton = Proton()
+            let destroyed_neutron:Neutron = neutrons[0]
+            let created_electron:Electron = Electron()
+            nucleus.protons.append(created_proton)
+            nucleus.neutrons.removeFirst(2)
+            // TODO: emit electron/positron and electron antineutrino
+            return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)], emitted_neutrons: [neutrons[1]])
+            
         case .beta_plus:
             let created_neutron:Neutron = Neutron()
             nucleus.protons.removeFirst()
             nucleus.neutrons.append(created_neutron)
             return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())])
+        case .beta_plus_proton_emission:
+            let created_neutron:Neutron = Neutron()
+            nucleus.protons.removeFirst(2)
+            nucleus.neutrons.append(created_neutron)
+            return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())], emitted_protons: [protons[1]])
+            
         case .gamma:
+            // TODO: emit gamma ray photon
             return ChemicalReaction()
             
-        case .proton_emission:
-            nucleus.protons.removeFirst()
-            return ChemicalReaction(emitted_protons: [protons[0]])
-        case .proton_emission_2:
-            nucleus.protons.removeFirst(2)
-            return ChemicalReaction(emitted_protons: [protons[0], protons[1]])
-        case .neutron_emission:
-            nucleus.neutrons.removeFirst()
-            return ChemicalReaction(emitted_neutrons: [neutrons[0]])
-        case .neutron_emission_2:
-            nucleus.neutrons.removeFirst(2)
-            return ChemicalReaction(emitted_neutrons: [neutrons[0], neutrons[1]])
+        case .proton_emission(let amount):
+            nucleus.protons.removeFirst(amount)
+            return ChemicalReaction(emitted_protons: Array(protons[0..<amount]))
             
-        default:
+        case .neutron_emission(let amount):
+            nucleus.neutrons.removeFirst(amount)
+            return ChemicalReaction(emitted_neutrons: Array(neutrons[0..<amount]))
+            
+        case .electron_capture:
+            // TODO: fix
             return ChemicalReaction()
         }
     }

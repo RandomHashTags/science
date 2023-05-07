@@ -24,14 +24,14 @@ struct Molecule {
     }
     private func get_molecular_formula(_ chemical_element: ChemicalElement, amount: Int) -> String {
         let amount_string:String = amount > 1 ? amount.as_subscript : ""
-        return chemical_element.symbol + amount_string
+        return chemical_element.details.symbol + amount_string // TODO: fix
     }
 }
 
 
 extension Molecule {
     static var water:Molecule = {
-        let hydrogen:Atom = ChemicalElement.hydrogen.atom
-        return Molecule(atoms: [hydrogen, hydrogen, ChemicalElement.oxygen.atom])
+        let hydrogen:Atom = ChemicalElement.hydrogen.details.atom // TODO: fix
+        return Molecule(atoms: [hydrogen, hydrogen, ChemicalElement.oxygen.details.atom])
     }()
 }
