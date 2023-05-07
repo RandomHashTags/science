@@ -25,10 +25,11 @@ public struct ChemicalElement : Hashable {
     /// if known, boiling point of this chemical element, measured in degrees Kelvin
     public let boiling_point:TemperatureUnit?
     
-    // TODO: support radioactive decay
+    // TODO: decay mode probabilities
+    public let decay_mode:AtomicDecayType?
     public let half_life:TimeUnit?
     
-    public init(atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
+    public init(atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil) {
         self.atomic_number = atomic_number
         self.neutron_count = neutron_count
         self.symbol = symbol
@@ -37,14 +38,15 @@ public struct ChemicalElement : Hashable {
         //self.freezing_point = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(freezing_point))
         self.melting_point = melting_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(melting_point!)) : nil
         self.boiling_point = boiling_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(boiling_point!)) : nil
+        self.decay_mode = decay_mode
         self.half_life = half_life
         if ChemicalElement.elements[atomic_number] == nil {
             ChemicalElement.elements[atomic_number] = [:]
         }
         ChemicalElement.elements[atomic_number]![neutron_count ?? atomic_number] = self
     }
-    public init(_ element: ChemicalElement, neutron_count: Int, standard_atomic_weight: Float, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, half_life: TimeUnit? = nil) {
-        self.init(atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, half_life: half_life)
+    public init(_ element: ChemicalElement, neutron_count: Int, standard_atomic_weight: Float, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil) {
+        self.init(atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, decay_mode: decay_mode, half_life: half_life)
     }
     
     public lazy var atom : Atom = {
@@ -54,7 +56,7 @@ public struct ChemicalElement : Hashable {
         let location:Location = Location(x: HugeFloat.zero, y: HugeFloat.zero, z: HugeFloat.zero)
         let speed:SpeedUnit = SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero)
         let velocity:Velocity = Velocity(x: speed, y: speed, z: speed)
-        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, half_life: half_life, location: location, velocity: velocity)
+        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, decay_mode: decay_mode, half_life: half_life, location: location, velocity: velocity)
     }()
 }
 // https://www.rsc.org/periodic-table

@@ -10,7 +10,7 @@ import MetalKit
 public struct Atom : Hashable {
     public var nucleus:AtomicNucleus
     public var electron_shells:[ElectronShell]
-    public var half_life:TimeUnit?
+    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?
     public var lifetime:ElapsedTime = ElapsedTime()
     public var location:Location
     public var velocity:Velocity
@@ -52,10 +52,15 @@ public struct Atom : Hashable {
         return half_life != nil
     }
     public mutating func decay() -> ChemicalReaction {
-        print("Atom;decay;element=\(chemical_element?.symbol), lifetime=\(lifetime.description)")
-        lifetime = ElapsedTime()
-        let reaction:ChemicalReaction = decay(AtomicDecayType.alpha)
-        half_life = chemical_element?.half_life
+        print("Atom;decay;decay_type=\(decay_mode);half_life=\(half_life?.description);lifetime=\(lifetime.description)")
+        guard let decay_type:AtomicDecayType = decay_mode, let half_life:TimeUnit = half_life else { return ChemicalReaction() }
+        lifetime -= half_life
+        
+        let reaction:ChemicalReaction = decay(decay_type)
+        let chemical_element:ChemicalElement? = chemical_element
+        decay_mode = chemical_element?.decay_mode
+        self.half_life = chemical_element?.half_life
+        print("Atom;decay;remaining_lifetime=\(lifetime.description);new_decay_mode=\(decay_mode);new_half_life=\(half_life)")
         return reaction
     }
     private mutating func decay(_ type: AtomicDecayType) -> ChemicalReaction {
@@ -80,6 +85,20 @@ public struct Atom : Hashable {
             return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())])
         case .gamma:
             return ChemicalReaction()
+            
+        case .proton_emission:
+            nucleus.protons.removeFirst()
+            return ChemicalReaction(emitted_protons: [protons[0]])
+        case .proton_emission_2:
+            nucleus.protons.removeFirst(2)
+            return ChemicalReaction(emitted_protons: [protons[0], protons[1]])
+        case .neutron_emission:
+            nucleus.neutrons.removeFirst()
+            return ChemicalReaction(emitted_neutrons: [neutrons[0]])
+        case .neutron_emission_2:
+            nucleus.neutrons.removeFirst(2)
+            return ChemicalReaction(emitted_neutrons: [neutrons[0], neutrons[1]])
+            
         default:
             return ChemicalReaction()
         }

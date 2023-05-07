@@ -78,7 +78,7 @@ public extension Unit {
  */
 public extension Unit {
     static prefix func - (item: Self) -> Self {
-        return Self(type: item.type, value: -item.value)
+        return Self(prefix: item.prefix, type: item.type, value: -item.value)
     }
 }
 /*
@@ -88,11 +88,25 @@ public extension Unit {
     static func + (left: Self, right: Self) -> Self {
         let left_type:TargetUnitType = left.type, left_prefix:UnitPrefix = left.prefix
         let right_updated:Self = right.to_unit(prefix: left_prefix, unit: left_type)
-        return Self(type: left_type, value: left.value + right_updated.value)
+        return Self(prefix: left_prefix, type: left_type, value: left.value + right_updated.value)
     }
     
     static func += (left: inout Self, right: Self) {
         left = left + right
+    }
+}
+/*
+ Subtraction
+ */
+public extension Unit {
+    static func - (left: Self, right: Self) -> Self {
+        let left_type:TargetUnitType = left.type, left_prefix:UnitPrefix = left.prefix
+        let right_updated:Self = right.to_unit(prefix: left_prefix, unit: left_type)
+        return Self(prefix: left_prefix, type: left_type, value: left.value - right_updated.value)
+    }
+    
+    static func -= (left: inout Self, right: Self) {
+        left = left - right
     }
 }
 /*
@@ -102,7 +116,7 @@ public extension Unit {
     static func * (left: Self, right: Self) -> Self {
         let left_type:TargetUnitType = left.type, left_prefix:UnitPrefix = left.prefix
         let right_updated:Self = right.to_unit(prefix: left_prefix, unit: left_type)
-        return Self(type: left_type, value: left.value * right_updated.value)
+        return Self(prefix: left_prefix, type: left_type, value: left.value * right_updated.value)
     }
 }
 public extension Unit {
