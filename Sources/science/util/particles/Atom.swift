@@ -51,7 +51,9 @@ public struct Atom : Hashable {
     public var is_unstable : Bool {
         return half_life != nil
     }
-    public mutating func decay() -> [ChemicalReaction] {
+    public mutating func decay() -> [ChemicalReaction]? {
+        // TODO: support probability of decaying (half-life=50% chance of it decaying within the half-life)
+        guard decay_mode != nil && half_life != nil && lifetime >= half_life! else { return nil }
         var reactions:[ChemicalReaction] = []
         while let decay_mode:AtomicDecayType = decay_mode, let half_life:TimeUnit = half_life, lifetime >= half_life {
             lifetime -= half_life
@@ -63,7 +65,6 @@ public struct Atom : Hashable {
             let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
             self.decay_mode = new_element.decay_mode
             self.half_life = new_element.half_life
-            
             reactions.append(reaction)
         }
         print("Atom;decay;finally decayed into " + chemical_element!.rawValue + ";new_decay_mode=\(decay_mode);new_half_life=\(half_life?.description)")

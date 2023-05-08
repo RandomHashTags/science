@@ -198,7 +198,11 @@ public extension ElapsedTime {
         let right_type:TimeUnitType = right.type, right_prefix:UnitPrefix = right.prefix
         print("ElapsedTime;>=;left=" + left.description + ";right=" + right.description)
         let greater_elements:[Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element] = left.values.filter({ $0.key.is_greater_than_or_equal_to(right_type) })
-        if greater_elements.count == 1 {
+        switch greater_elements.count {
+        case 0:
+            print("ElapsedTime;>=;returned false due to left being smaller via time unit")
+            return false
+        case 1:
             let greater_element:Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element = greater_elements[0]
             if let _:UnitPrefix = greater_element.value.keys.first(where: { $0.rawValue >= right_prefix.rawValue }) {
                 print("ElapsedTime;>=;returned true due to left prefix being bigger then right_prefix")
@@ -209,9 +213,10 @@ public extension ElapsedTime {
                 print("ElapsedTime;>=;test1;left_to_unit=" + left_to_unit.description + ";returned " + value.description)
                 return value
             }
+        default:
+            print("ElapsedTime;>=;returned true due to left being bigger via time unit")
+            return true
         }
-        print("ElapsedTime;>=;returned true due to left being bigger via time unit")
-        return true
     }
 }
 public extension ElapsedTime {
