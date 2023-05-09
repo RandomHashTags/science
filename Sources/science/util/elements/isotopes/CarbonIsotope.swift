@@ -46,7 +46,7 @@ public enum CarbonIsotope : String, ChemicalElementIsotope {
         case .carbon_13:
             return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: 13.003_354_835_336)
         case .carbon_14:
-            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: 14.003_241_989, decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: HugeFloat("570")))
+            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: 14.003_241_989, decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: HugeFloat("5700")))
         case .carbon_15:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: 15.010_599_3, decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: HugeFloat("2.449")))
         case .carbon_16:

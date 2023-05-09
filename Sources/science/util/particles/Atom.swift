@@ -6,12 +6,14 @@
 
 import Foundation
 import MetalKit
+import huge_numbers
 
 public struct Atom : Hashable {
     public var nucleus:AtomicNucleus
     public var electron_shells:[ElectronShell]
     public var decay_mode:AtomicDecayType?, half_life:TimeUnit?
-    public var lifetime:ElapsedTime = ElapsedTime()
+    public var lifetime_total:ElapsedTime = ElapsedTime()
+    public var elapsed_time_since_last_decay:ElapsedTime = ElapsedTime()
     public var location:Location
     public var velocity:Velocity
     
@@ -49,26 +51,42 @@ public struct Atom : Hashable {
     }
     
     public var is_unstable : Bool {
-        return half_life != nil
+        return decay_mode != nil || half_life != nil
     }
     public mutating func decay() -> [ChemicalReaction]? {
         // TODO: support probability of decaying (half-life=50% chance of it decaying within the half-life)
-        guard decay_mode != nil && half_life != nil && lifetime >= half_life! else { return nil }
+        guard decay_mode != nil && half_life != nil && elapsed_time_since_last_decay >= half_life! else { return nil }
         var reactions:[ChemicalReaction] = []
-        while let decay_mode:AtomicDecayType = decay_mode, let half_life:TimeUnit = half_life, lifetime >= half_life {
-            lifetime -= half_life
-            
-            let reaction:ChemicalReaction = decay(decay_mode)
-            let chemical_element:ChemicalElement = chemical_element!
-            let element_identifier:String = chemical_element.rawValue
-            let target_number:Int = nucleus.proton_count + nucleus.neutron_count
-            let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
-            self.decay_mode = new_element.decay_mode
-            self.half_life = new_element.half_life
-            reactions.append(reaction)
+        
+        var status:Bool = true
+        while status {
+            let (decayed, reaction):(Bool, ChemicalReaction?) = try_decaying()
+            if let reaction:ChemicalReaction = reaction {
+                reactions.append(reaction)
+            }
+            status = decayed
         }
-        print("Atom;decay;finally decayed into " + chemical_element!.rawValue + ";new_decay_mode=\(decay_mode);new_half_life=\(half_life?.description)")
         return reactions
+    }
+    /// - Returns: Whether or not this atom has decayed, if so, also the chemical reaction of the decay.
+    private mutating func try_decaying() -> (Bool, ChemicalReaction?) {
+        let test:TimeUnit = elapsed_time_since_last_decay.to_unit(unit_prefix: half_life!.prefix, unit_type: half_life!.type)
+        let iterations:UInt64 = test.value.divide_by(half_life!.value, precision: HugeInt.float_precision).integer.to_int()!
+        for i in 0..<iterations {
+            elapsed_time_since_last_decay -= half_life!
+            if Bool.random() {
+                let reaction:ChemicalReaction = decay(decay_mode!)
+                let chemical_element:ChemicalElement = chemical_element!
+                let element_identifier:String = chemical_element.rawValue
+                let target_number:Int = nucleus.proton_count + nucleus.neutron_count
+                let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
+                self.decay_mode = new_element.decay_mode
+                self.half_life = new_element.half_life
+                print("Atom;try_decaying;decayed into " + chemical_element.rawValue + ";took " + (i + 1).description + " iterations;new_half_life=\(half_life?.description);remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
+                return (true, reaction)
+            }
+        }
+        return (false, nil)
     }
     private mutating func decay(_ type: AtomicDecayType) -> ChemicalReaction {
         let protons:[Proton] = nucleus.protons, neutrons:[Neutron] = nucleus.neutrons

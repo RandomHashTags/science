@@ -115,7 +115,6 @@ public struct ElapsedTime : Hashable {
                 }
             }
         }
-        print("ElapsedTime;to_unit;unit_prefix=\(unit_prefix);unit_type=\(unit_type);unit=" + unit.description)
         return unit
     }
     
@@ -196,25 +195,19 @@ public struct ElapsedTime : Hashable {
 public extension ElapsedTime {
     static func >= (left: ElapsedTime, right: TimeUnit) -> Bool {
         let right_type:TimeUnitType = right.type, right_prefix:UnitPrefix = right.prefix
-        print("ElapsedTime;>=;left=" + left.description + ";right=" + right.description)
         let greater_elements:[Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element] = left.values.filter({ $0.key.is_greater_than_or_equal_to(right_type) })
         switch greater_elements.count {
         case 0:
-            print("ElapsedTime;>=;returned false due to left being smaller via time unit")
             return false
         case 1:
-            let greater_element:Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element = greater_elements[0]
-            if let _:UnitPrefix = greater_element.value.keys.first(where: { $0.rawValue >= right_prefix.rawValue }) {
-                print("ElapsedTime;>=;returned true due to left prefix being bigger then right_prefix")
+            let greater_value:[UnitPrefix:HugeFloat] = greater_elements[0].value
+            if let greater_prefix:UnitPrefix = greater_value.keys.first(where: { $0.rawValue > right_prefix.rawValue }), !greater_value[greater_prefix]!.integer.is_zero {
                 return true
             } else {
                 let left_to_unit:TimeUnit = left.to_unit(unit_prefix: right_prefix, unit_type: right_type)
-                let value:Bool = left_to_unit >= right
-                print("ElapsedTime;>=;test1;left_to_unit=" + left_to_unit.description + ";returned " + value.description)
-                return value
+                return left_to_unit >= right
             }
         default:
-            print("ElapsedTime;>=;returned true due to left being bigger via time unit")
             return true
         }
     }
@@ -240,6 +233,11 @@ public extension ElapsedTime {
             left.values[unit_type]![unit_prefix] = HugeFloat.zero
         }
         left.values[unit_type]![unit_prefix]! += right.value
+        
+        /*let unit_prefix_raw_value:Int = unit_prefix.rawValue, value_integer_length:Int = left.values[unit_type]![unit_prefix]!.integer.length
+        if unit_prefix_raw_value < UnitPrefix.normal.rawValue && value_integer_length >= abs(unit_prefix_raw_value) {
+            // TODO: simplify?
+        }*/
     }
 }
 /*
@@ -253,8 +251,6 @@ public extension ElapsedTime {
     }
     static func -= (left: inout ElapsedTime, right: TimeUnit) {
         let units:TimeUnit = left.to_unit(unit_prefix: right.prefix, unit_type: right.type)
-        let result:TimeUnit = units - right
-        print("ElapsedTime;-=;left=" + left.description + ";right=" + right.description + ";units=" + units.description + ";result=" + result.description)
-        left = ElapsedTime(result)
+        left = ElapsedTime(units - right)
     }
 }

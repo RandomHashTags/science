@@ -11,7 +11,6 @@ public protocol ChemicalElementIsotope : CaseIterable, RawRepresentable where Ra
     var element : ChemicalElement { get }
     
     var load_details : ChemicalElementDetails { get }
-    var details : ChemicalElementDetails { get }
 }
 public extension ChemicalElementIsotope {
     var details : ChemicalElementDetails {

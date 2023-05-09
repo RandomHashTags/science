@@ -24,8 +24,10 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     public var fps:HugeInt {
         didSet {
             let fps_integer:UInt64 = fps.to_int()!
-            gravity_per_frame = gravity.value / fps.to_float
+            let fps_float:HugeFloat = fps.to_float
+            gravity_per_frame = gravity.value / fps_float
             timeline_nanoseconds = 1_000_000_000 / fps_integer
+            elapsed_time_per_frame = timeline.speed.to_unit(prefix: UnitPrefix.milli, unit: TimeUnitType.second) / fps_float
         }
     }
     public var fps_counter:EnvironmentFPSCounter = EnvironmentFPSCounter()
@@ -63,13 +65,13 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         timeline = EnvironmentTimeline(
             starting_point: TimeUnit(type: TimeUnitType.second, value: HugeFloat.zero),
             speed: settings.time_speed,
-            end_after: TimeUnit(type: TimeUnitType.minute, value: HugeFloat("5"))
+            end_after: TimeUnit(type: TimeUnitType.second, value: HugeFloat("5"))
         )
         simulation_elapsed_time = ElapsedTime()
         
         gravity_per_frame = gravity.value / fps_float
         timeline_nanoseconds = 1_000_000_000 / fps_integer
-        elapsed_time_per_frame = TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("1000") / fps_float)
+        elapsed_time_per_frame = settings.time_speed.to_unit(prefix: UnitPrefix.milli, unit: TimeUnitType.second) / fps_float
         
         individual_atoms = []
         half_life_atoms = [OxygenIsotope.oxygen_26.atom]
@@ -82,7 +84,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         fps_counter_task!.cancel()
     }
     public func resume() {
-        guard !is_simulating else { return }
+        guard !is_simulating && !(simulation_elapsed_time >= timeline.end_after) else { return }
         is_simulating = true
         simulation_task = Task {
             await simulate()
@@ -104,25 +106,32 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     public func simulate() async {
         while !Task.isCancelled {
             tick()
+            if simulation_elapsed_time >= timeline.end_after {
+                stop_simulating()
+                return
+            }
             try? await Task.sleep(nanoseconds: timeline_nanoseconds)
         }
     }
     
     private func tick() {
-        apply_physics()
         update_time()
+        apply_logic()
         fps_counter.new_count += 1
     }
     
     private func update_time() {
         simulation_elapsed_time += elapsed_time_per_frame
         for index in individual_atoms.indices {
-            individual_atoms[index].lifetime += elapsed_time_per_frame
+            individual_atoms[index].lifetime_total += elapsed_time_per_frame
         }
         for index in half_life_atoms.indices {
-            half_life_atoms[index].lifetime += elapsed_time_per_frame
+            half_life_atoms[index].lifetime_total += elapsed_time_per_frame
+            half_life_atoms[index].elapsed_time_since_last_decay += elapsed_time_per_frame
         }
-        
+    }
+    
+    private func apply_logic() {
         let previous_count:Int = individual_atoms.count
         for index in half_life_atoms.indices {
             if let reactions:[ChemicalReaction] = half_life_atoms[index].decay() {
@@ -134,7 +143,10 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         if previous_count != individual_atoms.count {
             half_life_atoms.removeAll(where: { !$0.is_unstable })
         }
+        
+        apply_physics()
     }
+    
     private func apply_physics() {
         for index in individual_atoms.indices {
             individual_atoms[index].location.y -= gravity_per_frame
