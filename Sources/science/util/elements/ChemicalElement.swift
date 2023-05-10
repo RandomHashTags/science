@@ -410,7 +410,8 @@ public enum ChemicalElement : String, CaseIterable {
             return SodiumIsotope.self
         case .magnesium:
             return MagnesiumIsotope.self
-        // case .aluminium:
+        case .aluminium:
+            return AluminiumIsotope.self
         case .silicon:
             return SiliconIsotope.self
             

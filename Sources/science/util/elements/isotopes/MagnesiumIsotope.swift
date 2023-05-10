@@ -82,7 +82,7 @@ public enum MagnesiumIsotope : String, ChemicalElementIsotope {
         case .magnesium_38:
             return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: 38.036_58, decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("3.1")))
         case .magnesium_40:
-            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: 40.053_19, decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("1")))
+            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: 40.053_19, decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: HugeFloat("171")))
         }
     }
 }
