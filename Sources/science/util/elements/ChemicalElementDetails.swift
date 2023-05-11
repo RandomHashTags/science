@@ -38,7 +38,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     public let atomic_number:Int, neutron_count:Int?
     public let symbol:String
     /// Masured in Dalton
-    public let standard_atomic_weight:Float
+    public let standard_atomic_weight:HugeFloat
     /// if known, predicted/known density of this chemical element, measured in grams per cubic centimetre
     public let density:DensityUnit?
     /// if known, melting point of this chemical element, measured in degrees Kelvin
@@ -52,11 +52,11 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     
     public let isotopes:(any ChemicalElementIsotope).Type?
     
-    public init(identifier: String, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: Float, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
+    public init(identifier: String, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
         self.atomic_number = atomic_number
         self.neutron_count = neutron_count
         self.symbol = symbol
-        self.standard_atomic_weight = standard_atomic_weight
+        self.standard_atomic_weight = HugeFloat(standard_atomic_weight)
         self.density = density != nil ? DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat(density!)) : nil
         //self.freezing_point = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(freezing_point))
         self.melting_point = melting_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(melting_point!)) : nil
@@ -66,7 +66,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         self.isotopes = isotopes
         ChemicalElementDetails.cached[identifier] = self
     }
-    public convenience init(_ isotope: any ChemicalElementIsotope, neutron_count: Int, standard_atomic_weight: Float, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil) {
+    public convenience init(_ isotope: any ChemicalElementIsotope, neutron_count: Int, standard_atomic_weight: String, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil) {
         let element:ChemicalElementDetails = ChemicalElementDetails.value_of(identifier: isotope.element.rawValue)!
         self.init(identifier: isotope.rawValue, atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, decay_mode: decay_mode, half_life: half_life)
     }
@@ -79,7 +79,13 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     
     public lazy var atom : Atom = {
         let protons:[Proton] = [Proton].init(repeating: Proton(), count: atomic_number)
-        let neutrons:[Neutron] = [Neutron].init(repeating: Neutron(), count: neutron_count ?? Int(standard_atomic_weight) - atomic_number)
+        let neutrons:[Neutron]
+        if let neutron_count:Int = neutron_count {
+            neutrons = [Neutron].init(repeating: Neutron(), count: neutron_count - atomic_number)
+        } else {
+            let weight:Int = standard_atomic_weight.integer.to_int()!
+            neutrons = [Neutron].init(repeating: Neutron(), count: weight - atomic_number)
+        }
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
         let location:Location = Location(x: HugeFloat.zero, y: HugeFloat.zero, z: HugeFloat.zero)
         let speed:SpeedUnit = SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero)

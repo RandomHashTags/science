@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import huge_numbers
 
 // TODO: support uncertainty
 public protocol ChemicalElementProtocol : Hashable {
@@ -13,7 +14,7 @@ public protocol ChemicalElementProtocol : Hashable {
     var neutron_count : Int? { get }
     var symbol : String { get }
     /// Masured in Dalton
-    var standard_atomic_weight : Float { get }
+    var standard_atomic_weight : HugeFloat { get }
     /// if known, predicted/known density of this chemical element, measured in grams per cubic centimetre
     var density : DensityUnit? { get }
     /// if known, melting point of this chemical element, measured in degrees Kelvin
