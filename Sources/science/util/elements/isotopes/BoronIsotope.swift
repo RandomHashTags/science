@@ -12,12 +12,14 @@ public enum BoronIsotope : String, ChemicalElementIsotope {
     case boron_6
     case boron_7
     case boron_8
+    case boron_8_isomer_1
     case boron_9
     case boron_10
     case boron_11
     case boron_12
     case boron_13
     case boron_14
+    case boron_14_isomer_1
     case boron_15
     case boron_16
     case boron_17
@@ -38,6 +40,8 @@ public enum BoronIsotope : String, ChemicalElementIsotope {
             return ChemicalElementDetails(self, neutron_count: 2, standard_atomic_weight: "7.029712", decay_mode: AtomicDecayType.proton_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "570"))
         case .boron_8:
             return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "8.0246073", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "771.9")) // TODO: fix
+        case .boron_8_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "8.0246073", decay_mode: AtomicDecayType.isomeric_transition, half_life: nil) // TODO: fix
         case .boron_9:
             return ChemicalElementDetails(self, neutron_count: 4, standard_atomic_weight: "9.0133296", decay_mode: AtomicDecayType.proton_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "800")) // TODO: fix
         case .boron_10:
@@ -50,6 +54,8 @@ public enum BoronIsotope : String, ChemicalElementIsotope {
             return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "13.0177800", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "17.16"))
         case .boron_14:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "14.025404", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "12.36"))
+        case .boron_14_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "14.025404", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "4.15"))
         case .boron_15:
             return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "15.031087", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10.18"))
         case .boron_16:

@@ -28,4 +28,7 @@ public enum AtomicDecayType : Hashable {
     
     // https://en.wikipedia.org/wiki/Gamma_ray
     case gamma
+    
+    // https://en.wikipedia.org/wiki/Nuclear_isomer#Decay_processes
+    case isomeric_transition
 }

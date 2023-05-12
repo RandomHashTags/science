@@ -7,8 +7,10 @@
 
 import Foundation
 
+// https://en.wikipedia.org/wiki/Isotopes_of_phosphorus
 public enum PhosphorusIsotope : String, ChemicalElementIsotope {
     case phosphorus_26
+    case phosphorus_26_isomer_1
     case phosphorus_27
     case phosphorus_28
     case phosphorus_29
@@ -39,6 +41,8 @@ public enum PhosphorusIsotope : String, ChemicalElementIsotope {
         switch self {
         case .phosphorus_26:
             return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "26.01178", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "43.7"))
+        case .phosphorus_26_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "26.01178", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "120"))
         case .phosphorus_27:
             return ChemicalElementDetails(self, neutron_count: 12, standard_atomic_weight: "26.999224", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "260"))
         case .phosphorus_28:

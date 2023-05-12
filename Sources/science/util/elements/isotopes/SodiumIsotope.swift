@@ -15,10 +15,14 @@ public enum SodiumIsotope : String, ChemicalElementIsotope {
     case sodium_20
     case sodium_21
     case sodium_22
+    case sodium_22_isomer_1
+    case sodium_22_isomer_2
     case sodium_23
     case sodium_24
+    case sodium_24_isomer_1
     case sodium_25
     case sodium_26
+    case sodium_26_isomer_1
     case sodium_27
     case sodium_28
     case sodium_29
@@ -49,14 +53,22 @@ public enum SodiumIsotope : String, ChemicalElementIsotope {
             return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "20.99765446", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "22.4550"))
         case .sodium_22:
             return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "21.99443742", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.year, value: "2.6019")) // TODO: fix (in tropical years)
+        case .sodium_22_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "21.99443742", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "243"))
+        case .sodium_22_isomer_2:
+            return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "21.99443742", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.pico, type: TimeUnitType.second, value: "19.6"))
         case .sodium_23:
             return ChemicalElementDetails(self, neutron_count: 12, standard_atomic_weight: "22.9897692820")
         case .sodium_24:
             return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "23.990963012", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "14.9560"))
+        case .sodium_24_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "23.990963012", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "20.18"))
         case .sodium_25:
             return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "24.9899540", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "59.1"))
         case .sodium_26:
             return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "25.992635", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "1.07128"))
+        case .sodium_26_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "25.992635", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "4.35"))
         case .sodium_27:
             return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "26.994076", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "301"))
         case .sodium_28:

@@ -14,7 +14,9 @@ public protocol Unit : Hashable, Comparable {
     var type : TargetUnitType { get set }
     var value : HugeFloat { get set }
     
+    init(type: TargetUnitType, value: String)
     init(type: TargetUnitType, value: HugeFloat)
+    init(prefix: UnitPrefix, type: TargetUnitType, value: String)
     init(prefix: UnitPrefix, type: TargetUnitType, value: HugeFloat)
     
     mutating func convert_to_unit(_ unit: TargetUnitType)
@@ -24,8 +26,14 @@ public protocol Unit : Hashable, Comparable {
     func to_unit(prefix: UnitPrefix, unit: TargetUnitType) -> Self
 }
 public extension Unit {
+    init(type: TargetUnitType, value: String) {
+        self.init(prefix: UnitPrefix.normal, type: type, value: value)
+    }
     init(type: TargetUnitType, value: HugeFloat) {
         self.init(prefix: UnitPrefix.normal, type: type, value: value)
+    }
+    init(prefix: UnitPrefix, type: TargetUnitType, value: String) {
+        self.init(prefix: prefix, type: type, value: HugeFloat(value))
     }
     
     var symbol : String {

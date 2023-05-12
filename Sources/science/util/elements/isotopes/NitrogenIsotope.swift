@@ -11,11 +11,14 @@ import Foundation
 public enum NitrogenIsotope : String, ChemicalElementIsotope {
     case nitrogen_10
     case nitrogen_11
+    case nitrogen_11_isomer_1
     case nitrogen_12
     case nitrogen_13
     case nitrogen_14
+    case nitrogen_14_isomer_1
     case nitrogen_15
     case nitrogen_16
+    case nitrogen_16_isomer_1
     case nitrogen_17
     case nitrogen_18
     case nitrogen_19
@@ -36,16 +39,22 @@ public enum NitrogenIsotope : String, ChemicalElementIsotope {
             return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "10.04164", decay_mode: AtomicDecayType.proton_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "143"))
         case .nitrogen_11:
             return ChemicalElementDetails(self, neutron_count: 4, standard_atomic_weight: "11.026158", decay_mode: AtomicDecayType.proton_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "585"))
+        case .nitrogen_11_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 4, standard_atomic_weight: "11.026158", decay_mode: AtomicDecayType.proton_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "690"))
         case .nitrogen_12:
             return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "12.0186132", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "690"))
         case .nitrogen_13:
             return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "13.00573861", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.minute, value: "9.965"))
         case .nitrogen_14:
             return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "14.003074004251")
+        case .nitrogen_14_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "14.003074004251", decay_mode: AtomicDecayType.isomeric_transition, half_life: nil) // TODO: fix
         case .nitrogen_15:
             return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "15.000108898266")
         case .nitrogen_16:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "16.0061019", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "7.13"))
+        case .nitrogen_16_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "16.0061019", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "5.25"))
         case .nitrogen_17:
             return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "17.008449", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(type: TimeUnitType.second, value: "4.173"))
         case .nitrogen_18:

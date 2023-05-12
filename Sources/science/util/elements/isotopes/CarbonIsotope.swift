@@ -13,9 +13,11 @@ public enum CarbonIsotope : String, ChemicalElementIsotope {
     case carbon_9
     case carbon_10
     case carbon_11
+    case carbon_11_isomer_1
     case carbon_12
     case carbon_13
     case carbon_14
+    case carbon_14_isomer_1
     case carbon_15
     case carbon_16
     case carbon_17
@@ -40,12 +42,16 @@ public enum CarbonIsotope : String, ChemicalElementIsotope {
             return ChemicalElementDetails(self, neutron_count: 4, standard_atomic_weight: "10.01685322", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "19.3011"))
         case .carbon_11:
             return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "11.01143260", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.minute, value: "20.3402"))
+        case .carbon_11_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "11.01143260", decay_mode: AtomicDecayType.proton_emission(amount: 1), half_life: nil) // TODO: fix
         case .carbon_12:
             return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "12")
         case .carbon_13:
             return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "13.003354835336")
         case .carbon_14:
             return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "14.003241989", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "5700"))
+        case .carbon_14_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "14.003241989", decay_mode: AtomicDecayType.isomeric_transition, half_life: nil) // TODO: fix
         case .carbon_15:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "15.0105993", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "2.449"))
         case .carbon_16:

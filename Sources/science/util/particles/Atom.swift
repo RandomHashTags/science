@@ -11,7 +11,7 @@ import huge_numbers
 public struct Atom : Hashable {
     public var nucleus:AtomicNucleus
     public var electron_shells:[ElectronShell]
-    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?
+    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, decays_into_isomer:Int?
     public var lifetime_total:ElapsedTime = ElapsedTime()
     public var elapsed_time_since_last_decay:ElapsedTime = ElapsedTime()
     public var location:Location
@@ -75,14 +75,18 @@ public struct Atom : Hashable {
         for i in 0..<iterations {
             elapsed_time_since_last_decay -= half_life!
             if Bool.random() {
+                let original_element:ChemicalElement = chemical_element!
+                let original_target_number:Int = nucleus.proton_count + nucleus.neutron_count
                 let reaction:ChemicalReaction = decay(decay_mode!)
                 let chemical_element:ChemicalElement = chemical_element!
                 let element_identifier:String = chemical_element.rawValue
                 let target_number:Int = nucleus.proton_count + nucleus.neutron_count
-                let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: element_identifier + "_" + target_number.description) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
+                let decayed_to_element_identifier:String = element_identifier + "_" + target_number.description + (decays_into_isomer != nil ? "_isomer_" + decays_into_isomer!.description : "")
+                let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: decayed_to_element_identifier) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
                 self.decay_mode = new_element.decay_mode
                 self.half_life = new_element.half_life
-                print("Atom;try_decaying;decayed into " + chemical_element.rawValue + ";took " + (i + 1).description + " iterations;new_half_life=\(half_life?.description);remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
+                self.decays_into_isomer = new_element.decays_into_isomer
+                print("Atom;try_decaying;" + original_element.rawValue + original_target_number.description + " -> " + decayed_to_element_identifier + ";took " + (i + 1).description + " iterations;new_half_life=\(half_life?.description);remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
                 return (true, reaction)
             }
         }
@@ -137,6 +141,11 @@ public struct Atom : Hashable {
             return ChemicalReaction(emitted_neutrons: Array(neutrons[0..<amount]))
             
         case .electron_capture:
+            // TODO: fix
+            return ChemicalReaction()
+            
+        case .isomeric_transition:
+            decays_into_isomer = nil
             // TODO: fix
             return ChemicalReaction()
         }

@@ -22,6 +22,7 @@ public enum SiliconIsotope : String, ChemicalElementIsotope {
     case silicon_32
     case silicon_33
     case silicon_34
+    case silicon_34_isomer_1
     case silicon_35
     case silicon_36
     case silicon_37
@@ -65,6 +66,8 @@ public enum SiliconIsotope : String, ChemicalElementIsotope {
             return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "32.9779770", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "6.18"))
         case .silicon_34:
             return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "33.978575", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "2.77"))
+        case .silicon_34_isomer_1:
+            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "33.978575", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "209"))
         case .silicon_35:
             return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "34.98455", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "780"))
         case .silicon_36:

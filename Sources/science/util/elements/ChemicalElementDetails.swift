@@ -49,10 +49,11 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     // TODO: decay mode probabilities
     public let decay_mode:AtomicDecayType?
     public let half_life:TimeUnit?
+    public let decays_into_isomer:Int?
     
     public let isotopes:(any ChemicalElementIsotope).Type?
     
-    public init(identifier: String, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
+    public init(identifier: String, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
         self.atomic_number = atomic_number
         self.neutron_count = neutron_count
         self.symbol = symbol
@@ -63,12 +64,13 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         self.boiling_point = boiling_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(boiling_point!)) : nil
         self.decay_mode = decay_mode
         self.half_life = half_life
+        self.decays_into_isomer = decays_into_isomer
         self.isotopes = isotopes
         ChemicalElementDetails.cached[identifier] = self
     }
-    public convenience init(_ isotope: any ChemicalElementIsotope, neutron_count: Int, standard_atomic_weight: String, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil) {
+    public convenience init(_ isotope: any ChemicalElementIsotope, neutron_count: Int, standard_atomic_weight: String, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil) {
         let element:ChemicalElementDetails = ChemicalElementDetails.value_of(identifier: isotope.element.rawValue)!
-        self.init(identifier: isotope.rawValue, atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, decay_mode: decay_mode, half_life: half_life)
+        self.init(identifier: isotope.rawValue, atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point, decay_mode: decay_mode, half_life: half_life, decays_into_isomer: decays_into_isomer)
     }
     
     public func hash(into hasher: inout Hasher) {
@@ -81,15 +83,15 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         let protons:[Proton] = [Proton].init(repeating: Proton(), count: atomic_number)
         let neutrons:[Neutron]
         if let neutron_count:Int = neutron_count {
-            neutrons = [Neutron].init(repeating: Neutron(), count: neutron_count - atomic_number)
+            neutrons = [Neutron].init(repeating: Neutron(), count: neutron_count)
         } else {
-            let weight:Int = standard_atomic_weight.integer.to_int()!
+            let weight:Int = Int(standard_atomic_weight.represented_float)
             neutrons = [Neutron].init(repeating: Neutron(), count: weight - atomic_number)
         }
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
         let location:Location = Location(x: HugeFloat.zero, y: HugeFloat.zero, z: HugeFloat.zero)
         let speed:SpeedUnit = SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat.zero)
         let velocity:Velocity = Velocity(x: speed, y: speed, z: speed)
-        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, decay_mode: decay_mode, half_life: half_life, location: location, velocity: velocity)
+        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, decay_mode: decay_mode, half_life: half_life, decays_into_isomer: decays_into_isomer, location: location, velocity: velocity)
     }()
 }

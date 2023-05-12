@@ -65,13 +65,13 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         timeline = EnvironmentTimeline(
             starting_point: TimeUnit(type: TimeUnitType.second, value: HugeFloat.zero),
             speed: settings.time_speed,
-            end_after: TimeUnit(type: TimeUnitType.second, value: HugeFloat("5"))
+            end_after: TimeUnit(type: TimeUnitType.minute, value: HugeFloat("5"))
         )
         simulation_elapsed_time = ElapsedTime()
         
         gravity_per_frame = gravity.value / fps_float
         timeline_nanoseconds = 1_000_000_000 / fps_integer
-        elapsed_time_per_frame = settings.time_speed.to_unit(prefix: UnitPrefix.milli, unit: TimeUnitType.second) / fps_float
+        elapsed_time_per_frame = TimeUnit(type: TimeUnitType.minute, value: HugeFloat.one)// settings.time_speed.to_unit(prefix: UnitPrefix.milli, unit: TimeUnitType.second) / fps_float
         
         individual_atoms = []
         half_life_atoms = [OxygenIsotope.oxygen_26.atom]
