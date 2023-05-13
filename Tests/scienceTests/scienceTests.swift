@@ -177,6 +177,12 @@ extension scienceTests {
                 case "2p":
                     decay_mode = "AtomicDecayType.proton_emission(amount: 2)"
                     break
+                case "3p":
+                    decay_mode = "AtomicDecayType.proton_emission(amount: 3)"
+                    break
+                case "4p":
+                    decay_mode = "AtomicDecayType.proton_emission(amount: 4)"
+                    break
                 case "β−":
                     decay_mode = "AtomicDecayType.beta_minus"
                     break
