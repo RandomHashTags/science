@@ -418,6 +418,8 @@ public enum ChemicalElement : String, CaseIterable {
             return PhosphorusIsotope.self
         case .sulfur:
             return SulfurIsotope.self
+        case .chlorine:
+            return ChlorineIsotope.self
             
         default:
             return nil

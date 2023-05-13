@@ -10,9 +10,10 @@ import huge_numbers
 import Metal
 import MetalKit
 import AppKit
+import Kanna
 
 final class scienceTests: XCTestCase {
-    func testExample() throws {
+    func testExample() async throws {
         let huge_float_one:HugeFloat = HugeFloat.one
         test_molecules()
         
@@ -23,6 +24,8 @@ final class scienceTests: XCTestCase {
         test_mathmatical_constants()
         test_unit_conversions()
         test_environment()
+        
+        await generate_isotope(ChemicalElement.chlorine)
     }
 }
 extension scienceTests {
@@ -117,5 +120,140 @@ extension scienceTests {
         print("scienceTests;test_environment_elapsed_time;elapsed_time=" + elapsed_time.description)
         
         XCTAssert(ElapsedTime([.second:[.normal:HugeFloat.one]]) == TimeUnit(type: TimeUnitType.second, value: HugeFloat.one))
+    }
+}
+
+extension scienceTests {
+    private func generate_isotope(_ element: ChemicalElement) async {
+        guard let test:HTMLDocument = await request_html(url: "https://en.wikipedia.org/wiki/Isotopes_of_" + element.rawValue.replacingOccurrences(of: " ", with: "_")) else {
+            return
+        }
+        let identifier:String = element.rawValue + "_"
+        let wikitable:Kanna.XMLElement = test.css("table.wikitable")[1]
+        let table_rows:XPathObject = wikitable.css("tbody tr")
+        var cases:[String] = [], details:[String] = []
+        var isomer_index:Int = 1
+        var previous_neutron_count:String = element.get_details.atomic_number.description
+        var previous_weight:String = element.get_details.standard_atomic_weight.description
+        for row in table_rows {
+            let tds:XPathObject = row.css("td")
+            if tds.count > 4 {
+                let number:String = tds[0].css("sup")[0].text!.filter({ $0 != "\n" })
+                let is_isomer:Bool = number.contains("m")
+                let isotope_identifier:String = identifier + number.replacingOccurrences(of: "m", with: "") + (is_isomer ? "_isomer_" + isomer_index.description : "")
+                
+                cases.append(isotope_identifier)
+                
+                var neutron_count:String = tds[2].text!.filter({ $0 != "\n" })
+                var weight:String, half_life:String, decay_mode:String
+                if neutron_count.contains("(") {
+                    weight = previous_weight
+                    half_life = tds[2].text!
+                    decay_mode = tds[3].text!
+                    neutron_count = previous_neutron_count
+                } else {
+                    previous_neutron_count = neutron_count
+                    weight = String(tds[3].text!.split(separator: "(")[0])
+                    half_life = tds[4].text!
+                    decay_mode = tds[5].text!
+                }
+                weight = weight.filter({ $0 != "\n" })
+                
+                if weight.isEmpty {
+                    weight = "0"
+                }
+                
+                previous_weight = weight
+                half_life = half_life.filter({ $0 != "\n" })
+                decay_mode = decay_mode.split(separator: "(")[0].filter({ $0 != "\n" })
+                while decay_mode.last == " " {
+                    decay_mode.removeLast()
+                }
+                
+                switch decay_mode {
+                case "p":
+                    decay_mode = "AtomicDecayType.proton_emission(amount: 1)"
+                    break
+                case "2p":
+                    decay_mode = "AtomicDecayType.proton_emission(amount: 2)"
+                    break
+                case "β−":
+                    decay_mode = "AtomicDecayType.beta_minus"
+                    break
+                case "β−, n":
+                    decay_mode = "AtomicDecayType.beta_minus_neutron_emission"
+                    break
+                case "β+":
+                    decay_mode = "AtomicDecayType.beta_plus"
+                    break
+                case "β+, p":
+                    decay_mode = "AtomicDecayType.beta_plus_proton_emission"
+                    break
+                case "IT":
+                    decay_mode = "AtomicDecayType.isomeric_transition"
+                    break
+                default:
+                    decay_mode = "???"
+                    break
+                }
+                
+                let is_stable:Bool = half_life.lowercased().elementsEqual("stable")
+                var detail_string:String = "case ." + isotope_identifier + ":\n    return ChemicalElementDetails(self, neutron_count: " + neutron_count + ", standard_atomic_weight: \"" + weight + "\""
+                if decay_mode.isEmpty {
+                    decay_mode = "nil"
+                }
+                if half_life.isEmpty {
+                    half_life = "nil"
+                } else {
+                    let opening_values:[Substring] = half_life.split(separator: "(")
+                    let closing_values:[Substring] = half_life.split(separator: ")")
+                    half_life = String(opening_values[0] + closing_values[closing_values.count-1])
+                }
+                if !is_stable {
+                    detail_string.append(", decay_mode: " + decay_mode + ", half_life: " + half_life)
+                }
+                detail_string.append(")")
+                if weight.elementsEqual("0") || decay_mode.elementsEqual("nil") || half_life.elementsEqual("nil") {
+                    detail_string.append(" // TODO: fix")
+                }
+                details.append(detail_string)
+                
+                if is_isomer {
+                    isomer_index += 1
+                } else {
+                    isomer_index = 1
+                }
+            }
+        }
+        
+        for value in cases {
+            print("case " + value)
+        }
+        for value in details {
+            print(value)
+        }
+    }
+}
+
+extension scienceTests {
+    private func request_html(url: String) async -> HTMLDocument? {
+        guard let url:URL = URL(string: url),
+              let data:Data = await make_request(request: URLRequest(url: url)),
+              let html:String = String(data: data, encoding: .utf8) else {
+            return nil
+        }
+        return try? HTML(html: html, encoding: .utf8)
+    }
+    private func make_request(request: URLRequest) async -> Data? {
+        return try? await withCheckedThrowingContinuation({ continuation in
+            let dataTask:URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data:Data = data, let _:URLResponse = response else {
+                    let error:Error = error ?? URLError(.badServerResponse)
+                    return continuation.resume(throwing: error)
+                }
+                continuation.resume(returning: data)
+            }
+            dataTask.resume()
+        })
     }
 }
