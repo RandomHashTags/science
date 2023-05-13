@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_unit_conversions()
         test_environment()
         
-        await generate_isotope(ChemicalElement.calcium)
+        await generate_isotope(ChemicalElement.scandium)
     }
 }
 extension scienceTests {
