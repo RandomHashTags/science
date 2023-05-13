@@ -7,6 +7,7 @@
 
 import Foundation
 
+// https://en.wikipedia.org/wiki/Isotopes_of_chlorine
 public enum ChlorineIsotope : String, ChemicalElementIsotope {
     case chlorine_28
     case chlorine_29

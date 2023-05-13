@@ -420,6 +420,8 @@ public enum ChemicalElement : String, CaseIterable {
             return SulfurIsotope.self
         case .chlorine:
             return ChlorineIsotope.self
+        case .argon:
+            return ArgonIsotope.self
             
         default:
             return nil

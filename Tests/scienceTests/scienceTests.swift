@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_unit_conversions()
         test_environment()
         
-        await generate_isotope(ChemicalElement.chlorine)
+        await generate_isotope(ChemicalElement.potassium)
     }
 }
 extension scienceTests {
@@ -192,22 +192,58 @@ extension scienceTests {
                 case "IT":
                     decay_mode = "AtomicDecayType.isomeric_transition"
                     break
+                case "EC":
+                    decay_mode = "AtomicDecayType.electron_capture"
+                    break
                 default:
                     decay_mode = "???"
                     break
                 }
                 
-                let is_stable:Bool = half_life.lowercased().elementsEqual("stable")
+                let is_stable:Bool = half_life.lowercased().contains("stable")
                 var detail_string:String = "case ." + isotope_identifier + ":\n    return ChemicalElementDetails(self, neutron_count: " + neutron_count + ", standard_atomic_weight: \"" + weight + "\""
                 if decay_mode.isEmpty {
                     decay_mode = "nil"
                 }
-                if half_life.isEmpty {
+                if half_life.isEmpty || half_life.lowercased().elementsEqual("unknown") {
                     half_life = "nil"
                 } else {
                     let opening_values:[Substring] = half_life.split(separator: "(")
                     let closing_values:[Substring] = half_life.split(separator: ")")
-                    half_life = String(opening_values[0] + closing_values[closing_values.count-1])
+                    let target_time:String = opening_values[0].replacingOccurrences(of: " ", with: "")
+                    var time_unit:String = closing_values.last!.split(separator: "[")[0].filter({ $0.isLetter })
+                    switch time_unit {
+                    case "ps":
+                        half_life = "TimeUnit(prefix: UnitPrefix.pico, type: TimeUnitType.second, value: \"" + target_time + "\")"
+                        break
+                    case "ns":
+                        half_life = "TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: \"" + target_time + "\")"
+                        break
+                    case "μs":
+                        half_life = "TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: \"" + target_time + "\")"
+                        break
+                    case "ms":
+                        half_life = "TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: \"" + target_time + "\")"
+                        break
+                    case "s":
+                        half_life = "TimeUnit(type: TimeUnitType.second, value: \"" + target_time + "\")"
+                        break
+                    case "min":
+                        half_life = "TimeUnit(type: TimeUnitType.minute, value: \"" + target_time + "\")"
+                        break
+                    case "h":
+                        half_life = "TimeUnit(type: TimeUnitType.hour, value: \"" + target_time + "\")"
+                        break
+                    case "d":
+                        half_life = "TimeUnit(type: TimeUnitType.day, value: \"" + target_time + "\")"
+                        break
+                    case "y":
+                        half_life = "TimeUnit(type: TimeUnitType.year, value: \"" + target_time + "\")"
+                        break
+                    default:
+                        half_life = target_time + " " + time_unit
+                        break
+                    }
                 }
                 if !is_stable {
                     detail_string.append(", decay_mode: " + decay_mode + ", half_life: " + half_life)
