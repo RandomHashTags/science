@@ -108,6 +108,14 @@ public struct Atom : Hashable {
             nucleus.neutrons.removeFirst()
             // TODO: emit electron/positron and electron antineutrino
             return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)])
+        case .beta_minus_double:
+            let created_protons:[Proton] = [Proton(), Proton()]
+            let destroyed_neutrons:[Neutron] = [neutrons[0], neutrons[1]]
+            let created_electrons:[Electron] = [Electron(), Electron()]
+            nucleus.protons.append(contentsOf: created_protons)
+            nucleus.neutrons.removeFirst(2)
+            // TODO: emit electron/positron and electron antineutrino
+            return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: [AntiParticle(created_electrons[0]), AntiParticle(created_electrons[1])])
         case .beta_minus_neutron_emission:
             let created_proton:Proton = Proton()
             let destroyed_neutron:Neutron = neutrons[0]
