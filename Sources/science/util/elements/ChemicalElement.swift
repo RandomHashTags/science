@@ -416,6 +416,8 @@ public enum ChemicalElement : String, CaseIterable {
             return SiliconIsotope.self
         case .phosphorus:
             return PhosphorusIsotope.self
+        case .sulfur:
+            return SulfurIsotope.self
             
         default:
             return nil
