@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_unit_conversions()
         test_environment()
         
-        await generate_isotope(ChemicalElement.chromium)
+        await generate_isotope(ChemicalElement.manganese)
     }
 }
 extension scienceTests {
