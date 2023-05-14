@@ -24,14 +24,12 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         case 1:
             guard let element:ChemicalElement = ChemicalElement(rawValue: key) else { return nil }
             return element.details
-        case 2:
+        default:
             guard let element:ChemicalElement = ChemicalElement(rawValue: key),
                   let isotope:any ChemicalElementIsotope = element.isotope_type?.init(rawValue: identifier) else {
                 return nil
             }
             return isotope.load_details
-        default:
-            return nil
         }
     }
         

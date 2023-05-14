@@ -23,8 +23,10 @@ final class scienceTests: XCTestCase {
         test_electrons()
         test_mathmatical_constants()
         test_unit_conversions()
+        test_chemical_elements()
         test_environment()
         
+        return;
         await generate_isotope(ChemicalElement.manganese)
     }
 }
@@ -103,6 +105,25 @@ extension scienceTests {
         XCTAssert(kilogram_to_electronvolt == EnergyUnit(type: EnergyUnitType.electronvolt, value: HugeFloat("560958884538931987162813850074640384")))
         let electronvolt_to_mass:MassUnit = kilogram_to_electronvolt.to_mass()
         XCTAssert(electronvolt_to_mass == MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat("1")), "test_unit_conversion_mass_to_energy;joule_to_mass=\(electronvolt_to_mass.description)")
+    }
+}
+
+extension scienceTests {
+    private func test_chemical_elements() {
+        for element in ChemicalElement.allCases {
+            let _:ChemicalElementDetails = element.get_details
+        }
+        
+        test_chemical_element_isotopes()
+    }
+    private func test_chemical_element_isotopes() {
+        for element in ChemicalElement.allCases {
+            if let isotope_type:any ChemicalElementIsotope.Type = element.isotope_type {
+                for isotope in isotope_type.allCases as! [any ChemicalElementIsotope] {
+                    let _:ChemicalElementDetails = isotope.details
+                }
+            }
+        }
     }
 }
 

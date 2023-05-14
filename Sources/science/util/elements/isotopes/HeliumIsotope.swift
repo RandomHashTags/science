@@ -30,7 +30,7 @@ public enum HeliumIsotope : String, ChemicalElementIsotope {
         case .helium_3:
             return ChemicalElementDetails(self, neutron_count: 1, standard_atomic_weight: "3.016029321967")
         case .helium_4:
-            return ChemicalElementDetails(self, neutron_count: 2, standard_atomic_weight: "4.002_603254130")
+            return ChemicalElementDetails(self, neutron_count: 2, standard_atomic_weight: "4.002603254130")
         case .helium_5:
             return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "5.012057", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "602"))
         case .helium_6:
