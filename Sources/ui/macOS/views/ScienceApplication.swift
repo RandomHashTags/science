@@ -10,7 +10,7 @@ import SwiftUI
 import science
 
 public struct ScienceApplication : App {
-        
+    
     public static func run() {
         let _:NSApplication = NSApplication.shared
         NSApp.setActivationPolicy(.regular)

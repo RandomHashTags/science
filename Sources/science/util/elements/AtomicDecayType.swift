@@ -32,4 +32,11 @@ public enum AtomicDecayType : Hashable {
     
     // https://en.wikipedia.org/wiki/Nuclear_isomer#Decay_processes
     case isomeric_transition
+    
+    public var name : String {
+        switch self {
+        default:
+            return String(describing: self)
+        }
+    }
 }

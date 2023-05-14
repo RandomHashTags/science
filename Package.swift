@@ -35,7 +35,9 @@ let package = Package(
         
         .target(
             name: "RendererMetal",
-            dependencies: ["RendererMetalSharedTypes"],
+            dependencies: [
+                "RendererMetalSharedTypes"
+            ],
             path: "./Sources/science/renderer/metal"
         ),
         .target(
@@ -45,12 +47,16 @@ let package = Package(
         
         .target(
             name: "MacOSUserInterface",
-            dependencies: ["science"],
+            dependencies: [
+                "science"
+            ],
             path: "./Sources/ui/macOS/views"
         ),
         .executableTarget(
             name: "UserInterfaceMacOS",
-            dependencies: ["MacOSUserInterface"],
+            dependencies: [
+                "MacOSUserInterface"
+            ],
             path: "./Sources/ui/macOS/run"
         ),
         

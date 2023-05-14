@@ -23,7 +23,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         switch values.count {
         case 1:
             guard let element:ChemicalElement = ChemicalElement(rawValue: key) else { return nil }
-            return element.details
+            return element.load_details
         default:
             guard let element:ChemicalElement = ChemicalElement(rawValue: key),
                   let isotope:any ChemicalElementIsotope = element.isotope_type?.init(rawValue: identifier) else {

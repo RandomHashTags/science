@@ -51,9 +51,9 @@ struct StackNavigationSubview<Content> : View where Content : View {
         .toolbar {
             ToolbarItem(placement: .navigation) {
                 Button {
-                    //withAnimation(.easeOut(duration: 1)) {
+                    //withAnimation(.easeOut(duration: 0.3)) {
                         index.removeLast()
-                        //return
+                        return
                     //}
                 } label: {
                     Label("back", systemImage: "chevron.left")

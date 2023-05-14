@@ -22,6 +22,18 @@ struct MainMenuView : View {
                     EnvironmentView(environment: ScienceDataStore.shared_instance.active_environment)
                 )
             }
+            Button("View Periodic Table") {
+                push_subview(
+                    PeriodicTableView(on_tap: { element in
+                        if let isotopes:[any ChemicalElementIsotope] = element.isotope_type?.allCases as? [any ChemicalElementIsotope] {
+                            push_subview(
+                                ChemicalElementIsotopesView(isotopes: isotopes, on_tap: { isotope in
+                                })
+                            )
+                        }
+                    }).frame(maxWidth: CGFloat.infinity, maxHeight: CGFloat.infinity)
+                )
+            }
             Button("Go to subview") {
                 push_subview(
                     Button("View Environment Settings") {
@@ -35,8 +47,9 @@ struct MainMenuView : View {
         .frame(minWidth: 1920, idealWidth: 1920, maxWidth: 1920, minHeight: 1080, idealHeight: 1080, maxHeight: 1080)
     }
     
-    private func push_subview<Content: View>(_ view: Content) {
-        //withAnimation(.easeOut(duration: 1)) {
+    internal func push_subview<Content: View>(_ view: Content) {
+        print("MainMenuView;push_subview")
+        //withAnimation(.easeOut(duration: 0.3)) {
             subviews.append({ AnyView(view) })
         //}
     }

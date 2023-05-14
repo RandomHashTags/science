@@ -32,7 +32,7 @@ final class scienceTests: XCTestCase {
 }
 extension scienceTests {
     private func test_molecules() {
-        let atom:Atom = ChemicalElement.silicon.get_details.atom
+        let atom:Atom = ChemicalElement.silicon.details.atom
         let molecule:Molecule = Molecule(atoms: [atom, atom, atom, atom, atom])
         XCTAssert(molecule.molecular_formula.elementsEqual("Si" + 5.as_subscript))
     }
@@ -42,10 +42,10 @@ extension scienceTests {
         test_electron_shell()
     }
     private func test_electron_shell() {
-        XCTAssert(ChemicalElement.hydrogen.get_details.atom.electron_shells.count == 1)
-        XCTAssert(ChemicalElement.helium.get_details.atom.electron_shells.count == 1)
-        XCTAssert(ChemicalElement.lithium.get_details.atom.electron_shells.count == 2)
-        XCTAssert(ChemicalElement.sodium.get_details.atom.electron_shells.count == 3)
+        XCTAssert(ChemicalElement.hydrogen.details.atom.electron_shells.count == 1)
+        XCTAssert(ChemicalElement.helium.details.atom.electron_shells.count == 1)
+        XCTAssert(ChemicalElement.lithium.details.atom.electron_shells.count == 2)
+        XCTAssert(ChemicalElement.sodium.details.atom.electron_shells.count == 3)
     }
 }
 extension scienceTests {
@@ -111,7 +111,7 @@ extension scienceTests {
 extension scienceTests {
     private func test_chemical_elements() {
         for element in ChemicalElement.allCases {
-            let _:ChemicalElementDetails = element.get_details
+            let _:ChemicalElementDetails = element.details
         }
         
         test_chemical_element_isotopes()
@@ -154,8 +154,8 @@ extension scienceTests {
         let table_rows:XPathObject = wikitable.css("tbody tr")
         var cases:[String] = [], details:[String] = []
         var isomer_index:Int = 1
-        var previous_neutron_count:String = element.get_details.atomic_number.description
-        var previous_weight:String = element.get_details.standard_atomic_weight.description
+        var previous_neutron_count:String = element.details.atomic_number.description
+        var previous_weight:String = element.details.standard_atomic_weight.description
         for row in table_rows {
             let tds:XPathObject = row.css("td")
             if tds.count > 4 {

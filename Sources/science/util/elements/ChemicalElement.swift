@@ -8,7 +8,7 @@ import Foundation
 
 // https://www.rsc.org/periodic-table
 // https://en.wikipedia.org/wiki/List_of_chemical_elements
-public enum ChemicalElement : String, CaseIterable {
+public enum ChemicalElement : String, CaseIterable, Identifiable {
     // H2O melting point = 273.15 K (13.99+27.18=41.17)
     // H2SO4 melting point = 283.26 K (13.99+388.36+(27.18*2)=511.07)
     
@@ -136,14 +136,18 @@ public enum ChemicalElement : String, CaseIterable {
         self = element
     }
     
+    public var id : String {
+        return rawValue
+    }
+    
     private func get_details(atomic_number: Int, symbol: String, standard_atomic_weight: String, density: String, melting_point: String?, boiling_point: String?) -> ChemicalElementDetails {
         return ChemicalElementDetails(identifier: rawValue, atomic_number: atomic_number, symbol: symbol, standard_atomic_weight: standard_atomic_weight, density: density, melting_point: melting_point, boiling_point: boiling_point)
     }
     
-    public var get_details : ChemicalElementDetails {
+    public var details : ChemicalElementDetails {
         return ChemicalElementDetails.value_of(identifier: rawValue)!
     }
-    public var details : ChemicalElementDetails {
+    public var load_details : ChemicalElementDetails {
         switch self {
         case .hydrogen:
             return get_details(atomic_number: 1, symbol: "H", standard_atomic_weight: "1.0080", density: "0.00008988", melting_point: "13.99", boiling_point: "20.271")

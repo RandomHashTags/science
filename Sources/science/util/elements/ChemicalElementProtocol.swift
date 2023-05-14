@@ -9,7 +9,7 @@ import Foundation
 import huge_numbers
 
 // TODO: support uncertainty
-public protocol ChemicalElementProtocol : Hashable {
+public protocol ChemicalElementProtocol : Hashable, Identifiable {
     var atomic_number : Int { get }
     var neutron_count : Int? { get }
     var symbol : String { get }
@@ -25,4 +25,9 @@ public protocol ChemicalElementProtocol : Hashable {
     // TODO: decay mode probabilities
     var decay_mode : AtomicDecayType? { get }
     var half_life : TimeUnit? { get }
+}
+public extension ChemicalElementProtocol {
+    var id : Int {
+        return atomic_number
+    }
 }
