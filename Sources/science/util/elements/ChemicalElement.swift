@@ -409,6 +409,7 @@ public enum ChemicalElement : String, CaseIterable {
         case .scandium:   return ScandiumIsotope.self
         case .titanium:   return TitaniumIsotope.self
         case .vanadium:   return VanadiumIsotope.self
+        case .chromium:   return ChromiumIsotope.self
             
         default:
             return nil

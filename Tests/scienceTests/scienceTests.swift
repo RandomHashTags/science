@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_unit_conversions()
         test_environment()
         
-        await generate_isotope(ChemicalElement.vanadium)
+        await generate_isotope(ChemicalElement.chromium)
     }
 }
 extension scienceTests {
@@ -140,7 +140,7 @@ extension scienceTests {
             if tds.count > 4 {
                 let number:String = tds[0].css("sup")[0].text!.filter({ $0 != "\n" })
                 let is_isomer:Bool = number.contains("m")
-                let isotope_identifier:String = identifier + number.replacingOccurrences(of: "m", with: "") + (is_isomer ? "_isomer_" + isomer_index.description : "")
+                let isotope_identifier:String = identifier + number.components(separatedBy: "m")[0] + (is_isomer ? "_isomer_" + isomer_index.description : "")
                 
                 cases.append(isotope_identifier)
                 
@@ -165,7 +165,7 @@ extension scienceTests {
                 
                 previous_weight = weight
                 half_life = half_life.filter({ $0 != "\n" })
-                decay_mode = decay_mode.split(separator: "(")[0].filter({ $0 != "\n" })
+                decay_mode = decay_mode.split(separator: "(")[0].split(separator: "[")[0].filter({ $0 != "\n" })
                 while decay_mode.last == " " {
                     decay_mode.removeLast()
                 }
@@ -183,7 +183,7 @@ extension scienceTests {
                 case "4p":
                     decay_mode = "AtomicDecayType.proton_emission(amount: 4)"
                     break
-                case "β−":
+                case "β−", "β−?":
                     decay_mode = "AtomicDecayType.beta_minus"
                     break
                 case "β−, n":
@@ -255,7 +255,7 @@ extension scienceTests {
                     detail_string.append(", decay_mode: " + decay_mode + ", half_life: " + half_life)
                 }
                 detail_string.append(")")
-                if weight.elementsEqual("0") || decay_mode.elementsEqual("nil") || half_life.elementsEqual("nil") {
+                if weight.elementsEqual("0") || !is_stable && (decay_mode.elementsEqual("nil") || half_life.elementsEqual("nil")) {
                     detail_string.append(" // TODO: fix")
                 }
                 details.append(detail_string)
