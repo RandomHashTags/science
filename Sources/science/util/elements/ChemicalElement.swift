@@ -386,48 +386,28 @@ public enum ChemicalElement : String, CaseIterable {
     
     public var isotope_type : (any ChemicalElementIsotope.Type)? {
         switch self {
-        case .hydrogen:
-            return HydrogenIsotope.self
-        case .helium:
-            return HeliumIsotope.self
-        case .lithium:
-            return LithiumIsotope.self
-        case .beryllium:
-            return BerylliumIsotope.self
-         case .boron:
-            return BoronIsotope.self
-        case .carbon:
-            return CarbonIsotope.self
-        case .nitrogen:
-            return NitrogenIsotope.self
-        case .oxygen:
-            return OxygenIsotope.self
-        case .fluorine:
-            return FluorineIsotope.self
-        case .neon:
-            return NeonIsotope.self
-        case .sodium:
-            return SodiumIsotope.self
-        case .magnesium:
-            return MagnesiumIsotope.self
-        case .aluminium:
-            return AluminiumIsotope.self
-        case .silicon:
-            return SiliconIsotope.self
-        case .phosphorus:
-            return PhosphorusIsotope.self
-        case .sulfur:
-            return SulfurIsotope.self
-        case .chlorine:
-            return ChlorineIsotope.self
-        case .argon:
-            return ArgonIsotope.self
-        case .potassium:
-            return PotassiumIsotope.self
-        case .calcium:
-            return CalciumIsotope.self
-        case .scandium:
-            return ScandiumIsotope.self
+        case .hydrogen:   return HydrogenIsotope.self
+        case .helium:     return HeliumIsotope.self
+        case .lithium:    return LithiumIsotope.self
+        case .beryllium:  return BerylliumIsotope.self
+        case .boron:      return BoronIsotope.self
+        case .carbon:     return CarbonIsotope.self
+        case .nitrogen:   return NitrogenIsotope.self
+        case .oxygen:     return OxygenIsotope.self
+        case .fluorine:   return FluorineIsotope.self
+        case .neon:       return NeonIsotope.self
+        case .sodium:     return SodiumIsotope.self
+        case .magnesium:  return MagnesiumIsotope.self
+        case .aluminium:  return AluminiumIsotope.self
+        case .silicon:    return SiliconIsotope.self
+        case .phosphorus: return PhosphorusIsotope.self
+        case .sulfur:     return SulfurIsotope.self
+        case .chlorine:   return ChlorineIsotope.self
+        case .argon:      return ArgonIsotope.self
+        case .potassium:  return PotassiumIsotope.self
+        case .calcium:    return CalciumIsotope.self
+        case .scandium:   return ScandiumIsotope.self
+        case .titanium:   return TitaniumIsotope.self
             
         default:
             return nil

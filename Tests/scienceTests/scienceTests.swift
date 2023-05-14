@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_unit_conversions()
         test_environment()
         
-        await generate_isotope(ChemicalElement.scandium)
+        await generate_isotope(ChemicalElement.titanium)
     }
 }
 extension scienceTests {
@@ -202,7 +202,7 @@ extension scienceTests {
                     decay_mode = "AtomicDecayType.electron_capture"
                     break
                 default:
-                    decay_mode = "???"
+                    decay_mode = "nil"
                     break
                 }
                 
