@@ -26,8 +26,7 @@ final class scienceTests: XCTestCase {
         test_chemical_elements()
         test_environment()
         
-        return;
-        await generate_isotope(ChemicalElement.manganese)
+        await generate_isotope(ChemicalElement.iron)
     }
 }
 extension scienceTests {

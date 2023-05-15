@@ -48,7 +48,6 @@ struct MainMenuView : View {
     }
     
     internal func push_subview<Content: View>(_ view: Content) {
-        print("MainMenuView;push_subview")
         //withAnimation(.easeOut(duration: 0.3)) {
             subviews.append({ AnyView(view) })
         //}
