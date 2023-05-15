@@ -65,7 +65,7 @@ enum IronIsotope : String, ChemicalElementIsotope {
         case .iron_51:
             return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "50.956820", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "305"))
         case .iron_52:
-            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "51.948114", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.hour, value: "8.275"))
+            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "51.948114", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.hour, value: "8.275"), decays_into_isomer: 1)
         case .iron_52_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "51.948114", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "45.9"))
         case .iron_53:

@@ -26,7 +26,7 @@ final class scienceTests: XCTestCase {
         test_chemical_elements()
         test_environment()
         
-        await generate_isotope(ChemicalElement.iron)
+        await generate_isotope(ChemicalElement.cobalt)
     }
 }
 extension scienceTests {
@@ -205,6 +205,9 @@ extension scienceTests {
                     break
                 case "β−", "β−?":
                     decay_mode = "AtomicDecayType.beta_minus"
+                    break
+                case "β−, γ":
+                    decay_mode = "AtomicDecayType.beta_minus_gamma"
                     break
                 case "β−, n":
                     decay_mode = "AtomicDecayType.beta_minus_neutron_emission"
