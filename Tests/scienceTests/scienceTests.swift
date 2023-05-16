@@ -24,7 +24,8 @@ final class scienceTests: XCTestCase {
         test_chemical_elements()
         test_environment()
         
-        await generate_isotope(ChemicalElement.nickel)
+        return;
+        await generate_isotope(ChemicalElement.copper)
     }
 }
 extension scienceTests {

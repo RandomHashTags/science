@@ -418,6 +418,7 @@ public enum ChemicalElement : String, CaseIterable, Identifiable {
         case .iron:       return IronIsotope.self
         case .cobalt:     return CobaltIsotope.self
         case .nickel:     return NickelIsotope.self
+        case .copper:     return CopperIsotope.self
             
         default:
             return nil

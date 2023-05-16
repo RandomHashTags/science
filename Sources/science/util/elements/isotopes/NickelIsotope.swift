@@ -7,6 +7,7 @@
 
 import Foundation
 
+// https://en.wikipedia.org/wiki/Isotopes_of_nickel
 public enum NickelIsotope : String, ChemicalElementIsotope {
     case nickel_48
     case nickel_49
