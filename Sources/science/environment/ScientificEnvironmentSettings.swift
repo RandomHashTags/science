@@ -9,14 +9,14 @@ import Foundation
 import huge_numbers
 
 public struct ScientificEnvironmentSettings : Hashable {
-    public var uuid:UUID?
+    public var uuid:UUID
     public var fps:HugeInt
     public var ambient_temperature:TemperatureUnit
     public var ambient_pressure:PressureUnit
     public var gravity:AccelerationUnit
     public var time_speed:TimeUnit
     
-    public init(uuid: UUID? = nil, fps: HugeInt, ambient_temperature: TemperatureUnit, ambient_pressure: PressureUnit, gravity: AccelerationUnit, time_speed: TimeUnit) {
+    public init(uuid: UUID, fps: HugeInt, ambient_temperature: TemperatureUnit, ambient_pressure: PressureUnit, gravity: AccelerationUnit, time_speed: TimeUnit) {
         self.uuid = uuid
         self.fps = fps
         self.ambient_temperature = ambient_temperature

@@ -6,7 +6,7 @@
 
 import Foundation
 
-public struct ChemicalReaction { // TODO: fix terminology
+public struct ChemicalReaction : Hashable { // TODO: fix terminology
     public var created_protons:[Proton]?
     public var destroyed_protons:[Proton]?
     public var created_antiprotons:[AntiParticle]?

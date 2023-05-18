@@ -15,6 +15,7 @@ public final class ScienceDataStore : ObservableObject {
     
     @Published public var active_environment:ScientificEnvironment = ScientificEnvironment(
         ScientificEnvironmentSettings(
+            uuid: UUID(),
             fps: HugeInt("1"),
             ambient_temperature: MathmaticalConstant.standard_temperature,
             ambient_pressure: MathmaticalConstant.standard_pressure,

@@ -9,11 +9,13 @@ import MetalKit
 import huge_numbers
 
 public struct Atom : Hashable {
+    public var uuid:UUID = UUID()
     public var nucleus:AtomicNucleus
     public var electron_shells:[ElectronShell]
     public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, decays_into_isomer:Int?
     public var lifetime_total:ElapsedTime = ElapsedTime()
     public var elapsed_time_since_last_decay:ElapsedTime = ElapsedTime()
+    public var survived_iterations:UInt64 = 0
     public var location:Location
     public var velocity:Velocity
     
@@ -36,8 +38,14 @@ public struct Atom : Hashable {
         return proton_count == electron_count ? .stable : electron_count > proton_count ? .anion : .cation
     }
     
+    
     public var chemical_element : ChemicalElement? {
         return nucleus.element
+    }
+    public var chemical_element_identifier : String? {
+        guard let element:ChemicalElement = chemical_element else { return nil }
+        let target_number:Int = nucleus.proton_count + nucleus.neutron_count
+        return element.rawValue + "_\(target_number)" + (decays_into_isomer != nil ? "_isomer_\(decays_into_isomer!)" : "")
     }
     
     public var elementary_charge : Double {
@@ -53,44 +61,46 @@ public struct Atom : Hashable {
     public var is_unstable : Bool {
         return decay_mode != nil || half_life != nil
     }
-    public mutating func decay() -> [ChemicalReaction]? {
+    public mutating func decay() -> [AtomicDecayResult]? {
         // TODO: support probability of decaying (half-life=50% chance of it decaying within the half-life)
         guard decay_mode != nil && half_life != nil && elapsed_time_since_last_decay >= half_life! else { return nil }
-        var reactions:[ChemicalReaction] = []
+        var results:[AtomicDecayResult] = []
         
         var status:Bool = true
         while status {
-            let (decayed, reaction):(Bool, ChemicalReaction?) = try_decaying()
-            if let reaction:ChemicalReaction = reaction {
-                reactions.append(reaction)
+            if let result:AtomicDecayResult = try_decaying() {
+                results.append(result)
+            } else {
+                status = false
             }
-            status = decayed
         }
-        return reactions
+        return results.isEmpty ? nil : results
     }
-    /// - Returns: Whether or not this atom has decayed, if so, also the chemical reaction of the decay.
-    private mutating func try_decaying() -> (Bool, ChemicalReaction?) {
+    private mutating func try_decaying() -> AtomicDecayResult? {
         let test:TimeUnit = elapsed_time_since_last_decay.to_unit(unit_prefix: half_life!.prefix, unit_type: half_life!.type)
         let iterations:UInt64 = test.value.divide_by(half_life!.value, precision: HugeInt.float_precision).integer.to_int()!
-        for i in 0..<iterations {
-            elapsed_time_since_last_decay -= half_life!
+        guard iterations > 0 else { return nil }
+        for i in 1...iterations {
             if Bool.random() {
-                let original_element:ChemicalElement = chemical_element!
-                let original_target_number:Int = nucleus.proton_count + nucleus.neutron_count
+                let total_iteration_count = i + survived_iterations
+                let atom_lifetime:TimeUnit = half_life! * HugeInt(total_iteration_count)
+                elapsed_time_since_last_decay -= atom_lifetime
+                let original_element_identifier:String = chemical_element_identifier!
+                
                 let reaction:ChemicalReaction = decay(decay_mode!)
-                let chemical_element:ChemicalElement = chemical_element!
-                let element_identifier:String = chemical_element.rawValue
-                let target_number:Int = nucleus.proton_count + nucleus.neutron_count
-                let decayed_to_element_identifier:String = element_identifier + "_" + target_number.description + (decays_into_isomer != nil ? "_isomer_" + decays_into_isomer!.description : "")
-                let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: decayed_to_element_identifier) ?? ChemicalElementDetails.value_of(identifier: element_identifier)
+                let decayed_to_element_identifier:String = chemical_element_identifier!
+                let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: decayed_to_element_identifier) ?? ChemicalElementDetails.value_of(identifier: chemical_element!.rawValue)
+                
                 self.decay_mode = new_element.decay_mode
                 self.half_life = new_element.half_life
                 self.decays_into_isomer = new_element.decays_into_isomer
-                print("Atom;try_decaying;" + original_element.rawValue + original_target_number.description + " -> " + decayed_to_element_identifier + ";took " + (i + 1).description + " iterations;new_half_life=\(half_life?.description);remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
-                return (true, reaction)
+                print("Atom;try_decaying;" + original_element_identifier + " -> " + decayed_to_element_identifier + ";took \(total_iteration_count) iterations;new_half_life=\(String(describing: half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
+                survived_iterations = 0
+                return AtomicDecayResult(atom_uuid: uuid, atom_lifetime: atom_lifetime, reaction: reaction, iteration_count: total_iteration_count, decayed_from: original_element_identifier, decayed_into: decayed_to_element_identifier)
             }
         }
-        return (false, nil)
+        survived_iterations += iterations
+        return nil
     }
     private mutating func decay(_ type: AtomicDecayType) -> ChemicalReaction {
         let protons:[Proton] = nucleus.protons, neutrons:[Neutron] = nucleus.neutrons
