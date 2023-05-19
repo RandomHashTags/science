@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_environment()
         
         return;
-        await generate_isotope(ChemicalElement.zinc)
+        await generate_isotope(ChemicalElement.germanium)
     }
 }
 extension scienceTests {
@@ -149,6 +149,9 @@ extension scienceTests {
                     break
                 case "β−", "β−?":
                     decay_mode = "AtomicDecayType.beta_minus"
+                    break
+                case "β−β−":
+                    decay_mode = "AtomicDecayType.beta_minus_double"
                     break
                 case "β−, γ":
                     decay_mode = "AtomicDecayType.beta_minus_gamma"
