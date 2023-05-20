@@ -124,7 +124,7 @@ extension scienceTests {
                 }
                 weight = weight.filter({ $0 != "\n" })
                 
-                if weight.isEmpty {
+                if weight.isEmpty || weight.compare("Unknown") == .orderedSame {
                     weight = "0"
                 }
                 

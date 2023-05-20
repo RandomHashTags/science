@@ -139,7 +139,7 @@ public enum KryptonIsotope : String, ChemicalElementIsotope {
         case .krypton_100:
             return ChemicalElementDetails(self, neutron_count: 64, standard_atomic_weight: "99.96114", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10")) // TODO: fix
         case .krypton_101:
-            return ChemicalElementDetails(self, neutron_count: 65, standard_atomic_weight: "unknown", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "636")) // TODO: fix
+            return ChemicalElementDetails(self, neutron_count: 65, standard_atomic_weight: "0", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "636")) // TODO: fix
         case .krypton_102:
             return ChemicalElementDetails(self, neutron_count: 66, standard_atomic_weight: "0", decay_mode: nil, half_life: nil) // TODO: fix
         }
