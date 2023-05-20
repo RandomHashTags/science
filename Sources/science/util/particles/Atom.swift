@@ -12,9 +12,12 @@ public struct Atom : Hashable {
     public var uuid:UUID = UUID()
     public var nucleus:AtomicNucleus
     public var electron_shells:[ElectronShell]
-    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, decays_into_isomer:Int?
-    public var lifetime_total:ElapsedTime = ElapsedTime()
+    
     public var elapsed_time_since_last_decay:ElapsedTime = ElapsedTime()
+    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, decays_into_isomer:Int?
+    
+    public var lifetime_total:ElapsedTime = ElapsedTime()
+    
     public var survived_iterations:UInt64 = 0
     public var location:Location
     public var velocity:Velocity
@@ -94,7 +97,7 @@ public struct Atom : Hashable {
                 self.decay_mode = new_element.decay_mode
                 self.half_life = new_element.half_life
                 self.decays_into_isomer = new_element.decays_into_isomer
-                print("Atom;try_decaying;" + original_element_identifier + " -> " + decayed_to_element_identifier + ";took \(total_iteration_count) iterations;new_half_life=\(String(describing: half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
+                print("Atom;try_decaying;" + original_element_identifier + " -> " + decayed_to_element_identifier + ";maximum_iterations=\(iterations);took \(total_iteration_count) iterations;new_half_life=\(String(describing: half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
                 survived_iterations = 0
                 return AtomicDecayResult(atom_uuid: uuid, atom_lifetime: atom_lifetime, reaction: reaction, iteration_count: total_iteration_count, decayed_from: original_element_identifier, decayed_into: decayed_to_element_identifier)
             }

@@ -88,7 +88,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         is_simulating = false
         simulation_task!.cancel()
         fps_counter_task!.cancel()
-        print("ScientificEnvironment;stop_simulating;action_log=")
+        print("ScientificEnvironment;stop_simulating;simulation_elapsed_time=" + simulation_elapsed_time.description + ";action_log=")
         let event_log:[String] = action_log.event_log()
         for entry in event_log {
             print(entry)
@@ -116,23 +116,23 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     
     public func simulate() async {
         while !Task.isCancelled {
-            tick()
+            simulation_elapsed_time += elapsed_time_per_frame
             if simulation_elapsed_time >= timeline.end_after {
                 stop_simulating()
                 return
             }
-            try? await Task.sleep(nanoseconds: timeline_nanoseconds)
+            tick()
+            try! await Task.sleep(nanoseconds: timeline_nanoseconds)
         }
     }
     
     private func tick() {
+        fps_counter.new_count += 1
         update_time()
         apply_logic()
-        fps_counter.new_count += 1
     }
     
     private func update_time() {
-        simulation_elapsed_time += elapsed_time_per_frame
         for index in individual_atoms.indices {
             individual_atoms[index].lifetime_total += elapsed_time_per_frame
         }

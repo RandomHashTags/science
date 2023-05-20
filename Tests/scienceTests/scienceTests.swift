@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_environment()
         
         return;
-        await generate_isotope(ChemicalElement.germanium)
+        await generate_isotope(ChemicalElement.arsenic)
     }
 }
 extension scienceTests {

@@ -8,7 +8,7 @@
 import Foundation
 import huge_numbers
 
-public struct ElapsedTime : Hashable {
+public struct ElapsedTime : Hashable, CustomStringConvertible {
     private var values:[TimeUnitType:[UnitPrefix:HugeFloat]]
     
     public init(_ values: [TimeUnitType:[UnitPrefix:HugeFloat]] = [:]) {
