@@ -426,6 +426,7 @@ public enum ChemicalElement : String, CaseIterable, Identifiable {
         case .selenium:   return SeleniumIsotope.self
         case .bromine:    return BromineIsotope.self
         case .krypton:    return KryptonIsotope.self
+        case .rubidium:   return RubidiumIsotope.self
             
         default:
             return nil
