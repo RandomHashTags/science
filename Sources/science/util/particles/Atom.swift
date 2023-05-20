@@ -113,22 +113,21 @@ public struct Atom : Hashable {
             nucleus.neutrons.removeFirst(2)
             return ChemicalReaction(destroyed_protons: [protons[0], protons[1]], destroyed_neutrons: [neutrons[0], neutrons[1]])
             
-        case .beta_minus:
-            let created_proton:Proton = Proton()
-            let destroyed_neutron:Neutron = neutrons[0]
-            let created_electron:Electron = Electron()
-            nucleus.protons.append(created_proton)
-            nucleus.neutrons.removeFirst()
-            // TODO: emit electron/positron and electron antineutrino
-            return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)])
-        case .beta_minus_double:
-            let created_protons:[Proton] = [Proton(), Proton()]
-            let destroyed_neutrons:[Neutron] = [neutrons[0], neutrons[1]]
-            let created_electrons:[Electron] = [Electron(), Electron()]
+        case .beta_minus(let amount):
+            var created_protons:[Proton] = []
+            var destroyed_neutrons:[Neutron] = []
+            var created_electrons:[Electron] = [], created_antielectrons:[AntiParticle] = []
+            for i in 0..<amount {
+                created_protons.append(Proton())
+                destroyed_neutrons.append(neutrons[i])
+                let electron:Electron = Electron()
+                created_electrons.append(electron)
+                created_antielectrons.append(AntiParticle(electron))
+            }
             nucleus.protons.append(contentsOf: created_protons)
-            nucleus.neutrons.removeFirst(2)
+            nucleus.neutrons.removeFirst(amount)
             // TODO: emit electron/positron and electron antineutrino
-            return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: [AntiParticle(created_electrons[0]), AntiParticle(created_electrons[1])])
+            return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: created_antielectrons)
         case .beta_minus_gamma:
             let created_proton:Proton = Proton()
             let destroyed_neutron:Neutron = neutrons[0]
@@ -169,7 +168,7 @@ public struct Atom : Hashable {
             nucleus.neutrons.removeFirst(amount)
             return ChemicalReaction(emitted_neutrons: Array(neutrons[0..<amount]))
             
-        case .electron_capture:
+        case .electron_capture(let amount):
             // TODO: fix
             return ChemicalReaction()
             

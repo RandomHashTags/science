@@ -95,45 +95,45 @@ public enum ZincIsotope : String, ChemicalElementIsotope {
         case .zinc_68:
             return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "67.9248442")
         case .zinc_69:
-            return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "68.9265503", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "56.4"))
+            return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "68.9265503", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "56.4"))
         case .zinc_69_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "68.9265503", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.hour, value: "13.76"))
         case .zinc_70:
             return ChemicalElementDetails(self, neutron_count: 40, standard_atomic_weight: "69.9253193")
         case .zinc_71:
-            return ChemicalElementDetails(self, neutron_count: 41, standard_atomic_weight: "70.927722", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "2.45"))
+            return ChemicalElementDetails(self, neutron_count: 41, standard_atomic_weight: "70.927722", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "2.45"))
         case .zinc_71_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 41, standard_atomic_weight: "70.927722", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "3.96"))
+            return ChemicalElementDetails(self, neutron_count: 41, standard_atomic_weight: "70.927722", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "3.96"))
         case .zinc_72:
-            return ChemicalElementDetails(self, neutron_count: 42, standard_atomic_weight: "71.926858", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "46.5"))
+            return ChemicalElementDetails(self, neutron_count: 42, standard_atomic_weight: "71.926858", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "46.5"))
         case .zinc_73:
-            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "72.92978", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "23.5"))
+            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "72.92978", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "23.5"))
         case .zinc_73_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "72.92978", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "13.0")) // TODO: fix
         case .zinc_73_isomer_2:
-            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "72.92978", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "5.8"))
+            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "72.92978", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "5.8"))
         case .zinc_74:
-            return ChemicalElementDetails(self, neutron_count: 44, standard_atomic_weight: "73.92946", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "95.6"))
+            return ChemicalElementDetails(self, neutron_count: 44, standard_atomic_weight: "73.92946", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "95.6"))
         case .zinc_75:
-            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "74.93294", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "10.2"))
+            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "74.93294", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "10.2"))
         case .zinc_76:
-            return ChemicalElementDetails(self, neutron_count: 46, standard_atomic_weight: "75.93329", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "5.7"))
+            return ChemicalElementDetails(self, neutron_count: 46, standard_atomic_weight: "75.93329", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "5.7"))
         case .zinc_77:
-            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "76.93696", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "2.08"))
+            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "76.93696", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "2.08"))
         case .zinc_77_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "76.93696", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.second, value: "1.05"))
         case .zinc_78:
-            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "77.93844", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "1.47"))
+            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "77.93844", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.47"))
         case .zinc_78_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "77.93844", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "319")) // TODO: fix
         case .zinc_79:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "78.94265", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "0.995"))
+            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "78.94265", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.995"))
         case .zinc_80:
-            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "79.94434", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "545"))
+            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "79.94434", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "545"))
         case .zinc_81:
-            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "80.95048", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "290"))
+            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "80.95048", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "290"))
         case .zinc_82:
-            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "81.95442", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
+            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "81.95442", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
         case .zinc_83:
             return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "82.96103", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "80")) // TODO: fix
         }

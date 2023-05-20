@@ -31,7 +31,7 @@ public enum HydrogenIsotope : String, ChemicalElementIsotope {
         case .hydrogen_2:
             return ChemicalElementDetails(self, neutron_count: 1, standard_atomic_weight: "2.014101777844")
         case .hydrogen_3:
-            return ChemicalElementDetails(self, neutron_count: 2, standard_atomic_weight: "3.016049281320", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "12.32"))
+            return ChemicalElementDetails(self, neutron_count: 2, standard_atomic_weight: "3.016049281320", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "12.32"))
         case .hydrogen_4:
             return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "4.02643", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "139"))
         case .hydrogen_5:

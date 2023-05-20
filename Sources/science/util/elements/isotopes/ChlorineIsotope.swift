@@ -62,41 +62,41 @@ public enum ChlorineIsotope : String, ChemicalElementIsotope {
         case .chlorine_35:
             return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "34.96885269")
         case .chlorine_36:
-            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "35.96830682", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "301300"))
+            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "35.96830682", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "301300"))
         case .chlorine_37:
             return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "36.96590258")
         case .chlorine_38:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "37.96801042", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "37.24"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "37.96801042", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "37.24"))
         case .chlorine_38_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "37.96801042", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "715"))
         case .chlorine_39:
-            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "38.9680082", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "56.2"))
+            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "38.9680082", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "56.2"))
         case .chlorine_40:
-            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "39.97042", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "1.35"))
+            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "39.97042", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "1.35"))
         case .chlorine_41:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "40.97068", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "38.4"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "40.97068", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "38.4"))
         case .chlorine_42:
-            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "41.97334", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "6.8"))
+            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "41.97334", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "6.8"))
         case .chlorine_43:
-            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "42.97406", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "3.13"))
+            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "42.97406", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "3.13"))
         case .chlorine_44:
-            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "43.97812", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "0.56"))
+            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "43.97812", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.56"))
         case .chlorine_45:
-            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "44.98039", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "413"))
+            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "44.98039", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "413"))
         case .chlorine_46:
             return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "45.98512", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "232"))
         case .chlorine_47:
-            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "46.98950", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "101"))
+            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "46.98950", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "101"))
         case .chlorine_48:
-            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "47.99541", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
+            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "47.99541", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
         case .chlorine_49:
-            return ChemicalElementDetails(self, neutron_count: 32, standard_atomic_weight: "49.00101", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50"))
+            return ChemicalElementDetails(self, neutron_count: 32, standard_atomic_weight: "49.00101", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50"))
         case .chlorine_50:
-            return ChemicalElementDetails(self, neutron_count: 33, standard_atomic_weight: "50.00831", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "20"))
+            return ChemicalElementDetails(self, neutron_count: 33, standard_atomic_weight: "50.00831", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "20"))
         case .chlorine_51:
-            return ChemicalElementDetails(self, neutron_count: 34, standard_atomic_weight: "51.01534", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2"))
+            return ChemicalElementDetails(self, neutron_count: 34, standard_atomic_weight: "51.01534", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2"))
         case .chlorine_52:
-            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus, half_life: nil) // TODO: fix
+            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: nil) // TODO: fix
         }
     }
 }

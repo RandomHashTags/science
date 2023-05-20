@@ -39,7 +39,7 @@ public enum BerylliumIsotope : String, ChemicalElementIsotope {
         case .beryllium_6:
             return ChemicalElementDetails(self, neutron_count: 2, standard_atomic_weight: "6.019726", decay_mode: AtomicDecayType.proton_emission(amount: 2), half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "5.0"))
         case .beryllium_7:
-            return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "7.01692871", decay_mode: AtomicDecayType.electron_capture, half_life: TimeUnit(type: TimeUnitType.day, value: "53.22"))
+            return ChemicalElementDetails(self, neutron_count: 3, standard_atomic_weight: "7.01692871", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "53.22"))
         case .beryllium_8:
             return ChemicalElementDetails(self, neutron_count: 4, standard_atomic_weight: "8.005305", decay_mode: AtomicDecayType.alpha, half_life: TimeUnit(prefix: UnitPrefix.atto, type: TimeUnitType.second, value: "81.9"))
         case .beryllium_8_isomer_1:
@@ -49,13 +49,13 @@ public enum BerylliumIsotope : String, ChemicalElementIsotope {
         case .beryllium_9_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "9.01218306", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.atto, type: TimeUnitType.second, value: "1.25"))
         case .beryllium_10:
-            return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "10.01353469", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "1387000")) // TODO: fix? | tropical year
+            return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "10.01353469", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "1387000")) // TODO: fix? | tropical year
         case .beryllium_11:
-            return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "11.02166108", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "13.76"))
+            return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "11.02166108", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "13.76"))
         case .beryllium_11_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "11.02166108", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "0.93"))
         case .beryllium_12:
-            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "12.0269221", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "21.46"))
+            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "12.0269221", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "21.46"))
         case .beryllium_12_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "12.0269221", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "233"))
         case .beryllium_13:

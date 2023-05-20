@@ -62,41 +62,41 @@ public enum ArgonIsotope : String, ChemicalElementIsotope {
         case .argon_36:
             return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "35.967545105")
         case .argon_37:
-            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "36.96677631", decay_mode: AtomicDecayType.electron_capture, half_life: TimeUnit(type: TimeUnitType.day, value: "35.011"))
+            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "36.96677631", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "35.011"))
         case .argon_38:
             return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "37.96273210")
         case .argon_39:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "38.964313", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "268"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "38.964313", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "268"))
         case .argon_40:
             return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "39.9623831238")
         case .argon_41:
-            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "40.9645006", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "109.61"))
+            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "40.9645006", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "109.61"))
         case .argon_42:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "41.963046", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "32.9"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "41.963046", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "32.9"))
         case .argon_43:
-            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "42.965636", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "5.37"))
+            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "42.965636", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "5.37"))
         case .argon_44:
-            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "43.9649238", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "11.87"))
+            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "43.9649238", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "11.87"))
         case .argon_45:
-            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "44.9680397", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "21.48"))
+            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "44.9680397", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "21.48"))
         case .argon_46:
-            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "45.9680374", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "8.4"))
+            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "45.9680374", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "8.4"))
         case .argon_47:
-            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "46.9727681", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "1.23"))
+            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "46.9727681", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.23"))
         case .argon_48:
-            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "47.97608", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "415"))
+            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "47.97608", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "415"))
         case .argon_49:
-            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "48.98155", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "236"))
+            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "48.98155", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "236"))
         case .argon_50:
-            return ChemicalElementDetails(self, neutron_count: 32, standard_atomic_weight: "49.98569", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "106"))
+            return ChemicalElementDetails(self, neutron_count: 32, standard_atomic_weight: "49.98569", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "106"))
         case .argon_51:
-            return ChemicalElementDetails(self, neutron_count: 33, standard_atomic_weight: "50.99280", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "60"))
+            return ChemicalElementDetails(self, neutron_count: 33, standard_atomic_weight: "50.99280", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "60"))
         case .argon_52:
-            return ChemicalElementDetails(self, neutron_count: 34, standard_atomic_weight: "51.99863", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10"))
+            return ChemicalElementDetails(self, neutron_count: 34, standard_atomic_weight: "51.99863", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10"))
         case .argon_53:
-            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "53.00729", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3"))
+            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "53.00729", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3"))
         case .argon_54:
-            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus, half_life: nil) // TODO: fix
+            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: nil) // TODO: fix
         }
     }
 }

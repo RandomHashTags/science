@@ -24,8 +24,8 @@ final class scienceTests: XCTestCase {
         test_chemical_elements()
         test_environment()
         
-        //return;
-        await generate_isotope(ChemicalElement.bromine)
+        return;
+        await generate_isotope(ChemicalElement.krypton)
     }
 }
 extension scienceTests {
@@ -149,10 +149,10 @@ extension scienceTests {
                     decay_mode = "AtomicDecayType.proton_emission(amount: 4)"
                     break
                 case "β−", "β−?":
-                    decay_mode = "AtomicDecayType.beta_minus"
+                    decay_mode = "AtomicDecayType.beta_minus(amount: 1)"
                     break
                 case "β−β−":
-                    decay_mode = "AtomicDecayType.beta_minus_double"
+                    decay_mode = "AtomicDecayType.beta_minus(amount: 2)"
                     break
                 case "β−, γ":
                     decay_mode = "AtomicDecayType.beta_minus_gamma"
@@ -170,7 +170,10 @@ extension scienceTests {
                     decay_mode = "AtomicDecayType.isomeric_transition"
                     break
                 case "EC":
-                    decay_mode = "AtomicDecayType.electron_capture"
+                    decay_mode = "AtomicDecayType.electron_capture(amount: 1)"
+                    break
+                case "Double EC":
+                    decay_mode = "AtomicDecayType.electron_capture(amount: 2)"
                     break
                 default:
                     decay_mode = "nil"

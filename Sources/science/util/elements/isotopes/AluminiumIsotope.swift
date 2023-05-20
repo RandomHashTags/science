@@ -59,31 +59,31 @@ public enum AluminiumIsotope : String, ChemicalElementIsotope {
         case .aluminium_27:
             return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "26.98153841")
         case .aluminium_28:
-            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "27.98191009", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "2.245"))
+            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "27.98191009", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "2.245"))
         case .aluminium_29:
-            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "28.9804532", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "6.56"))
+            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "28.9804532", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "6.56"))
         case .aluminium_30:
-            return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "29.982968", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "3.62"))
+            return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "29.982968", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "3.62"))
         case .aluminium_31:
-            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "30.9839498", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "644"))
+            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "30.9839498", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "644"))
         case .aluminium_32:
-            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "31.988084", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "33.0"))
+            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "31.988084", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "33.0"))
         case .aluminium_32_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "31.988084", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "200"))
         case .aluminium_33:
-            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "32.990878", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "41.7"))
+            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "32.990878", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "41.7"))
         case .aluminium_34:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "33.996779", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "56.3"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "33.996779", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "56.3"))
         case .aluminium_34_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "33.996779", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "26"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "33.996779", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "26"))
         case .aluminium_35:
-            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "34.999760", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "37.2"))
+            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "34.999760", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "37.2"))
         case .aluminium_36:
-            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "36.00639", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "90"))
+            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "36.00639", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "90"))
         case .aluminium_37:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "37.01053", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "11.5"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "37.01053", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "11.5"))
         case .aluminium_38:
-            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "38.0174", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "9.0"))
+            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "38.0174", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "9.0"))
         case .aluminium_39:
             return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "39.02217", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "7.6"))
         case .aluminium_40:
@@ -91,9 +91,9 @@ public enum AluminiumIsotope : String, ChemicalElementIsotope {
         case .aluminium_41:
             return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "41.03588", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.5"))
         case .aluminium_42:
-            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "42.04305", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
+            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "42.04305", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
         case .aluminium_43:
-            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "43.05048", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
+            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "43.05048", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
         }
     }
 }

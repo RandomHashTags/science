@@ -57,31 +57,31 @@ public enum MagnesiumIsotope : String, ChemicalElementIsotope {
         case .magnesium_26:
             return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "25.98259297")
         case .magnesium_27:
-            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "26.98434065", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "9.435"))
+            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "26.98434065", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "9.435"))
         case .magnesium_28:
-            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "27.98387543", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "20.915"))
+            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "27.98387543", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "20.915"))
         case .magnesium_29:
-            return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "28.9886072", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "1.30"))
+            return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "28.9886072", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.30"))
         case .magnesium_30:
-            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "29.9904655", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "317"))
+            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "29.9904655", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "317"))
         case .magnesium_31:
-            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "30.996648", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "270"))
+            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "30.996648", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "270"))
         case .magnesium_32:
-            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "31.999110", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "80.4"))
+            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "31.999110", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "80.4"))
         case .magnesium_33:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "33.0053279", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "92.0"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "33.0053279", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "92.0"))
         case .magnesium_34:
-            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "34.008935", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "44.9"))
+            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "34.008935", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "44.9"))
         case .magnesium_35:
             return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "35.01679", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "11.3"))
         case .magnesium_36:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "36.02188", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.9"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "36.02188", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.9"))
         case .magnesium_37:
-            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "37.03029", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "8"))
+            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "37.03029", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "8"))
         case .magnesium_38:
             return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "38.03658", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.1"))
         case .magnesium_40:
-            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "40.05319", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
+            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "40.05319", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
         }
     }
 }

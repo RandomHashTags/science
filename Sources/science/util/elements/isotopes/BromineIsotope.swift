@@ -101,7 +101,7 @@ public enum BromineIsotope : String, ChemicalElementIsotope {
         case .bromine_79_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 44, standard_atomic_weight: "78.9183371", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.second, value: "4.86"))
         case .bromine_80:
-            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "79.9185293", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "17.68"))
+            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "79.9185293", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "17.68"))
         case .bromine_80_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "79.9185293", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.hour, value: "4.4205"))
         case .bromine_81:
@@ -109,41 +109,41 @@ public enum BromineIsotope : String, ChemicalElementIsotope {
         case .bromine_81_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 46, standard_atomic_weight: "80.9162906", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "34.6")) // TODO: fix
         case .bromine_82:
-            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "81.9168041", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "35.282"))
+            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "81.9168041", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "35.282"))
         case .bromine_82_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "81.9168041", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "6.13"))
         case .bromine_83:
-            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "82.915180", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "2.40"))
+            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "82.915180", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "2.40"))
         case .bromine_83_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "82.915180", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "700")) // TODO: fix
         case .bromine_84:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "83.916479", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "31.80"))
+            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "83.916479", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "31.80"))
         case .bromine_84_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "83.916479", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "6.0"))
+            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "83.916479", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "6.0"))
         case .bromine_84_isomer_2:
             return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "83.916479", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "139")) // TODO: fix
         case .bromine_85:
-            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "84.915608", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "2.90"))
+            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "84.915608", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "2.90"))
         case .bromine_86:
-            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "85.918798", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "55.1"))
+            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "85.918798", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "55.1"))
         case .bromine_87:
-            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "86.920711", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "55.65"))
+            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "86.920711", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "55.65"))
         case .bromine_88:
-            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "87.92407", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "16.29"))
+            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "87.92407", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "16.29"))
         case .bromine_88_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "87.92407", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "5.4")) // TODO: fix
         case .bromine_89:
-            return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "88.92639", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "4.40"))
+            return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "88.92639", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "4.40"))
         case .bromine_90:
-            return ChemicalElementDetails(self, neutron_count: 55, standard_atomic_weight: "89.93063", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "1.91"))
+            return ChemicalElementDetails(self, neutron_count: 55, standard_atomic_weight: "89.93063", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.91"))
         case .bromine_91:
-            return ChemicalElementDetails(self, neutron_count: 56, standard_atomic_weight: "90.93397", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "541"))
+            return ChemicalElementDetails(self, neutron_count: 56, standard_atomic_weight: "90.93397", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "541"))
         case .bromine_92:
-            return ChemicalElementDetails(self, neutron_count: 57, standard_atomic_weight: "91.93926", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "0.343"))
+            return ChemicalElementDetails(self, neutron_count: 57, standard_atomic_weight: "91.93926", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.343"))
         case .bromine_93:
-            return ChemicalElementDetails(self, neutron_count: 58, standard_atomic_weight: "92.94305", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "102"))
+            return ChemicalElementDetails(self, neutron_count: 58, standard_atomic_weight: "92.94305", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "102"))
         case .bromine_94:
-            return ChemicalElementDetails(self, neutron_count: 59, standard_atomic_weight: "93.94868", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "70"))
+            return ChemicalElementDetails(self, neutron_count: 59, standard_atomic_weight: "93.94868", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "70"))
         case .bromine_95:
             return ChemicalElementDetails(self, neutron_count: 60, standard_atomic_weight: "94.95287", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50")) // TODO: fix
         case .bromine_96:

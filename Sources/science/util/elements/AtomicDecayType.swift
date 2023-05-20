@@ -9,7 +9,7 @@ import Foundation
 // https://en.wikipedia.org/wiki/Particle_radiation | https://en.wikipedia.org/wiki/Radioactive_decay#List_of_decay_modes
 public enum AtomicDecayType : Hashable {
     // https://en.wikipedia.org/wiki/Electron_capture
-    case electron_capture
+    case electron_capture(amount: Int)
     
     // https://en.wikipedia.org/wiki/Proton_emission
     case proton_emission(amount: Int)
@@ -21,8 +21,7 @@ public enum AtomicDecayType : Hashable {
     case alpha
     
     // https://en.wikipedia.org/wiki/Beta_decay
-    case beta_minus
-    case beta_minus_double
+    case beta_minus(amount: Int)
     case beta_minus_gamma
     case beta_minus_neutron_emission
     case beta_plus

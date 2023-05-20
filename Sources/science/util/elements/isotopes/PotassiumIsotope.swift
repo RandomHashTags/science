@@ -69,31 +69,31 @@ public enum PotassiumIsotope : String, ChemicalElementIsotope {
         case .potassium_39:
             return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "38.963706487")
         case .potassium_40:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "39.96399817", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.year, value: "1.248"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "39.96399817", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "1.248"))
         case .potassium_40_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "39.96399817", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "336"))
         case .potassium_41:
             return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "40.961825258")
         case .potassium_42:
-            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "41.96240231", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "12.355"))
+            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "41.96240231", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "12.355"))
         case .potassium_43:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "42.9607347", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "22.3"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "42.9607347", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "22.3"))
         case .potassium_43_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "42.9607347", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "200"))
         case .potassium_44:
-            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "43.9615870", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "22.13"))
+            return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "43.9615870", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "22.13"))
         case .potassium_45:
-            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "44.9606915", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "17.8"))
+            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "44.9606915", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "17.8"))
         case .potassium_46:
-            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "45.9619816", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "105"))
+            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "45.9619816", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "105"))
         case .potassium_47:
-            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "46.9616616", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "17.50"))
+            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "46.9616616", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "17.50"))
         case .potassium_48:
-            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "47.9653412", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "6.8"))
+            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "47.9653412", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "6.8"))
         case .potassium_49:
             return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "48.9682108", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(type: TimeUnitType.second, value: "1.26"))
         case .potassium_50:
-            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "49.972380", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "472"))
+            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "49.972380", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "472"))
         case .potassium_50_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "49.972380", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "125"))
         case .potassium_51:
@@ -103,15 +103,15 @@ public enum PotassiumIsotope : String, ChemicalElementIsotope {
         case .potassium_53:
             return ChemicalElementDetails(self, neutron_count: 34, standard_atomic_weight: "52.98680", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "30"))
         case .potassium_54:
-            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "53.99463", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10"))
+            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "53.99463", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10"))
         case .potassium_55:
-            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "55.00076", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3"))
+            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "55.00076", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3"))
         case .potassium_56:
-            return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "56.00851", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "1"))
+            return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "56.00851", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "1"))
         case .potassium_57:
-            return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus, half_life: nil) // TODO: fix
+            return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: nil) // TODO: fix
         case .potassium_59:
-            return ChemicalElementDetails(self, neutron_count: 40, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus, half_life: nil) // TODO: fix
+            return ChemicalElementDetails(self, neutron_count: 40, standard_atomic_weight: "0", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: nil) // TODO: fix
         }
     }
 }

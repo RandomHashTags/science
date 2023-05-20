@@ -86,7 +86,7 @@ public enum GermaniumIsotope : String, ChemicalElementIsotope {
         case .germanium_67_isomer_2:
             return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "66.932734", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "110.9")) // TODO: fix
         case .germanium_68:
-            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "67.928094", decay_mode: AtomicDecayType.electron_capture, half_life: TimeUnit(type: TimeUnitType.day, value: "271.05"))
+            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "67.928094", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "271.05"))
         case .germanium_69:
             return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "68.9279645", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.hour, value: "39.05"))
         case .germanium_69_isomer_1:
@@ -96,7 +96,7 @@ public enum GermaniumIsotope : String, ChemicalElementIsotope {
         case .germanium_70:
             return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "69.9242474")
         case .germanium_71:
-            return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "70.9249510", decay_mode: AtomicDecayType.electron_capture, half_life: TimeUnit(type: TimeUnitType.day, value: "11.43"))
+            return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "70.9249510", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "11.43"))
         case .germanium_71_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "70.9249510", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "20.40"))
         case .germanium_72:
@@ -112,37 +112,37 @@ public enum GermaniumIsotope : String, ChemicalElementIsotope {
         case .germanium_74:
             return ChemicalElementDetails(self, neutron_count: 42, standard_atomic_weight: "73.9211778")
         case .germanium_75:
-            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "74.9228589", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "82.78"))
+            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "74.9228589", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "82.78"))
         case .germanium_75_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "74.9228589", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.second, value: "47.7"))
         case .germanium_75_isomer_2:
             return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "74.9228589", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "216")) // TODO: fix
         case .germanium_76:
-            return ChemicalElementDetails(self, neutron_count: 44, standard_atomic_weight: "75.9214026", decay_mode: AtomicDecayType.beta_minus_double, half_life: TimeUnit(type: TimeUnitType.year, value: "1926000000000000000000"))
+            return ChemicalElementDetails(self, neutron_count: 44, standard_atomic_weight: "75.9214026", decay_mode: AtomicDecayType.beta_minus(amount: 2), half_life: TimeUnit(type: TimeUnitType.year, value: "1926000000000000000000"))
         case .germanium_77:
-            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "76.9235486", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.hour, value: "11.30"))
+            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "76.9235486", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.hour, value: "11.30"))
         case .germanium_77_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "76.9235486", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "52.9"))
+            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "76.9235486", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "52.9"))
         case .germanium_78:
-            return ChemicalElementDetails(self, neutron_count: 46, standard_atomic_weight: "77.922853", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "88"))
+            return ChemicalElementDetails(self, neutron_count: 46, standard_atomic_weight: "77.922853", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "88"))
         case .germanium_79:
-            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "78.9254", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "18.98"))
+            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "78.9254", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "18.98"))
         case .germanium_79_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "78.9254", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "39.0"))
+            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "78.9254", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "39.0"))
         case .germanium_80:
-            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "79.92537", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "29.5"))
+            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "79.92537", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "29.5"))
         case .germanium_81:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "80.92882", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "7.6"))
+            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "80.92882", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "7.6"))
         case .germanium_81_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "80.92882", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "7.6"))
+            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "80.92882", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "7.6"))
         case .germanium_82:
-            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "81.92955", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "4.55"))
+            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "81.92955", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "4.55"))
         case .germanium_83:
-            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "82.93462", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "1.85"))
+            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "82.93462", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.85"))
         case .germanium_84:
-            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "83.93747", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "0.947"))
+            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "83.93747", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.947"))
         case .germanium_85:
-            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "84.94303", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "535"))
+            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "84.94303", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "535"))
         case .germanium_86:
             return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "85.94649", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "151"))
         case .germanium_87:

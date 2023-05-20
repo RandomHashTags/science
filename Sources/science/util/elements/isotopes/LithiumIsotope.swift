@@ -43,7 +43,7 @@ public enum LithiumIsotope : String, ChemicalElementIsotope {
         case .lithium_7:
             return ChemicalElementDetails(self, neutron_count: 4, standard_atomic_weight: "7.016003434")
         case .lithium_8:
-            return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "8.02248624", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "838.7"))
+            return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "8.02248624", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "838.7"))
         case .lithium_9:
             return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "9.02679019", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "178.2"))
         case .lithium_10:

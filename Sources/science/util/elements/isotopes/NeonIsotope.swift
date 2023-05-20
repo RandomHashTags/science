@@ -53,29 +53,29 @@ public enum NeonIsotope : String, ChemicalElementIsotope {
         case .neon_22:
             return ChemicalElementDetails(self, neutron_count: 12, standard_atomic_weight: "21.991385114")
         case .neon_23:
-            return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "22.99446691", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.second, value: "37.15"))
+            return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "22.99446691", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "37.15"))
         case .neon_24:
-            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "23.9936106", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(type: TimeUnitType.minute, value: "3.38"))
+            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "23.9936106", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "3.38"))
         case .neon_25:
-            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "24.997810", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "602"))
+            return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "24.997810", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "602"))
         case .neon_26:
-            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "26.000516", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "197"))
+            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "26.000516", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "197"))
         case .neon_27:
-            return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "27.007570", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "30.9"))
+            return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "27.007570", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "30.9"))
         case .neon_28:
-            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "28.012130", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "18.8"))
+            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "28.012130", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "18.8"))
         case .neon_29:
-            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "29.019750", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "14.7"))
+            return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "29.019750", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "14.7"))
         case .neon_30:
-            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "30.024990", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "7.22"))
+            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "30.024990", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "7.22"))
         case .neon_31:
-            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "31.033470", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.4"))
+            return ChemicalElementDetails(self, neutron_count: 21, standard_atomic_weight: "31.033470", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.4"))
         case .neon_32:
-            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "32.039720", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.5"))
+            return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "32.039720", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.5"))
         case .neon_33:
             return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "33.049520", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "259"))
         case .neon_34:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "34.056730", decay_mode: AtomicDecayType.beta_minus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "34.056730", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2"))
         }
     }
 }
