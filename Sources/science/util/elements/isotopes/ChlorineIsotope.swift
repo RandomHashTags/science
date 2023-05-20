@@ -84,7 +84,7 @@ public enum ChlorineIsotope : String, ChemicalElementIsotope {
         case .chlorine_45:
             return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "44.98039", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "413"))
         case .chlorine_46:
-            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "45.98512", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "232"))
+            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "45.98512", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "232"))
         case .chlorine_47:
             return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "46.98950", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "101"))
         case .chlorine_48:

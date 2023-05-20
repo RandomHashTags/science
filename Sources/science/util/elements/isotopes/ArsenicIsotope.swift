@@ -130,7 +130,7 @@ public enum ArsenicIsotope : String, ChemicalElementIsotope {
         case .arsenic_84_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "83.92906", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "650")) // TODO: fix
         case .arsenic_85:
-            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "84.93202", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(type: TimeUnitType.second, value: "2.021"))
+            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "84.93202", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "2.021"))
         case .arsenic_86:
             return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "85.93650", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.945"))
         case .arsenic_87:

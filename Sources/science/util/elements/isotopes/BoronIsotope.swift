@@ -57,15 +57,15 @@ public enum BoronIsotope : String, ChemicalElementIsotope {
         case .boron_14_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "14.025404", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "4.15"))
         case .boron_15:
-            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "15.031087", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10.18"))
+            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "15.031087", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10.18"))
         case .boron_16:
             return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "16.039841", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "4.7"))
         case .boron_17:
-            return ChemicalElementDetails(self, neutron_count: 12, standard_atomic_weight: "17.04693", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.08"))
+            return ChemicalElementDetails(self, neutron_count: 12, standard_atomic_weight: "17.04693", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.08"))
         case .boron_18:
             return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "18.05560", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "25"))
         case .boron_19:
-            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "19.06417", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2.92"))
+            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "19.06417", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2.92"))
         case .boron_20:
             return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "20.07451", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.yocto, type: TimeUnitType.second, value: "912.5"))
         case .boron_21:

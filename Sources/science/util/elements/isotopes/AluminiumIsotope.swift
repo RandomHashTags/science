@@ -85,11 +85,11 @@ public enum AluminiumIsotope : String, ChemicalElementIsotope {
         case .aluminium_38:
             return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "38.0174", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "9.0"))
         case .aluminium_39:
-            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "39.02217", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "7.6"))
+            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "39.02217", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "7.6"))
         case .aluminium_40:
-            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "40.02962", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.7"))
+            return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "40.02962", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.7"))
         case .aluminium_41:
-            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "41.03588", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.5"))
+            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "41.03588", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.5"))
         case .aluminium_42:
             return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "42.04305", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
         case .aluminium_43:

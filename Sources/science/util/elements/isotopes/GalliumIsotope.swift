@@ -113,7 +113,7 @@ public enum GalliumIsotope : String, ChemicalElementIsotope {
         case .gallium_83:
             return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "82.94698", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "308"))
         case .gallium_84:
-            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "83.95265", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(type: TimeUnitType.second, value: "0.085"))
+            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "83.95265", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.085"))
         case .gallium_85:
             return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "84.95700", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50")) // TODO: fix
         case .gallium_86:

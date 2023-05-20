@@ -56,7 +56,7 @@ public enum NitrogenIsotope : String, ChemicalElementIsotope {
         case .nitrogen_16_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "16.0061019", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "5.25"))
         case .nitrogen_17:
-            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "17.008449", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(type: TimeUnitType.second, value: "4.173"))
+            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "17.008449", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "4.173"))
         case .nitrogen_18:
             return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "18.014078", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "619.2"))
         case .nitrogen_19:
@@ -64,7 +64,7 @@ public enum NitrogenIsotope : String, ChemicalElementIsotope {
         case .nitrogen_20:
             return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "20.023370", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "136"))
         case .nitrogen_21:
-            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "21.02709", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "85"))
+            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "21.02709", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "85"))
         case .nitrogen_22:
             return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "22.03410", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "23"))
         case .nitrogen_23:

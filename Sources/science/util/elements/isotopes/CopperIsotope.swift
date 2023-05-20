@@ -121,7 +121,7 @@ public enum CopperIsotope : String, ChemicalElementIsotope {
         case .copper_78:
             return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "77.95196", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "342"))
         case .copper_79:
-            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "78.95456", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "188"))
+            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "78.95456", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "188"))
         case .copper_80:
             return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "79.96087", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
         }

@@ -76,11 +76,11 @@ public enum PhosphorusIsotope : String, ChemicalElementIsotope {
         case .phosphorus_42:
             return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "42.00108", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "48.5"))
         case .phosphorus_43:
-            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "43.00502", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "35.8"))
+            return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "43.00502", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "35.8"))
         case .phosphorus_44:
             return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "44.01122", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "18.5"))
         case .phosphorus_45:
-            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "45.01675", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "24"))
+            return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "45.01675", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "24"))
         case .phosphorus_46:
             return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "46.02466", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "201"))
         case .phosphorus_47:

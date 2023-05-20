@@ -84,7 +84,7 @@ public enum SodiumIsotope : String, ChemicalElementIsotope {
         case .sodium_33:
             return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "33.02553", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "8.2"))
         case .sodium_34:
-            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "34.03401", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.5")) // TODO: 2 neutron emission
+            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "34.03401", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.5")) // TODO: 2 neutron emission
         case .sodium_35:
             return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "35.04061", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "1.5"))
         case .sodium_37:

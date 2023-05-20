@@ -45,7 +45,7 @@ public enum LithiumIsotope : String, ChemicalElementIsotope {
         case .lithium_8:
             return ChemicalElementDetails(self, neutron_count: 5, standard_atomic_weight: "8.02248624", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "838.7"))
         case .lithium_9:
-            return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "9.02679019", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "178.2"))
+            return ChemicalElementDetails(self, neutron_count: 6, standard_atomic_weight: "9.02679019", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "178.2"))
         case .lithium_10:
             return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "10.035483", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "2.0"))
         case .lithium_10_isomer_1:
@@ -53,7 +53,7 @@ public enum LithiumIsotope : String, ChemicalElementIsotope {
         case .lithium_10_isomer_2:
             return ChemicalElementDetails(self, neutron_count: 7, standard_atomic_weight: "10.035483", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "1.35"))
         case .lithium_11:
-            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "11.0437236", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "8.75"))
+            return ChemicalElementDetails(self, neutron_count: 8, standard_atomic_weight: "11.0437236", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "8.75"))
         case .lithium_12:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "12.052610", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: nil) // TODO: fix
         case .lithium_13:

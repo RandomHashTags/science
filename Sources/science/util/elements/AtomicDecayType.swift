@@ -23,7 +23,7 @@ public enum AtomicDecayType : Hashable {
     // https://en.wikipedia.org/wiki/Beta_decay
     case beta_minus(amount: Int)
     case beta_minus_gamma
-    case beta_minus_neutron_emission
+    case beta_minus_neutron_emission(amount: Int)
     case beta_plus
     case beta_plus_proton_emission
     

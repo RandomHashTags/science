@@ -63,7 +63,7 @@ public enum BerylliumIsotope : String, ChemicalElementIsotope {
         case .beryllium_13_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "13.036135", decay_mode: AtomicDecayType.isomeric_transition, half_life: nil) // TODO: fix
         case .beryllium_14:
-            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "13.04289", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "4.53"))
+            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "13.04289", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "4.53"))
         case .beryllium_14_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "13.04289", decay_mode: AtomicDecayType.isomeric_transition, half_life: nil) // TODO: fix
         case .beryllium_15:

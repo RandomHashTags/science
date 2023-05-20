@@ -82,7 +82,7 @@ public enum SulfurIsotope : String, ChemicalElementIsotope {
         case .sulfur_44_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "43.990119", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "2.619"))
         case .sulfur_45:
-            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "44.99572", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "68"))
+            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "44.99572", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "68"))
         case .sulfur_46:
             return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "46.00037", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50"))
         case .sulfur_47:

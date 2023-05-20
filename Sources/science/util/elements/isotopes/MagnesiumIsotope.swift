@@ -73,13 +73,13 @@ public enum MagnesiumIsotope : String, ChemicalElementIsotope {
         case .magnesium_34:
             return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "34.008935", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "44.9"))
         case .magnesium_35:
-            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "35.01679", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "11.3"))
+            return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "35.01679", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "11.3"))
         case .magnesium_36:
             return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "36.02188", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.9"))
         case .magnesium_37:
             return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "37.03029", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "8"))
         case .magnesium_38:
-            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "38.03658", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.1"))
+            return ChemicalElementDetails(self, neutron_count: 26, standard_atomic_weight: "38.03658", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3.1"))
         case .magnesium_40:
             return ChemicalElementDetails(self, neutron_count: 27, standard_atomic_weight: "40.05319", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "171"))
         }

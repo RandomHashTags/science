@@ -144,7 +144,7 @@ public enum GermaniumIsotope : String, ChemicalElementIsotope {
         case .germanium_85:
             return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "84.94303", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "535"))
         case .germanium_86:
-            return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "85.94649", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "151"))
+            return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "85.94649", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "151"))
         case .germanium_87:
             return ChemicalElementDetails(self, neutron_count: 55, standard_atomic_weight: "86.95251", decay_mode: nil, half_life: TimeUnit(type: TimeUnitType.second, value: "0.14")) // TODO: fix
         case .germanium_88:

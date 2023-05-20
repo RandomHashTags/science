@@ -55,19 +55,19 @@ public enum CarbonIsotope : String, ChemicalElementIsotope {
         case .carbon_15:
             return ChemicalElementDetails(self, neutron_count: 9, standard_atomic_weight: "15.0105993", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "2.449"))
         case .carbon_16:
-            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "16.014701", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "750"))
+            return ChemicalElementDetails(self, neutron_count: 10, standard_atomic_weight: "16.014701", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "750"))
         case .carbon_17:
             return ChemicalElementDetails(self, neutron_count: 11, standard_atomic_weight: "17.022579", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "193"))
         case .carbon_18:
             return ChemicalElementDetails(self, neutron_count: 12, standard_atomic_weight: "18.02675", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "92"))
         case .carbon_19:
-            return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "19.03480", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "46.2"))
+            return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "19.03480", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "46.2"))
         case .carbon_20:
-            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "20.04026", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "16"))
+            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "20.04026", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "16"))
         case .carbon_21:
             return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "21.04900", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "29"))
         case .carbon_22:
-            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "22.05755", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "6.2"))
+            return ChemicalElementDetails(self, neutron_count: 16, standard_atomic_weight: "22.05755", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "6.2"))
         case .carbon_23:
             return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "23.06889", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: nil) // TODO: fix
         }

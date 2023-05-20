@@ -70,11 +70,11 @@ public enum FluorineIsotope : String, ChemicalElementIsotope {
         case .fluorine_26_isomer_1:
             return ChemicalElementDetails(self, neutron_count: 17, standard_atomic_weight: "26.020050", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2.2"))
         case .fluorine_27:
-            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "27.026980", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.0"))
+            return ChemicalElementDetails(self, neutron_count: 18, standard_atomic_weight: "27.026980", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "5.0"))
         case .fluorine_28:
             return ChemicalElementDetails(self, neutron_count: 19, standard_atomic_weight: "28.035860", decay_mode: AtomicDecayType.neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: "46"))
         case .fluorine_29:
-            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "29.043100", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2.5"))
+            return ChemicalElementDetails(self, neutron_count: 20, standard_atomic_weight: "29.043100", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2.5"))
         case .fluorine_31:
             return ChemicalElementDetails(self, neutron_count: 22, standard_atomic_weight: "31.06020", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "2"))
         }

@@ -124,7 +124,7 @@ public enum SeleniumIsotope : String, ChemicalElementIsotope {
         case .selenium_89:
             return ChemicalElementDetails(self, neutron_count: 55, standard_atomic_weight: "88.93645", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.41"))
         case .selenium_90:
-            return ChemicalElementDetails(self, neutron_count: 56, standard_atomic_weight: "89.93996", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "300"))
+            return ChemicalElementDetails(self, neutron_count: 56, standard_atomic_weight: "89.93996", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "300"))
         case .selenium_91:
             return ChemicalElementDetails(self, neutron_count: 57, standard_atomic_weight: "90.94596", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "270"))
         case .selenium_92:

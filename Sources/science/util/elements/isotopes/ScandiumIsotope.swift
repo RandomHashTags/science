@@ -117,7 +117,7 @@ public enum ScandiumIsotope : String, ChemicalElementIsotope {
         case .scandium_58:
             return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "57.98371", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "12"))
         case .scandium_59:
-            return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "58.98922", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10"))
+            return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "58.98922", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "10"))
         case .scandium_60:
             return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "59.99571", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "3"))
         case .scandium_61:

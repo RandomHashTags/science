@@ -75,7 +75,7 @@ public enum SiliconIsotope : String, ChemicalElementIsotope {
         case .silicon_37:
             return ChemicalElementDetails(self, neutron_count: 23, standard_atomic_weight: "36.99295", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "90"))
         case .silicon_38:
-            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "37.99552", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "63"))
+            return ChemicalElementDetails(self, neutron_count: 24, standard_atomic_weight: "37.99552", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "63"))
         case .silicon_39:
             return ChemicalElementDetails(self, neutron_count: 25, standard_atomic_weight: "39.00249", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "47.5"))
         case .silicon_40:
@@ -85,7 +85,7 @@ public enum SiliconIsotope : String, ChemicalElementIsotope {
         case .silicon_42:
             return ChemicalElementDetails(self, neutron_count: 28, standard_atomic_weight: "42.01768", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "12.5"))
         case .silicon_43:
-            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "42.02480", decay_mode: AtomicDecayType.beta_minus_neutron_emission, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "13"))
+            return ChemicalElementDetails(self, neutron_count: 29, standard_atomic_weight: "42.02480", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "13"))
         case .silicon_44:
             return ChemicalElementDetails(self, neutron_count: 30, standard_atomic_weight: "44.03147", half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "4")) // TODO: fix
         }

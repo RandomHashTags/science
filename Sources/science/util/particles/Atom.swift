@@ -136,14 +136,22 @@ public struct Atom : Hashable {
             nucleus.neutrons.removeFirst()
             // TODO: emit electron/positron and electron antineutrino AND emit a gamma ray
             return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)])
-        case .beta_minus_neutron_emission:
-            let created_proton:Proton = Proton()
-            let destroyed_neutron:Neutron = neutrons[0]
-            let created_electron:Electron = Electron()
-            nucleus.protons.append(created_proton)
-            nucleus.neutrons.removeFirst(2)
+        case .beta_minus_neutron_emission(let amount):
+            var created_protons:[Proton] = []
+            var destroyed_neutrons:[Neutron] = []
+            var created_electrons:[Electron] = [], created_antielectrons:[AntiParticle] = []
+            var emitted_neutrons:[Neutron] = []
+            for i in 0..<amount {
+                created_protons.append(Proton())
+                let neutron_index:Int = i * 2
+                destroyed_neutrons.append(neutrons[neutron_index])
+                emitted_neutrons.append(neutrons[neutron_index + 1])
+                created_electrons.append(Electron())
+            }
+            nucleus.protons.append(contentsOf: created_protons)
+            nucleus.neutrons.removeFirst(2 * amount)
             // TODO: emit electron/positron and electron antineutrino
-            return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)], emitted_neutrons: [neutrons[1]])
+            return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: created_antielectrons, emitted_neutrons: emitted_neutrons)
             
         case .beta_plus:
             let created_neutron:Neutron = Neutron()
