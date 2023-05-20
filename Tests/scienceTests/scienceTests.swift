@@ -24,8 +24,8 @@ final class scienceTests: XCTestCase {
         test_chemical_elements()
         test_environment()
         
-        return;
-        await generate_isotope(ChemicalElement.arsenic)
+        //return;
+        await generate_isotope(ChemicalElement.selenium)
     }
 }
 extension scienceTests {
@@ -89,7 +89,8 @@ extension scienceTests {
 
 extension scienceTests {
     private func generate_isotope(_ element: ChemicalElement) async {
-        guard let test:HTMLDocument = await request_html(url: "https://en.wikipedia.org/wiki/Isotopes_of_" + element.rawValue.replacingOccurrences(of: " ", with: "_")) else {
+        let url:String = "https://en.wikipedia.org/wiki/Isotopes_of_" + element.rawValue.replacingOccurrences(of: " ", with: "_")
+        guard let test:HTMLDocument = await request_html(url: url) else {
             return
         }
         let identifier:String = element.rawValue + "_"
@@ -177,7 +178,7 @@ extension scienceTests {
                 }
                 
                 let is_stable:Bool = half_life.lowercased().contains("stable")
-                var detail_string:String = "case ." + isotope_identifier + ":\n    return ChemicalElementDetails(self, neutron_count: " + neutron_count + ", standard_atomic_weight: \"" + weight + "\""
+                var detail_string:String = "        case ." + isotope_identifier + ":\n            return ChemicalElementDetails(self, neutron_count: " + neutron_count + ", standard_atomic_weight: \"" + weight + "\""
                 if decay_mode.isEmpty {
                     decay_mode = "nil"
                 }
@@ -187,7 +188,7 @@ extension scienceTests {
                     let opening_values:[Substring] = half_life.split(separator: "(")
                     let closing_values:[Substring] = half_life.split(separator: ")")
                     let target_time:String = opening_values[0].replacingOccurrences(of: " ", with: "")
-                    var time_unit:String = closing_values.last!.split(separator: "[")[0].filter({ $0.isLetter })
+                    let time_unit:String = closing_values.last!.split(separator: "[")[0].filter({ $0.isLetter })
                     switch time_unit {
                     case "ps":
                         half_life = "TimeUnit(prefix: UnitPrefix.pico, type: TimeUnitType.second, value: \"" + target_time + "\")"
@@ -238,12 +239,27 @@ extension scienceTests {
             }
         }
         
+        let element_identifier:String = "\(element)"
+        print("// " + url)
+        print("public enum " + (element_identifier[element_identifier.startIndex].uppercased() + String(element_identifier[element_identifier.index(after: element_identifier.startIndex)...])) + "Isotope : String, ChemicalElementIsotope {")
         for value in cases {
-            print("case " + value)
+            print("    case " + value)
         }
+        print("    ")
+        
+        print("    public var element : ChemicalElement {")
+        print("        return ChemicalElement." + element_identifier)
+        print("    }")
+        print("    ")
+        
+        print("    public var load_details : ChemicalElementDetails {")
+        print("        switch self {")
         for value in details {
             print(value)
         }
+        print("        }")
+        print("    }")
+        print("}")
     }
 }
 
