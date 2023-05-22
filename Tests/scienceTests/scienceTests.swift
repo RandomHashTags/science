@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_environment()
         
         return;
-        await generate_isotope(ChemicalElement.rubidium)
+        await generate_isotope(ChemicalElement.zirconium)
     }
 }
 extension scienceTests {
