@@ -7,6 +7,7 @@
 
 import Foundation
 
+// https://www-nds.iaea.org/amdc/ame2020/NUBASE2020.pdf
 public protocol ChemicalElementIsotope : CaseIterable, RawRepresentable where RawValue == String {
     var element : ChemicalElement { get }
     

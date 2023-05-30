@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import MetalKit
 import science
 
 struct EnvironmentView : View {
@@ -20,11 +19,11 @@ struct EnvironmentView : View {
         } content: {
             let max_width:CGFloat = 1000
             VStack {
-                EnvironmentStatsView(environment: environment, fps_counter: environment.fps_counter)
-                Spacer()
+                //EnvironmentStatsView(environment: environment, fps_counter: environment.fps_counter)
+                //Spacer()
                 EnvironmentRenderer()
-                Spacer()
-                EnvironmentActionPanel(environment: environment).frame(width: max_width-200, height: 100)
+                //Spacer()
+                //EnvironmentActionPanel(environment: environment).frame(width: max_width-200, height: 100)
             }.frame(width: max_width, height: 1080).background(Color.orange)
         } detail: {
             EnvironmentSettingsView(is_editable: false).frame(width: 500, height: 1080)
@@ -49,12 +48,6 @@ struct EnvironmentStatsView : View {
             Text("Simulation Elapsed Time: " + environment.simulation_elapsed_time.description)
             Spacer()
         }.cornerRadius(50).background(Color.gray)
-    }
-}
-
-struct EnvironmentRenderer : View {
-    var body: some View {
-        Text("Metal Renderer")
     }
 }
 

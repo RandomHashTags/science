@@ -19,8 +19,6 @@ public struct Atom : Hashable {
     public var lifetime_total:ElapsedTime = ElapsedTime()
     
     public var survived_iterations:UInt64 = 0
-    public var location:Location
-    public var velocity:Velocity
     
     public var electron_count : Int {
         return electron_shells.reduce(0, { $0 + $1.electrons.count })
@@ -50,15 +48,14 @@ public struct Atom : Hashable {
         let target_number:Int = nucleus.proton_count + nucleus.neutron_count
         return element.rawValue + "_\(target_number)" + (decays_into_isomer != nil ? "_isomer_\(decays_into_isomer!)" : "")
     }
-    
-    public var elementary_charge : Double {
-        return nucleus.protons.reduce(0) { $0 + $1.elementary_charge } + electron_shells.reduce(0) { $0 + $1.elementary_charge }
+    public var chemical_element_details : ChemicalElementDetails? {
+        guard let identifier:String = chemical_element_identifier else { return nil }
+        return ChemicalElementDetails.value_of(identifier: identifier)
     }
     
-    public mutating func collide(_ atom: inout Atom) {
-        let atom1_velocity:Velocity = velocity, atom2_velocity:Velocity = atom.velocity
-        velocity = -atom2_velocity
-        atom.velocity = -atom1_velocity
+    /// Measured in coulombs
+    public var elementary_charge : Double {
+        return nucleus.protons.reduce(0) { $0 + $1.elementary_charge } + electron_shells.reduce(0) { $0 + $1.elementary_charge }
     }
     
     public var is_unstable : Bool {

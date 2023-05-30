@@ -165,13 +165,13 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     }
     
     private func apply_physics() {
-        for index in individual_atoms.indices {
+        /*for index in individual_atoms.indices {
             individual_atoms[index].location.y -= gravity_per_frame
             
         }
         for index in half_life_atoms.indices {
             half_life_atoms[index].location.y -= gravity_per_frame
-        }
+        }*/
     }
     // TODO: support time skipping/jumping/browsing/indexing
     private func apply_physics(multiplier: HugeFloat) {
