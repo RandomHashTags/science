@@ -31,6 +31,7 @@ extension Atom {
         physics_body.mass = CGFloat(details.standard_atomic_weight.represented_float)
         
         let node:SCNNode = SCNNode(geometry: sphere)
+        node.name = uuid.uuidString
         node.physicsBody = physics_body
         
         return node

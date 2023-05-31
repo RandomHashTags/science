@@ -25,7 +25,8 @@ struct EnvironmentRenderer : View {
         return node
     }
     
-    var body: some View {
+    var body : some View {
+        let scene:EnvironmentRendererScene = scene
         SceneView(
             scene: scene,
             pointOfView: camera_node,
@@ -33,12 +34,13 @@ struct EnvironmentRenderer : View {
                 .allowsCameraControl,
                 .autoenablesDefaultLighting,
                 .temporalAntialiasingEnabled,
-            ]
+            ],
+            delegate: scene
         )
     }
 }
 
-final class EnvironmentRendererScene : SCNScene, SCNPhysicsContactDelegate {
+final class EnvironmentRendererScene : SCNScene, SCNSceneRendererDelegate, SCNPhysicsContactDelegate {
     
     override init() {
         super.init()
@@ -47,8 +49,8 @@ final class EnvironmentRendererScene : SCNScene, SCNPhysicsContactDelegate {
         let environment:ScientificEnvironment = data_store.active_environment
         
         background.contents = NSColor.black
-        self.physicsWorld.gravity = SCNVector3(0, 0, 0)
-        self.physicsWorld.contactDelegate = self
+        physicsWorld.gravity = SCNVector3(0, 0, 0)
+        physicsWorld.contactDelegate = self
         
         for atom in environment.half_life_atoms {
             if let node:SCNNode = atom.get_node(affected_by_gravity: false) {
