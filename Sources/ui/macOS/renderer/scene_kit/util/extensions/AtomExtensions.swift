@@ -7,7 +7,7 @@
 
 import Foundation
 import SceneKit
-import science
+import Science
 
 extension Atom {
     
@@ -23,7 +23,7 @@ extension Atom {
         }
         
         let sphere:SCNSphere = SCNSphere(radius: CGFloat(atomic_radius))
-        sphere.firstMaterial?.diffuse.contents = NSColor.white
+        sphere.firstMaterial?.diffuse.contents = [NSColor.white, NSColor.blue, NSColor.orange, NSColor.red, NSColor.lightGray, NSColor.green, NSColor.brown, NSColor.purple, NSColor.magenta].randomElement()!
         
         let physics_body:SCNPhysicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: SCNPhysicsShape(geometry: sphere))
         physics_body.isAffectedByGravity = affected_by_gravity

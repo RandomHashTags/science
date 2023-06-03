@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import science
+import Science
 import huge_numbers
 
 struct MainMenuView : View {

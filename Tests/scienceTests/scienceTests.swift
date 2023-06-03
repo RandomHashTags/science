@@ -5,7 +5,7 @@
 //
 
 import XCTest
-@testable import science
+import Science
 import huge_numbers
 import AppKit
 import Kanna

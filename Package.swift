@@ -12,8 +12,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "science",
-            targets: ["science"]
+            name: "Science",
+            targets: ["Science"]
         )
     ],
     dependencies: [
@@ -22,33 +22,32 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "science",
+            name: "Science",
             dependencies: [
                 .product(name: "huge-numbers", package: "swift_huge-numbers")
             ],
-            exclude: ["renderer"]
+            path: "./Sources/science"
         ),
         .executableTarget(
             name: "Run",
-            dependencies: ["science", .target(name: "MacOSUserInterface", condition: .when(platforms: [.macOS]))]
+            dependencies: [
+                "Science",
+                .target(name: "MacOSUserInterface", condition: .when(platforms: [.macOS]))
+            ]
         ),
         
         .target(
-            name: "RendererMetal",
+            name: "RendererSceneKit",
             dependencies: [
-                "RendererMetalSharedTypes"
+                "Science"
             ],
-            path: "./Sources/science/renderer/metal"
-        ),
-        .target(
-            name: "RendererMetalSharedTypes",
-            path: "./Sources/science/renderer/metal_shared_types"
+            path: "./Sources/ui/macOS/renderer/scene_kit"
         ),
         
         .target(
             name: "MacOSUserInterface",
             dependencies: [
-                "science"
+                "RendererSceneKit"
             ],
             path: "./Sources/ui/macOS/views"
         ),
@@ -63,7 +62,7 @@ let package = Package(
         .testTarget(
             name: "scienceTests",
             dependencies: [
-                "science",
+                "Science",
                 "Kanna",
                 .product(name: "huge-numbers", package: "swift_huge-numbers")
             ]

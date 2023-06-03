@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-import science
+import Science
 import huge_numbers
 
 struct UnitConversions {

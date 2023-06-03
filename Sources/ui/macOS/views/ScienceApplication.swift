@@ -7,7 +7,7 @@
 
 import AppKit
 import SwiftUI
-import science
+import Science
 
 public struct ScienceApplication : App {
     
@@ -21,7 +21,7 @@ public struct ScienceApplication : App {
     public init() {
     }
     
-    public var body: some Scene {
+    public var body : some Scene {
         Window("Science düd", id: "main-screen") {
             MainMenuView()
         }

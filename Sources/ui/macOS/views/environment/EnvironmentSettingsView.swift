@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import science
+import Science
 import huge_numbers
 
 public struct EnvironmentSettingsView : View {
@@ -94,7 +94,7 @@ public struct EnvironmentSettingsView : View {
         }
     }
     
-    private func get_unit_view<T: science.Unit>(title: String, unit: UnsafeMutablePointer<T>, types: [T.TargetUnitType]) -> some View {
+    private func get_unit_view<T: Science.Unit>(title: String, unit: UnsafeMutablePointer<T>, types: [T.TargetUnitType]) -> some View {
         HStack {
             Spacer()
             Text(title)
@@ -119,7 +119,7 @@ public struct EnvironmentSettingsView : View {
         }
     }
     
-    private func get_unit_view<T: science.Unit>(title: String, editing_unit: @escaping ((inout T) -> Void) -> Void, types: [T.TargetUnitType]) -> some View {
+    private func get_unit_view<T: Science.Unit>(title: String, editing_unit: @escaping ((inout T) -> Void) -> Void, types: [T.TargetUnitType]) -> some View {
         HStack {
             Spacer()
             Text(title)

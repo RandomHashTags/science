@@ -6,10 +6,14 @@
 
 import Foundation
 
-struct Molecule {
-    var atoms:[Atom]
+public struct Molecule {
+    public var atoms:[Atom]
     
-    var molecular_formula : String {
+    public init(atoms: [Atom]) {
+        self.atoms = atoms
+    }
+    
+    public var molecular_formula : String {
         var elements:[ChemicalElement:Int] = [:]
         for atom in atoms {
             if let element:ChemicalElement = atom.chemical_element {
@@ -30,7 +34,7 @@ struct Molecule {
 
 
 extension Molecule {
-    static var water:Molecule = {
+    public static var water:Molecule = {
         let hydrogen:Atom = ChemicalElement.hydrogen.details.atom
         return Molecule(atoms: [hydrogen, hydrogen, ChemicalElement.oxygen.details.atom])
     }()

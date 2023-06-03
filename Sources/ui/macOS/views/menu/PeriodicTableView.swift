@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import science
+import Science
 
 struct PeriodicTableView : View {
     

@@ -8,6 +8,30 @@
 import Foundation
 import huge_numbers
 
+public protocol ScientificEnvironmentProtocol : Hashable {
+    var uuid : UUID { get }
+    
+    var ambient_temperature : TemperatureUnit { get set }
+    var ambient_pressure : PressureUnit { get set }
+    var gravity : AccelerationUnit { get set }
+    
+    var timeline : EnvironmentTimeline { get set }
+    var simulation_elapsed_time : ElapsedTime { get set }
+    
+    var individual_atoms : [Atom] { get set }
+    var half_life_atoms : [Atom] { get set }
+    
+    var action_log : ScientificEnvironmentActionLog { get set }
+    
+    func pause()
+    func resume()
+}
+public extension ScientificEnvironmentProtocol {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+}
+
 // TODO: add a tick handler and tick listeners for dynamic manipulation
 public final class ScientificEnvironment : Hashable, ObservableObject {
     

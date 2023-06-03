@@ -6,12 +6,13 @@
 //
 
 import Foundation
-import science
 import huge_numbers
+
+#if canImport(SwiftUI)
 import SwiftUI
 
 public final class ScienceDataStore : ObservableObject {
-    static var shared_instance:ScienceDataStore = ScienceDataStore()
+    public static var shared_instance:ScienceDataStore = ScienceDataStore()
     
     @Published public var active_environment:ScientificEnvironment = ScientificEnvironment(
         ScientificEnvironmentSettings(
@@ -27,3 +28,14 @@ public final class ScienceDataStore : ObservableObject {
     public init() {
     }
 }
+#else
+
+// TODO: fix
+public final class ScienceDataStore {
+    public static var shared_instance:ScienceDataStore = ScienceDataStore()
+    
+    public init() {
+    }
+}
+
+#endif
