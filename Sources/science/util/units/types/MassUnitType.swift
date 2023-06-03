@@ -7,6 +7,7 @@
 import Foundation
 
 public enum MassUnitType : String, UnitType {
+    case dalton
     case gram
     case ounce
     case pound
@@ -14,6 +15,7 @@ public enum MassUnitType : String, UnitType {
     
     public var symbol : String {
         switch self {
+        case .dalton: return "Da"
         case .gram: return "g"
         case .ounce: return "oz"
         case .pound: return "lb"

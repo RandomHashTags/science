@@ -52,10 +52,20 @@ final class EnvironmentRendererScene : SCNScene, SCNSceneRendererDelegate, SCNPh
         physicsWorld.gravity = SCNVector3(0, 0, 0)
         physicsWorld.contactDelegate = self
         
+        var name:String = ""
         for atom in environment.half_life_atoms {
             if let node:SCNNode = atom.get_node(affected_by_gravity: false) {
+                name = node.name!
                 node.position = SCNVector3(0, 0, 0)
                 rootNode.addChildNode(node)
+            }
+        }
+        
+        let target_name:String = name
+        Task {
+            try? await Task.sleep(for: .seconds(3))
+            if let node:SCNNode = rootNode.childNode(withName: target_name, recursively: false) {
+                node.physicsBody!.applyForce(SCNVector3(x: 0, y: 0.01, z: 0), asImpulse: true)
             }
         }
     }

@@ -28,7 +28,11 @@ extension Atom {
         let physics_body:SCNPhysicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: SCNPhysicsShape(geometry: sphere))
         physics_body.isAffectedByGravity = affected_by_gravity
         physics_body.charge = elementary_charge
-        physics_body.mass = CGFloat(details.standard_atomic_weight.represented_float)
+        physics_body.mass = CGFloat(details.standard_atomic_weight.to_unit(prefix: UnitPrefix.kilo, unit: MassUnitType.gram).value.represented_float)
+        
+        physics_body.friction = 0
+        physics_body.angularDamping = 0
+        physics_body.damping = 0
         
         let node:SCNNode = SCNNode(geometry: sphere)
         node.name = uuid.uuidString

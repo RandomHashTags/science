@@ -35,8 +35,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         
     public let atomic_number:Int, neutron_count:Int?
     public let symbol:String
-    /// Masured in Dalton
-    public let standard_atomic_weight:HugeFloat
+    public let standard_atomic_weight:MassUnit
     /// Measured in pictometres (https://en.wikipedia.org/wiki/Atomic_radius)
     public let atomic_radius:UInt16
     /// if known, predicted/known density of this chemical element, measured in grams per cubic centimetre
@@ -57,7 +56,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         self.atomic_number = atomic_number
         self.neutron_count = neutron_count
         self.symbol = symbol
-        self.standard_atomic_weight = HugeFloat(standard_atomic_weight)
+        self.standard_atomic_weight = MassUnit(type: MassUnitType.dalton, value: standard_atomic_weight)
         self.atomic_radius = atomic_radius
         self.density = density != nil ? DensityUnit(type: DensityUnitType.gram_per_cubic_centimetre, value: HugeFloat(density!)) : nil
         //self.freezing_point = TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(freezing_point))
@@ -86,7 +85,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         if let neutron_count:Int = neutron_count {
             neutrons = [Neutron].init(repeating: Neutron(), count: neutron_count)
         } else {
-            let weight:Int = Int(standard_atomic_weight.represented_float)
+            let weight:Int = Int(standard_atomic_weight.value.represented_float)
             neutrons = [Neutron].init(repeating: Neutron(), count: weight - atomic_number)
         }
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)

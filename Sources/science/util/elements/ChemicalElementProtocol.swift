@@ -13,8 +13,8 @@ public protocol ChemicalElementProtocol : Hashable, Identifiable {
     var atomic_number : Int { get }
     var neutron_count : Int? { get }
     var symbol : String { get }
-    /// Masured in Dalton
-    var standard_atomic_weight : HugeFloat { get }
+    /// Default value is masured in Dalton
+    var standard_atomic_weight : MassUnit { get }
     /// if known, predicted/known density of this chemical element, measured in grams per cubic centimetre
     var density : DensityUnit? { get }
     /// if known, melting point of this chemical element, measured in degrees Kelvin
