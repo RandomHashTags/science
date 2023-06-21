@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct TimeUnit : Unit {
     public typealias TargetUnitType = TimeUnitType

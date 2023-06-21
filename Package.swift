@@ -17,14 +17,14 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.13"),
+        .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.14"),
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
     ],
     targets: [
         .target(
             name: "Science",
             dependencies: [
-                .product(name: "huge-numbers", package: "swift_huge-numbers")
+                .product(name: "HugeNumbers", package: "swift_huge-numbers")
             ],
             path: "./Sources/science"
         ),
@@ -64,7 +64,7 @@ let package = Package(
             dependencies: [
                 "Science",
                 "Kanna",
-                .product(name: "huge-numbers", package: "swift_huge-numbers")
+                .product(name: "HugeNumbers", package: "swift_huge-numbers")
             ]
         ),
     ]

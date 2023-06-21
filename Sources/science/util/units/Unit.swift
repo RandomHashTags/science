@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public protocol Unit : Hashable, Comparable {
     associatedtype TargetUnitType : UnitType

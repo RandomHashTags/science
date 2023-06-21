@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct Location : Hashable {
     public var x:HugeFloat, y:HugeFloat, z:HugeFloat

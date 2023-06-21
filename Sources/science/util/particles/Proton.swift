@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 import MetalKit
 
 public struct Proton : SubatomicParticle {

@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct AtomicNucleus : Hashable {
     public var protons:[Proton]

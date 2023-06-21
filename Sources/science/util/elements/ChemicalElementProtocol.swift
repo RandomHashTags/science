@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 // TODO: support uncertainty
 public protocol ChemicalElementProtocol : Hashable, Identifiable {

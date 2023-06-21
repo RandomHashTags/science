@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct Photon : ElementaryParticle {
     public let elementary_charge:Double = 0

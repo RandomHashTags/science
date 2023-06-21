@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct AccelerationUnit : Unit {
     public static var zero:AccelerationUnit = AccelerationUnit(type: AccelerationUnitType.metres_per_second_per_second, value: HugeFloat.zero)

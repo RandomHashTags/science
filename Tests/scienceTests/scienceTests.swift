@@ -6,7 +6,7 @@
 
 import XCTest
 import Science
-import huge_numbers
+import HugeNumbers
 import AppKit
 import Kanna
 

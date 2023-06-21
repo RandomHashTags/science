@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public enum MathmaticalConstant {
     public static var speed_of_light_in_a_vacuum:SpeedUnit = SpeedUnit(type: SpeedUnitType.metre_per_second, value: HugeFloat("299792458"))

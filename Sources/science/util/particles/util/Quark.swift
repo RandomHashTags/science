@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 // https://www.britannica.com/science/quark
 public struct Quark : ElementaryParticle {

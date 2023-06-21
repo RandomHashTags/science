@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct ActionUnit : Unit {
     public typealias TargetUnitType = ActionUnitType

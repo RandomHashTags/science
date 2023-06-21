@@ -6,7 +6,7 @@
 
 import Foundation
 import MetalKit
-import huge_numbers
+import HugeNumbers
 
 public struct Atom : Hashable {
     public var uuid:UUID = UUID()

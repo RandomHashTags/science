@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public enum TemperatureUnitType : String, UnitType {
     case fahrenheit

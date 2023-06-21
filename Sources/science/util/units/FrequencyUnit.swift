@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct FrequencyUnit : Unit {
     public typealias TargetUnitType = FrequencyUnitType

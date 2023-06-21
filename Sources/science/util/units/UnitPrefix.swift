@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 // https://en.wikipedia.org/wiki/Metric_prefix
 public enum UnitPrefix : Int {

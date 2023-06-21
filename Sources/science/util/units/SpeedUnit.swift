@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct SpeedUnit : Unit {
     public typealias TargetUnitType = SpeedUnitType

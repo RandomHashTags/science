@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct ForceUnit : Unit {
     public typealias TargetUnitType = ForceUnitType

@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import huge_numbers
+import HugeNumbers
 
 public struct Neutron : SubatomicParticle {
     public let particle_type:ParticleType = ParticleType.elementary

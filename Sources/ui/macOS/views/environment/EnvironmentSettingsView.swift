@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import Science
-import huge_numbers
+import HugeNumbers
 
 public struct EnvironmentSettingsView : View {
     public let is_editable:Bool

@@ -8,7 +8,7 @@
 import Foundation
 import XCTest
 import Science
-import huge_numbers
+import HugeNumbers
 
 struct UnitConversions {
     func validate() {

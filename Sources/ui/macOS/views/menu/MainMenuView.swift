@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import Science
-import huge_numbers
+import HugeNumbers
 
 struct MainMenuView : View {
     @State private var current_subview:AnyView? = nil
