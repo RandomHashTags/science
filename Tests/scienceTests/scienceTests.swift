@@ -25,7 +25,7 @@ final class scienceTests: XCTestCase {
         test_environment()
         
         return;
-        await generate_isotope(ChemicalElement.niobium)
+        await generate_isotope(ChemicalElement.molybdenum)
     }
 }
 extension scienceTests {

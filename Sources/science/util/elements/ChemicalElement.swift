@@ -431,6 +431,7 @@ public enum ChemicalElement : String, CaseIterable, Identifiable {
         case .yttrium:    return YttriumIsotope.self
         case .zirconium:  return ZirconiumIsotope.self
         //case .niobium:    return NiobiumIsotope.self
+        case .molybdenum: return MolybdenumIsotope.self
             
         default:
             return nil
