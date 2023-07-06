@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Science
 import HugeNumbers
+import SwiftUnits
 
 public struct EnvironmentSettingsView : View {
     public let is_editable:Bool
@@ -17,7 +18,7 @@ public struct EnvironmentSettingsView : View {
         self.is_editable = is_editable
     }
     
-    public var body: some View {
+    public var body : some View {
         VStack {
             let environment:ScientificEnvironment = ScienceDataStore.shared_instance.active_environment
             Text("Environment Settings UI!")
@@ -94,7 +95,7 @@ public struct EnvironmentSettingsView : View {
         }
     }
     
-    private func get_unit_view<T: Science.Unit>(title: String, unit: UnsafeMutablePointer<T>, types: [T.TargetUnitType]) -> some View {
+    private func get_unit_view<T: SwiftUnits.Unit>(title: String, unit: UnsafeMutablePointer<T>, types: [T.TargetUnitType]) -> some View {
         HStack {
             Spacer()
             Text(title)
@@ -119,7 +120,7 @@ public struct EnvironmentSettingsView : View {
         }
     }
     
-    private func get_unit_view<T: Science.Unit>(title: String, editing_unit: @escaping ((inout T) -> Void) -> Void, types: [T.TargetUnitType]) -> some View {
+    private func get_unit_view<T: SwiftUnits.Unit>(title: String, editing_unit: @escaping ((inout T) -> Void) -> Void, types: [T.TargetUnitType]) -> some View {
         HStack {
             Spacer()
             Text(title)

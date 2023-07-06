@@ -8,6 +8,7 @@
 import Foundation
 import SceneKit
 import Science
+import SwiftUnits
 
 extension Atom {
     

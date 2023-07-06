@@ -9,6 +9,7 @@ import Science
 import HugeNumbers
 import AppKit
 import Kanna
+import SwiftUnits
 
 final class scienceTests: XCTestCase {
     func testExample() async throws {
@@ -20,7 +21,6 @@ final class scienceTests: XCTestCase {
         
         test_electrons()
         test_mathmatical_constants()
-        UnitConversions().validate()
         test_chemical_elements()
         test_environment()
         

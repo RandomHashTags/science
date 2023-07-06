@@ -2,6 +2,11 @@
 
 Just an open-source scientific simulator. Created for educational and scientific purposes.
 
+## Requirements
+- Swift >= 5.7
+- macOS >= 13.0
+- iOS >= 13.0
+
 ## Future development
 - cross-platform: macOS, linux, windows | ARM, x86, RISC
 - modern and friendly UI
