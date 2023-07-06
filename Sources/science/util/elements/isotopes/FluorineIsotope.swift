@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 // https://en.wikipedia.org/wiki/Isotopes_of_fluorine
 public enum FluorineIsotope : String, ChemicalElementIsotope {

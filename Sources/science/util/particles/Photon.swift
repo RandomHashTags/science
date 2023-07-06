@@ -6,6 +6,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public struct Photon : ElementaryParticle {
     public let elementary_charge:Double = 0

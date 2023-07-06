@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public struct AtomicDecayResult : Hashable {
     public let atom_uuid:UUID

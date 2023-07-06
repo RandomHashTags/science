@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public struct Velocity : Hashable {
     public var x:SpeedUnit, y:SpeedUnit, z:SpeedUnit

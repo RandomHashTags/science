@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public struct ScientificEnvironmentSettings : Hashable {
     public var uuid:UUID

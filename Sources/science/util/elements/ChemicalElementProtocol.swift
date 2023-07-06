@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 // TODO: support uncertainty
 public protocol ChemicalElementProtocol : Hashable, Identifiable {

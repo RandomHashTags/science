@@ -5,9 +5,10 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public protocol SubatomicParticle : Hashable {
-    associatedtype TargetMassUnit : Unit = MassUnit
+    associatedtype TargetMassUnit : SwiftUnits.Unit = MassUnit
     
     var particle_type : ParticleType { get }
     var quarks : [Quark]? { get }

@@ -7,6 +7,7 @@
 import Foundation
 import HugeNumbers
 import MetalKit
+import SwiftUnits
 
 public struct Proton : SubatomicParticle {
     public let particle_type:ParticleType = ParticleType.composite

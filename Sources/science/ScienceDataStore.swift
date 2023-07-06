@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 #if canImport(SwiftUI)
 import SwiftUI
@@ -20,7 +21,7 @@ public final class ScienceDataStore : ObservableObject {
             fps: HugeInt(is_negative: false, [0, 6]),
             ambient_temperature: MathmaticalConstant.standard_temperature,
             ambient_pressure: MathmaticalConstant.standard_pressure,
-            gravity: MathmaticalConstant.gravity_standard,
+            gravity: MathmaticalConstant.standard_gravity,
             time_speed: TimeUnit(type: TimeUnitType.second, value: HugeFloat.one)
         )
     )

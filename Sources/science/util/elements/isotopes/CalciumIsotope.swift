@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 // https://en.wikipedia.org/wiki/Isotopes_of_calcium
 public enum CalciumIsotope : String, ChemicalElementIsotope {

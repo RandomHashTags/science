@@ -18,13 +18,15 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.0.14"),
+        .package(url: "https://github.com/RandomHashTags/swift-units.git", from: "1.0.0"),
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
     ],
     targets: [
         .target(
             name: "Science",
             dependencies: [
-                .product(name: "HugeNumbers", package: "swift_huge-numbers")
+                .product(name: "HugeNumbers", package: "swift_huge-numbers"),
+                .product(name: "SwiftUnits", package: "swift-units")
             ],
             path: "./Sources/science"
         ),

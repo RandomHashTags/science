@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 // https://en.wikipedia.org/wiki/Isotopes_of_boron
 public enum BoronIsotope : String, ChemicalElementIsotope {

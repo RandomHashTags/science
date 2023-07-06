@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: evolve to noncopyable struct when available (https://github.com/apple/swift-evolution/blob/main/proposals/0390-noncopyable-structs-and-enums.md)
     public static func == (lhs: ChemicalElementDetails, rhs: ChemicalElementDetails) -> Bool {

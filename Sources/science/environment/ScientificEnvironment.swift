@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public protocol ScientificEnvironmentProtocol : Hashable {
     var uuid : UUID { get }

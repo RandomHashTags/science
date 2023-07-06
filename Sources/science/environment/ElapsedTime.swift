@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public struct ElapsedTime : Hashable, CustomStringConvertible {
     private var values:[TimeUnitType:[UnitPrefix:HugeFloat]]

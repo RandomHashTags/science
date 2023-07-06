@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public enum CobaltIsotope : String, ChemicalElementIsotope {
     case cobalt_47
