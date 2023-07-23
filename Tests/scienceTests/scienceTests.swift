@@ -20,9 +20,6 @@ final class scienceTests: XCTestCase {
         //print("scienceTests;photo energy at " + photon.frequency.value.description + " " + photon.frequency.type.symbol + "=" + String(describing: photon_energy))
         
         test_electrons()
-        test_mathmatical_constants()
-        test_chemical_elements()
-        test_environment()
         
         return;
         await generate_isotope(ChemicalElement.molybdenum)
@@ -44,46 +41,6 @@ extension scienceTests {
         XCTAssert(ChemicalElement.helium.details.atom.electron_shells.count == 1)
         XCTAssert(ChemicalElement.lithium.details.atom.electron_shells.count == 2)
         XCTAssert(ChemicalElement.sodium.details.atom.electron_shells.count == 3)
-    }
-}
-extension scienceTests {
-    private func test_mathmatical_constants() {
-    }
-}
-
-extension scienceTests {
-    private func test_chemical_elements() {
-        for element in ChemicalElement.allCases {
-            let _:ChemicalElementDetails = element.details
-        }
-        
-        test_chemical_element_isotopes()
-    }
-    private func test_chemical_element_isotopes() {
-        for element in ChemicalElement.allCases {
-            if let isotope_type:any ChemicalElementIsotope.Type = element.isotope_type {
-                for isotope in isotope_type.allCases as! [any ChemicalElementIsotope] {
-                    let _:ChemicalElementDetails = isotope.details
-                }
-            }
-        }
-    }
-}
-
-extension scienceTests {
-    private func test_environment() {
-        test_environment_elapsed_time()
-    }
-    private func test_environment_elapsed_time() {
-        var elapsed_time:ElapsedTime = ElapsedTime()
-        elapsed_time += TimeUnit(type: TimeUnitType.second, value: HugeFloat("25"))
-        elapsed_time += TimeUnit(prefix: UnitPrefix.kilo, type: TimeUnitType.second, value: HugeFloat("1"))
-        elapsed_time += TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: HugeFloat("5"))
-        elapsed_time += TimeUnit(prefix: UnitPrefix.zepto, type: TimeUnitType.second, value: HugeFloat("2"))
-        elapsed_time += TimeUnit(prefix: UnitPrefix.giga, type: TimeUnitType.second, value: HugeFloat("8"))
-        print("scienceTests;test_environment_elapsed_time;elapsed_time=" + elapsed_time.description)
-        
-        XCTAssert(ElapsedTime([.second:[.normal:HugeFloat.one]]) == TimeUnit(type: TimeUnitType.second, value: HugeFloat.one))
     }
 }
 

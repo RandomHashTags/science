@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RandomHashTags/swift-units.git",
       "state" : {
-        "revision" : "c00162160e0a7a21edf17fac372bdd97d383621b",
-        "version" : "1.0.0"
+        "revision" : "d7ac8be2f8b849d09aeb4e80287fb396950c7afb",
+        "version" : "1.1.3"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RandomHashTags/swift_huge-numbers",
       "state" : {
-        "revision" : "4d78511f595bed62f9904ced59c5799250a982aa",
-        "version" : "1.0.14"
+        "revision" : "085e31230464b9385bdaf069ea037cc393c4cfd2",
+        "version" : "1.0.16"
       }
     }
   ],
