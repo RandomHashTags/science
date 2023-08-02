@@ -9,6 +9,8 @@ import Foundation
 import SceneKit
 import SwiftUI
 import Science
+import HugeNumbers
+import SwiftUnits
 
 final class EnvironmentRendererScene : SCNScene, SCNSceneRendererDelegate, SCNPhysicsContactDelegate {
     
@@ -18,24 +20,15 @@ final class EnvironmentRendererScene : SCNScene, SCNSceneRendererDelegate, SCNPh
         let data_store:ScienceDataStore = ScienceDataStore.shared_instance
         let environment:ScientificEnvironment = data_store.active_environment
         
+        let gravity:Float = -data_store.active_environment.gravity.to_unit(prefix: UnitPrefix.normal, unit: AccelerationUnitType.metres_per_second_per_second).value.represented_float
         background.contents = NSColor.black
-        physicsWorld.gravity = SCNVector3(0, 0, 0)
+        physicsWorld.gravity = SCNVector3(0, gravity, 0)
         physicsWorld.contactDelegate = self
         
-        var name:String = ""
         for atom in environment.half_life_atoms {
-            if let node:SCNNode = atom.get_node(affected_by_gravity: false) {
-                name = node.name!
+            if let node:SCNNode = atom.get_node(affected_by_gravity: true) {
                 node.position = SCNVector3(0, 0, 0)
                 rootNode.addChildNode(node)
-            }
-        }
-        
-        let target_name:String = name
-        Task {
-            try? await Task.sleep(for: .seconds(3))
-            if let node:SCNNode = rootNode.childNode(withName: target_name, recursively: false) {
-                node.physicsBody!.applyForce(SCNVector3(x: 0, y: 0.01, z: 0), asImpulse: true)
             }
         }
         environment.resume()

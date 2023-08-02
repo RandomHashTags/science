@@ -36,10 +36,11 @@ public struct ScientificEnvironmentActionLog {
             switch type {
             case .atomic_decay:
                 let data:AtomicDecayResult = action.data as! AtomicDecayResult
-                data_to_string = "[\(data.atom_uuid)] " + data.decayed_from + " -> " + data.decayed_into + " (took \(data.iteration_count) half-life(s))"
+                let iteration_count:UInt64 = data.iteration_count
+                data_to_string = "[\(data.atom_uuid)] " + data.decayed_from + " -> " + data.decayed_into + " (took \(iteration_count) half-life" + (iteration_count > 1 ? "s" : "") + ")"
                 break
             }
-            array.append("[" + action.timestamp.description + "] [\(type)] " + data_to_string)
+            array.append("[\(action.timestamp)] [\(type)] " + data_to_string)
         }
         return array
     }

@@ -11,32 +11,25 @@ import AppKit
 import Kanna
 import SwiftUnits
 
-final class scienceTests: XCTestCase {
+final class scienceTests : XCTestCase {
     func testExample() async throws {
         let huge_float_one:HugeFloat = HugeFloat.one
-        test_molecules()
-        
         let photon:Photon = Photon(frequency: FrequencyUnit(type: .hertz, value: huge_float_one)), photon_energy:EnergyUnit = photon.to_energy()
         //print("scienceTests;photo energy at " + photon.frequency.value.description + " " + photon.frequency.type.symbol + "=" + String(describing: photon_energy))
-        
-        test_electrons()
         
         return;
         await generate_isotope(ChemicalElement.molybdenum)
     }
 }
 extension scienceTests {
-    private func test_molecules() {
+    func test_molecules() {
         let atom:Atom = ChemicalElement.silicon.details.atom
         let molecule:Molecule = Molecule(atoms: [atom, atom, atom, atom, atom])
         XCTAssert(molecule.molecular_formula.elementsEqual("Si" + 5.as_subscript))
     }
 }
 extension scienceTests {
-    private func test_electrons() {
-        test_electron_shell()
-    }
-    private func test_electron_shell() {
+    func test_electron_shell() {
         XCTAssert(ChemicalElement.hydrogen.details.atom.electron_shells.count == 1)
         XCTAssert(ChemicalElement.helium.details.atom.electron_shells.count == 1)
         XCTAssert(ChemicalElement.lithium.details.atom.electron_shells.count == 2)

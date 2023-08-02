@@ -21,19 +21,20 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         }
         let values:[Substring] = identifier.split(separator: "_")
         let key:String = String(values[0])
+        guard let element:ChemicalElement = ChemicalElement(rawValue: key) else { return nil }
         switch values.count {
         case 1:
-            guard let element:ChemicalElement = ChemicalElement(rawValue: key) else { return nil }
             return element.load_details
         default:
-            guard let element:ChemicalElement = ChemicalElement(rawValue: key),
-                  let isotope:any ChemicalElementIsotope = element.isotope_type?.init(rawValue: identifier) else {
+            guard let isotope:any ChemicalElementIsotope = element.isotope_type?.init(rawValue: identifier) else {
                 return nil
             }
             return isotope.load_details
         }
     }
-        
+    
+    public let id:String
+    public let is_isotope:Bool
     public let atomic_number:Int, neutron_count:Int?
     public let symbol:String
     public let standard_atomic_weight:MassUnit
@@ -53,7 +54,9 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     
     public let isotopes:(any ChemicalElementIsotope).Type?
     
-    public init(identifier: String, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, atomic_radius: UInt16, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
+    public init(identifier: String, is_isotope: Bool = false, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, atomic_radius: UInt16, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
+        self.id = identifier
+        self.is_isotope = is_isotope
         self.atomic_number = atomic_number
         self.neutron_count = neutron_count
         self.symbol = symbol
@@ -71,11 +74,12 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     }
     public convenience init(_ isotope: any ChemicalElementIsotope, neutron_count: Int, standard_atomic_weight: String, density: String? = nil, melting_point: String? = nil, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil) {
         let element:ChemicalElementDetails = ChemicalElementDetails.value_of(identifier: isotope.element.rawValue)!
-        self.init(identifier: isotope.rawValue, atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, atomic_radius: element.atomic_radius, density: density, melting_point: melting_point, boiling_point: boiling_point, decay_mode: decay_mode, half_life: half_life, decays_into_isomer: decays_into_isomer)
+        self.init(identifier: isotope.rawValue, is_isotope: true, atomic_number: element.atomic_number, neutron_count: neutron_count, symbol: element.symbol, standard_atomic_weight: standard_atomic_weight, atomic_radius: element.atomic_radius, density: density, melting_point: melting_point, boiling_point: boiling_point, decay_mode: decay_mode, half_life: half_life, decays_into_isomer: decays_into_isomer)
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(atomic_number)
+        hasher.combine(id)
+        hasher.combine(is_isotope)
         hasher.combine(neutron_count)
         hasher.combine(standard_atomic_weight)
     }

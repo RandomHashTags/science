@@ -17,11 +17,11 @@ public struct EnvironmentRendererView : View {
     
     var camera_node : SCNNode {
         let camera:SCNCamera = SCNCamera()
-        camera.zFar = 1000
+        camera.zFar = 100
         
         let node:SCNNode = SCNNode()
         node.camera = camera
-        node.position = SCNVector3(0, 0, 1000)
+        node.position = SCNVector3(0, 0, 100)
         return node
     }
     
