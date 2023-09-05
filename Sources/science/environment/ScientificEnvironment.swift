@@ -46,7 +46,7 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
     
     private let uuid:UUID
     
-    public var fps:HugeInt {
+    public var fps : HugeInt {
         didSet {
             let fps_integer:UInt64 = fps.to_int()!
             let fps_float:HugeFloat = fps.to_float

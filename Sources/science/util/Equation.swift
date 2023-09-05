@@ -21,6 +21,19 @@ enum Equation {
         /// Alternating Current.
         static func joule_heating_ac(current: HugeFloat, resistance: HugeFloat) {
         }
+        
+        /// Static electrical resistance of an object.
+        static func resistance(voltage: HugeFloat, current: HugeFloat) -> HugeFloat {
+            return voltage / current
+        }
+        /// Static electrical conductance of an object.
+        static func conductance(voltage: HugeFloat, current: HugeFloat) -> HugeFloat {
+            return current / voltage
+        }
+        
+        static func voltage(current: HugeFloat, resistance: HugeFloat) -> HugeFloat {
+            return current * resistance
+        }
     }
     
 }

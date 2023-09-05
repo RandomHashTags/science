@@ -42,9 +42,9 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     public let atomic_radius:UInt16
     /// if known, predicted/known density of this chemical element, measured in grams per cubic centimetre
     public let density:DensityUnit?
-    /// if known, melting point of this chemical element, measured in degrees Kelvin
+    /// if known, melting point of this chemical element at standard pressure, measured in degrees Kelvin
     public let melting_point:TemperatureUnit?
-    /// if known, boiling point of this chemical element, measured in degrees Kelvin
+    /// if known, boiling point of this chemical element at standard pressure, measured in degrees Kelvin
     public let boiling_point:TemperatureUnit?
     
     // TODO: decay mode probabilities
