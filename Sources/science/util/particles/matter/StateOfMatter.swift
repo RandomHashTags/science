@@ -8,7 +8,7 @@
 import Foundation
 
 // https://en.wikipedia.org/wiki/List_of_states_of_matter
-enum StateOfMatter {
+public enum StateOfMatter {
     case solid
     case liquid
     case gas

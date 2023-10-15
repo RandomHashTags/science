@@ -80,7 +80,7 @@ public struct Atom : Hashable {
     private mutating func try_decaying() -> AtomicDecayResult? {
         guard let half_life:TimeUnit = half_life, let decay_mode:AtomicDecayType = decay_mode else { return nil }
         let test:TimeUnit = elapsed_time_since_last_decay.to_unit(unit_prefix: half_life.prefix, unit_type: half_life.type)
-        let iterations:UInt64 = test.value.divide_by(half_life.value, precision: HugeInt.float_precision).integer.to_int() ?? 0
+        let iterations:UInt64 = test.value.divide_by(half_life.value, precision: HugeInt("5")).integer.to_int() ?? 0
         guard iterations > 0 else { return nil }
         for i in 1...iterations {
             if Bool.random() {
