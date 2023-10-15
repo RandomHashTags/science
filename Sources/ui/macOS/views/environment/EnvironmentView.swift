@@ -19,7 +19,7 @@ struct EnvironmentView : View {
         } content: {
             let max_width:CGFloat = 1000
             VStack {
-                //EnvironmentStatsView(environment: environment, fps_counter: environment.fps_counter)
+                EnvironmentStatsView(environment: environment, fps_counter: environment.fps_counter)
                 //Spacer()
                 EnvironmentRenderer()
                 //Spacer()

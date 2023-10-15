@@ -89,11 +89,11 @@ public final class ScientificEnvironment : Hashable, ObservableObject {
         ambient_pressure = settings.ambient_pressure
         gravity = settings.gravity
         
-        let time_speed:TimeUnit = settings.time_speed
+        let time_speed:TimeUnit = TimeUnit(type: TimeUnit.TargetUnitType.hour, value: "1")// settings.time_speed
         timeline = EnvironmentTimeline(
             starting_point: TimeUnit(type: TimeUnitType.second, value: HugeFloat.zero),
             speed: time_speed,
-            end_after: TimeUnit(type: TimeUnitType.second, value: HugeFloat("5"))
+            end_after: TimeUnit(type: TimeUnitType.day, value: HugeFloat("10"))
         )
         simulation_elapsed_time = ElapsedTime()
         

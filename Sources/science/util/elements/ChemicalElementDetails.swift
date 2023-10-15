@@ -50,6 +50,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     // TODO: decay mode probabilities
     public let decay_mode:AtomicDecayType?
     public let half_life:TimeUnit?
+    public let isomer:Int?
     public let decays_into_isomer:Int?
     
     public let isotopes:(any ChemicalElementIsotope).Type?
@@ -68,6 +69,7 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
         self.boiling_point = boiling_point != nil ? TemperatureUnit(type: TemperatureUnitType.kelvin, value: HugeFloat(boiling_point!)) : nil
         self.decay_mode = decay_mode
         self.half_life = half_life
+        self.isomer = identifier.contains("_isomer_") ? Int(identifier.split(separator: "_").last!) : nil
         self.decays_into_isomer = decays_into_isomer
         self.isotopes = isotopes
         ChemicalElementDetails.cached[identifier] = self
@@ -94,6 +96,6 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
             neutrons = [Neutron].init(repeating: Neutron(), count: weight - atomic_number)
         }
         let electron_shells:[ElectronShell] = ElectronShell.collect(electron_count: atomic_number)
-        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, decay_mode: decay_mode, half_life: half_life, decays_into_isomer: decays_into_isomer)
+        return Atom(nucleus: AtomicNucleus(protons: protons, neutrons: neutrons), electron_shells: electron_shells, decay_mode: decay_mode, half_life: half_life, isomer: isomer, decays_into_isomer: decays_into_isomer)
     }()
 }

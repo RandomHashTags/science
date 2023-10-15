@@ -77,31 +77,31 @@ public struct ElapsedTime : Hashable, CustomStringConvertible {
         
         var string:String = "", needs_comma:Bool = false
         if !decades.integer.is_zero {
-            string.append(decades.description + "decades")
+            string.append("\(decades)decades")
             needs_comma = true
         }
         if !years.integer.is_zero {
-            string.append((needs_comma ? ", " : "") + years.description + "yr")
+            string.append((needs_comma ? ", " : "") + "\(years)yr")
             needs_comma = true
         }
         if !weeks.integer.is_zero {
-            string.append((needs_comma ? ", " : "") + weeks.description + "weeks")
+            string.append((needs_comma ? ", " : "") + "\(weeks)weeks")
             needs_comma = true
         }
         if !days.integer.is_zero {
-            string.append((needs_comma ? ", " : "") + days.description + "d")
+            string.append((needs_comma ? ", " : "") + "\(days)d")
             needs_comma = true
         }
         if !hours.integer.is_zero {
-            string.append((needs_comma ? ", " : "") + hours.description + "hr")
+            string.append((needs_comma ? ", " : "") + "\(hours)hr")
             needs_comma = true
         }
         if !minutes.integer.is_zero {
-            string.append((needs_comma ? ", " : "") + minutes.description + "min")
+            string.append((needs_comma ? ", " : "") + "\(minutes)min")
             needs_comma = true
         }
         if string.isEmpty || !seconds.integer.is_zero {
-            string.append((needs_comma ? ", " : "") + seconds.description + "s")
+            string.append((needs_comma ? ", " : "") + "\(seconds)s")
         }
         return string
     }
@@ -196,10 +196,17 @@ public struct ElapsedTime : Hashable, CustomStringConvertible {
 public extension ElapsedTime {
     static func >= (left: ElapsedTime, right: TimeUnit) -> Bool {
         let right_type:TimeUnitType = right.type, right_prefix:UnitPrefix = right.prefix
-        let greater_elements:[Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element] = left.values.filter({ $0.key.is_greater_than_or_equal_to(right_type) })
+        let left_values:[TimeUnitType:[UnitPrefix:HugeFloat]] = left.values
+        let greater_elements:[Dictionary<TimeUnitType, [UnitPrefix : HugeFloat]>.Element] = left_values.filter({ $0.key.is_greater_than_or_equal_to(right_type) })
         switch greater_elements.count {
         case 0:
-            return false
+            var left_value:TimeUnit = TimeUnit(type: TimeUnitType.second, value: "0")
+            for (unit_type, unit_type_values) in left_values {
+                for (unit_prefix, unit_value) in unit_type_values {
+                    left_value += TimeUnit(prefix: unit_prefix, type: unit_type, value: unit_value).to_unit(prefix: UnitPrefix.normal, unit: TimeUnitType.second)
+                }
+            }
+            return left_value >= right.to_unit(prefix: UnitPrefix.normal, unit: TimeUnitType.second)
         case 1:
             let greater_value:[UnitPrefix:HugeFloat] = greater_elements[0].value
             if let greater_prefix:UnitPrefix = greater_value.keys.first(where: { $0.rawValue > right_prefix.rawValue }), !greater_value[greater_prefix]!.integer.is_zero {

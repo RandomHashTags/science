@@ -15,7 +15,7 @@ public struct Atom : Hashable {
     public var electron_shells:[ElectronShell]
     
     public var elapsed_time_since_last_decay:ElapsedTime = ElapsedTime()
-    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, decays_into_isomer:Int?
+    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, isomer:Int?, decays_into_isomer:Int?
     
     public var lifetime_total:ElapsedTime = ElapsedTime()
     
@@ -47,7 +47,7 @@ public struct Atom : Hashable {
     public var chemical_element_identifier : String? {
         guard let element:ChemicalElement = chemical_element else { return nil }
         let target_number:Int = nucleus.proton_count + nucleus.neutron_count
-        return element.rawValue + "_\(target_number)" + (decays_into_isomer != nil ? "_isomer_\(decays_into_isomer!)" : "")
+        return element.rawValue + "_\(target_number)" + (isomer != nil ? "_isomer_\(isomer!)" : "")
     }
     public var chemical_element_details : ChemicalElementDetails? {
         guard let identifier:String = chemical_element_identifier else { return nil }
@@ -78,24 +78,26 @@ public struct Atom : Hashable {
         return results.isEmpty ? nil : results
     }
     private mutating func try_decaying() -> AtomicDecayResult? {
-        let test:TimeUnit = elapsed_time_since_last_decay.to_unit(unit_prefix: half_life!.prefix, unit_type: half_life!.type)
-        let iterations:UInt64 = test.value.divide_by(half_life!.value, precision: HugeInt.float_precision).integer.to_int()!
+        guard let half_life:TimeUnit = half_life, let decay_mode:AtomicDecayType = decay_mode else { return nil }
+        let test:TimeUnit = elapsed_time_since_last_decay.to_unit(unit_prefix: half_life.prefix, unit_type: half_life.type)
+        let iterations:UInt64 = test.value.divide_by(half_life.value, precision: HugeInt.float_precision).integer.to_int() ?? 0
         guard iterations > 0 else { return nil }
         for i in 1...iterations {
             if Bool.random() {
                 let total_iteration_count = i + survived_iterations
-                let atom_lifetime:TimeUnit = half_life! * HugeInt(total_iteration_count)
+                let atom_lifetime:TimeUnit = half_life * HugeInt(total_iteration_count)
                 elapsed_time_since_last_decay -= atom_lifetime
                 let original_element_identifier:String = chemical_element_identifier!
                 
-                let reaction:ChemicalReaction = decay(decay_mode!)
+                let reaction:ChemicalReaction = decay(decay_mode)
+                self.isomer = decays_into_isomer
                 let decayed_to_element_identifier:String = chemical_element_identifier!
                 let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: decayed_to_element_identifier) ?? ChemicalElementDetails.value_of(identifier: chemical_element!.rawValue)
                 
                 self.decay_mode = new_element.decay_mode
                 self.half_life = new_element.half_life
                 self.decays_into_isomer = new_element.decays_into_isomer
-                print("Atom;try_decaying;" + original_element_identifier + " -> " + decayed_to_element_identifier + ";maximum_iterations=\(iterations);took \(total_iteration_count) iterations;new_half_life=\(String(describing: half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
+                print("Atom;try_decaying;" + original_element_identifier + " -> " + decayed_to_element_identifier + ";maximum_iterations=\(iterations);took \(total_iteration_count) iterations;new_half_life=\(String(describing: self.half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
                 survived_iterations = 0
                 return AtomicDecayResult(atom_uuid: uuid, atom_lifetime: atom_lifetime, reaction: reaction, iteration_count: total_iteration_count, decayed_from: original_element_identifier, decayed_into: decayed_to_element_identifier)
             }

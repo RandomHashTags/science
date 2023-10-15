@@ -56,7 +56,7 @@ public enum NeonIsotope : String, ChemicalElementIsotope {
         case .neon_23:
             return ChemicalElementDetails(self, neutron_count: 13, standard_atomic_weight: "22.99446691", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "37.15"))
         case .neon_24:
-            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "23.9936106", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "3.38"))
+            return ChemicalElementDetails(self, neutron_count: 14, standard_atomic_weight: "23.9936106", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "3.38"), decays_into_isomer: 1)
         case .neon_25:
             return ChemicalElementDetails(self, neutron_count: 15, standard_atomic_weight: "24.997810", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "602"))
         case .neon_26:
