@@ -141,7 +141,7 @@ public enum ChemicalElement : String, CaseIterable, Identifiable {
     }
     
     private func get_details(atomic_number: Int, symbol: String, standard_atomic_weight: String, phase_at_stp: StateOfMatter, atomic_radius: UInt16, density: String, melting_point: String?, boiling_point: String?) -> ChemicalElementDetails {
-        return ChemicalElementDetails(identifier: rawValue, atomic_number: atomic_number, symbol: symbol, standard_atomic_weight: standard_atomic_weight, phase_at_stp: phase_at_stp, atomic_radius: atomic_radius, density: density, melting_point: melting_point, boiling_point: boiling_point)
+        return ChemicalElementDetails(identifier: rawValue, atomic_number: atomic_number, symbol: symbol, standard_atomic_weight: standard_atomic_weight, phase_at_stp: phase_at_stp, atomic_radius: atomic_radius, density: density, melting_point: melting_point, boiling_point: boiling_point, isotopes: isotope_type)
     }
     
     public var details : ChemicalElementDetails {

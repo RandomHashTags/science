@@ -9,7 +9,9 @@ import HugeNumbers
 import SwiftUnits
 
 enum Equation {
-    
+}
+
+extension Equation {
     enum Energy {
         /// Calculates the power (energy per unit time) converted from electrical energy to thermal energy (direct current)
         /// - Parameters:
@@ -35,6 +37,9 @@ enum Equation {
         static func voltage(current: HugeFloat, resistance: HugeFloat) -> HugeFloat {
             return current * resistance
         }
+        
+        static func current(voltage: HugeFloat, resistance: HugeFloat) -> HugeFloat {
+            return voltage / resistance
+        }
     }
-    
 }

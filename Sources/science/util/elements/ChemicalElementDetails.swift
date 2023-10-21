@@ -55,9 +55,9 @@ public final class ChemicalElementDetails : ChemicalElementProtocol { // TODO: e
     public let isomer:Int?
     public let decays_into_isomer:Int?
     
-    public let isotopes:(any ChemicalElementIsotope).Type?
+    public let isotopes:(any ChemicalElementIsotope.Type)?
     
-    public init(identifier: String, is_isotope: Bool = false, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, phase_at_stp: StateOfMatter, atomic_radius: UInt16, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil, isotopes: (any ChemicalElementIsotope).Type? = nil) {
+    public init(identifier: String, is_isotope: Bool = false, atomic_number: Int, neutron_count: Int? = nil, symbol: String, standard_atomic_weight: String, phase_at_stp: StateOfMatter, atomic_radius: UInt16, density: String?, melting_point: String?, boiling_point: String? = nil, decay_mode: AtomicDecayType? = nil, half_life: TimeUnit? = nil, decays_into_isomer: Int? = nil, isotopes: (any ChemicalElementIsotope.Type)? = nil) {
         self.id = identifier
         self.is_isotope = is_isotope
         self.atomic_number = atomic_number
