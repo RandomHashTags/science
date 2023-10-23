@@ -193,6 +193,11 @@ public struct ElapsedTime : Hashable, CustomStringConvertible {
 /*
  Comparable
  */
+extension TimeUnitType {
+    func is_greater_than_or_equal_to(_ unit: Self) -> Bool {
+        return Self.allCases.firstIndex(of: self)! >= Self.allCases.firstIndex(of: unit)!
+    }
+}
 public extension ElapsedTime {
     static func >= (left: ElapsedTime, right: TimeUnit) -> Bool {
         let right_type:TimeUnitType = right.type, right_prefix:UnitPrefix = right.prefix

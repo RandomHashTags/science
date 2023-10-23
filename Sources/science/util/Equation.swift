@@ -26,20 +26,28 @@ extension Equation {
         }
         
         /// Static electrical resistance of an object.
-        static func resistance(voltage: HugeFloat, current: HugeFloat) -> HugeFloat {
-            return voltage / current
+        static func resistance(voltage: ElectricPotentialUnit, current: ElectricCurrentUnit) -> ElectricResistanceUnit {
+            let voltage:HugeFloat = voltage.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricPotentialUnitType.volt)
+            let current:HugeFloat = current.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricCurrentUnitType.ampere)
+            return ElectricResistanceUnit(type: ElectricResistanceUnitType.ohm, value: voltage / current)
         }
         /// Static electrical conductance of an object.
-        static func conductance(voltage: HugeFloat, current: HugeFloat) -> HugeFloat {
-            return current / voltage
+        static func conductance(voltage: ElectricPotentialUnit, current: ElectricCurrentUnit) -> ElectricResistanceUnit {
+            let voltage:HugeFloat = voltage.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricPotentialUnitType.volt)
+            let current:HugeFloat = current.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricCurrentUnitType.ampere)
+            return ElectricResistanceUnit(type: ElectricResistanceUnitType.ohm, value: current / voltage)
         }
         
-        static func voltage(current: HugeFloat, resistance: HugeFloat) -> HugeFloat {
-            return current * resistance
+        static func voltage(current: ElectricCurrentUnit, resistance: ElectricResistanceUnit) -> ElectricPotentialUnit {
+            let current:HugeFloat = current.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricCurrentUnitType.ampere)
+            let resistance:HugeFloat = resistance.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricResistanceUnitType.ohm)
+            return ElectricPotentialUnit(type: ElectricPotentialUnitType.volt, value: current * resistance)
         }
         
-        static func current(voltage: HugeFloat, resistance: HugeFloat) -> HugeFloat {
-            return voltage / resistance
+        static func current(voltage: ElectricPotentialUnit, resistance: ElectricResistanceUnit) -> ElectricCurrentUnit {
+            let voltage:HugeFloat = voltage.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricPotentialUnitType.volt)
+            let resistance:HugeFloat = resistance.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricResistanceUnitType.ohm)
+            return ElectricCurrentUnit(type: ElectricCurrentUnitType.ampere, value: voltage / resistance)
         }
     }
 }

@@ -24,8 +24,11 @@ final class scienceTests : XCTestCase {
 extension scienceTests {
     func test_molecules() {
         let atom:Atom = ChemicalElement.silicon.details.atom
-        let molecule:Molecule = Molecule(atoms: [atom, atom, atom, atom, atom])
-        XCTAssert(molecule.molecular_formula.elementsEqual("Si" + 5.as_subscript))
+        var molecule:Molecule = Molecule(atoms: [atom, atom, atom, atom, atom])
+        XCTAssertEqual(molecule.molecular_formula, "Si" + 5.as_subscript)
+        
+        molecule = Molecule.glucose
+        XCTAssertEqual(molecule.molecular_formula, "C" + 6.as_subscript + "H" + 12.as_subscript + "O" + 6.as_subscript)
     }
 }
 extension scienceTests {
