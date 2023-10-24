@@ -10,16 +10,16 @@ import HugeNumbers
 import SwiftUnits
 
 public struct Atom : Hashable {
-    public var uuid:UUID = UUID()
-    public var nucleus:AtomicNucleus
-    public var electron_shells:[ElectronShell]
+    public private(set) var uuid:UUID = UUID()
+    public private(set) var nucleus:AtomicNucleus
+    public private(set) var electron_shells:[ElectronShell]
     
     public var elapsed_time_since_last_decay:ElapsedTime = ElapsedTime()
-    public var decay_mode:AtomicDecayType?, half_life:TimeUnit?, isomer:Int?, decays_into_isomer:Int?
+    public private(set) var decay_mode:AtomicDecayType?, half_life:TimeUnit?, isomer:Int?, decays_into_isomer:Int?
     
     public var lifetime_total:ElapsedTime = ElapsedTime()
     
-    public var survived_iterations:UInt64 = 0
+    public private(set) var survived_iterations:UInt64 = 0
     
     public var electron_count : Int {
         return electron_shells.reduce(0, { $0 + $1.electrons.count })

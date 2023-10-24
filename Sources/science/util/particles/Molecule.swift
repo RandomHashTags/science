@@ -5,18 +5,26 @@
 //
 
 import Foundation
+import OrderedCollections
 
-public struct Molecule {
-    public var atoms:[Atom]
+public struct Molecule : Hashable {
+    public private(set) var atoms:[Atom]
     
     public init(atoms: [Atom]) {
         self.atoms = atoms
     }
+    public init(elements: OrderedDictionary<ChemicalElement, Int>) {
+        var atoms:[Atom] = []
+        atoms.reserveCapacity(elements.reduce(0, { $0 + $1.1 }))
+        for (element, amount) in elements {
+            let atom:Atom = element.details.atom
+            atoms.append(contentsOf: (0..<amount).map({ _ in atom }))
+        }
+        self.atoms = atoms
+    }
     
     public var molecular_formula : String {
-        var elements:[ChemicalElement:Int] = [:]
-        var element_ids:Set<ChemicalElement> = []
-        var element_order:[ChemicalElement] = []
+        var elements:OrderedDictionary<ChemicalElement, Int> = [:]
         for atom in atoms {
             if let element:ChemicalElement = atom.chemical_element {
                 if elements[element] == nil {
@@ -24,16 +32,9 @@ public struct Molecule {
                 } else {
                     elements[element]! += 1
                 }
-                if element_ids.insert(element).inserted {
-                    element_order.append(element)
-                }
             }
         }
-        var values:[String] = []
-        for element in element_order {
-            values.append(get_molecular_formula(element, amount: elements[element]!))
-        }
-        return values.joined()
+        return elements.map({ get_molecular_formula($0.key, amount: $0.value) }).joined()
     }
     private func get_molecular_formula(_ chemical_element: ChemicalElement, amount: Int) -> String {
         let amount_string:String = amount > 1 ? amount.as_subscript : ""
@@ -44,18 +45,10 @@ public struct Molecule {
 
 extension Molecule {
     public static var water : Molecule = {
-        let hydrogen:Atom = ChemicalElement.hydrogen.details.atom
-        return Molecule(atoms: [hydrogen, hydrogen, ChemicalElement.oxygen.details.atom])
+        return Molecule(elements: [ChemicalElement.hydrogen : 2, ChemicalElement.oxygen : 1])
     }()
     
     public static var glucose : Molecule = {
-        let carbon:Atom = ChemicalElement.carbon.details.atom
-        let hydrogen:Atom = ChemicalElement.hydrogen.details.atom
-        let oxygen:Atom = ChemicalElement.oxygen.details.atom
-        return Molecule(atoms: [
-            carbon, carbon, carbon, carbon, carbon, carbon,
-            hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen, hydrogen,
-            oxygen, oxygen, oxygen, oxygen, oxygen, oxygen
-        ])
+        return Molecule(elements: [ChemicalElement.carbon : 6, ChemicalElement.hydrogen : 12, ChemicalElement.oxygen : 6])
     }()
 }

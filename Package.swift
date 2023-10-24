@@ -17,6 +17,8 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.5"),
+        
         .package(url: "https://github.com/RandomHashTags/swift_huge-numbers.git", from: "1.1.0"),
         .package(url: "https://github.com/RandomHashTags/swift-units.git", from: "1.2.0"),
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
@@ -26,7 +28,8 @@ let package = Package(
             name: "Science",
             dependencies: [
                 .product(name: "HugeNumbers", package: "swift_huge-numbers"),
-                .product(name: "SwiftUnits", package: "swift-units")
+                .product(name: "SwiftUnits", package: "swift-units"),
+                .product(name: "OrderedCollections", package: "swift-collections"),
             ],
             path: "./Sources/science"
         ),
