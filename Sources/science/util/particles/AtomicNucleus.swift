@@ -8,8 +8,8 @@ import Foundation
 import HugeNumbers
 
 public struct AtomicNucleus : Hashable {
-    public var protons:[Proton]
-    public var neutrons:[Neutron]
+    public internal(set) var protons:[Proton]
+    public internal(set) var neutrons:[Neutron]
     
     public var proton_count : Int {
         return protons.count

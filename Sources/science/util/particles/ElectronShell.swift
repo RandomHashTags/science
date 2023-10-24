@@ -24,7 +24,7 @@ public struct ElectronShell : Hashable {
     }
     
     public let maximum_allowed_electrons:Int
-    public var electrons:[Electron]
+    public private(set) var electrons:[Electron]
     
     public init(maximum_allowed_electrons: Int, electrons: [Electron]) {
         self.maximum_allowed_electrons = maximum_allowed_electrons

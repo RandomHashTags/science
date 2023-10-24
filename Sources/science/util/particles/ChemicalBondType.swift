@@ -8,7 +8,7 @@
 import Foundation
 
 // https://en.wikipedia.org/wiki/Chemical_bond
-enum ChemicalBondType {
+public enum ChemicalBondType {
     case covalent
     case ionic
     case metallic

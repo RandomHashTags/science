@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhaseTransition {
-    let from:StateOfMatter
-    let to:StateOfMatter
+public struct PhaseTransition {
+    public let from:StateOfMatter
+    public let to:StateOfMatter
 }

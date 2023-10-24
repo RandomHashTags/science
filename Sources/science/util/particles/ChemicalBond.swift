@@ -8,6 +8,6 @@
 import Foundation
 
 // https://en.wikipedia.org/wiki/Chemical_bond
-struct ChemicalBond : Hashable {
-    var type:ChemicalBondType
+public struct ChemicalBond : Hashable {
+    public private(set) var type:ChemicalBondType
 }
