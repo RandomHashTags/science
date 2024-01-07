@@ -12,6 +12,10 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
+            name: "Circuitry",
+            targets: ["Circuitry"]
+        ),
+        .library(
             name: "Physics",
             targets: ["Physics"]
         ),
@@ -42,6 +46,11 @@ let package = Package(
                 .product(name: "OrderedCollections", package: "swift-collections"),
             ],
             path: "./Sources/Utilities"
+        ),
+        .target(
+            name: "Circuitry",
+            dependencies: ["ScienceUtilities"],
+            path: "./Sources/Circuitry"
         ),
         .target(
             name: "Physics",

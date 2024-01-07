@@ -6,10 +6,10 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public protocol LogicGate : CircuitComponent {
     var data_bits : Int { get set }
     var number_of_inputs : Int { get set }
-    
     var gate_delay : TimeUnit { get set }
 }
