@@ -7,9 +7,10 @@
 
 import Foundation
 import XCTest
-@testable import Science
 import SwiftUnits
 import HugeNumbers
+import Science
+import ScienceUtilities
 
 final class EnvironmentTests : XCTestCase {
     func test_elapsed_time() {

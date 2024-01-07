@@ -9,6 +9,7 @@ import Foundation
 import SceneKit
 import Science
 import SwiftUnits
+import Physics
 
 extension Atom {
     

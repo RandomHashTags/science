@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Science
+import Physics
 
 struct PeriodicTableView : View {
     

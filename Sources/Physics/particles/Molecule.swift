@@ -6,6 +6,7 @@
 
 import Foundation
 import OrderedCollections
+import ScienceUtilities
 
 public struct Molecule : Hashable {
     public private(set) var atoms:[Atom]
@@ -43,12 +44,11 @@ public struct Molecule : Hashable {
 }
 
 
-extension Molecule {
-    public static var water : Molecule = {
-        return Molecule(elements: [ChemicalElement.hydrogen : 2, ChemicalElement.oxygen : 1])
-    }()
+public extension Molecule {
+    static let water:Molecule = Molecule(elements: [ChemicalElement.hydrogen : 2, ChemicalElement.oxygen : 1])
     
-    public static var glucose : Molecule = {
-        return Molecule(elements: [ChemicalElement.carbon : 6, ChemicalElement.hydrogen : 12, ChemicalElement.oxygen : 6])
-    }()
+    static let carbon_monoxide:Molecule = Molecule(elements: [ChemicalElement.carbon : 1, ChemicalElement.oxygen : 1])
+    static let carbon_dioxide:Molecule = Molecule(elements: [ChemicalElement.carbon : 1, ChemicalElement.oxygen : 2])
+    
+    static let glucose:Molecule = Molecule(elements: [ChemicalElement.carbon : 6, ChemicalElement.hydrogen : 12, ChemicalElement.oxygen : 6])
 }

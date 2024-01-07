@@ -17,6 +17,10 @@ public protocol SubatomicParticle : Hashable {
     var mass : TargetMassUnit { get set }
 }
 public extension SubatomicParticle {
+    var antiparticle : AntiParticle {
+        return AntiParticle(self)
+    }
+    
     var elementary_charge : Double {
         return quarks?.reduce(0) { $0 + $1.elementary_charge } ?? 0
     }

@@ -6,7 +6,7 @@
 
 import Foundation
 
-public extension BinaryInteger {
+package extension BinaryInteger {
     
     var as_subscript : String {
         let values:[Character] = String(describing: self).map({ Self.get_subscript($0) })

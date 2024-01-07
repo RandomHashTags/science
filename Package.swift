@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -12,6 +12,15 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
+            name: "Physics",
+            targets: ["Physics"]
+        ),
+        .library(
+            name: "ScienceUtilities",
+            targets: ["ScienceUtilities"]
+        ),
+        
+        .library(
             name: "Science",
             targets: ["Science"]
         )
@@ -24,15 +33,28 @@ let package = Package(
         .package(url: "https://github.com/tid-kijyun/Kanna.git", from: "5.2.7")
     ],
     targets: [
+        
         .target(
-            name: "Science",
+            name: "ScienceUtilities",
             dependencies: [
                 .product(name: "HugeNumbers", package: "swift_huge-numbers"),
                 .product(name: "SwiftUnits", package: "swift-units"),
                 .product(name: "OrderedCollections", package: "swift-collections"),
             ],
+            path: "./Sources/Utilities"
+        ),
+        .target(
+            name: "Physics",
+            dependencies: ["ScienceUtilities"],
+            path: "./Sources/Physics"
+        ),
+        
+        .target(
+            name: "Science",
+            dependencies: ["Physics"],
             path: "./Sources/science"
         ),
+        
         .executableTarget(
             name: "Run",
             dependencies: [

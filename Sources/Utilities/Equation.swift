@@ -8,10 +8,10 @@ import Foundation
 import HugeNumbers
 import SwiftUnits
 
-public enum Equation {
+package enum Equation {
 }
 
-public extension Equation {
+package extension Equation {
     enum Energy {
         /// Calculates the power (energy per unit time) converted from electrical energy to thermal energy (direct current)
         /// - Parameters:

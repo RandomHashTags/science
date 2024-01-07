@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Science
 import HugeNumbers
+import Physics
 
 struct MainMenuView : View {
     @State private var current_subview:AnyView? = nil

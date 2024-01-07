@@ -10,7 +10,8 @@ import Foundation
 public struct ElectronShell : Hashable {
     public static func collect(electron_count: Int) -> [ElectronShell] {
         var shell_number:Int = 1, maximum_electrons:Int = 0
-        var array:[ElectronShell] = [ElectronShell]()
+        var array:[ElectronShell] = []
+        array.reserveCapacity(electron_count)
         let electron:Electron = Electron()
         while maximum_electrons < electron_count {
             let maximum_allowed:Int = 2 * (shell_number * shell_number)
@@ -31,7 +32,7 @@ public struct ElectronShell : Hashable {
         self.electrons = electrons
     }
     
-    public func can_accept_an_electron() -> Bool {
+    public var can_accept_an_electron : Bool {
         return electrons.count + 1 < maximum_allowed_electrons
     }
     

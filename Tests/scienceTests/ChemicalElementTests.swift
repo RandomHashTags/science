@@ -7,7 +7,8 @@
 
 import Foundation
 import XCTest
-@testable import Science
+import Science
+import Physics
 
 final class ChemicalElementTests : XCTestCase {
     func test() {

@@ -7,6 +7,7 @@
 import Foundation
 import HugeNumbers
 
+// https://en.wikipedia.org/wiki/Atomic_nucleus
 public struct AtomicNucleus : Hashable {
     public internal(set) var protons:[Proton]
     public internal(set) var neutrons:[Neutron]

@@ -9,6 +9,9 @@ import Foundation
 import HugeNumbers
 import SwiftUnits
 
+import ScienceUtilities
+import Physics
+
 public protocol ScientificEnvironmentProtocol : Hashable {
     var uuid : UUID { get }
     

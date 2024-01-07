@@ -12,11 +12,15 @@ public struct Photon : ElementaryParticle {
     public let elementary_charge:Double = 0
     
     public var frequency:FrequencyUnit
-    public var mass:MassUnit
+    public var mass : MassUnit {
+        didSet {
+            mass = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.zero)
+        }
+    }
     
-    public init(frequency: FrequencyUnit, mass: MassUnit = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.zero)) {
+    public init(frequency: FrequencyUnit) {
         self.frequency = frequency
-        self.mass = mass
+        self.mass = MassUnit(prefix: UnitPrefix.kilo, type: MassUnitType.gram, value: HugeFloat.zero)
     }
     
     public func to_energy(unit_prefix: UnitPrefix = UnitPrefix.normal, unit_type: EnergyUnitType = EnergyUnitType.joule) -> EnergyUnit {

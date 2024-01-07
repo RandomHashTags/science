@@ -132,8 +132,9 @@ public enum ChemicalElement : String, CaseIterable, Identifiable {
     case oganesson
     
     init?(proton_count: Int) {
-        guard let element:ChemicalElement = Self.allCases.get(proton_count - 1) else { return nil }
-        self = element
+        let index:Int = proton_count-1
+        guard index < Self.allCases.count else { return nil }
+        self = Self.allCases[index]
     }
     
     public var id : String {

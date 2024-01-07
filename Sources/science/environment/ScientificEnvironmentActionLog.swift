@@ -7,6 +7,9 @@
 
 import Foundation
 
+import ScienceUtilities
+import Physics
+
 public enum ScientificEnvironmentActionType {
     case atomic_decay
 }

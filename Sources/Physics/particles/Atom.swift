@@ -8,6 +8,7 @@ import Foundation
 import MetalKit
 import HugeNumbers
 import SwiftUnits
+import ScienceUtilities
 
 public struct Atom : Hashable {
     public private(set) var uuid:UUID = UUID()
