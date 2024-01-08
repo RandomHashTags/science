@@ -18,6 +18,9 @@ public final class Circuit {
         self.components = components
     }
     
+    public var powerables : [Powerable] {
+        return components.filter({ $0 is Powerable }) as! [Powerable]
+    }
     public var wires : [Wire] {
         return components.filter({ $0 is Wire }) as! [Wire]
     }

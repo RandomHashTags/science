@@ -99,6 +99,7 @@ let package = Package(
             name: "scienceTests",
             dependencies: [
                 "Science",
+                "Circuitry",
                 "Kanna",
                 .product(name: "HugeNumbers", package: "swift_huge-numbers")
             ]

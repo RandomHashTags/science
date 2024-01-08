@@ -8,6 +8,7 @@
 import Foundation
 
 public protocol Powerable {
+    var point : GridPoint { get }
     var powered : Bool { get }
     
     func set_powered(circuit: Circuit, powered: Bool)

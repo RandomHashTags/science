@@ -8,9 +8,14 @@
 import Foundation
 
 public final class Wire : CircuitComponent, Powerable {
+    public static var default_width:Int = 1
+    public static var default_height:Int = 1
+    
     public let id:UUID
     public var name:String?
     public var point:GridPoint
+    public var width:Int
+    public var height:Int
     public var facing : Direction = Direction.north {
         didSet {
             facing = Direction.north
@@ -22,10 +27,13 @@ public final class Wire : CircuitComponent, Powerable {
     
     public private(set) var powered:Bool
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, end_point: GridPoint, intersections: [GridPoint], powered: Bool) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, end_point: GridPoint, intersections: [GridPoint], powered: Bool) {
         self.id = id
         self.name = name
         self.point = point
+        self.width = width
+        self.height = height
+        self.facing = facing
         self.end_point = end_point
         self.intersections = intersections
         self.powered = powered
@@ -55,7 +63,6 @@ public final class Wire : CircuitComponent, Powerable {
     }
     
     public func set_powered(circuit: Circuit, powered: Bool) {
-        guard self.powered != powered else { return }
         self.powered = powered
         
         let path:Set<GridPoint> = path_set()
