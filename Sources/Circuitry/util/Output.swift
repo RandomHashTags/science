@@ -8,13 +8,15 @@
 import Foundation
 
 public final class Output : CircuitComponent {
-    public var name:String
+    public let id:UUID
+    public var name:String?
     public var point:GridPoint
     public var facing:Direction
     
     public var data_bits:Int
     
-    init(name: String, point: GridPoint, facing: Direction, data_bits: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, facing: Direction, data_bits: Int) {
+        self.id = id
         self.name = name
         self.point = point
         self.facing = facing

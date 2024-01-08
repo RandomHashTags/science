@@ -9,14 +9,16 @@ import Foundation
 import HugeNumbers
 
 public struct Arithmetic : CircuitComponent {
-    public var name:String
+    public let id:UUID
+    public var name:String?
     public var point:GridPoint
     public var facing:Direction
     
     public var type:ArithmeticType
     public var data_bits:Int
     
-    init(name: String, point: GridPoint, facing: Direction, type: ArithmeticType, data_bits: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, facing: Direction, type: ArithmeticType, data_bits: Int) {
+        self.id = id
         self.name = name
         self.point = point
         self.facing = facing

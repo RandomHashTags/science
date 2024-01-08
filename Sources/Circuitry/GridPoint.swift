@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct GridPoint {
+public struct GridPoint : Hashable {
     public let x:Int
-    public let z:Int
+    public let y:Int
 }

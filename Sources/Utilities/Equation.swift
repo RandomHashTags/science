@@ -49,5 +49,15 @@ package extension Equation {
             let resistance:HugeFloat = resistance.convert_value_to_unit(prefix: UnitPrefix.normal, ElectricResistanceUnitType.ohm)
             return ElectricCurrentUnit(type: ElectricCurrentUnitType.ampere, value: voltage / resistance)
         }
+        
+        // TODO: update `swift-units` for `HeatCapacityUnit`
+        /*
+        /// AKA: Johnson-Nyquist noise
+        static func thermal_noise(thermal_noise_power: ElectricPowerUnit, temperature: TemperatureUnit, system_bandwidth: FrequencyUnit) {
+            let normalized_temperature:TemperatureUnit = temperature.to_unit(prefix: UnitPrefix.normal, unit: TemperatureUnitType.kelvin)
+            let normalized_system_bandwidth:FrequencyUnit = system_bandwidth.to_unit(prefix: UnitPrefix.normal, unit: FrequencyUnitType.hertz)
+            let value:HugeFloat = normalized_temperature.value * normalized_system_bandwidth.value
+            // TODO: finish
+        }*/
     }
 }

@@ -9,7 +9,8 @@ import Foundation
 import SwiftUnits
 
 public final class LogicGateAnd : LogicGate {
-    public var name:String
+    public let id:UUID
+    public var name:String?
     public var point:GridPoint
     public var facing:Direction
     
@@ -17,7 +18,8 @@ public final class LogicGateAnd : LogicGate {
     public var data_bits:Int
     public var gate_delay:TimeUnit
     
-    init(name: String, point: GridPoint, facing: Direction, number_of_inputs: Int, data_bits: Int, gate_delay: TimeUnit) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, facing: Direction, number_of_inputs: Int, data_bits: Int, gate_delay: TimeUnit) {
+        self.id = id
         self.name = name
         self.point = point
         self.facing = facing
