@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class Constant : CircuitComponent, Powerable {
+public final class Constant : PowerTransmitter {
     public static var default_width:Int = 2
     public static var default_height:Int = 2
     
@@ -18,20 +18,27 @@ public final class Constant : CircuitComponent, Powerable {
     public var height:Int
     public var facing:Direction
     
+    public private(set) var power_out_point:GridPoint
     public private(set) var powered:Bool
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, powered: Bool) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, power_out_point: GridPoint, powered: Bool) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
         self.facing = facing
+        self.power_out_point = power_out_point
         self.powered = powered
     }
     
     public func set_powered(circuit: Circuit, powered: Bool) {
         guard self.powered != powered else { return }
         self.powered = powered
+        
+        let receivers:[PowerReceiver] = circuit.power_receivers.filter({ $0.power_in_point == power_out_point })
+        for receiver in receivers {
+            receiver.set_powered(circuit: circuit, powered: powered)
+        }
     }
 }

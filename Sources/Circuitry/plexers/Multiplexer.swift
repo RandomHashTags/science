@@ -19,10 +19,10 @@ public final class Multiplexer : CircuitComponent {
     public var height:Int
     public var facing:Direction
     
-    public var select_bits:HugeInt
-    public var data_bits:HugeInt
+    public var select_bits:Int
+    public var data_bits:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, select_bits: HugeInt, data_bits: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, select_bits: Int, data_bits: Int) {
         self.id = id
         self.name = name
         self.point = point

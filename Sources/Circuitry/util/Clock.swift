@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUnits
 
-public final class Clock : CircuitComponent {
+public final class Clock : PowerTransmitter {
     public static let default_width:Int = 3
     public static let default_height:Int = 3
     
@@ -19,31 +19,35 @@ public final class Clock : CircuitComponent {
     public var height:Int
     public var facing:Direction
     
-    public var output_point:GridPoint
-    
-    public private(set) var powering:Bool
+    public private(set) var power_out_point:GridPoint
+    public private(set) var powered:Bool
+    public var frequency:FrequencyUnit
     public var lowest_frequency:FrequencyUnit
     public var highest_frequency:FrequencyUnit
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, output_point: GridPoint, powering: Bool, lowest_frequency: FrequencyUnit, highest_frequency: FrequencyUnit) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, power_out_point: GridPoint, powered: Bool, lowest_frequency: FrequencyUnit, highest_frequency: FrequencyUnit) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
         self.facing = facing
-        self.output_point = output_point
-        self.powering = powering
+        self.power_out_point = power_out_point
+        self.powered = powered
         self.lowest_frequency = lowest_frequency
         self.highest_frequency = highest_frequency
+        frequency = lowest_frequency
     }
     
     public func tick(circuit: Circuit) {
-        powering = !powering
-        
-        let powerables:[Powerable] = circuit.powerables.filter({ $0.point == output_point })
-        for powerable in powerables {
-            powerable.set_powered(circuit: circuit, powered: powering)
+        powered = !powered
+        set_powered(circuit: circuit, powered: powered)
+    }
+    
+    public func set_powered(circuit: Circuit, powered: Bool) {
+        let receivers:[PowerReceiver] = circuit.power_receivers.filter({ $0.power_in_point == power_out_point })
+        for receiver in receivers {
+            receiver.set_powered(circuit: circuit, powered: powered)
         }
     }
 }

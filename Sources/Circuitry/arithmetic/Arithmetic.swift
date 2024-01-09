@@ -8,15 +8,15 @@
 import Foundation
 import HugeNumbers
 
-public struct Arithmetic : CircuitComponent {
+public final class Arithmetic : CircuitComponent {
     public static var default_width:Int = 4
     public static var default_height:Int = 4
     
     public let id:UUID
     public var name:String?
     public var point:GridPoint
-    public var width: Int
-    public var height: Int
+    public var width:Int
+    public var height:Int
     public var facing:Direction
     
     public var type:ArithmeticType

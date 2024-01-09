@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HugeNumbers
 
 public final class Register : CircuitComponent {
     public static var default_width:Int = 8
@@ -20,12 +21,13 @@ public final class Register : CircuitComponent {
     
     public var data_bits:Int
     
-    public var write_enabled:Bool
+    public private(set) var write_enabled:Bool
+    public var write_enable_point:GridPoint
     public var input_clock:Clock?
     
-    public private(set) var value:Int
+    public private(set) var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, data_bits: Int, write_enabled: Bool, input_clock: Clock? = nil, value: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, input_clock: Clock? = nil, value: HugeInt) {
         self.id = id
         self.name = name
         self.point = point
@@ -34,6 +36,7 @@ public final class Register : CircuitComponent {
         self.facing = facing
         self.data_bits = data_bits
         self.write_enabled = write_enabled
+        self.write_enable_point = write_enable_point
         self.input_clock = input_clock
         self.value = value
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol CircuitComponent {
+public protocol CircuitComponent : AnyObject {
     /// Measured in x grid points.
     static var default_width : Int { get }
     /// Measured in y grid points.
@@ -15,6 +15,7 @@ public protocol CircuitComponent {
     
     var id : UUID { get }
     var name : String? { get set }
+    /// Where this component is located in a grid; always the bottom left  (the "anchor") point.
     var point : GridPoint { get set }
     /// Measured in x grid points.
     var width : Int { get set }
@@ -23,18 +24,18 @@ public protocol CircuitComponent {
     
     var facing : Direction { get set }
     
-    mutating func move(circuit: Circuit, to point: GridPoint) -> Bool
-    mutating func rotate(circuit: Circuit, facing direction: Direction) -> Bool
+    func move(circuit: Circuit, to point: GridPoint) -> Bool
+    func rotate(circuit: Circuit, facing direction: Direction) -> Bool
 }
 
 public extension CircuitComponent {
-    mutating func move(circuit: Circuit, to point: GridPoint) -> Bool {
+    func move(circuit: Circuit, to point: GridPoint) -> Bool {
         guard circuit.can_place(component: self, at: point) else { return false }
         self.point = point
         return true
     }
     
-    mutating func rotate(circuit: Circuit, facing direction: Direction) -> Bool { // TODO: finish
+    func rotate(circuit: Circuit, facing direction: Direction) -> Bool { // TODO: finish
         //self.facing = facing
         return true
     }

@@ -19,10 +19,10 @@ public final class Output : CircuitComponent {
     public var height:Int
     public var facing:Direction
     
-    public var data_bits:HugeInt
+    public var data_bits:Int
     public var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, data_bits: HugeInt, value: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, data_bits: Int, value: HugeInt) {
         self.id = id
         self.name = name
         self.point = point
