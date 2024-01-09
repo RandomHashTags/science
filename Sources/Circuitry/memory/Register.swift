@@ -9,8 +9,8 @@ import Foundation
 import HugeNumbers
 
 public final class Register : CircuitComponent {
-    public static var default_width:Int = 8
-    public static var default_height:Int = 9
+    public static let default_width:Int = 8
+    public static let default_height:Int = 9
     
     public let id:UUID
     public var name:String?

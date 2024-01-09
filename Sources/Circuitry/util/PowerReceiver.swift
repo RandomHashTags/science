@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol PowerReceiver : PowerListener {
-    var power_in_point : GridPoint { get }
+    var power_in_point : GridPoint? { get }
 }

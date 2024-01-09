@@ -8,8 +8,8 @@
 import Foundation
 
 public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
-    public static var default_width:Int = 1
-    public static var default_height:Int = 1
+    public static let default_width:Int = 1
+    public static let default_height:Int = 1
     
     public let id:UUID
     public var name:String?
@@ -27,9 +27,9 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
     }
     
     /// Equivalent to the start point.
-    public private(set) var power_in_point:GridPoint
+    public private(set) var power_in_point:GridPoint?
     /// Equivalent to the end point.
-    public private(set) var power_out_point:GridPoint
+    public private(set) var power_out_point:GridPoint?
     public var intersections:[GridPoint]
     
     public private(set) var powered:Bool
@@ -50,8 +50,8 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
     public func path_set() -> Set<GridPoint> { // TODO: consider intersections, overlaps, etc
         var set:Set<GridPoint> = []
         
-        let x1:Int = point.x, x2:Int = power_out_point.x
-        let y1:Int = point.y, y2:Int = power_out_point.y
+        let x1:Int = point.x, x2:Int = power_out_point!.x
+        let y1:Int = point.y, y2:Int = power_out_point!.y
         
         let minimum_x:Int = min(x1, x2)
         let maximum_x:Int = max(x1, x2)
@@ -65,8 +65,8 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
             set.insert(GridPoint(x: x1, y: y))
         }
         
-        set.remove(power_in_point)
-        set.remove(power_out_point)
+        set.remove(power_in_point!)
+        set.remove(power_out_point!)
         return set
     }
     

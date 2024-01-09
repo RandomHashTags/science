@@ -8,8 +8,8 @@
 import Foundation
 
 public final class RandomGenerator : CircuitComponent {
-    public static var default_width:Int = 9
-    public static var default_height:Int = 10
+    public static let default_width:Int = 9
+    public static let default_height:Int = 10
     
     public let id:UUID
     public var name:String?

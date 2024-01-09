@@ -19,7 +19,7 @@ public final class Clock : PowerTransmitter {
     public var height:Int
     public var facing:Direction
     
-    public private(set) var power_out_point:GridPoint
+    public private(set) var power_out_point:GridPoint?
     public private(set) var powered:Bool
     public var frequency:FrequencyUnit
     public var lowest_frequency:FrequencyUnit
@@ -39,12 +39,9 @@ public final class Clock : PowerTransmitter {
         frequency = lowest_frequency
     }
     
-    public func tick(circuit: Circuit) {
-        powered = !powered
-        set_powered(circuit: circuit, powered: powered)
-    }
-    
     public func set_powered(circuit: Circuit, powered: Bool) {
+        guard self.powered != powered else { return }
+        self.powered = powered
         let receivers:[PowerReceiver] = circuit.power_receivers.filter({ $0.power_in_point == power_out_point })
         for receiver in receivers {
             receiver.set_powered(circuit: circuit, powered: powered)

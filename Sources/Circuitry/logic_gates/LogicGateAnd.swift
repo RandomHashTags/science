@@ -9,8 +9,8 @@ import Foundation
 import SwiftUnits
 
 public final class LogicGateAnd : LogicGate {
-    public static var default_width:Int = 5
-    public static var default_height:Int = 5
+    public static let default_width:Int = 5
+    public static let default_height:Int = 5
     
     public let id:UUID
     public var name:String?

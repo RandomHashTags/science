@@ -9,8 +9,8 @@ import Foundation
 import HugeNumbers
 
 public final class Multiplexer : CircuitComponent {
-    public static var default_width:Int = 4
-    public static var default_height:Int = 4
+    public static let default_width:Int = 4
+    public static let default_height:Int = 4
     
     public let id:UUID
     public var name:String?

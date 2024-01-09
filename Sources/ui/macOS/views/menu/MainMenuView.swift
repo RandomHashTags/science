@@ -10,6 +10,7 @@ import SwiftUI
 import Science
 import HugeNumbers
 import Physics
+import Circuitry
 
 struct MainMenuView : View {
     @State private var current_subview:AnyView? = nil
@@ -18,6 +19,11 @@ struct MainMenuView : View {
     public var body: some View {
         StackNavigationView(current_subview: $subviews) {
             Text("Root view!")
+            Button("Circuitry") {
+                push_subview(
+                    CircuitryView(simulating: false)
+                )
+            }
             Button("View Environment") {
                 push_subview(
                     EnvironmentView(environment: ScienceDataStore.shared_instance.active_environment)

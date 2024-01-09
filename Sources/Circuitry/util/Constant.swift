@@ -8,8 +8,8 @@
 import Foundation
 
 public final class Constant : PowerTransmitter {
-    public static var default_width:Int = 2
-    public static var default_height:Int = 2
+    public static let default_width:Int = 2
+    public static let default_height:Int = 2
     
     public let id:UUID
     public var name:String?
@@ -18,7 +18,7 @@ public final class Constant : PowerTransmitter {
     public var height:Int
     public var facing:Direction
     
-    public private(set) var power_out_point:GridPoint
+    public private(set) var power_out_point:GridPoint?
     public private(set) var powered:Bool
     
     init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, power_out_point: GridPoint, powered: Bool) {

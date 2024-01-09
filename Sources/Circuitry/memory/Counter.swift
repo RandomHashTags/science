@@ -8,8 +8,8 @@
 import Foundation
 
 public final class Counter : CircuitComponent {
-    public static var default_width:Int = 20
-    public static var default_height:Int = 28
+    public static let default_width:Int = 20
+    public static let default_height:Int = 28
     
     public let id:UUID
     public var name:String?

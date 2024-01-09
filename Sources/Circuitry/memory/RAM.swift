@@ -9,8 +9,8 @@ import Foundation
 import HugeNumbers
 
 public final class RAM : CircuitComponent {
-    public static var default_width:Int = 23
-    public static var default_height:Int = 26
+    public static let default_width:Int = 23
+    public static let default_height:Int = 26
     
     public let id:UUID
     public var name:String?
@@ -20,7 +20,7 @@ public final class RAM : CircuitComponent {
     public var facing:Direction
     
     public var type:MemoryType
-    public var address_bit_width : HugeInt {
+    public var address_bit_width : Int {
         didSet {
             maximum_addresses = calculate_maximum_addresses()
         }
@@ -33,7 +33,7 @@ public final class RAM : CircuitComponent {
     
     public private(set) var values:[HugeInt:HugeInt]
     
-    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, type: MemoryType, address_bit_width: HugeInt, data_bit_width: Int, read_enabled: Bool, write_enabled: Bool, values: [HugeInt:HugeInt]) {
+    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, type: MemoryType, address_bit_width: Int, data_bit_width: Int, read_enabled: Bool, write_enabled: Bool, values: [HugeInt:HugeInt]) {
         self.id = id
         self.name = name
         self.point = point
@@ -51,14 +51,7 @@ public final class RAM : CircuitComponent {
         self.maximum_addresses = calculate_maximum_addresses()
     }
     private func calculate_maximum_addresses() -> HugeInt {
-        let two:HugeInt = HugeInt(2)
-        var value:HugeInt = HugeInt.one
-        var remaining:HugeInt = address_bit_width
-        while remaining > HugeInt.zero {
-            remaining -= 1
-            value *= two
-        }
-        return value
+        return HugeInt(2).to_the_power_of(UInt64(address_bit_width))
     }
     
     public func read(address: HugeInt) -> HugeInt? {

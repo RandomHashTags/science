@@ -12,7 +12,7 @@ import HugeNumbers
 
 final class CircuitryTests : XCTestCase {
     func testExample() {
-        let ram:RAM = RAM(point: GridPoint(x: 0, y: 0), width: 0, height: 0, facing: Direction.east, type: MemoryType.volatile, address_bit_width: HugeInt(67), data_bit_width: 32, read_enabled: false, write_enabled: false, values: [:])
+        let ram:RAM = RAM(point: GridPoint(x: 0, y: 0), width: 0, height: 0, facing: Direction.east, type: MemoryType.volatile, address_bit_width: 67, data_bit_width: 32, read_enabled: false, write_enabled: false, values: [:])
         print("ram.maximum_addresses=\(ram.maximum_addresses)")
     }
 }
