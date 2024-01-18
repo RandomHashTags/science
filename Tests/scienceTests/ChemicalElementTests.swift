@@ -25,4 +25,15 @@ final class ChemicalElementTests : XCTestCase {
             }
         }
     }
+    
+    func test_product_prediction() {
+        var zinc:Atom = ChemicalElement.zinc.details.atom
+        zinc.lose_electrons(2)
+        
+        let molecules:[Molecule] = [
+            Molecule(atoms: [zinc]),
+            Molecule(elements: [.oxygen : 2])
+        ]
+        ChemicalReaction.predict_product(reactant: molecules)
+    }
 }

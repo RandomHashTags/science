@@ -42,4 +42,15 @@ public struct ElectronShell : Hashable {
     public var elementary_charge : Double {
         return electrons.reduce(0) { $0 + $1.elementary_charge }
     }
+    
+    public mutating func gained(_ amount: Int) {
+        electrons.append(contentsOf: [Electron].init(repeating: Electron(), count: amount))
+    }
+    
+    public mutating func lost() {
+        electrons.removeAll()
+    }
+    public mutating func lost(_ amount: Int) {
+        electrons.removeLast(amount)
+    }
 }

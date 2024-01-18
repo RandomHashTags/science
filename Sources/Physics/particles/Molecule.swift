@@ -41,6 +41,11 @@ public struct Molecule : Hashable {
         let amount_string:String = amount > 1 ? amount.as_subscript : ""
         return chemical_element.details.symbol + amount_string
     }
+    
+    /// Measured in coulombs
+    public var elementary_charge : Double {
+        return atoms.reduce(0, { $0 + $1.elementary_charge })
+    }
 }
 
 

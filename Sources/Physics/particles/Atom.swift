@@ -63,7 +63,39 @@ public struct Atom : Hashable {
     public var is_unstable : Bool {
         return decay_mode != nil || half_life != nil
     }
-    public mutating func decay() -> [AtomicDecayResult]? {
+    
+    public mutating func gain_electrons(_ amount: Int) {
+        var gained:Int = 0
+        while gained != amount {
+            if let unfilled_shell_index:Int = electron_shells.firstIndex(where: { $0.electrons.count != $0.maximum_allowed_electrons }) {
+                let shell:ElectronShell = electron_shells[unfilled_shell_index]
+                let shell_gained:Int = min(shell.maximum_allowed_electrons - shell.electrons.count, amount - gained)
+                electron_shells[unfilled_shell_index].gained(shell_gained)
+                gained += shell_gained
+            } else {
+                fatalError("gained an electron shell")
+            }
+        }
+    }
+    public mutating func lose_electrons(_ amount: Int) {
+        guard electron_count >= amount else {
+            fatalError("electron_count < amount;chemical_element_identifier=\(String(describing: chemical_element_identifier));electron_count=\(electron_count);amount=\(amount)")
+        }
+        var lost:Int = 0
+        while lost != amount {
+            if let shell_index:Int = electron_shells.lastIndex(where: { $0.electrons.count > 0 }) {
+                let shell:ElectronShell = electron_shells[shell_index]
+                let shell_lost:Int = min(shell.electrons.count, amount - lost)
+                lost += shell_lost
+                
+                electron_shells[shell_index].lost(shell_lost)
+            }
+        }
+    }
+}
+
+public extension Atom {
+    mutating func decay() -> [AtomicDecayResult]? {
         // TODO: support probability of decaying (half-life=50% chance of it decaying within the half-life)
         guard decay_mode != nil && half_life != nil && elapsed_time_since_last_decay >= half_life! else { return nil }
         var results:[AtomicDecayResult] = []
@@ -88,31 +120,37 @@ public struct Atom : Hashable {
                 let total_iteration_count = i + survived_iterations
                 let atom_lifetime:TimeUnit = half_life * HugeInt(total_iteration_count)
                 elapsed_time_since_last_decay -= atom_lifetime
-                let original_element_identifier:String = chemical_element_identifier!
                 
-                let reaction:ChemicalReaction = decay(decay_mode)
+                let result:AtomicDecayResult = decay(decay_mode, lifetime: atom_lifetime, iterations: total_iteration_count)
                 self.isomer = decays_into_isomer
-                let decayed_to_element_identifier:String = chemical_element_identifier!
-                let new_element:ChemicalElementDetails! = ChemicalElementDetails.value_of(identifier: decayed_to_element_identifier) ?? ChemicalElementDetails.value_of(identifier: chemical_element!.rawValue)
+                let new_element_details:ChemicalElementDetails
+                if let details:ChemicalElementDetails = ChemicalElementDetails.value_of(identifier: result.decayed_into) {
+                    new_element_details = details
+                } else if let element:ChemicalElement = chemical_element, let details:ChemicalElementDetails = ChemicalElementDetails.value_of(identifier: element.rawValue) {
+                    new_element_details = details
+                } else {
+                    fatalError("unknown element details: " + result.decayed_into)
+                }
                 
-                self.decay_mode = new_element.decay_mode
-                self.half_life = new_element.half_life
-                self.decays_into_isomer = new_element.decays_into_isomer
-                print("Atom;try_decaying;" + original_element_identifier + " -> " + decayed_to_element_identifier + ";maximum_iterations=\(iterations);took \(total_iteration_count) iterations;new_half_life=\(String(describing: self.half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
+                self.decay_mode = new_element_details.decay_mode
+                self.half_life = new_element_details.half_life
+                self.decays_into_isomer = new_element_details.decays_into_isomer
+                print("Atom;try_decaying;" + result.decayed_from + " -> " + result.decayed_into + ";maximum_iterations=\(iterations);took \(total_iteration_count) iterations;new_half_life=\(String(describing: self.half_life?.description));remaining_elapsed_time_since_last_decay=" + elapsed_time_since_last_decay.description)
                 survived_iterations = 0
-                return AtomicDecayResult(atom_uuid: uuid, atom_lifetime: atom_lifetime, reaction: reaction, iteration_count: total_iteration_count, decayed_from: original_element_identifier, decayed_into: decayed_to_element_identifier)
+                return result
             }
         }
         survived_iterations += iterations
         return nil
     }
-    private mutating func decay(_ type: AtomicDecayType) -> ChemicalReaction {
+    private mutating func decay(_ type: AtomicDecayType, lifetime: TimeUnit, iterations: UInt64) -> AtomicDecayResult {
+        let decayed_from:String = chemical_element_identifier!
         let protons:[Proton] = nucleus.protons, neutrons:[Neutron] = nucleus.neutrons
         switch type {
         case .alpha:
             nucleus.protons.removeFirst(2)
             nucleus.neutrons.removeFirst(2)
-            return ChemicalReaction(destroyed_protons: [protons[0], protons[1]], destroyed_neutrons: [neutrons[0], neutrons[1]])
+            break
             
         case .beta_minus(let amount):
             var created_protons:[Proton] = []
@@ -128,7 +166,8 @@ public struct Atom : Hashable {
             nucleus.protons.append(contentsOf: created_protons)
             nucleus.neutrons.removeFirst(amount)
             // TODO: emit electron/positron and electron antineutrino
-            return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: created_antielectrons)
+            //return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: created_antielectrons)
+            break
         case .beta_minus_gamma:
             let created_proton:Proton = Proton()
             let destroyed_neutron:Neutron = neutrons[0]
@@ -136,7 +175,8 @@ public struct Atom : Hashable {
             nucleus.protons.append(created_proton)
             nucleus.neutrons.removeFirst()
             // TODO: emit electron/positron and electron antineutrino AND emit a gamma ray
-            return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)])
+           // return ChemicalReaction(created_protons: [created_proton], destroyed_neutrons: [destroyed_neutron], created_electrons: [created_electron], created_antielectrons: [AntiParticle(created_electron)])
+            break
         case .beta_minus_neutron_emission(let amount):
             var created_protons:[Proton] = []
             var destroyed_neutrons:[Neutron] = []
@@ -152,39 +192,44 @@ public struct Atom : Hashable {
             nucleus.protons.append(contentsOf: created_protons)
             nucleus.neutrons.removeFirst(2 * amount)
             // TODO: emit electron/positron and electron antineutrino
-            return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: created_antielectrons, emitted_neutrons: emitted_neutrons)
+            //return ChemicalReaction(created_protons: created_protons, destroyed_neutrons: destroyed_neutrons, created_electrons: created_electrons, created_antielectrons: created_antielectrons, emitted_neutrons: emitted_neutrons)
             
         case .beta_plus:
             let created_neutron:Neutron = Neutron()
             nucleus.protons.removeFirst()
             nucleus.neutrons.append(created_neutron)
-            return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())])
+            //return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())])
+            break
         case .beta_plus_proton_emission:
             let created_neutron:Neutron = Neutron()
             nucleus.protons.removeFirst(2)
             nucleus.neutrons.append(created_neutron)
-            return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())], emitted_protons: [protons[1]])
+            //return ChemicalReaction(destroyed_protons: [protons[0]], created_neutrons: [created_neutron], created_antielectrons: [AntiParticle(Electron())], emitted_protons: [protons[1]])
+            break
             
         case .gamma:
             // TODO: emit gamma ray photon
-            return ChemicalReaction()
+            break
             
         case .proton_emission(let amount):
             nucleus.protons.removeFirst(amount)
-            return ChemicalReaction(emitted_protons: Array(protons[0..<amount]))
+            //return ChemicalReaction(emitted_protons: Array(protons[0..<amount]))
+            break
             
         case .neutron_emission(let amount):
             nucleus.neutrons.removeFirst(amount)
-            return ChemicalReaction(emitted_neutrons: Array(neutrons[0..<amount]))
+            //return ChemicalReaction(emitted_neutrons: Array(neutrons[0..<amount]))
+            break
             
         case .electron_capture(let amount):
             // TODO: fix
-            return ChemicalReaction()
+            break
             
         case .isomeric_transition:
             decays_into_isomer = nil
             // TODO: fix
-            return ChemicalReaction()
+            break
         }
+        return AtomicDecayResult(atom_uuid: uuid, atom_lifetime: lifetime, iteration_count: iterations, decayed_from: decayed_from, decayed_into: chemical_element_identifier!)
     }
 }
