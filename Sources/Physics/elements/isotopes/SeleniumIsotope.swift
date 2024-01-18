@@ -57,83 +57,83 @@ public enum SeleniumIsotope : String, ChemicalElementIsotope {
     public var load_details : ChemicalElementDetails {
         switch self {
         case .selenium_65:
-            return ChemicalElementDetails(self, neutron_count: 31, standard_atomic_weight: "64.96466", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "49"))
+            return ChemicalElementDetails(self, neutrons: 31, standard_atomic_weight: "64.96466", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "49"))
         case .selenium_66:
-            return ChemicalElementDetails(self, neutron_count: 32, standard_atomic_weight: "65.95521", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "33"))
+            return ChemicalElementDetails(self, neutrons: 32, standard_atomic_weight: "65.95521", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "33"))
         case .selenium_67:
-            return ChemicalElementDetails(self, neutron_count: 33, standard_atomic_weight: "66.95009", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "133"))
+            return ChemicalElementDetails(self, neutrons: 33, standard_atomic_weight: "66.95009", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "133"))
         case .selenium_68:
-            return ChemicalElementDetails(self, neutron_count: 34, standard_atomic_weight: "67.94180", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "35.5"))
+            return ChemicalElementDetails(self, neutrons: 34, standard_atomic_weight: "67.94180", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "35.5"))
         case .selenium_69:
-            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "68.93956", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "27.4"))
+            return ChemicalElementDetails(self, neutrons: 35, standard_atomic_weight: "68.93956", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.second, value: "27.4"))
         case .selenium_69_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "68.93956", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "2.0")) // TODO: fix
+            return ChemicalElementDetails(self, neutrons: 35, standard_atomic_weight: "68.93956", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "2.0")) // TODO: fix
         case .selenium_69_isomer_2:
-            return ChemicalElementDetails(self, neutron_count: 35, standard_atomic_weight: "68.93956", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "955")) // TODO: fix
+            return ChemicalElementDetails(self, neutrons: 35, standard_atomic_weight: "68.93956", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "955")) // TODO: fix
         case .selenium_70:
-            return ChemicalElementDetails(self, neutron_count: 36, standard_atomic_weight: "69.93339", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.minute, value: "41.1"))
+            return ChemicalElementDetails(self, neutrons: 36, standard_atomic_weight: "69.93339", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.minute, value: "41.1"))
         case .selenium_71:
-            return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "70.93224", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.minute, value: "4.74"))
+            return ChemicalElementDetails(self, neutrons: 37, standard_atomic_weight: "70.93224", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.minute, value: "4.74"))
         case .selenium_71_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "70.93224", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "5.6")) // TODO: fix
+            return ChemicalElementDetails(self, neutrons: 37, standard_atomic_weight: "70.93224", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "5.6")) // TODO: fix
         case .selenium_71_isomer_2:
-            return ChemicalElementDetails(self, neutron_count: 37, standard_atomic_weight: "70.93224", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "19.0")) // TODO: fix
+            return ChemicalElementDetails(self, neutrons: 37, standard_atomic_weight: "70.93224", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.micro, type: TimeUnitType.second, value: "19.0")) // TODO: fix
         case .selenium_72:
-            return ChemicalElementDetails(self, neutron_count: 38, standard_atomic_weight: "71.927112", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "8.40"))
+            return ChemicalElementDetails(self, neutrons: 38, standard_atomic_weight: "71.927112", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "8.40"))
         case .selenium_73:
-            return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "72.926765", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.hour, value: "7.15"))
+            return ChemicalElementDetails(self, neutrons: 39, standard_atomic_weight: "72.926765", decay_mode: AtomicDecayType.beta_plus, half_life: TimeUnit(type: TimeUnitType.hour, value: "7.15"))
         case .selenium_73_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 39, standard_atomic_weight: "72.926765", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "39.8"))
+            return ChemicalElementDetails(self, neutrons: 39, standard_atomic_weight: "72.926765", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "39.8"))
         case .selenium_74:
-            return ChemicalElementDetails(self, neutron_count: 40, standard_atomic_weight: "73.9224764")
+            return ChemicalElementDetails(self, neutrons: 40, standard_atomic_weight: "73.9224764")
         case .selenium_75:
-            return ChemicalElementDetails(self, neutron_count: 41, standard_atomic_weight: "74.9225234", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "119.779"))
+            return ChemicalElementDetails(self, neutrons: 41, standard_atomic_weight: "74.9225234", decay_mode: AtomicDecayType.electron_capture(amount: 1), half_life: TimeUnit(type: TimeUnitType.day, value: "119.779"))
         case .selenium_76:
-            return ChemicalElementDetails(self, neutron_count: 42, standard_atomic_weight: "75.9192136")
+            return ChemicalElementDetails(self, neutrons: 42, standard_atomic_weight: "75.9192136")
         case .selenium_77:
-            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "76.9199140")
+            return ChemicalElementDetails(self, neutrons: 43, standard_atomic_weight: "76.9199140")
         case .selenium_77_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 43, standard_atomic_weight: "76.9199140", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.second, value: "17.36"))
+            return ChemicalElementDetails(self, neutrons: 43, standard_atomic_weight: "76.9199140", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.second, value: "17.36"))
         case .selenium_78:
-            return ChemicalElementDetails(self, neutron_count: 44, standard_atomic_weight: "77.9173091")
+            return ChemicalElementDetails(self, neutrons: 44, standard_atomic_weight: "77.9173091")
         case .selenium_79:
-            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "78.9184991", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "327000"))
+            return ChemicalElementDetails(self, neutrons: 45, standard_atomic_weight: "78.9184991", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.year, value: "327000"))
         case .selenium_79_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 45, standard_atomic_weight: "78.9184991", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "3.92"))
+            return ChemicalElementDetails(self, neutrons: 45, standard_atomic_weight: "78.9184991", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "3.92"))
         case .selenium_80:
-            return ChemicalElementDetails(self, neutron_count: 46, standard_atomic_weight: "79.9165213")
+            return ChemicalElementDetails(self, neutrons: 46, standard_atomic_weight: "79.9165213")
         case .selenium_81:
-            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "80.9179925", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "18.45"))
+            return ChemicalElementDetails(self, neutrons: 47, standard_atomic_weight: "80.9179925", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "18.45"))
         case .selenium_81_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 47, standard_atomic_weight: "80.9179925", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "57.28"))
+            return ChemicalElementDetails(self, neutrons: 47, standard_atomic_weight: "80.9179925", decay_mode: AtomicDecayType.isomeric_transition, half_life: TimeUnit(type: TimeUnitType.minute, value: "57.28"))
         case .selenium_82:
-            return ChemicalElementDetails(self, neutron_count: 48, standard_atomic_weight: "81.9166994", decay_mode: AtomicDecayType.beta_minus(amount: 2), half_life: TimeUnit(type: TimeUnitType.year, value: "97000000000000000000"))
+            return ChemicalElementDetails(self, neutrons: 48, standard_atomic_weight: "81.9166994", decay_mode: AtomicDecayType.beta_minus(amount: 2), half_life: TimeUnit(type: TimeUnitType.year, value: "97000000000000000000"))
         case .selenium_83:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "82.919118", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "22.3"))
+            return ChemicalElementDetails(self, neutrons: 49, standard_atomic_weight: "82.919118", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "22.3"))
         case .selenium_83_isomer_1:
-            return ChemicalElementDetails(self, neutron_count: 49, standard_atomic_weight: "82.919118", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "70.1"))
+            return ChemicalElementDetails(self, neutrons: 49, standard_atomic_weight: "82.919118", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "70.1"))
         case .selenium_84:
-            return ChemicalElementDetails(self, neutron_count: 50, standard_atomic_weight: "83.918462", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "3.1"))
+            return ChemicalElementDetails(self, neutrons: 50, standard_atomic_weight: "83.918462", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.minute, value: "3.1"))
         case .selenium_85:
-            return ChemicalElementDetails(self, neutron_count: 51, standard_atomic_weight: "84.92225", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "31.7"))
+            return ChemicalElementDetails(self, neutrons: 51, standard_atomic_weight: "84.92225", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "31.7"))
         case .selenium_86:
-            return ChemicalElementDetails(self, neutron_count: 52, standard_atomic_weight: "85.924272", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "15.3"))
+            return ChemicalElementDetails(self, neutrons: 52, standard_atomic_weight: "85.924272", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "15.3"))
         case .selenium_87:
-            return ChemicalElementDetails(self, neutron_count: 53, standard_atomic_weight: "86.92852", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "5.50"))
+            return ChemicalElementDetails(self, neutrons: 53, standard_atomic_weight: "86.92852", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "5.50"))
         case .selenium_88:
-            return ChemicalElementDetails(self, neutron_count: 54, standard_atomic_weight: "87.93142", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.53"))
+            return ChemicalElementDetails(self, neutrons: 54, standard_atomic_weight: "87.93142", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "1.53"))
         case .selenium_89:
-            return ChemicalElementDetails(self, neutron_count: 55, standard_atomic_weight: "88.93645", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.41"))
+            return ChemicalElementDetails(self, neutrons: 55, standard_atomic_weight: "88.93645", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(type: TimeUnitType.second, value: "0.41"))
         case .selenium_90:
-            return ChemicalElementDetails(self, neutron_count: 56, standard_atomic_weight: "89.93996", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "300"))
+            return ChemicalElementDetails(self, neutrons: 56, standard_atomic_weight: "89.93996", decay_mode: AtomicDecayType.beta_minus_neutron_emission(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "300"))
         case .selenium_91:
-            return ChemicalElementDetails(self, neutron_count: 57, standard_atomic_weight: "90.94596", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "270"))
+            return ChemicalElementDetails(self, neutrons: 57, standard_atomic_weight: "90.94596", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "270"))
         case .selenium_92:
-            return ChemicalElementDetails(self, neutron_count: 58, standard_atomic_weight: "91.94992", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
+            return ChemicalElementDetails(self, neutrons: 58, standard_atomic_weight: "91.94992", decay_mode: AtomicDecayType.beta_minus(amount: 1), half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "100"))
         case .selenium_93:
-            return ChemicalElementDetails(self, neutron_count: 59, standard_atomic_weight: "92.95629", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50")) // TODO: fix
+            return ChemicalElementDetails(self, neutrons: 59, standard_atomic_weight: "92.95629", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "50")) // TODO: fix
         case .selenium_94:
-            return ChemicalElementDetails(self, neutron_count: 60, standard_atomic_weight: "93.96049", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "20")) // TODO: fix
+            return ChemicalElementDetails(self, neutrons: 60, standard_atomic_weight: "93.96049", decay_mode: nil, half_life: TimeUnit(prefix: UnitPrefix.milli, type: TimeUnitType.second, value: "20")) // TODO: fix
         }
     }
 }
