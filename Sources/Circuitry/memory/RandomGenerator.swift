@@ -18,7 +18,7 @@ public final class RandomGenerator : CircuitComponent {
     public var data_bits:Int
     public var seed:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 9, height: Int = 10, facing: Direction, data_bits: Int, seed: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 9, height: Int = 10, facing: Direction = Direction.east, data_bits: Int, seed: Int) {
         self.id = id
         self.name = name
         self.point = point

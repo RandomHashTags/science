@@ -20,7 +20,7 @@ public final class LogicGateAnd : LogicGate {
     public var data_bits:Int
     public var gate_delay:TimeUnit
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 5, height: Int = 5, facing: Direction, number_of_inputs: Int, data_bits: Int, gate_delay: TimeUnit) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 5, height: Int = 5, facing: Direction = Direction.east, number_of_inputs: Int, data_bits: Int, gate_delay: TimeUnit) {
         self.id = id
         self.name = name
         self.point = point

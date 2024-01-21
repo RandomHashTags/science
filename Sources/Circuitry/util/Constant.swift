@@ -21,7 +21,7 @@ public final class Constant : PowerTransmitter {
     public private(set) var data_bits:Int
     public private(set) var value:[Bool]
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction, power_out_point: GridPoint, powered: Bool = false, data_bits: Int = 1, value: [Bool]) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction = Direction.east, power_out_point: GridPoint, powered: Bool = false, data_bits: Int = 1, value: [Bool]) {
         self.id = id
         self.name = name
         self.point = point

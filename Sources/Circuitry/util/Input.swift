@@ -16,17 +16,15 @@ public final class Input : CircuitComponent {
     public var height:Int
     public var facing:Direction
     
-    public var data_bits:Int
-    public var value:HugeInt
+    public var data:CircuitData
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 3, facing: Direction, data_bits: Int, value: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 3, facing: Direction = Direction.east, data: CircuitData) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
         self.facing = facing
-        self.data_bits = data_bits
-        self.value = value
+        self.data = data
     }
 }

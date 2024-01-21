@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HugeNumbers
 
 public final class Counter : CircuitComponent {
     public let id:UUID
@@ -16,10 +17,10 @@ public final class Counter : CircuitComponent {
     public var facing:Direction
     
     public var data_bits:Int
-    public var maximum_value:Int
-    public private(set) var value:Int
+    public var maximum_value:HugeInt
+    public private(set) var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 20, height: Int = 28, facing: Direction, data_bits: Int, maximum_value: Int, value: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 20, height: Int = 28, facing: Direction = Direction.east, data_bits: Int, maximum_value: HugeInt, value: HugeInt = HugeInt.zero) {
         self.id = id
         self.name = name
         self.point = point

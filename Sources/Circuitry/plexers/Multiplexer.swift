@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HugeNumbers
 
 public final class Multiplexer : CircuitComponent {
     public let id:UUID
@@ -19,7 +18,9 @@ public final class Multiplexer : CircuitComponent {
     public var select_bits:Int
     public var data_bits:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 4, facing: Direction, select_bits: Int, data_bits: Int) {
+    public private(set) var output:[Bool]
+    
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 4, facing: Direction = Direction.east, select_bits: Int, data_bits: Int) {
         self.id = id
         self.name = name
         self.point = point
@@ -28,5 +29,6 @@ public final class Multiplexer : CircuitComponent {
         self.facing = facing
         self.select_bits = select_bits
         self.data_bits = data_bits
+        self.output = [Bool].init(repeating: false, count: data_bits)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 public protocol CircuitComponent : AnyObject {
     var id : UUID { get }
     var name : String? { get set }
-    /// Where this component is located in a grid; always the bottom left  (the "anchor") point.
+    /// Where this component is located in a grid; always the bottom left (the "anchor") point.
     var point : GridPoint { get set }
     /// Measured in x grid points.
     var width : Int { get set }

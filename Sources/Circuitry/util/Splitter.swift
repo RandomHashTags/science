@@ -15,17 +15,46 @@ public final class Splitter : CircuitComponent {
     public var height:Int
     public var facing:Direction
     
-    public var bit_width_in:Int
-    public var bit_width_out:Int
+    public var fan_out : Int {
+        didSet {
+            if fan_out > oldValue {
+                height += fan_out - oldValue
+            } else {
+                height -= oldValue - fan_out
+            }
+        }
+    }
+    public var bits_in:Int
+    public var bits_out:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, facing: Direction, bit_width_in: Int, bit_width_out: Int) {
+    public private(set) var values:[CircuitData]
+    
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, facing: Direction = Direction.east, fan_out: Int, bits_in: Int, bits_out: Int, values: [CircuitData] = []) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
         self.facing = facing
-        self.bit_width_in = bit_width_in
-        self.bit_width_out = bit_width_out
+        self.fan_out = fan_out
+        self.bits_in = bits_in
+        self.bits_out = bits_out
+        self.values = values
+    }
+    
+    public var output_points : Set<GridPoint> {
+        let max_x:Int = point.x + width, max_y:Int = point.y + height
+        var set:Set<GridPoint> = Set<GridPoint>.init(minimumCapacity: fan_out)
+        for y in 0..<fan_out {
+            set.insert(GridPoint(x: max_x, y: max_y - y))
+        }
+        return set
+    }
+    
+    public func split(input: CircuitData) -> [CircuitData] { // TODO: finish
+        var data:[CircuitData] = []
+        
+        values = data
+        return data
     }
 }

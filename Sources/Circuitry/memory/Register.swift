@@ -24,7 +24,7 @@ public final class Register : CircuitComponent {
     
     public private(set) var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 8, height: Int = 9, facing: Direction, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, input_clock: Clock? = nil, value: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 8, height: Int = 9, facing: Direction = Direction.east, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, input_clock: Clock? = nil, value: HugeInt) {
         self.id = id
         self.name = name
         self.point = point
