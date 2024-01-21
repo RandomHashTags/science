@@ -8,9 +8,6 @@
 import Foundation
 
 public final class Counter : CircuitComponent {
-    public static let default_width:Int = 20
-    public static let default_height:Int = 28
-    
     public let id:UUID
     public var name:String?
     public var point:GridPoint
@@ -22,7 +19,7 @@ public final class Counter : CircuitComponent {
     public var maximum_value:Int
     public private(set) var value:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, data_bits: Int, maximum_value: Int, value: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 20, height: Int = 28, facing: Direction, data_bits: Int, maximum_value: Int, value: Int) {
         self.id = id
         self.name = name
         self.point = point
@@ -32,11 +29,5 @@ public final class Counter : CircuitComponent {
         self.data_bits = data_bits
         self.maximum_value = maximum_value
         self.value = value
-    }
-}
-
-public extension Counter {
-    static func `default`(point: GridPoint) -> Counter {
-        return Counter(point: point, width: Counter.default_width, height: Counter.default_height, facing: Direction.east, data_bits: 8, maximum_value: 255, value: 0)
     }
 }

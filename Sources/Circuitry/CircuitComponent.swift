@@ -8,11 +8,6 @@
 import Foundation
 
 public protocol CircuitComponent : AnyObject {
-    /// Measured in x grid points.
-    static var default_width : Int { get }
-    /// Measured in y grid points.
-    static var default_height : Int { get }
-    
     var id : UUID { get }
     var name : String? { get set }
     /// Where this component is located in a grid; always the bottom left  (the "anchor") point.
@@ -23,7 +18,7 @@ public protocol CircuitComponent : AnyObject {
     var height : Int { get set }
     
     var facing : Direction { get set }
-    
+        
     func move(circuit: Circuit, to point: GridPoint) -> Bool
     func rotate(circuit: Circuit, facing direction: Direction) -> Bool
 }

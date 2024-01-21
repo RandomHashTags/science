@@ -8,9 +8,6 @@
 import Foundation
 
 public final class Constant : PowerTransmitter {
-    public static let default_width:Int = 2
-    public static let default_height:Int = 2
-    
     public let id:UUID
     public var name:String?
     public var point:GridPoint
@@ -21,7 +18,10 @@ public final class Constant : PowerTransmitter {
     public private(set) var power_out_point:GridPoint?
     public private(set) var powered:Bool
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, power_out_point: GridPoint, powered: Bool) {
+    public private(set) var data_bits:Int
+    public private(set) var value:[Bool]
+    
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction, power_out_point: GridPoint, powered: Bool = false, data_bits: Int = 1, value: [Bool]) {
         self.id = id
         self.name = name
         self.point = point
@@ -30,6 +30,8 @@ public final class Constant : PowerTransmitter {
         self.facing = facing
         self.power_out_point = power_out_point
         self.powered = powered
+        self.data_bits = data_bits
+        self.value = value
     }
     
     public func set_powered(circuit: Circuit, powered: Bool) {

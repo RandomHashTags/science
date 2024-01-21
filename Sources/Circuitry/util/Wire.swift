@@ -8,9 +8,6 @@
 import Foundation
 
 public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
-    public static let default_width:Int = 1
-    public static let default_height:Int = 1
-    
     public let id:UUID
     public var name:String?
     public var point : GridPoint {
@@ -18,36 +15,40 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
             power_in_point = point
         }
     }
-    public var width:Int
-    public var height:Int
-    public var facing : Direction = Direction.north {
+    public var width:Int = 1 {
         didSet {
-            facing = Direction.north
+            width = 1
         }
     }
+    public var height:Int = 1 {
+        didSet {
+            height = 1
+        }
+    }
+    public var facing:Direction
     
+    /// Measured in single X/Y grid points.
+    public private(set) var distance:Int
     /// Equivalent to the start point.
     public private(set) var power_in_point:GridPoint?
     /// Equivalent to the end point.
     public private(set) var power_out_point:GridPoint?
-    public var intersections:[GridPoint]
     
     public private(set) var powered:Bool
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, power_out_point: GridPoint, intersections: [GridPoint], powered: Bool) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, facing: Direction = Direction.east, distance: Int, powered: Bool = false) {
         self.id = id
         self.name = name
         self.point = point
         power_in_point = point
-        self.width = width
-        self.height = height
         self.facing = facing
-        self.power_out_point = power_out_point
-        self.intersections = intersections
+        self.distance = distance
+        
+        power_out_point = facing.point(x: point.x, y: point.y, width: distance, height: distance)
         self.powered = powered
     }
     
-    public func path_set() -> Set<GridPoint> { // TODO: consider intersections, overlaps, etc
+    public func path_set() -> Set<GridPoint> { // TODO: overlaps, etc
         var set:Set<GridPoint> = []
         
         let x1:Int = point.x, x2:Int = power_out_point!.x

@@ -9,9 +9,6 @@ import Foundation
 import HugeNumbers
 
 public final class Arithmetic : CircuitComponent {
-    public static let default_width:Int = 4
-    public static let default_height:Int = 4
-    
     public let id:UUID
     public var name:String?
     public var point:GridPoint
@@ -22,7 +19,7 @@ public final class Arithmetic : CircuitComponent {
     public var type:ArithmeticType
     public var data_bits:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, type: ArithmeticType, data_bits: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 4, facing: Direction, type: ArithmeticType, data_bits: Int) {
         self.id = id
         self.name = name
         self.point = point

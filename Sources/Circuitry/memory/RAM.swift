@@ -9,9 +9,6 @@ import Foundation
 import HugeNumbers
 
 public final class RAM : CircuitComponent {
-    public static let default_width:Int = 23
-    public static let default_height:Int = 26
-    
     public let id:UUID
     public var name:String?
     public var point:GridPoint
@@ -33,7 +30,7 @@ public final class RAM : CircuitComponent {
     
     public private(set) var values:[HugeInt:HugeInt]
     
-    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, type: MemoryType, address_bit_width: Int, data_bit_width: Int, read_enabled: Bool, write_enabled: Bool, values: [HugeInt:HugeInt]) {
+    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 23, height: Int = 26, facing: Direction, type: MemoryType, address_bit_width: Int, data_bit_width: Int, read_enabled: Bool, write_enabled: Bool, values: [HugeInt:HugeInt]) {
         self.id = id
         self.name = name
         self.point = point

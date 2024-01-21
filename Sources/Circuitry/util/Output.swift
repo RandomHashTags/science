@@ -9,9 +9,6 @@ import Foundation
 import HugeNumbers
 
 public final class Output : CircuitComponent {
-    public static let default_width:Int = 4
-    public static let default_height:Int = 3
-    
     public let id:UUID
     public var name:String?
     public var point:GridPoint
@@ -22,7 +19,7 @@ public final class Output : CircuitComponent {
     public var data_bits:Int
     public var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int, height: Int, facing: Direction, data_bits: Int, value: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 3, facing: Direction, data_bits: Int, value: HugeInt) {
         self.id = id
         self.name = name
         self.point = point
