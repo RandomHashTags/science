@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HugeNumbers
 
 public final class RandomGenerator : CircuitComponent {
     public let id:UUID
@@ -17,8 +18,9 @@ public final class RandomGenerator : CircuitComponent {
     
     public var data_bits:Int
     public var seed:Int
+    public private(set) var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 9, height: Int = 10, facing: Direction = Direction.east, data_bits: Int, seed: Int) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 9, height: Int = 10, facing: Direction = Direction.east, data_bits: Int, seed: Int, value: HugeInt = HugeInt.zero) {
         self.id = id
         self.name = name
         self.point = point
@@ -27,5 +29,13 @@ public final class RandomGenerator : CircuitComponent {
         self.facing = facing
         self.data_bits = data_bits
         self.seed = seed
+        self.value = value
+    }
+    
+    public func power(reset: Bool, enable: Bool, clock: Bool) -> CircuitData {
+        if reset {
+            value = HugeInt.zero
+        }
+        return CircuitData(bits: data_bits, value: value)
     }
 }

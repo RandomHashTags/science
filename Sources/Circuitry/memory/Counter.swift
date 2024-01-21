@@ -31,4 +31,15 @@ public final class Counter : CircuitComponent {
         self.maximum_value = maximum_value
         self.value = value
     }
+    
+    public func power(reset: Bool, load: Bool, up_down: Bool, update: Bool, data: CircuitData) -> CircuitData {
+        if update {
+            value += up_down ? 1 : -1
+        }
+        return CircuitData(bits: data_bits, value: value)
+    }
+    
+    public func reset() {
+        value = HugeInt.zero
+    }
 }

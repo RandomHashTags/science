@@ -27,4 +27,9 @@ public final class Input : CircuitComponent {
         self.facing = facing
         self.data = data
     }
+    
+    public func power(data: CircuitData) {
+        guard data.bits == self.data.bits else { return }
+        self.data.value = data.value
+    }
 }

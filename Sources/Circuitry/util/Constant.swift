@@ -18,10 +18,9 @@ public final class Constant : PowerTransmitter {
     public private(set) var power_out_point:GridPoint?
     public private(set) var powered:Bool
     
-    public private(set) var data_bits:Int
-    public private(set) var value:[Bool]
+    public var data:CircuitData
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction = Direction.east, power_out_point: GridPoint, powered: Bool = false, data_bits: Int = 1, value: [Bool]) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction = Direction.east, power_out_point: GridPoint, powered: Bool = false, data: CircuitData) {
         self.id = id
         self.name = name
         self.point = point
@@ -30,8 +29,7 @@ public final class Constant : PowerTransmitter {
         self.facing = facing
         self.power_out_point = power_out_point
         self.powered = powered
-        self.data_bits = data_bits
-        self.value = value
+        self.data = data
     }
     
     public func set_powered(circuit: Circuit, powered: Bool) {

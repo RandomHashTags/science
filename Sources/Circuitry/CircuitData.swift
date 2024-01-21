@@ -8,7 +8,7 @@
 import Foundation
 import HugeNumbers
 
-public final class CircuitData {
+public struct CircuitData {
     public var bits:Int
     public var value:HugeInt
     

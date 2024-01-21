@@ -16,7 +16,7 @@ public final class Output : CircuitComponent {
     public var height:Int
     public var facing:Direction
     
-    public var data:CircuitData
+    public private(set) var data:CircuitData
     
     init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 3, facing: Direction = Direction.east, data: CircuitData) {
         self.id = id
@@ -26,5 +26,10 @@ public final class Output : CircuitComponent {
         self.height = height
         self.facing = facing
         self.data = data
+    }
+    
+    public func power(data: CircuitData) {
+        guard data.bits == self.data.bits else { return }
+        self.data.value = data.value
     }
 }

@@ -20,11 +20,10 @@ public final class Register : CircuitComponent {
     
     public private(set) var write_enabled:Bool
     public var write_enable_point:GridPoint
-    public var input_clock:Clock?
     
     public private(set) var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 8, height: Int = 9, facing: Direction = Direction.east, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, input_clock: Clock? = nil, value: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 8, height: Int = 9, facing: Direction = Direction.east, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, value: HugeInt) {
         self.id = id
         self.name = name
         self.point = point
@@ -34,7 +33,18 @@ public final class Register : CircuitComponent {
         self.data_bits = data_bits
         self.write_enabled = write_enabled
         self.write_enable_point = write_enable_point
-        self.input_clock = input_clock
         self.value = value
+    }
+    
+    public func power(data: CircuitData, write: Bool, clock: Bool) -> CircuitData {
+        guard data.bits == data_bits else { return CircuitData(bits: data_bits, value: HugeInt.zero) }
+        if write {
+            value = data.value
+        }
+        return CircuitData(bits: data_bits, value: value)
+    }
+    
+    public func reset() {
+        value = HugeInt.zero
     }
 }

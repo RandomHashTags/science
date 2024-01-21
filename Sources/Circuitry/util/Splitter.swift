@@ -43,10 +43,32 @@ public final class Splitter : CircuitComponent {
     }
     
     public var output_points : Set<GridPoint> {
-        let max_x:Int = point.x + width, max_y:Int = point.y + height
         var set:Set<GridPoint> = Set<GridPoint>.init(minimumCapacity: fan_out)
-        for y in 0..<fan_out {
-            set.insert(GridPoint(x: max_x, y: max_y - y))
+        switch facing {
+        case .north:
+            let max_x:Int = point.x, max_y:Int = point.y + width
+            for x in 0..<fan_out {
+                set.insert(GridPoint(x: max_x + x, y: max_y))
+            }
+            break
+        case .south:
+            let max_x:Int = point.x, max_y:Int = point.y
+            for x in 0..<fan_out {
+                set.insert(GridPoint(x: max_x + x, y: max_y))
+            }
+            break
+        case .east:
+            let max_x:Int = point.x + width, max_y:Int = point.y + height
+            for y in 0..<fan_out {
+                set.insert(GridPoint(x: max_x, y: max_y - y))
+            }
+            break
+        case .west:
+            let max_x:Int = point.x, max_y:Int = point.y + height
+            for y in 0..<fan_out {
+                set.insert(GridPoint(x: max_x, y: max_y - y))
+            }
+            break
         }
         return set
     }

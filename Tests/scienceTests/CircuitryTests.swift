@@ -53,6 +53,49 @@ extension CircuitryTests {
         XCTAssertEqual(wire.path_set(), expected_path)
     }
 }
+extension CircuitryTests {
+    func test_splitter_direction() {
+        let splitter:Splitter = Splitter(point: GridPoint(x: 10, y: 10), fan_out: 2, bits_in: 2, bits_out: 2)
+        var expected_points:Set<GridPoint> = [
+            GridPoint(x: 13, y: 13),
+            GridPoint(x: 13, y: 12)
+        ]
+        XCTAssertEqual(splitter.output_points, expected_points)
+        
+        splitter.facing = .west
+        expected_points = [
+            GridPoint(x: 10, y: 13),
+            GridPoint(x: 10, y: 12)
+        ]
+        XCTAssertEqual(splitter.output_points, expected_points)
+        
+        splitter.facing = .north
+        expected_points = [
+            GridPoint(x: 10, y: 13),
+            GridPoint(x: 11, y: 13)
+        ]
+        XCTAssertEqual(splitter.output_points, expected_points)
+        
+        splitter.facing = .south
+        expected_points = [
+            GridPoint(x: 10, y: 10),
+            GridPoint(x: 11, y: 10)
+        ]
+        XCTAssertEqual(splitter.output_points, expected_points)
+        
+        
+        splitter.facing = .east
+        splitter.fan_out = 5
+        expected_points = [
+            GridPoint(x: 13, y: 16),
+            GridPoint(x: 13, y: 15),
+            GridPoint(x: 13, y: 14),
+            GridPoint(x: 13, y: 13),
+            GridPoint(x: 13, y: 12)
+        ]
+        XCTAssertEqual(splitter.output_points, expected_points)
+    }
+}
 
 extension CircuitryTests {
     func test_ram() {
@@ -62,6 +105,8 @@ extension CircuitryTests {
         XCTAssertEqual(ram.values.count, 0)
         
         var address:HugeInt = HugeInt("5"), write_value:HugeInt = HugeInt("8723")
+        
+        // MARK: Valid address & data
         var value:CircuitData = ram.power(address: CircuitData(bits: address_bits, value: address), data: CircuitData(bits: data_bits, value: write_value), write_enable: true, output_enable: true)
         XCTAssertEqual(value.bits, data_bits)
         XCTAssertEqual(value.value, write_value)
