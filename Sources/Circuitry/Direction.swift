@@ -21,4 +21,31 @@ public enum Direction {
         case .west: return GridPoint(x: x - width, y: y)
         }
     }
+    
+    func points(x: Int, y: Int, distance: Int) -> Set<GridPoint> {
+        var set:Set<GridPoint> = []
+        switch self {
+        case .north:
+            for i in 1..<distance {
+                set.insert(GridPoint(x: x, y: y + i))
+            }
+            break
+        case .south:
+            for i in 1..<distance {
+                set.insert(GridPoint(x: x, y: y - i))
+            }
+            break
+        case .east:
+            for i in 1..<distance {
+                set.insert(GridPoint(x: x + i, y: y))
+            }
+            break
+        case .west:
+            for i in 1..<distance {
+                set.insert(GridPoint(x: x, y: y - i))
+            }
+            break
+        }
+        return set
+    }
 }

@@ -13,10 +13,9 @@ import SwiftUnits
 
 final class CircuitryTests : XCTestCase {
     func testExample() {
-        let ram:RAM = RAM(point: GridPoint(x: 0, y: 0), type: MemoryType.volatile, address_bits: 67, data_bits: 32, read_enabled: false, write_enabled: false, values: [:])
-        print("ram.maximum_addresses=\(ram.maximum_addresses)")
     }
-    
+}
+extension CircuitryTests {
     func test_simulation() {
         let circuit:Circuit = Circuit(point: GridPoint(x: 0, y: 0), components: [])
         
@@ -38,5 +37,62 @@ final class CircuitryTests : XCTestCase {
         XCTAssert(!clock.powered)
         XCTAssert(!connected_wire.powered)
         XCTAssert(!unconnected_wire.powered)
+    }
+}
+
+extension CircuitryTests {
+    func test_wire() {
+        let wire:Wire = Wire(point: GridPoint(x: 10, y: 10), distance: 5)
+        
+        let expected_path:Set<GridPoint> = [
+            GridPoint(x: 11, y: 10),
+            GridPoint(x: 12, y: 10),
+            GridPoint(x: 13, y: 10),
+            GridPoint(x: 14, y: 10)
+        ]
+        XCTAssertEqual(wire.path_set(), expected_path)
+    }
+}
+
+extension CircuitryTests {
+    func test_ram() {
+        let address_bits:Int = 67, data_bits:Int = 32
+        let ram:RAM = RAM(point: GridPoint(x: 0, y: 0), type: MemoryType.volatile, address_bits: address_bits, data_bits: data_bits)
+        XCTAssertEqual(ram.maximum_addresses, HugeInt("147573952589676412928"))
+        XCTAssertEqual(ram.values.count, 0)
+        
+        var address:HugeInt = HugeInt("5"), write_value:HugeInt = HugeInt("8723")
+        var value:CircuitData = ram.power(address: CircuitData(bits: address_bits, value: address), data: CircuitData(bits: data_bits, value: write_value), write_enable: true, output_enable: true)
+        XCTAssertEqual(value.bits, data_bits)
+        XCTAssertEqual(value.value, write_value)
+        XCTAssertEqual(HugeInt(ram.values.count), HugeInt.one)
+        
+        // MARK: Invalid address
+        value = ram.power(address: CircuitData(bits: address_bits-1, value: address), data: CircuitData(bits: data_bits, value: write_value), write_enable: true, output_enable: true)
+        XCTAssertEqual(value.value, HugeInt.zero)
+        XCTAssertEqual(HugeInt(ram.values.count), HugeInt.one)
+        
+        // MARK: Invalid data
+        value = ram.power(address: CircuitData(bits: address_bits, value: address), data: CircuitData(bits: data_bits-1, value: write_value), write_enable: true, output_enable: true)
+        XCTAssertEqual(value.value, HugeInt.zero)
+        XCTAssertEqual(HugeInt(ram.values.count), HugeInt.one)
+        
+        // MARK: Write disable, output enable
+        address -= 1
+        write_value += 1
+        value = ram.power(address: CircuitData(bits: address_bits, value: address), data: CircuitData(bits: data_bits, value: write_value), write_enable: false, output_enable: true)
+        XCTAssertEqual(value.value, HugeInt.zero)
+        XCTAssertEqual(HugeInt(ram.values.count), HugeInt.one)
+        
+        // MARK: Write enable, output disable
+        address -= 1
+        write_value += 1
+        value = ram.power(address: CircuitData(bits: address_bits, value: address), data: CircuitData(bits: data_bits, value: write_value), write_enable: true, output_enable: false)
+        XCTAssertEqual(value.value, HugeInt.zero)
+        XCTAssertEqual(HugeInt(ram.values.count), HugeInt("2"))
+        
+        XCTAssertEqual(ram.values[HugeInt("5")], HugeInt("8723"))
+        XCTAssertEqual(ram.values[HugeInt("4")] ?? HugeInt.zero, HugeInt.zero)
+        XCTAssertEqual(ram.values[HugeInt("3")], HugeInt("8725"))
     }
 }

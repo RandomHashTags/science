@@ -23,11 +23,15 @@ public final class RAM : CircuitComponent {
         }
     }
     public private(set) var maximum_addresses:HugeInt
-    public var data_bits:Int
+    public var data_bits : Int {
+        didSet {
+            values = [:]
+        }
+    }
     
     public private(set) var values:[HugeInt:HugeInt]
     
-    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 23, height: Int = 26, facing: Direction = Direction.east, type: MemoryType, address_bits: Int, data_bits: Int, read_enabled: Bool, write_enabled: Bool, values: [HugeInt:HugeInt]) {
+    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 23, height: Int = 26, facing: Direction = Direction.east, type: MemoryType, address_bits: Int, data_bits: Int, values: [HugeInt:HugeInt] = [:]) {
         self.id = id
         self.name = name
         self.point = point
@@ -47,7 +51,7 @@ public final class RAM : CircuitComponent {
     }
     
     public func power(address: CircuitData, data: CircuitData, write_enable: Bool, output_enable: Bool) -> CircuitData {
-        guard address.data_bits == address_bits, address.value < maximum_addresses, data.data_bits == data_bits else { return CircuitData(data_bits: data_bits, value: HugeInt.zero) }
+        guard address.bits == address_bits, address.value < maximum_addresses, data.bits == data_bits else { return CircuitData(bits: data_bits, value: HugeInt.zero) }
         if write_enable {
             values[address.value] = data.value
         }
@@ -57,7 +61,7 @@ public final class RAM : CircuitComponent {
         } else {
             value = HugeInt.zero
         }
-        return CircuitData(data_bits: data_bits, value: value)
+        return CircuitData(bits: data_bits, value: value)
     }
     
     public func write(address: HugeInt, value: HugeInt) {

@@ -9,11 +9,11 @@ import Foundation
 import HugeNumbers
 
 public final class CircuitData {
-    public var data_bits:Int
+    public var bits:Int
     public var value:HugeInt
     
-    public init(data_bits: Int, value: HugeInt) {
-        self.data_bits = data_bits
+    public init(bits: Int, value: HugeInt) {
+        self.bits = bits
         self.value = value
     }
 }

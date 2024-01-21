@@ -15,12 +15,12 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
             power_in_point = point
         }
     }
-    public var width:Int = 1 {
+    public var width : Int = 1 {
         didSet {
             width = 1
         }
     }
-    public var height:Int = 1 {
+    public var height : Int = 1 {
         didSet {
             height = 1
         }
@@ -48,26 +48,9 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
         self.powered = powered
     }
     
-    public func path_set() -> Set<GridPoint> { // TODO: overlaps, etc
-        var set:Set<GridPoint> = []
-        
-        let x1:Int = point.x, x2:Int = power_out_point!.x
-        let y1:Int = point.y, y2:Int = power_out_point!.y
-        
-        let minimum_x:Int = min(x1, x2)
-        let maximum_x:Int = max(x1, x2)
-        for x in minimum_x..<maximum_x {
-            set.insert(GridPoint(x: x, y: y1))
-        }
-        
-        let minimum_y:Int = min(y1, y2)
-        let maximum_y:Int = max(y1, y2)
-        for y in minimum_y..<maximum_y {
-            set.insert(GridPoint(x: x1, y: y))
-        }
-        
+    public func path_set() -> Set<GridPoint> {
+        var set:Set<GridPoint> = facing.points(x: point.x, y: point.y, distance: distance)
         set.remove(power_in_point!)
-        set.remove(power_out_point!)
         return set
     }
     
