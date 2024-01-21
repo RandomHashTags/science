@@ -20,6 +20,7 @@ public final class RAM : CircuitComponent {
     public var address_bits : Int {
         didSet {
             maximum_addresses = calculate_maximum_addresses()
+            values = [:]
         }
     }
     public private(set) var maximum_addresses:HugeInt
