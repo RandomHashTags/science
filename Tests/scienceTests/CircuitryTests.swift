@@ -25,17 +25,24 @@ extension CircuitryTests {
         let connected_wire:Wire = Wire(point: GridPoint(x: 8, y: 5), distance: 10)
         circuit.components.append(connected_wire)
         
+        let connected_output:Output = Output(point: GridPoint(x: 17, y: 5), data_bits: 1)
+        circuit.components.append(connected_output)
+        
         let unconnected_wire:Wire = Wire(point: GridPoint(x: 0, y: 0), distance: 1)
         circuit.components.append(unconnected_wire)
         
         circuit.simulate()
         XCTAssert(clock.powered)
         XCTAssert(connected_wire.powered)
+        XCTAssert(connected_output.powered)
+        XCTAssertEqual(connected_output.data.integer, HugeInt.one)
         XCTAssert(!unconnected_wire.powered)
         
         circuit.simulate()
         XCTAssert(!clock.powered)
         XCTAssert(!connected_wire.powered)
+        XCTAssert(!connected_output.powered)
+        XCTAssertEqual(connected_output.data.integer, HugeInt.zero)
         XCTAssert(!unconnected_wire.powered)
     }
 }
@@ -152,7 +159,7 @@ extension CircuitryTests {
         circuit.components.append(tunnel_receiver2)
         circuit.components.append(tunnel_receiver3)
         
-        let output1:Output = Output(point: GridPoint(x: 33, y: 28), data: CircuitData(bits: 8, value: HugeInt.zero))
+        let output1:Output = Output(point: GridPoint(x: 33, y: 28), data_bits: tunnel_bits)
         circuit.components.append(output1)
         
         circuit.simulate()

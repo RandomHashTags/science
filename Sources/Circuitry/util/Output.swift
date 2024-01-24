@@ -19,9 +19,10 @@ public final class Output : CircuitComponent, PowerReceiver {
     public var power_in_point:GridPoint?
     public private(set) var powered:Bool
     
+    public var data_bits:Int
     public private(set) var data:CircuitData
     
-    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 3, facing: Direction = Direction.east, powered: Bool = false, data: CircuitData) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 3, facing: Direction = Direction.east, data_bits: Int) {
         self.id = id
         self.name = name
         self.point = point
@@ -29,8 +30,9 @@ public final class Output : CircuitComponent, PowerReceiver {
         self.height = height
         self.facing = facing
         power_in_point = facing.point(x: point.x, y: point.y, width: width, height: height)
-        self.powered = powered
-        self.data = data
+        powered = false
+        self.data_bits = data_bits
+        data = CircuitData(bits: data_bits, value: false)
     }
     
     public func set_powered(circuit: Circuit, powered: Bool) {
@@ -38,7 +40,7 @@ public final class Output : CircuitComponent, PowerReceiver {
     
     public func receive_power(circuit: Circuit, powered: Bool, data: CircuitData) {
         self.powered = powered
-        guard data.bits == self.data.bits else { return }
+        guard data.bits == data_bits else { return }
         self.data.binary = data.binary
     }
 }
