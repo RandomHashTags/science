@@ -36,7 +36,7 @@ public final class Wire : CircuitComponent, PowerReceiver {
     
     public private(set) var powered:Bool
     
-    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, facing: Direction = Direction.east, distance: Int, powered: Bool = false) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, facing: Direction = Direction.east, distance: Int) {
         self.id = id
         self.name = name
         self.point = point
@@ -45,7 +45,7 @@ public final class Wire : CircuitComponent, PowerReceiver {
         self.distance = distance
         
         power_out_point = facing.point(x: point.x, y: point.y, width: distance, height: distance)
-        self.powered = powered
+        self.powered = false
     }
     
     public func path_set() -> Set<GridPoint> {

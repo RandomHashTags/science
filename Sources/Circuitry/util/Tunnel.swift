@@ -19,9 +19,9 @@ public final class Tunnel : CircuitComponent, PowerReceiver {
     public var power_in_point:GridPoint?
     
     public private(set) var powered:Bool
-    public var data:CircuitData
+    public var data_bits:Int
     
-    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, facing: Direction = Direction.west, powered: Bool = false, data: CircuitData) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, facing: Direction = Direction.west, data_bits: Int) {
         self.id = id
         self.name = name
         self.point = point
@@ -30,16 +30,15 @@ public final class Tunnel : CircuitComponent, PowerReceiver {
         self.facing = facing
         
         power_in_point = facing.point(x: point.x, y: point.y, width: width, height: height)
-        self.powered = powered
-        self.data = data
+        powered = false
+        self.data_bits = data_bits
     }
     
     public func receive_power(circuit: Circuit, powered: Bool, data: CircuitData) {
-        guard self.data.bits == data.bits else {
-            fatalError("mismatch bits: data.bits=\(data.bits); expected=\(self.data.bits)")
+        guard data.bits == data_bits else {
+            fatalError("mismatch bits: data.bits=\(data.bits); expected=\(data_bits)")
         }
         self.powered = powered
-        self.data.binary = data.binary
         
         let opposite_direction:Direction = facing.opposite
         let tunnels_of_same_name:[Tunnel] = circuit.power_receivers.compactMap({
@@ -53,7 +52,6 @@ public final class Tunnel : CircuitComponent, PowerReceiver {
     
     public func tunnel_power(circuit: Circuit, powered: Bool, data: CircuitData) {
         self.powered = powered
-        self.data = data
         
         let receivers:[PowerReceiver] = circuit.power_receivers.filter({ !($0 is Tunnel) && power_in_point == $0.power_in_point })
         for receiver in receivers {

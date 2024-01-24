@@ -137,16 +137,14 @@ extension CircuitryTests {
         circuit.components.append(extender)
         
         let tunnel_name:String = "bingbong"
-        let tunnel_data:CircuitData = CircuitData(bits: 8, value: HugeInt.zero)
-        let tunnel_transmitter:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 18, y: 5), data: tunnel_data)
+        let tunnel_bits:Int = 8
+        let tunnel_transmitter:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 18, y: 5), data_bits: tunnel_bits)
         
-        let tunnel_receiver1:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 30, y: 30), facing: .east, data: tunnel_data)
+        let tunnel_receiver1:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 30, y: 30), facing: .east, data_bits: tunnel_bits)
         let tunnel_receiver1_wire:Wire = Wire(point: GridPoint(x: 33, y: 30), facing: .south, distance: 3)
         
-        let tunnel_receiver2:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 40, y: 40), facing: .east, data: tunnel_data)
-        let tunnel_receiver3:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 50, y: 50), facing: .east, data: tunnel_data)
-        
-        let output1:Output = Output(point: GridPoint(x: 13, y: 8), data: CircuitData(bits: 8, value: HugeInt.zero))
+        let tunnel_receiver2:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 40, y: 40), facing: .east, data_bits: tunnel_bits)
+        let tunnel_receiver3:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 50, y: 50), facing: .east, data_bits: tunnel_bits)
         
         circuit.components.append(tunnel_transmitter)
         circuit.components.append(tunnel_receiver1)
@@ -154,17 +152,22 @@ extension CircuitryTests {
         circuit.components.append(tunnel_receiver2)
         circuit.components.append(tunnel_receiver3)
         
+        let output1:Output = Output(point: GridPoint(x: 33, y: 28), data: CircuitData(bits: 8, value: HugeInt.zero))
+        circuit.components.append(output1)
+        
         circuit.simulate()
         
         XCTAssert(clock.powered)
         XCTAssert(wire.powered)
         XCTAssert(extender.powered)
+        XCTAssert(output1.powered)
         
         XCTAssert(tunnel_transmitter.powered)
         XCTAssert(tunnel_receiver1.powered)
         XCTAssert(tunnel_receiver1_wire.powered)
         XCTAssert(tunnel_receiver2.powered)
         XCTAssert(tunnel_receiver3.powered)
+        XCTAssertEqual(output1.data.integer, HugeInt("255"))
         
         circuit.simulate()
     }
