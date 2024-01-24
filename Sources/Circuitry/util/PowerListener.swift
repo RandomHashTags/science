@@ -10,5 +10,5 @@ import Foundation
 public protocol PowerListener : CircuitComponent {
     var powered : Bool { get }
     
-    func set_powered(circuit: Circuit, powered: Bool)
+    func set_powered(circuit: Circuit, powered: Bool, data: CircuitData)
 }

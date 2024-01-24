@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HugeNumbers
 
 public final class Circuit : CircuitComponent {
     public let id:UUID
@@ -46,9 +47,10 @@ public final class Circuit : CircuitComponent {
     
     public func simulate() {
         simulating = !simulating
+        let data:CircuitData = CircuitData(bits: 1, is_negative: false, binary: [simulating])
         let transmitters:[PowerTransmitter] = components.filter({ $0 is PowerTransmitter && !($0 is Wire) }) as! [PowerTransmitter]
         for power_transmitter in transmitters {
-            power_transmitter.set_powered(circuit: self, powered: simulating)
+            power_transmitter.set_powered(circuit: self, powered: simulating, data: data)
         }
     }
 }

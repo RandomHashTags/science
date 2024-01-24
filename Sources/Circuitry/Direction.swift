@@ -13,6 +13,15 @@ public enum Direction {
     case east
     case west
     
+    var opposite : Direction {
+        switch self {
+        case .north: return .south
+        case .south: return .north
+        case .east:  return .west
+        case .west:  return .east
+        }
+    }
+    
     func point(x: Int, y: Int, width: Int, height: Int) -> GridPoint {
         switch self {
         case .north: return GridPoint(x: x, y: y + height)

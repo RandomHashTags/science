@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HugeNumbers
 import SwiftUnits
 
 public final class Clock : PowerTransmitter {
@@ -18,9 +19,14 @@ public final class Clock : PowerTransmitter {
     
     public private(set) var power_out_point:GridPoint?
     public private(set) var powered:Bool
-    public var frequency:FrequencyUnit
+    public private(set) var frequency : FrequencyUnit {
+        didSet {
+            nanoseconds = frequency.convert_value_to_unit(prefix: UnitPrefix.nano, FrequencyUnitType.hertz).integer.to_int()!
+        }
+    }
     public var lowest_frequency:FrequencyUnit
     public var highest_frequency:FrequencyUnit
+    private var nanoseconds:UInt64
     
     public private(set) var simulation_task:Task<Void, Never>!
     public var on_tick:(() -> Void)?
@@ -38,30 +44,29 @@ public final class Clock : PowerTransmitter {
         self.lowest_frequency = lowest_frequency
         self.highest_frequency = highest_frequency
         frequency = lowest_frequency
+        nanoseconds = frequency.convert_value_to_unit(prefix: UnitPrefix.nano, FrequencyUnitType.hertz).integer.to_int()!
     }
     
-    public func set_powered(circuit: Circuit, powered: Bool) {
+    public func set_powered(circuit: Circuit, powered: Bool, data: CircuitData) {
         guard self.powered != powered else { return }
         self.powered = powered
         let receivers:[PowerReceiver] = circuit.power_receivers.filter({ $0.power_in_point == power_out_point })
         for receiver in receivers {
-            receiver.set_powered(circuit: circuit, powered: powered)
+            receiver.receive_power(circuit: circuit, powered: powered, data: data)
         }
         if powered {
             simulation_task = Task {
-                guard let nanoseconds:UInt64 = frequency.convert_value_to_unit(prefix: UnitPrefix.nano, FrequencyUnitType.hertz).integer.to_int() else {
-                    return
-                }
                 do {
                     try await Task.sleep(nanoseconds: nanoseconds)
                 } catch {
+                    print("Clock: simulation_task sleep1 error: \(error)")
                 }
                 while self.powered {
                     tick(circuit: circuit, receivers: receivers)
                     do {
                         try await Task.sleep(nanoseconds: nanoseconds)
                     } catch {
-                        print("Clock: simulation_task sleep error: \(error)")
+                        print("Clock: simulation_task sleep2 error: \(error)")
                     }
                 }
             }
@@ -74,7 +79,7 @@ public final class Clock : PowerTransmitter {
     private func tick(circuit: Circuit, receivers: [PowerReceiver]) {
         powered = !powered
         for receiver in receivers {
-            receiver.set_powered(circuit: circuit, powered: powered)
+            receiver.receive_power(circuit: circuit, powered: powered, data: CircuitData(bits: 0, is_negative: false, binary: []))
         }
         on_tick?()
     }

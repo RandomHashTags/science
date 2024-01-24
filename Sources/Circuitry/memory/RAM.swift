@@ -52,13 +52,14 @@ public final class RAM : CircuitComponent {
     }
     
     public func power(address: CircuitData, data: CircuitData, write_enable: Bool, output_enable: Bool) -> CircuitData {
-        guard address.bits == address_bits, address.value < maximum_addresses, data.bits == data_bits else { return CircuitData(bits: data_bits, value: HugeInt.zero) }
+        let address_value:HugeInt = address.integer
+        guard address.bits == address_bits, address_value < maximum_addresses, data.bits == data_bits else { return CircuitData(bits: data_bits, is_negative: false, binary: [Bool].init(repeating: false, count: data_bits)) }
         if write_enable {
-            values[address.value] = data.value
+            values[address_value] = data.integer
         }
         let value:HugeInt
         if output_enable {
-            value = values[address.value] ?? HugeInt.zero
+            value = values[address_value] ?? HugeInt.zero
         } else {
             value = HugeInt.zero
         }

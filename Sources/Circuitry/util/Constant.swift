@@ -20,7 +20,7 @@ public final class Constant : PowerTransmitter {
     
     public var data:CircuitData
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction = Direction.east, power_out_point: GridPoint, powered: Bool = false, data: CircuitData) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction = Direction.east, power_out_point: GridPoint, data: CircuitData) {
         self.id = id
         self.name = name
         self.point = point
@@ -28,17 +28,16 @@ public final class Constant : PowerTransmitter {
         self.height = height
         self.facing = facing
         self.power_out_point = power_out_point
-        self.powered = powered
+        self.powered = false
         self.data = data
     }
     
-    public func set_powered(circuit: Circuit, powered: Bool) {
-        guard self.powered != powered else { return }
+    public func set_powered(circuit: Circuit, powered: Bool, data: CircuitData) {
         self.powered = powered
         
         let receivers:[PowerReceiver] = circuit.power_receivers.filter({ $0.power_in_point == power_out_point })
         for receiver in receivers {
-            receiver.set_powered(circuit: circuit, powered: powered)
+            receiver.receive_power(circuit: circuit, powered: powered, data: data)
         }
     }
 }

@@ -7,6 +7,9 @@
 
 import Foundation
 
-public protocol PowerReceiver : PowerListener {
+public protocol PowerReceiver {
+    var powered : Bool { get }
     var power_in_point : GridPoint? { get }
+    
+    func receive_power(circuit: Circuit, powered: Bool, data: CircuitData)
 }

@@ -32,6 +32,10 @@ public final class RandomGenerator : CircuitComponent {
         self.value = value
     }
     
+    public func number() -> HugeInt {
+        return HugeInt.random(in: HugeInt.zero..<value)
+    }
+    
     public func power(reset: Bool, enable: Bool, clock: Bool) -> CircuitData {
         if reset {
             value = HugeInt.zero

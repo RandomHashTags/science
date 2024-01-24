@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
+public final class Wire : CircuitComponent, PowerReceiver {
     public let id:UUID
     public var name:String?
     public var point : GridPoint {
@@ -54,13 +54,13 @@ public final class Wire : CircuitComponent, PowerReceiver, PowerTransmitter {
         return set
     }
     
-    public func set_powered(circuit: Circuit, powered: Bool) {
+    public func receive_power(circuit: Circuit, powered: Bool, data: CircuitData) {
         self.powered = powered
         
         let path:Set<GridPoint> = path_set()
         let components_attached:[PowerReceiver] = circuit.components.filter({ path.contains($0.point) && $0 is PowerReceiver }) as! [PowerReceiver]
         for component in components_attached {
-            component.set_powered(circuit: circuit, powered: powered)
+            component.receive_power(circuit: circuit, powered: powered, data: data)
         }
     }
 }

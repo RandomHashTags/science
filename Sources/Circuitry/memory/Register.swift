@@ -37,9 +37,9 @@ public final class Register : CircuitComponent {
     }
     
     public func power(data: CircuitData, write: Bool, clock: Bool) -> CircuitData {
-        guard data.bits == data_bits else { return CircuitData(bits: data_bits, value: HugeInt.zero) }
+        guard data.bits == data_bits else { return CircuitData(bits: data_bits, value: false) }
         if write {
-            value = data.value
+            value = data.integer
         }
         return CircuitData(bits: data_bits, value: value)
     }

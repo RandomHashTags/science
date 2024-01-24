@@ -30,6 +30,6 @@ public final class Input : CircuitComponent {
     
     public func power(data: CircuitData) {
         guard data.bits == self.data.bits else { return }
-        self.data.value = data.value
+        self.data.binary = data.binary
     }
 }
