@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public protocol CircuitComponent : AnyObject {
     var id : UUID { get }
@@ -16,6 +17,9 @@ public protocol CircuitComponent : AnyObject {
     var width : Int { get set }
     /// Measured in y grid points.
     var height : Int { get set }
+    
+    /// Amount of time taken to reach destination.
+    //var propagation_delay : TimeUnit { get }
     
     var facing : Direction { get set }
         

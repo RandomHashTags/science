@@ -83,4 +83,8 @@ public final class Clock : PowerTransmitter {
         }
         on_tick?()
     }
+    
+    public func lost_power(circuit: Circuit) {
+        set_powered(circuit: circuit, powered: false, data: CircuitData(bits: 1, value: false))
+    }
 }
