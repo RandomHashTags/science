@@ -10,25 +10,24 @@ import XCTest
 import Circuitry
 import HugeNumbers
 import SwiftUnits
+import ScienceUtilities
 
 final class CircuitryTests : XCTestCase {
-    func testExample() {
-    }
 }
 extension CircuitryTests {
     func test_simulation() {
         let circuit:Circuit = Circuit(point: GridPoint(x: 0, y: 0), components: [])
         
-        let clock:Clock = Clock(point: GridPoint(x: 5, y: 5), lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"))
+        let clock:Clock = Clock(point: GridPoint(x: 5, y: 5), propagation_delay: TimeUnit.zero, lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"))
         circuit.components.append(clock)
         
-        let connected_wire:Wire = Wire(point: GridPoint(x: 8, y: 5), distance: 10)
+        let connected_wire:Wire = Wire(point: GridPoint(x: 8, y: 5), propagation_delay: TimeUnit.zero, distance: 10)
         circuit.components.append(connected_wire)
         
-        let connected_output:Output = Output(point: GridPoint(x: 17, y: 5), data_bits: 1)
+        let connected_output:Output = Output(point: GridPoint(x: 17, y: 5), propagation_delay: TimeUnit.zero, data_bits: 1)
         circuit.components.append(connected_output)
         
-        let unconnected_wire:Wire = Wire(point: GridPoint(x: 0, y: 0), distance: 1)
+        let unconnected_wire:Wire = Wire(point: GridPoint(x: 0, y: 0), propagation_delay: TimeUnit.zero, distance: 1)
         circuit.components.append(unconnected_wire)
         
         circuit.simulate()
@@ -49,7 +48,7 @@ extension CircuitryTests {
 
 extension CircuitryTests {
     func test_wire() {
-        let wire:Wire = Wire(point: GridPoint(x: 10, y: 10), distance: 5)
+        let wire:Wire = Wire(point: GridPoint(x: 10, y: 10), propagation_delay: TimeUnit.zero, distance: 5)
         
         let expected_path:Set<GridPoint> = [
             GridPoint(x: 11, y: 10),
@@ -63,13 +62,13 @@ extension CircuitryTests {
 extension CircuitryTests {
     func test_bit_extender() {
         let circuit:Circuit = Circuit(point: GridPoint(x: 0, y: 0), components: [])
-        let clock:Clock = Clock(point: GridPoint(x: 5, y: 5), lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"))
+        let clock:Clock = Clock(point: GridPoint(x: 5, y: 5), propagation_delay: TimeUnit.zero, lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"))
         circuit.components.append(clock)
         
-        let wire:Wire = Wire(point: GridPoint(x: 8, y: 5), distance: 3)
+        let wire:Wire = Wire(point: GridPoint(x: 8, y: 5), propagation_delay: TimeUnit.zero, distance: 3)
         circuit.components.append(wire)
         
-        let extender:BitExtender = BitExtender(point: GridPoint(x: 10, y: 5), type: BitExtensionType.one, bits_in: 1, bits_out: 8)
+        let extender:BitExtender = BitExtender(point: GridPoint(x: 10, y: 5), propagation_delay: TimeUnit.zero, type: BitExtensionType.one, bits_in: 1, bits_out: 8)
         circuit.components.append(extender)
         
         circuit.simulate()
@@ -89,7 +88,7 @@ extension CircuitryTests {
 }
 extension CircuitryTests {
     func test_splitter_direction() {
-        let splitter:Splitter = Splitter(point: GridPoint(x: 10, y: 10), fan_out: 2, bits_in: 2, bits_out: 2)
+        let splitter:Splitter = Splitter(point: GridPoint(x: 10, y: 10), propagation_delay: TimeUnit.zero, fan_out: 2, bits_in: 2, bits_out: 2)
         var expected_points:Set<GridPoint> = [
             GridPoint(x: 13, y: 13),
             GridPoint(x: 13, y: 12)
@@ -134,24 +133,24 @@ extension CircuitryTests {
 extension CircuitryTests {
     func test_tunnel() {
         let circuit:Circuit = Circuit(point: GridPoint(x: 0, y: 0), components: [])
-        let clock:Clock = Clock(point: GridPoint(x: 5, y: 5), lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"))
+        let clock:Clock = Clock(point: GridPoint(x: 5, y: 5), propagation_delay: TimeUnit.zero, lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"))
         circuit.components.append(clock)
         
-        let wire:Wire = Wire(point: GridPoint(x: 8, y: 5), distance: 3)
+        let wire:Wire = Wire(point: GridPoint(x: 8, y: 5), propagation_delay: TimeUnit.zero, distance: 3)
         circuit.components.append(wire)
         
-        let extender:BitExtender = BitExtender(point: GridPoint(x: 10, y: 5), type: BitExtensionType.sign, bits_in: 1, bits_out: 8)
+        let extender:BitExtender = BitExtender(point: GridPoint(x: 10, y: 5), propagation_delay: TimeUnit.zero, type: BitExtensionType.sign, bits_in: 1, bits_out: 8)
         circuit.components.append(extender)
         
         let tunnel_name:String = "bingbong"
         let tunnel_bits:Int = 8
-        let tunnel_transmitter:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 18, y: 5), data_bits: tunnel_bits)
+        let tunnel_transmitter:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 18, y: 5), propagation_delay: TimeUnit.zero, data_bits: tunnel_bits)
         
-        let tunnel_receiver1:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 30, y: 30), facing: .east, data_bits: tunnel_bits)
-        let tunnel_receiver1_wire:Wire = Wire(point: GridPoint(x: 33, y: 30), facing: .south, distance: 3)
+        let tunnel_receiver1:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 30, y: 30), propagation_delay: TimeUnit.zero, facing: .east, data_bits: tunnel_bits)
+        let tunnel_receiver1_wire:Wire = Wire(point: GridPoint(x: 33, y: 30), propagation_delay: TimeUnit.zero, facing: .south, distance: 3)
         
-        let tunnel_receiver2:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 40, y: 40), facing: .east, data_bits: tunnel_bits)
-        let tunnel_receiver3:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 50, y: 50), facing: .east, data_bits: tunnel_bits)
+        let tunnel_receiver2:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 40, y: 40), propagation_delay: TimeUnit.zero, facing: .east, data_bits: tunnel_bits)
+        let tunnel_receiver3:Tunnel = Tunnel(name: tunnel_name, point: GridPoint(x: 50, y: 50), propagation_delay: TimeUnit.zero, facing: .east, data_bits: tunnel_bits)
         
         circuit.components.append(tunnel_transmitter)
         circuit.components.append(tunnel_receiver1)
@@ -159,7 +158,7 @@ extension CircuitryTests {
         circuit.components.append(tunnel_receiver2)
         circuit.components.append(tunnel_receiver3)
         
-        let output1:Output = Output(point: GridPoint(x: 33, y: 28), data_bits: tunnel_bits)
+        let output1:Output = Output(point: GridPoint(x: 33, y: 28), propagation_delay: TimeUnit.zero, data_bits: tunnel_bits)
         circuit.components.append(output1)
         
         circuit.simulate()
@@ -183,7 +182,7 @@ extension CircuitryTests {
 extension CircuitryTests {
     func test_ram() {
         let address_bits:Int = 64, data_bits:Int = 32
-        let ram:RAM = RAM(point: GridPoint(x: 0, y: 0), type: MemoryType.volatile, address_bits: address_bits, data_bits: data_bits)
+        let ram:RAM = RAM(point: GridPoint(x: 0, y: 0), propagation_delay: TimeUnit.zero, type: MemoryType.volatile, address_bits: address_bits, data_bits: data_bits)
         XCTAssertEqual(ram.maximum_addresses, HugeInt("18446744073709551616"))
         XCTAssertEqual(ram.values.count, 0)
         

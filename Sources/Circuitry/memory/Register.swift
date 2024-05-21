@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public final class Register : CircuitComponent {
     public let id:UUID
@@ -14,6 +15,7 @@ public final class Register : CircuitComponent {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public var data_bits:Int
@@ -23,13 +25,15 @@ public final class Register : CircuitComponent {
     
     public private(set) var value:HugeInt
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 8, height: Int = 9, facing: Direction = Direction.east, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, value: HugeInt) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 8, height: Int = 9, propagation_delay: TimeUnit, facing: Direction = Direction.east, data_bits: Int, write_enabled: Bool, write_enable_point: GridPoint, value: HugeInt) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
+
         self.data_bits = data_bits
         self.write_enabled = write_enabled
         self.write_enable_point = write_enable_point

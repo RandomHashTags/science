@@ -27,7 +27,7 @@ public final class Wire : CircuitComponent, PowerReceiver {
             height = 1
         }
     }
-    //public var propagation_delay:TimeUnit
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     /// Measured in single X/Y grid points.
@@ -39,12 +39,12 @@ public final class Wire : CircuitComponent, PowerReceiver {
     
     public private(set) var powered:Bool
     
-    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, propagation_delay: TimeUnit? = nil, facing: Direction = Direction.east, distance: Int) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, propagation_delay: TimeUnit, facing: Direction = Direction.east, distance: Int) {
         self.id = id
         self.name = name
         self.point = point
         power_in_point = point
-        //self.propagation_delay = propagation_delay ?? TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: HugeFloat(integer: "\(distance)")) // TODO: fix
+        self.propagation_delay = propagation_delay
         self.facing = facing
         self.distance = distance
         

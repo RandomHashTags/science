@@ -19,7 +19,7 @@ public protocol CircuitComponent : AnyObject {
     var height : Int { get set }
     
     /// Amount of time taken to reach destination.
-    //var propagation_delay : TimeUnit { get }
+    var propagation_delay : TimeUnit { get }
     
     var facing : Direction { get set }
         

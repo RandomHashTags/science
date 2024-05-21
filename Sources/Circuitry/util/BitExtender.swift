@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public final class BitExtender : CircuitComponent, PowerReceiver {
     public let id:UUID
@@ -14,6 +15,7 @@ public final class BitExtender : CircuitComponent, PowerReceiver {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public private(set) var power_in_point:GridPoint?
@@ -26,12 +28,13 @@ public final class BitExtender : CircuitComponent, PowerReceiver {
     public private(set) var value:CircuitData
     public var input:[Bool]?
     
-    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 5, height: Int = 5, facing: Direction = Direction.east, type: BitExtensionType, bits_in: Int, bits_out: Int) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 5, height: Int = 5, propagation_delay: TimeUnit, facing: Direction = Direction.east, type: BitExtensionType, bits_in: Int, bits_out: Int) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
         
         self.type = type

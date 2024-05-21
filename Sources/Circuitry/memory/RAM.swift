@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public final class RAM : CircuitComponent {
     public let id:UUID
@@ -14,6 +15,7 @@ public final class RAM : CircuitComponent {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public var type:MemoryType
@@ -32,13 +34,15 @@ public final class RAM : CircuitComponent {
     
     public private(set) var values:[HugeInt:HugeInt]
     
-    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 23, height: Int = 26, facing: Direction = Direction.east, type: MemoryType, address_bits: Int, data_bits: Int, values: [HugeInt:HugeInt] = [:]) {
+    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 23, height: Int = 26, propagation_delay: TimeUnit, facing: Direction = Direction.east, type: MemoryType, address_bits: Int, data_bits: Int, values: [HugeInt:HugeInt] = [:]) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
+
         self.type = type
         self.address_bits = address_bits
         self.maximum_addresses = HugeInt.zero

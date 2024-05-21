@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public final class Constant : PowerTransmitter {
     public let id:UUID
@@ -13,6 +14,7 @@ public final class Constant : PowerTransmitter {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public private(set) var power_out_point:GridPoint?
@@ -20,13 +22,15 @@ public final class Constant : PowerTransmitter {
     
     public var data:CircuitData
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, facing: Direction = Direction.east, power_out_point: GridPoint, data: CircuitData) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 2, height: Int = 2, propagation_delay: TimeUnit, facing: Direction = Direction.east, power_out_point: GridPoint, data: CircuitData) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
+        
         self.power_out_point = power_out_point
         self.powered = false
         self.data = data

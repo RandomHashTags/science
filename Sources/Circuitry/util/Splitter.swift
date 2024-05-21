@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUnits
 
 public final class Splitter : CircuitComponent {
     public let id:UUID
@@ -13,6 +14,7 @@ public final class Splitter : CircuitComponent {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public var fan_out : Int {
@@ -29,13 +31,15 @@ public final class Splitter : CircuitComponent {
     
     public private(set) var values:[CircuitData]
     
-    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, facing: Direction = Direction.east, fan_out: Int, bits_in: Int, bits_out: Int, values: [CircuitData] = []) {
+    public init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, propagation_delay: TimeUnit, facing: Direction = Direction.east, fan_out: Int, bits_in: Int, bits_out: Int, values: [CircuitData] = []) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
+
         self.fan_out = fan_out
         self.bits_in = bits_in
         self.bits_out = bits_out

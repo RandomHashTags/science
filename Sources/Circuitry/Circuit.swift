@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public final class Circuit : CircuitComponent {
     public let id:UUID
@@ -14,6 +15,9 @@ public final class Circuit : CircuitComponent {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay: TimeUnit {
+        return components.reduce(TimeUnit.zero, { $0 + $1.propagation_delay })
+    }
     public var facing : Direction = Direction.east {
         didSet {
             facing = Direction.east

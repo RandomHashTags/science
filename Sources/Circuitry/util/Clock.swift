@@ -15,6 +15,7 @@ public final class Clock : PowerTransmitter {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public private(set) var power_out_point:GridPoint?
@@ -31,12 +32,13 @@ public final class Clock : PowerTransmitter {
     public private(set) var simulation_task:Task<Void, Never>!
     public var on_tick:(() -> Void)?
     
-    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, facing: Direction = Direction.east, powered: Bool = false, lowest_frequency: FrequencyUnit, highest_frequency: FrequencyUnit) {
+    package init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 3, height: Int = 3, propagation_delay: TimeUnit, facing: Direction = Direction.east, powered: Bool = false, lowest_frequency: FrequencyUnit, highest_frequency: FrequencyUnit) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
         
         power_out_point = facing.point(x: point.x, y: point.y, width: width, height: height)

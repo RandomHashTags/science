@@ -7,6 +7,7 @@
 
 import Foundation
 import HugeNumbers
+import SwiftUnits
 
 public final class Arithmetic : CircuitComponent {
     public let id:UUID
@@ -14,18 +15,21 @@ public final class Arithmetic : CircuitComponent {
     public var point:GridPoint
     public var width:Int
     public var height:Int
+    public var propagation_delay:TimeUnit
     public var facing:Direction
     
     public var type:ArithmeticType
     public var data_bits:Int
     
-    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 4, facing: Direction = Direction.east, type: ArithmeticType, data_bits: Int) {
+    init(id: UUID = UUID(), name: String? = nil, point: GridPoint, width: Int = 4, height: Int = 4, propagation_delay: TimeUnit, facing: Direction = Direction.east, type: ArithmeticType, data_bits: Int) {
         self.id = id
         self.name = name
         self.point = point
         self.width = width
         self.height = height
+        self.propagation_delay = propagation_delay
         self.facing = facing
+
         self.type = type
         self.data_bits = data_bits
     }
