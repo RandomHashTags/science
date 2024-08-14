@@ -95,11 +95,13 @@ let package = Package(
             path: "./Sources/ui/macOS/run"
         ),
         
+        .testTarget(name: "CircuitryTests", dependencies: ["Circuitry"]),
+        .testTarget(name: "PhysicsTests", dependencies: ["Physics"]),
+        
         .testTarget(
             name: "scienceTests",
             dependencies: [
                 "Science",
-                "Circuitry",
                 "Kanna",
                 .product(name: "HugeNumbers", package: "swift_huge-numbers")
             ]

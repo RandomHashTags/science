@@ -9,7 +9,6 @@ import HugeNumbers
 import SwiftUnits
 import AppKit
 import Kanna
-import Science
 import Physics
 
 final class ParticleTests : XCTestCase {

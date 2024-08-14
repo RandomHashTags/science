@@ -14,6 +14,16 @@ import ScienceUtilities
 
 final class CircuitryTests : XCTestCase {
 }
+
+extension CircuitryTests {
+    func test_propagation_delay() {
+        let circuit:Circuit = Circuit(point: GridPoint(x: 0, y: 0), components: [])
+        circuit.components.append(Clock(point: GridPoint(x: 50, y: 50), propagation_delay: TimeUnit.zero, lowest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1"), highest_frequency: FrequencyUnit(type: FrequencyUnitType.hertz, value: "1")))
+        circuit.components.append(Wire(name: "Test", point: GridPoint(x: 50, y: 50), distance: 1500))
+        XCTAssertEqual(circuit.propagation_delay, TimeUnit(prefix: UnitPrefix.nano, type: TimeUnitType.second, value: "10"))
+    }
+}
+
 extension CircuitryTests {
     func test_simulation() {
         let circuit:Circuit = Circuit(point: GridPoint(x: 0, y: 0), components: [])

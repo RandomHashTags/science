@@ -7,7 +7,6 @@
 
 import Foundation
 import XCTest
-import Science
 import Physics
 
 final class ChemicalElementTests : XCTestCase {
